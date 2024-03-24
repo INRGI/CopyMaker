@@ -2,6 +2,7 @@
 import { useSelector } from "react-redux";
 import { getDomains } from "../../redux/selectors";
 import DomainForm from "../../components/DomainForm/DomainForm";
+import DomainList from "../../components/DomainList/DomainList";
 
 const Home = () => {
     const domains = useSelector(getDomains);
@@ -9,9 +10,8 @@ const Home = () => {
     return (
         <div>
             <DomainForm />
-            {domains.length > 0 ? (
-                domains.map(domain => <h3 key={domain.id}>{domain.name}</h3>)
-            ) : <h2>Not have domains</h2>}
+            {domains.length > 0 ? (<DomainList domains={domains} />)
+            : <h2>Not have domains</h2>}
             <h1>Home Page</h1>
 
         </div>
