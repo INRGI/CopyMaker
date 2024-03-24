@@ -12,7 +12,7 @@ import {
   REGISTER,
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-import { domainReducer } from './DomainSlice';
+import { domainReducer } from './domainSlice';
 
 const persistConfig = {
   key: 'root',
