@@ -13,6 +13,7 @@ import {
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import { domainReducer } from './domainSlice';
+import { filtersReducer } from './filtersSlice';
 
 const persistConfig = {
   key: 'root',
@@ -20,7 +21,8 @@ const persistConfig = {
 }
 
 const persistedReducer = persistReducer(persistConfig, combineReducers({
-    domains: domainReducer
+    domains: domainReducer,
+    filters: filtersReducer,
 }));
 
 
