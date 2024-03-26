@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { Container, Input, Label } from './Filter.styled';
+import { Input } from './Filter.styled';
 import { setDomainsFilter } from '../../redux/filtersSlice';
 import { selectFilter } from '../../redux/selectors';
 
@@ -12,12 +12,7 @@ const Filter = () => {
     };
 
     return (
-        <Container>
-            <Label>
-                Find domain by name
-                <Input type="text" value={filter} onChange={onFilterChange}/>
-            </Label>
-        </Container>
+        <Input type="text" value={filter} onChange={onFilterChange} placeholder="Find domain by name"/>
     );
 };
 
