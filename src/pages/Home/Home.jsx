@@ -4,21 +4,30 @@ import { getDomains } from "../../redux/selectors";
 import DomainForm from "../../components/DomainForm/DomainForm";
 import DomainList from "../../components/DomainList/DomainList";
 import Filter from "../../components/Filter/Filter";
+import { Container, DomainsContainer, EmptyDomains } from "./Home.styled";
+import { Helmet } from "react-helmet";
 
 const Home = () => {
     const domains = useSelector(getDomains);
 
     return (
-        <div>
-            <Filter />
+        <Container>
+            <Helmet>
+                <title>Your Domains</title>
+            </Helmet>
             <DomainForm />
-            {domains.length > 0 ? (<DomainList />)
-            : <h2>Not have domains</h2>}
-            <h1>Home Page</h1>
-
-        </div>
-        
-        
+            <DomainsContainer>      
+                {domains.length > 0 ? (
+                <>
+                    <Filter />
+                    <DomainList />
+                </>
+                ) : (
+                <EmptyDomains>Your phonebook is empty.</EmptyDomains>
+                )
+            }
+          </DomainsContainer>
+        </Container>
     )
 }
 
