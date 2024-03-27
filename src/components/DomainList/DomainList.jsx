@@ -5,14 +5,15 @@ import DeleteConfirmationModal from '../DeleteConfirmationModal';
 import { useState } from "react";
 import { Bounce, toast } from "react-toastify";
 import { deleteDomain } from '../../redux/domainSlice';
+import EditModal from "../EditModal/EditModal";
 
 const DomainList = () => {
     const visibleDomains = useSelector(selectVisibleDomains);
     const dispatch = useDispatch();
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [domainToDelete, setDomainToDelete] = useState(null);
-    // const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-    // const [domainToEdit, setDomainToEdit] = useState(null);
+    const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+    const [domainToEdit, setDomainToEdit] = useState(null);
 
     const handleDeleteClick = (id) => {
         setDomainToDelete(id);
@@ -24,10 +25,10 @@ const DomainList = () => {
         setDomainToDelete(null);
     };
 
-    // const handleEditClick = (contact) => {
-    //     setDomainToEdit(contact);
-    //     setIsEditModalOpen(true);
-    // };
+    const handleEditClick = (domain) => {
+        setDomainToEdit(domain);
+        setIsEditModalOpen(true);
+    };
 
     const handleConfirmDelete = () => {
         if (domainToDelete) {
@@ -48,10 +49,10 @@ const DomainList = () => {
         }
     };
 
-    // const handleConfirmEdit = () => {
-    //     setIsEditModalOpen(false);
-    //     setDomainToEdit(null);
-    // };
+    const handleConfirmEdit = () => {
+        setIsEditModalOpen(false);
+        setDomainToEdit(null);
+    };
         return (
             <Container>
                 {visibleDomains.map(domain => (
@@ -59,7 +60,7 @@ const DomainList = () => {
                     {domain.name}
                     <ButtonsContainer>
                         <ButtonEdit type='button' name='edit' 
-                        // onClick={() => handleEditClick(domain)}
+                        onClick={() => handleEditClick(domain.id)}
                         >
                             Edit
                         </ButtonEdit>
@@ -78,12 +79,12 @@ const DomainList = () => {
                 onClose={handleCancelDelete}
                 onConfirm={handleConfirmDelete}
             />
-            {/* <EditModal
+            <EditModal
                 isOpen={isEditModalOpen}
                 onClose={() => setIsEditModalOpen(false)}
                 onConfirm={handleConfirmEdit}
                 contact={domainToEdit}
-            /> */}
+            />
         </Container>
         );
 }

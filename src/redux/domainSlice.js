@@ -27,8 +27,14 @@ const domainSlice = createSlice({
       const index = state.findIndex((domain) => domain.id === action.payload);
       state.splice(index, 1);
     },
+    editDomain(state, action) {
+      const index = state.findIndex((domain) => domain.id === action.payload);
+      if (index !== -1) {
+        state.domains[index] = action.payload;
+      }
+    },
   },
 });
 
-export const { addDomain, deleteDomain } = domainSlice.actions;
+export const { addDomain, deleteDomain, editDomain } = domainSlice.actions;
 export const domainReducer = domainSlice.reducer;
