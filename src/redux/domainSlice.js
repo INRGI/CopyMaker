@@ -29,9 +29,7 @@ const domainSlice = createSlice({
     },
     editDomain(state, action) {
       const index = state.findIndex((domain) => domain.id === action.payload);
-      if (index !== -1) {
-        state.domains[index] = action.payload;
-      }
+      state.domains.splice(index, 1);
     },
   },
 });

@@ -40,7 +40,7 @@ const EditModal = ({ isOpen, onClose, onConfirm, domain }) => {
             return;
         }
 
-        dispatch(editDomain({ domainId: domain.id, values: values }));
+        dispatch(editDomain({ id: domain.id, values: values }));
         actions.resetForm();
         onConfirm();
         toast.success('Domain successfully updated', {

@@ -60,7 +60,7 @@ const DomainList = () => {
                     {domain.name}
                     <ButtonsContainer>
                         <ButtonEdit type='button' name='edit' 
-                        onClick={() => handleEditClick(domain.id)}
+                        onClick={() => handleEditClick(domain)}
                         >
                             Edit
                         </ButtonEdit>
@@ -83,7 +83,7 @@ const DomainList = () => {
                 isOpen={isEditModalOpen}
                 onClose={() => setIsEditModalOpen(false)}
                 onConfirm={handleConfirmEdit}
-                contact={domainToEdit}
+                domain={domainToEdit}
             />
         </Container>
         );
