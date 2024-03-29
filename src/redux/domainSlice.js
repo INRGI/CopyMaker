@@ -32,9 +32,13 @@ const domainSlice = createSlice({
         (domain) => domain.id === action.payload.id
       );
       if (index !== -1) {
-        state.domains[index] = action.payload;
+        state[index] = {
+          ...state[index],
+          ...action.payload.values
+        };
       }
     }
+    
   },
 });
 
