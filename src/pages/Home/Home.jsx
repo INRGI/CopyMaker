@@ -23,7 +23,7 @@ const Home = () => {
                     <DomainList />
                 </>
                 ) : (
-                <EmptyDomains>Your phonebook is empty.</EmptyDomains>
+                <EmptyDomains>Your domain list is empty.</EmptyDomains>
                 )
             }
           </DomainsContainer>

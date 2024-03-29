@@ -1,8 +1,8 @@
-import { Formik, Field } from 'formik';
+import { Formik, Field, Form } from 'formik';
 import { ErrorMessage } from "formik";
 import { nanoid } from 'nanoid';
 import * as Yup from "yup";
-import { Button, Container, FormBlock, Input, Label } from './DomainForm.styled';
+import { Button, Container, Input, Title } from './DomainForm.styled';
 import Error from '../Error/Error';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -13,14 +13,10 @@ import { getDomains } from '../../redux/selectors';
 
 const initialValues = {
     name: "",
-    fontSize: "",
-    fontFamily: "",
 };
 
 const FeedbackSchema = Yup.object().shape({
     name: Yup.string().min(3, "Too Short!").max(50, "Too Long!").required("Required"),
-    fontSize: Yup.string().min(1, "Too Short!").max(50, "Too Long!"),
-    fontFamily: Yup.string().min(1, "Too Short!").max(50, "Too Long!"),
 });
 
 const DomainForm = () => {
@@ -54,15 +50,20 @@ const DomainForm = () => {
 
     return (
         <>
-            <Formik initialValues={initialValues} onSubmit={handleSubmit} validationSchema={FeedbackSchema}>
-                <FormBlock>
+            <Formik 
+                initialValues={initialValues} 
+                onSubmit={handleSubmit} 
+                validationSchema={FeedbackSchema} 
+                validateOnBlur={false}
+                validateOnChange={false}>
+                <Form>
                     <Container>
-                        <Label htmlFor={nameId}>Name</Label>
-                        <Field as={Input} type="text" name="name" id={nameId} />
+                        <Title>Add Domain</Title>
+                        <Field as={Input} type="text" name="name" id={nameId} placeholder="Name"/>
                         <ErrorMessage name="name">{msg => <Error msg={msg} />}</ErrorMessage>
+                        <Button type='submit'>Add</Button>
                     </Container>
-                    <Button type='submit'>Add domain</Button>
-                </FormBlock>
+                </Form>
             </Formik>
             <ToastContainer />
         </>

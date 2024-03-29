@@ -4,6 +4,8 @@ export const Container = styled.div`
     display: flex;
     margin-top: 30px;
     gap: 30px;
+    align-items: center;
+    justify-content: center;
 `;
 
 export const EmptyDomains = styled.h2`
