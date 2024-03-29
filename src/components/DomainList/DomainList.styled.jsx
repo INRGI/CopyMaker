@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { Link } from "react-router-dom";
 
 export const Container = styled.ul`
     list-style: none;
@@ -114,4 +115,13 @@ export const ButtonEdit = styled.button`
     box-shadow: #e19110 0 3px 7px inset;
     transform: translateY(2px);
     }
+`;
+
+export const DomainDetail = styled(Link)`
+    text-decoration: none;
+    color: black;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
 `;

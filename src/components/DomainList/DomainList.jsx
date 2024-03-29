@@ -1,11 +1,12 @@
 import { useDispatch, useSelector } from "react-redux";
 import { selectVisibleDomains } from "../../redux/selectors";
-import { Button, ButtonEdit, ButtonsContainer, Container, Domain } from "./DomainList.styled";
+import { Button, ButtonEdit, ButtonsContainer, Container, Domain, DomainDetail } from "./DomainList.styled";
 import DeleteConfirmationModal from '../DeleteConfirmationModal';
 import { useState } from "react";
 import { Bounce, toast } from "react-toastify";
 import { deleteDomain } from '../../redux/domainSlice';
 import EditModal from "../EditModal/EditModal";
+import { useLocation } from "react-router-dom";
 
 const DomainList = () => {
     const visibleDomains = useSelector(selectVisibleDomains);
@@ -14,6 +15,8 @@ const DomainList = () => {
     const [domainToDelete, setDomainToDelete] = useState(null);
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
     const [domainToEdit, setDomainToEdit] = useState(null);
+
+    const location = useLocation();
 
     const handleDeleteClick = (id) => {
         setDomainToDelete(id);
@@ -56,23 +59,27 @@ const DomainList = () => {
         return (
             <Container>
                 {visibleDomains.map(domain => (
-                <Domain key={domain.id}>
-                    {domain.name}
-                    <ButtonsContainer>
-                        <ButtonEdit type='button' name='edit' 
-                        onClick={() => handleEditClick(domain)}
-                        >
-                            Edit
-                        </ButtonEdit>
-                        <Button
-                            type='button'
-                            name='delete'
-                            onClick={() => handleDeleteClick(domain.id)}
-                        >
-                            Delete
-                        </Button>
-                    </ButtonsContainer>
-                </Domain>
+                    
+                        <Domain key={domain.id}>
+                            <DomainDetail key={domain.id} to={`/${domain.id}`} state={{ from: location }}>
+                            {domain.name}
+                            </DomainDetail>
+                            <ButtonsContainer>
+                                <ButtonEdit type='button' name='edit' 
+                                onClick={() => handleEditClick(domain)}
+                                >
+                                    Edit
+                                </ButtonEdit>
+                                <Button
+                                    type='button'
+                                    name='delete'
+                                    onClick={() => handleDeleteClick(domain.id)}
+                                >
+                                    Delete
+                                </Button>
+                            </ButtonsContainer>
+                        </Domain>
+                
             ))}
             <DeleteConfirmationModal
                 isOpen={isModalOpen}
