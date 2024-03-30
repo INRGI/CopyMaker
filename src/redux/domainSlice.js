@@ -37,10 +37,18 @@ const domainSlice = createSlice({
           ...action.payload.values
         };
       }
+    },
+    getDomain(state, action) {
+      const index = state.findIndex(
+        (domain) => domain.id === action.payload.id
+      );
+      if (index !== -1) {
+        return state[index];
+      }
     }
     
   },
 });
 
-export const { addDomain, deleteDomain, editDomain } = domainSlice.actions;
+export const { addDomain, deleteDomain, editDomain, getDomain } = domainSlice.actions;
 export const domainReducer = domainSlice.reducer;
