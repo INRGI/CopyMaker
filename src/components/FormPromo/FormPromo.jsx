@@ -2,15 +2,16 @@
 import { useState } from "react";
 import { Formik, Form } from 'formik';
 import { useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { nanoid } from "nanoid";
+import { editDomain } from "../../redux/domainSlice";
 
 const FormPromo = () => {
     const [isFontSize, setFontSize] = useState(true);
     const [isFontFamily, setFontFamily] = useState(true);
     const [isSubmitted, setIsSubmitted] = useState(false);
 
-
+    const dispatch = useDispatch();
     const fontSizeId = nanoid();
     const fontFamilyId = nanoid();
 
@@ -19,9 +20,10 @@ const FormPromo = () => {
 
     const initialValues = domain;
 
-    const handleSubmit = () => {
-
-        setIsSubmitted(true)
+    const handleSubmit = (values) => {
+        
+        dispatch(editDomain({ id: domainId, values: values }));
+        setIsSubmitted(true);
     };
 
     return (
