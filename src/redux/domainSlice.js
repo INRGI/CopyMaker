@@ -1,7 +1,7 @@
 import { createSlice, nanoid } from '@reduxjs/toolkit';
 
 const domainsInitialState = [
-  { id: 'id-1', name: 'NewDomain', fontSize: '18px', fontFamily: "Tahoma" },
+  { id: 'id-1', name: 'NewDomain', fontSize: '18px', fontFamily: "Tahoma",isFontSize:false,isFontFamily:false, },
 ];
 
 const domainSlice = createSlice({
@@ -12,12 +12,14 @@ const domainSlice = createSlice({
       reducer(state, action) {
         state.push(action.payload);
       },
-      prepare({name, fontSize, fontFamily}) {
+      prepare({name, fontSize, fontFamily, isFontSize, isFontFamily}) {
         return {
           payload: {
             name,
             fontSize,
             fontFamily,
+            isFontSize,
+            isFontFamily,
             id: nanoid()
           },
         };

@@ -1,6 +1,6 @@
 
 import { useState } from "react";
-import { Formik, Form } from 'formik';
+import { Formik, Form, Field } from 'formik';
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { nanoid } from "nanoid";
@@ -14,14 +14,23 @@ const FormPromo = () => {
     const dispatch = useDispatch();
     const fontSizeId = nanoid();
     const fontFamilyId = nanoid();
-
     const { domainId } = useParams();
+    const isFontSizeId = nanoid();
+    const isFontFamilyId = nanoid();
+
+
+
     const domain = useSelector(state => state.domains.find(domain => domain.id === domainId));
 
-    const initialValues = domain;
+    const initialValues = {
+        fontSize: "",
+        isFontSize: false,
+        ...domain
+      };
+      
 
     const handleSubmit = (values) => {
-        
+        console.log(values)
         dispatch(editDomain({ id: domainId, values: values }));
         setIsSubmitted(true);
     };
@@ -33,14 +42,16 @@ const FormPromo = () => {
             validateOnBlur={false}
             validateOnChange={false}
         >
+            {({ values }) => (
             <Form>
                 <div>
                     <label>
-                        <input type="checkbox" checked={isFontSize} onChange={() => setFontSize((prev) => !prev)}/>
+                        <Field type="checkbox" name="isFontSize" id={isFontSizeId} checked={values.isFontSize}/>
+                        {/* <input type="checkbox" checked={isFontSize} onChange={() => setFontSize((prev) => !prev)}/> */}
                         Font Size
                     </label>
 
-                    <input id={fontSizeId} name="fontSize" type="text" disabled={!isFontSize}/>
+                    <Field type="text" name="fontSize" id={fontSizeId} placeholder="fontSize" disabled={!isFontSize}/>
                 </div>
 
                 <div>
@@ -63,7 +74,7 @@ const FormPromo = () => {
                     </div>
                 )}
                 
-                </Form>  
+                </Form>)}
         </Formik>
     )
 }
