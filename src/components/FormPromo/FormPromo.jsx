@@ -15,23 +15,20 @@ const FormPromo = () => {
     const fontSizeId = nanoid();
     const fontFamilyId = nanoid();
     const { domainId } = useParams();
-    const isFontSizeId = nanoid();
-    const isFontFamilyId = nanoid();
-
-
+    // const isFontSizeId = nanoid();
+    // const isFontFamilyId = nanoid();
 
     const domain = useSelector(state => state.domains.find(domain => domain.id === domainId));
+    // const isFontSize = domain.isFontSize;
 
     const initialValues = {
         fontSize: "",
-        isFontSize: false,
         ...domain
       };
       
 
     const handleSubmit = (values) => {
-        console.log(values)
-        dispatch(editDomain({ id: domainId, values: values }));
+        dispatch(editDomain({ id: domainId, values: {...values, isFontSize} }));
         setIsSubmitted(true);
     };
 
@@ -42,12 +39,11 @@ const FormPromo = () => {
             validateOnBlur={false}
             validateOnChange={false}
         >
-            {({ values }) => (
             <Form>
                 <div>
                     <label>
-                        <Field type="checkbox" name="isFontSize" id={isFontSizeId} checked={values.isFontSize}/>
-                        {/* <input type="checkbox" checked={isFontSize} onChange={() => setFontSize((prev) => !prev)}/> */}
+                        {/* <Field type="checkbox" name="isFontSize" id={isFontSizeId}/> */}
+                        <input type="checkbox" checked={isFontSize} onChange={() => setFontSize((prev) => !prev)}/>
                         Font Size
                     </label>
 
@@ -67,14 +63,15 @@ const FormPromo = () => {
                     <input type="text" placeholder="Paste your copy here :)" />
                     <button type="submit">Submit</button>
                 </div>
-
+                
                 {isSubmitted && (
                     <div>
                         <p>Here will be output</p>
                     </div>
                 )}
-                
-                </Form>)}
+            
+                </Form>
+            
         </Formik>
     )
 }
