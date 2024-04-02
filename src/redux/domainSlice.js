@@ -31,15 +31,21 @@ const domainSlice = createSlice({
     },
     editDomain(state, action) {
       const index = state.findIndex(
-        (domain) => domain.id === action.payload.id
+          (domain) => domain.id === action.payload.id
       );
       if (index !== -1) {
-        state[index] = {
-          ...state[index],
-          ...action.payload.values
-        };
+          return state.map((domain, idx) => {
+              if (idx === index) {
+                  return {
+                      ...domain,
+                      ...action.payload.values
+                  };
+              }
+              return domain;
+          });
       }
-    },
+      return state;
+  },
     
   },
 });
