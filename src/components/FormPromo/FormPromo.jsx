@@ -6,29 +6,29 @@ import { useDispatch, useSelector } from "react-redux";
 import { nanoid } from "nanoid";
 import { editDomain } from "../../redux/domainSlice";
 
+
 const FormPromo = () => {
-    const [isFontSize, setFontSize] = useState(true);
-    const [isFontFamily, setFontFamily] = useState(true);
+    const { domainId } = useParams();
+    const domain = useSelector(state => state.domains.find(domain => domain.id === domainId));
+
+    const [isFontSize, setFontSize] = useState(domain.isFontSize);
+    const [isFontFamily, setFontFamily] = useState(domain.isFontFamily);
     const [isSubmitted, setIsSubmitted] = useState(false);
+    
 
     const dispatch = useDispatch();
     const fontSizeId = nanoid();
     const fontFamilyId = nanoid();
-    const { domainId } = useParams();
-    // const isFontSizeId = nanoid();
-    // const isFontFamilyId = nanoid();
-
-    const domain = useSelector(state => state.domains.find(domain => domain.id === domainId));
-    // const isFontSize = domain.isFontSize;
 
     const initialValues = {
         fontSize: "",
+        fontFamily: "",
         ...domain
       };
       
 
     const handleSubmit = (values) => {
-        dispatch(editDomain({ id: domainId, values: {...values, isFontSize} }));
+        dispatch(editDomain({ id: domainId, values: {...values, isFontSize, isFontFamily} }));
         setIsSubmitted(true);
     };
 
@@ -42,7 +42,6 @@ const FormPromo = () => {
             <Form>
                 <div>
                     <label>
-                        {/* <Field type="checkbox" name="isFontSize" id={isFontSizeId}/> */}
                         <input type="checkbox" checked={isFontSize} onChange={() => setFontSize((prev) => !prev)}/>
                         Font Size
                     </label>
@@ -56,7 +55,7 @@ const FormPromo = () => {
                         Font Family
                     </label>
 
-                    <input id={fontFamilyId} name="fontFamily" type="text" disabled={!isFontFamily}/>
+                    <Field type="text" name="fontFamily" id={fontFamilyId} placeholder="fontFamily" disabled={!isFontFamily}/>
                 </div>
                 
                 <div>
