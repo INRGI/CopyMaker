@@ -1,10 +1,11 @@
 
 import { useState } from "react";
-import { Formik, Form, Field } from 'formik';
+import { Formik } from 'formik';
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { nanoid } from "nanoid";
 import { editDomain } from "../../redux/domainSlice";
+import { CheckBox, Container, FormContainer, FormInput, InputContainer } from "./FormPromo.styled";
 
 
 const FormPromo = () => {
@@ -39,25 +40,27 @@ const FormPromo = () => {
             validateOnBlur={false}
             validateOnChange={false}
         >
-            <Form>
-                <div>
-                    <label>
-                        <input type="checkbox" checked={isFontSize} onChange={() => setFontSize((prev) => !prev)}/>
-                        Font Size
-                    </label>
+            <FormContainer>
+                <Container>
+                    <InputContainer>
+                        <label>
+                            <CheckBox type="checkbox" checked={isFontSize} onChange={() => setFontSize((prev) => !prev)}/>
+                            Font Size
+                        </label>
 
-                    <Field type="text" name="fontSize" id={fontSizeId} placeholder="fontSize" disabled={!isFontSize}/>
-                </div>
+                        <FormInput type="text" name="fontSize" id={fontSizeId} placeholder="fontSize" disabled={!isFontSize}/>
+                    </InputContainer>
 
-                <div>
-                    <label>
-                        <input type="checkbox" checked={isFontFamily} onChange={() => setFontFamily((prev) => !prev)}/>
-                        Font Family
-                    </label>
+                    <InputContainer>
+                        <label>
+                            <CheckBox type="checkbox" checked={isFontFamily} onChange={() => setFontFamily((prev) => !prev)}/>
+                            Font Family
+                        </label>
 
-                    <Field type="text" name="fontFamily" id={fontFamilyId} placeholder="fontFamily" disabled={!isFontFamily}/>
-                </div>
-                
+                        <FormInput type="text" name="fontFamily" id={fontFamilyId} placeholder="fontFamily" disabled={!isFontFamily}/>
+                    </InputContainer>
+                </Container>
+
                 <div>
                     <input type="text" placeholder="Paste your copy here :)" />
                     <button type="submit">Submit</button>
@@ -69,7 +72,7 @@ const FormPromo = () => {
                     </div>
                 )}
             
-                </Form>
+                </FormContainer>
             
         </Formik>
     )
