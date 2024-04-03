@@ -5,8 +5,10 @@ import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { nanoid } from "nanoid";
 import { editDomain } from "../../redux/domainSlice";
-import { CheckBox, Container, FormContainer, FormInput, InputContainer } from "./FormPromo.styled";
+import { Container, FormContainer, FormInput, InputContainer, Label } from "./FormPromo.styled";
 
+
+import Checkbox from '@mui/material/Checkbox';
 
 const FormPromo = () => {
     const { domainId } = useParams();
@@ -43,19 +45,19 @@ const FormPromo = () => {
             <FormContainer>
                 <Container>
                     <InputContainer>
-                        <label>
-                            <CheckBox type="checkbox" checked={isFontSize} onChange={() => setFontSize((prev) => !prev)}/>
+                        <Label>
+                            <Checkbox checked={isFontSize} onChange={() => setFontSize((prev) => !prev)} color="success" />
                             Font Size
-                        </label>
+                        </Label>
 
                         <FormInput type="text" name="fontSize" id={fontSizeId} placeholder="fontSize" disabled={!isFontSize}/>
                     </InputContainer>
 
                     <InputContainer>
-                        <label>
-                            <CheckBox type="checkbox" checked={isFontFamily} onChange={() => setFontFamily((prev) => !prev)}/>
+                        <Label>
+                            <Checkbox checked={isFontFamily} onChange={() => setFontFamily((prev) => !prev)} color="success" />
                             Font Family
-                        </label>
+                        </Label>
 
                         <FormInput type="text" name="fontFamily" id={fontFamilyId} placeholder="fontFamily" disabled={!isFontFamily}/>
                     </InputContainer>
