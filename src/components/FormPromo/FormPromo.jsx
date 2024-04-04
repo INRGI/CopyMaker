@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { nanoid } from "nanoid";
 import { editDomain } from "../../redux/domainSlice";
-import { Container, FormContainer, FormInput, InputContainer, Label } from "./FormPromo.styled";
+import { Container, FormContainer, FormInput, InputContainer, Label, SubmitInput } from "./FormPromo.styled";
 
 
 import Checkbox from '@mui/material/Checkbox';
@@ -22,13 +22,14 @@ const FormPromo = () => {
     const dispatch = useDispatch();
     const fontSizeId = nanoid();
     const fontFamilyId = nanoid();
+    const submitId = nanoid();
 
     const initialValues = {
         fontSize: "",
         fontFamily: "",
-        ...domain
+        ...domain,
+        submit: "",
       };
-      
 
     const handleSubmit = (values) => {
         dispatch(editDomain({ id: domainId, values: {...values, isFontSize, isFontFamily} }));
@@ -64,7 +65,7 @@ const FormPromo = () => {
                 </Container>
 
                 <div>
-                    <input type="text" placeholder="Paste your copy here :)" />
+                    <SubmitInput name="submit" id={submitId} type="text" placeholder="Paste your copy here :)"/>
                     <button type="submit">Submit</button>
                 </div>
                 

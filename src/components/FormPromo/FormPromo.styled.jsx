@@ -11,7 +11,6 @@ export const FormInput = styled(Field)`
     background-color: rgba(255,255,255,0.07);
     border-radius: 3px;
     padding: 0 10px;
-    margin-top: 8px;
     font-size: 14px;
     font-weight: 300;
     &::placeholder{
@@ -23,13 +22,16 @@ export const FormInput = styled(Field)`
     }
 `;
 
+export const SubmitInput = styled(Field)`
+    
+`;
 
 export const InputContainer = styled.div`
     display: flex;
     gap: 10px;
     align-items: center;
     justify-content: center;
-    height: 32px;
+    height: 40px;
 `;
 
 export const Container = styled.div`
@@ -50,7 +52,6 @@ export const Label = styled.label`
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 150px;
     font-size: 14px;
-    font-weight: 300;
+    width: 200px;
 `;
