@@ -35,7 +35,7 @@ const FormPromo = () => {
 
     const handleSubmit = (values) => {
         dispatch(editDomain({ id: domainId, values: {...values, isFontSize, isFontFamily} }));
-        setSubmitedResult(makeCopy(values))
+        setSubmitedResult(makeCopy({...values, isFontSize, isFontFamily}))
 
         setIsSubmitted(true);
     };
@@ -89,3 +89,5 @@ export default FormPromo;
 
 
 // Font size, Font family, color link, paddings, width,
+
+{/* <div style="font-size:16px; color:blue"><span style="font-family:Roboto; color:white">hwaohfsf</span></div> */}
