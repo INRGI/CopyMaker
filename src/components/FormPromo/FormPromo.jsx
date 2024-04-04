@@ -9,6 +9,7 @@ import { Container, FormContainer, FormInput, InputContainer, Label, SubmitInput
 
 
 import Checkbox from '@mui/material/Checkbox';
+import makeCopy from "../../helpers/makeCopy";
 
 const FormPromo = () => {
     const { domainId } = useParams();
@@ -17,6 +18,7 @@ const FormPromo = () => {
     const [isFontSize, setFontSize] = useState(domain.isFontSize);
     const [isFontFamily, setFontFamily] = useState(domain.isFontFamily);
     const [isSubmitted, setIsSubmitted] = useState(false);
+    const [submitedResult, setSubmitedResult] = useState("");
     
 
     const dispatch = useDispatch();
@@ -33,6 +35,8 @@ const FormPromo = () => {
 
     const handleSubmit = (values) => {
         dispatch(editDomain({ id: domainId, values: {...values, isFontSize, isFontFamily} }));
+        setSubmitedResult(makeCopy(values))
+
         setIsSubmitted(true);
     };
 
@@ -71,7 +75,7 @@ const FormPromo = () => {
                 
                 {isSubmitted && (
                     <div>
-                        <p>Here will be output</p>
+                        <p>{submitedResult}</p>
                     </div>
                 )}
             
