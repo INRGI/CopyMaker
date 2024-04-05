@@ -20,6 +20,7 @@ const FormPromo = () => {
     const [isColorLink, setColorLink] = useState(domain.isColorLink);
     const [isWidth, setWidth] = useState(domain.isWidth);
     const [isPaddingLR, setPaddingLR] = useState(domain.isPaddingLR);
+    const [isReplace, setReplace] = useState(domain.isReplace);
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [submitedResult, setSubmitedResult] = useState("");
     
@@ -102,6 +103,13 @@ const FormPromo = () => {
 
                         <FormInput type="text" name="paddingLR" id={paddingLR} placeholder="Padding Left & Right" disabled={!isPaddingLR}/>
                     </InputContainer>
+
+                    <InputContainer>
+                        <Label>
+                            <Checkbox checked={isReplace} onChange={() => setReplace((prev) => !prev)} color="success" />
+                            Replace vowels
+                        </Label>
+                    </InputContainer>
                 </Container>
 
                 <div>
@@ -124,6 +132,6 @@ const FormPromo = () => {
 export default FormPromo;
 
 
-// +Font size, +Font family, color link, paddings, width,
+// +Font size, +Font family, +color link, +paddings, +width,
 
 {/* <div style="font-size:16px; color:blue"><span style="font-family:Roboto; color:white">hwaohfsf</span></div> */}
