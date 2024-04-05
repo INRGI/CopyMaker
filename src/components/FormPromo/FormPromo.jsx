@@ -18,7 +18,8 @@ const FormPromo = () => {
     const [isFontSize, setFontSize] = useState(domain.isFontSize);
     const [isFontFamily, setFontFamily] = useState(domain.isFontFamily);
     const [isColorLink, setColorLink] = useState(domain.isColorLink);
-    const [isWidth, setWidth] = useState(domain.isWidth)
+    const [isWidth, setWidth] = useState(domain.isWidth);
+    const [isPaddingLR, setPaddingLR] = useState(domain.isPaddingLR);
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [submitedResult, setSubmitedResult] = useState("");
     
@@ -28,12 +29,15 @@ const FormPromo = () => {
     const fontFamilyId = nanoid();
     const colorLinkId = nanoid();
     const width = nanoid();
+    const paddingLR = nanoid();
     const submitId = nanoid();
 
     const initialValues = {
         fontSize: "",
         fontFamily: "",
         colorLink: "",
+        width: "",
+        paddingLR: "",
         ...domain,
         submit: "",
       };
@@ -87,7 +91,16 @@ const FormPromo = () => {
                             Width
                         </Label>
 
-                        <FormInput type="text" name="colorLink" id={width} placeholder="Width" disabled={!isWidth}/>
+                        <FormInput type="text" name="width" id={width} placeholder="Width" disabled={!isWidth}/>
+                    </InputContainer>
+
+                    <InputContainer>
+                        <Label>
+                            <Checkbox checked={isPaddingLR} onChange={() => setPaddingLR((prev) => !prev)} color="success" />
+                            Padding Left & Right
+                        </Label>
+
+                        <FormInput type="text" name="paddingLR" id={paddingLR} placeholder="Padding Left & Right" disabled={!isPaddingLR}/>
                     </InputContainer>
                 </Container>
 
