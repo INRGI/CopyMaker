@@ -17,6 +17,8 @@ const FormPromo = () => {
 
     const [isFontSize, setFontSize] = useState(domain.isFontSize);
     const [isFontFamily, setFontFamily] = useState(domain.isFontFamily);
+    const [isColorLink, setColorLink] = useState(domain.isColorLink);
+    const [isWidth, setWidth] = useState(domain.isWidth)
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [submitedResult, setSubmitedResult] = useState("");
     
@@ -24,11 +26,14 @@ const FormPromo = () => {
     const dispatch = useDispatch();
     const fontSizeId = nanoid();
     const fontFamilyId = nanoid();
+    const colorLinkId = nanoid();
+    const width = nanoid();
     const submitId = nanoid();
 
     const initialValues = {
         fontSize: "",
         fontFamily: "",
+        colorLink: "",
         ...domain,
         submit: "",
       };
@@ -64,7 +69,25 @@ const FormPromo = () => {
                             Font Family
                         </Label>
 
-                        <FormInput type="text" name="fontFamily" id={fontFamilyId} placeholder="fontFamily" disabled={!isFontFamily}/>
+                        <FormInput type="text" name="fontFamily" id={fontFamilyId} placeholder="Font Family" disabled={!isFontFamily}/>
+                    </InputContainer>
+
+                    <InputContainer>
+                        <Label>
+                            <Checkbox checked={isColorLink} onChange={() => setColorLink((prev) => !prev)} color="success" />
+                            Link Color
+                        </Label>
+
+                        <FormInput type="text" name="colorLink" id={colorLinkId} placeholder="Link Color" disabled={!isColorLink}/>
+                    </InputContainer>
+
+                    <InputContainer>
+                        <Label>
+                            <Checkbox checked={isWidth} onChange={() => setWidth((prev) => !prev)} color="success" />
+                            Width
+                        </Label>
+
+                        <FormInput type="text" name="colorLink" id={width} placeholder="Width" disabled={!isWidth}/>
                     </InputContainer>
                 </Container>
 
@@ -88,6 +111,6 @@ const FormPromo = () => {
 export default FormPromo;
 
 
-// Font size, Font family, color link, paddings, width,
+// +Font size, +Font family, color link, paddings, width,
 
 {/* <div style="font-size:16px; color:blue"><span style="font-family:Roboto; color:white">hwaohfsf</span></div> */}
