@@ -1,4 +1,16 @@
-const makeCopy = ({submit, fontSize, fontFamily, isFontSize, isFontFamily}) => {
+const makeCopy = ({
+    submit, 
+    fontSize, 
+    isFontSize, 
+    fontFamily, 
+    isFontFamily, 
+    colorLink, 
+    isColorLink, 
+    width, 
+    isWidth,
+    paddingLR,
+    isPaddingLR
+}) => {
     let result = submit;
 
     if (isFontSize) {
@@ -7,6 +19,18 @@ const makeCopy = ({submit, fontSize, fontFamily, isFontSize, isFontFamily}) => {
 
     if (isFontFamily) {
         result = result.replace(/style="[^"]*font-family:[^"]*"/g, `style="font-family: ${fontFamily};"`);
+    }
+
+    if (isColorLink) {
+        // 
+    }
+
+    if (isWidth) {
+        // 
+    }
+
+    if (isPaddingLR) {
+        // 
     }
 
     return result;
