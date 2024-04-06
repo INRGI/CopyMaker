@@ -33,9 +33,25 @@ const makeCopy = ({
         
     }
 
+    
+    
     if (isWidth) {
-        // 
+        // Заміна ширини, враховуючи тег <img>
+        result = result.replace(/<(div|span)\s+width="(\d+)"((?!img)[^>]*)/g, (match, tag, widthAttr, remainingAttrs) => {
+            const style = `width:${width}px;`;
+            return `<${tag} width="${width}"${remainingAttrs ? remainingAttrs : ''}`;
+        });
+
+        // Заміна максимальної ширини, не враховуючи тег <img>
+        result = result.replace(/max-width:[^;]+;/g, `max-width: ${width}px;`);
     }
+    
+  
+    
+  
+    
+    
+     
 
     if (isPaddingLR) {
         // 

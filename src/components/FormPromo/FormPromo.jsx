@@ -134,4 +134,4 @@ export default FormPromo;
 
 // +Font size, +Font family, +color link, +paddings, +width,
 
-{/* <div style="font-size:16px; color:#aaaaaa; font-family:Roboto;"><span style="font-family:Roboto; color:white">hwaohfsf</span></div> */}
+{/* <div width="600" style="font-size:16px; color:#aaaaaa; font-family:Roboto; max-width:600px;"><a style="font-size:16px; color:#aaaaaa; font-family:Roboto;"><img width="600"/></a><span style="font-family:Roboto; color:white">hwaohfsf</span></div> */}
