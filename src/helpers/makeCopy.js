@@ -14,13 +14,13 @@ const makeCopy = ({
     let result = submit;
 
     if (isFontSize) {
-        result = result.replace(/style="[^"]*font-size:[^"]*"/g, `style="font-size: ${fontSize}px;"`);
+        result = result.replace(/(style="[^"]*)font-size:[^;]*;/g, `$1font-size: ${fontSize}px;`);
     }
-
+    
     if (isFontFamily) {
-        result = result.replace(/style="[^"]*font-family:[^"]*"/g, `style="font-family: ${fontFamily};"`);
+        result = result.replace(/(style="[^"]*)font-family:[^;]*;/g, `$1font-family: ${fontFamily};`);
     }
-
+    
     if (isColorLink) {
         result = result.replace(/<a\s+(?:[^>]*?\s+)?style="([^"]*)"/g, (match, styleAttr) => {
             
