@@ -38,7 +38,6 @@ const makeCopy = ({
     if (isWidth) {
         // Заміна ширини, враховуючи тег <img>
         result = result.replace(/<(div|span)\s+width="(\d+)"((?!img)[^>]*)/g, (match, tag, widthAttr, remainingAttrs) => {
-            const style = `width:${width}px;`;
             return `<${tag} width="${width}"${remainingAttrs ? remainingAttrs : ''}`;
         });
 
@@ -46,15 +45,11 @@ const makeCopy = ({
         result = result.replace(/max-width:[^;]+;/g, `max-width: ${width}px;`);
     }
     
-  
-    
-  
-    
-    
-     
 
     if (isPaddingLR) {
-        // 
+        // Заміна значень падінгу в ліво та в право
+        result = result.replace(/(style="[^"]*)padding-left:[^;]*;/g, `$1padding-left: ${paddingLR}px;`);
+        result = result.replace(/(style="[^"]*)padding-right:[^;]*;/g, `$1padding-right: ${paddingLR}px;`);
     }
 
     return result;
