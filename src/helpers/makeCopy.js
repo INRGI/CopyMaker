@@ -1,3 +1,5 @@
+import makeUnique from "./makeUnique";
+
 const makeCopy = ({
     submit, 
     fontSize, 
@@ -9,7 +11,8 @@ const makeCopy = ({
     width, 
     isWidth,
     paddingLR,
-    isPaddingLR
+    isPaddingLR,
+    isReplace,
 }) => {
     let result = submit;
 
@@ -52,6 +55,10 @@ const makeCopy = ({
         result = result.replace(/(style="[^"]*)padding-right:[^;]*;/g, `$1padding-right: ${paddingLR}px;`);
     }
 
+    if (isReplace) {
+        result = makeUnique(result);
+    }    
+    
     return result;
 };
 
