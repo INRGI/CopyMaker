@@ -41,18 +41,14 @@ const makeCopy = ({
     
     
     if (isWidth) {
-        // Заміна ширини, враховуючи тег <img>
         result = result.replace(/<(div|span)\s+width="(\d+)"((?!img)[^>]*)/g, (match, tag, widthAttr, remainingAttrs) => {
             return `<${tag} width="${width}"${remainingAttrs ? remainingAttrs : ''}`;
         });
-
-        // Заміна максимальної ширини, не враховуючи тег <img>
         result = result.replace(/max-width:[^;]+;/g, `max-width: ${width}px;`);
     }
     
 
     if (isPaddingLR) {
-        // Заміна значень падінгу в ліво та в право
         result = result.replace(/(style="[^"]*)padding-left:[^;]*;/g, `$1padding-left: ${paddingLR}px;`);
         result = result.replace(/(style="[^"]*)padding-right:[^;]*;/g, `$1padding-right: ${paddingLR}px;`);
     }
