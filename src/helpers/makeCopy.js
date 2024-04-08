@@ -15,6 +15,8 @@ const makeCopy = ({
     isReplace,
     isLinkUrl,
     linkUrl,
+    isTrTB,
+    // trTB,
 }) => {
     let result = submit;
 
@@ -57,6 +59,10 @@ const makeCopy = ({
         result = result.replace(/urlhere/g, linkUrl);
     }    
 
+    if (isTrTB) {
+        // 
+    }   
+
     if (isReplace) {
         result = makeUnique(result);
     }    
@@ -65,3 +71,9 @@ const makeCopy = ({
 };
 
 export default makeCopy;
+
+
+
+
+
+// check if image on submit -> find src -> display downl img + input for new src -> replace

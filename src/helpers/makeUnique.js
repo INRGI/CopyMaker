@@ -28,27 +28,25 @@ const makeUnique = (text) => {
 
     let newText = '';
     let insideTag = false;
-    
 
     for (let i = 0; i < text.length; i++) {
         const char = text[i];
+        let replaceChar = char;
 
         if (char === '<') {
             insideTag = true;
         } else if (char === '>') {
             insideTag = false;
         }
-
         // eslint-disable-next-line no-prototype-builtins
-        if (!insideTag && replacements.hasOwnProperty(char.toUpperCase())) {
-            newText += replacements[char.toUpperCase()].toLowerCase() === replacements[char.toUpperCase()] ? replacements[char.toUpperCase()] : replacements[char.toUpperCase()].toLowerCase();
-        } else {
-            newText += char;
+        if (!insideTag && replacements.hasOwnProperty(char)) {
+            replaceChar = replacements[char];
         }
+
+        newText += replaceChar;
     }
 
     return newText;
 }
 
 export default makeUnique;
-
