@@ -13,6 +13,8 @@ const makeCopy = ({
     paddingLR,
     isPaddingLR,
     isReplace,
+    isLinkUrl,
+    linkUrl,
 }) => {
     let result = submit;
 
@@ -54,6 +56,10 @@ const makeCopy = ({
         result = result.replace(/(style="[^"]*)padding-left:[^;]*;/g, `$1padding-left: ${paddingLR}px;`);
         result = result.replace(/(style="[^"]*)padding-right:[^;]*;/g, `$1padding-right: ${paddingLR}px;`);
     }
+
+    if (isLinkUrl) {
+        result = result.replace(/urlhere/g, linkUrl);
+    }    
 
     if (isReplace) {
         result = makeUnique(result);

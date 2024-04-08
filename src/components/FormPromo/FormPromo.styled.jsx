@@ -36,6 +36,7 @@ export const InputContainer = styled.div`
 
 export const Container = styled.div`
     display: flex;
+    flex-wrap: wrap;
     gap: 10px;
     align-items: center;
     justify-content: center;

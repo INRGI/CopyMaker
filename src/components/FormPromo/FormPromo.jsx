@@ -21,6 +21,7 @@ const FormPromo = () => {
     const [isWidth, setWidth] = useState(domain.isWidth);
     const [isPaddingLR, setPaddingLR] = useState(domain.isPaddingLR);
     const [isReplace, setReplace] = useState(domain.isReplace);
+    const [isLinkUrl, setLinkUrl] = useState(domain.isLinkUrl);
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [submitedResult, setSubmitedResult] = useState("");
     
@@ -32,6 +33,7 @@ const FormPromo = () => {
     const width = nanoid();
     const paddingLR = nanoid();
     const submitId = nanoid();
+    const linkUrlId = nanoid();
 
     const initialValues = {
         fontSize: "",
@@ -39,13 +41,14 @@ const FormPromo = () => {
         colorLink: "",
         width: "",
         paddingLR: "",
+        linkUrl: "",
         ...domain,
         submit: "",
       };
 
     const handleSubmit = (values) => {
-        dispatch(editDomain({ id: domainId, values: {...values, isFontSize, isFontFamily, isColorLink, isWidth, isPaddingLR, isReplace} }));
-        setSubmitedResult(makeCopy({...values, isFontSize, isFontFamily, isColorLink, isWidth, isPaddingLR, isReplace}))
+        dispatch(editDomain({ id: domainId, values: {...values, isFontSize, isFontFamily, isColorLink, isWidth, isPaddingLR, isReplace, isLinkUrl} }));
+        setSubmitedResult(makeCopy({...values, isFontSize, isFontFamily, isColorLink, isWidth, isPaddingLR, isReplace, isLinkUrl}))
 
         setIsSubmitted(true);
     };
@@ -103,13 +106,23 @@ const FormPromo = () => {
 
                         <FormInput type="text" name="paddingLR" id={paddingLR} placeholder="Padding Left & Right" disabled={!isPaddingLR}/>
                     </InputContainer>
+                    
+                    <InputContainer>
+                        <Label>
+                            <Checkbox checked={isLinkUrl} onChange={() => setLinkUrl((prev) => !prev)} color="success" />
+                            Link Url
+                        </Label>
+
+                        <FormInput type="text" name="linkUrl" id={linkUrlId} placeholder="Link Url" disabled={!isLinkUrl}/>
+                    </InputContainer>
 
                     <InputContainer>
                         <Label>
                             <Checkbox checked={isReplace} onChange={() => setReplace((prev) => !prev)} color="success" />
-                            Replace vowels
+                            Make Unique
                         </Label>
                     </InputContainer>
+
                 </Container>
 
                 <div>
@@ -138,8 +151,8 @@ export default FormPromo;
 My client intends to invest these funds in projects. I am willing to finance projects at a guaranteed 5% ROI per annum for projects ranging from 2 years term and above but not exceeding 12 years.
   
   Please answer ASAP.
-<a style="font-size:16px; color:#aaaaaa; font-family:Roboto;">
-<img width="600"/>
+<a href="urlhere" style="font-size:16px; color:#aaaaaa; font-family:Roboto;">
+<img src="osfahofhasoihfoihf" width="600"/>
 </a>
 <span style="font-family:Roboto; color:white">  Dear friend,
   
