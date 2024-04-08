@@ -7,7 +7,7 @@ export const FormInput = styled(Field)`
     display: block;
     min-height: 30px;
     width: 85%;
-    max-width: 200px;
+    max-width: 300px;
     background-color: rgba(255,255,255,0.07);
     border-radius: 3px;
     padding: 0 10px;
@@ -52,7 +52,15 @@ export const FormContainer = styled(Form)`
 export const Label = styled.label`
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     font-size: 14px;
-    width: 200px;
+    width: 250px;
 `;
+
+export const CheckBoxContainer = styled.div`
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: flex-start;
+    height: 40px;
+`

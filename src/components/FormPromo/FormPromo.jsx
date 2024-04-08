@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { nanoid } from "nanoid";
 import { editDomain } from "../../redux/domainSlice";
-import { Container, FormContainer, FormInput, InputContainer, Label, SubmitInput } from "./FormPromo.styled";
+import { CheckBoxContainer, Container, FormContainer, FormInput, InputContainer, Label, SubmitInput } from "./FormPromo.styled";
 
 
 import Checkbox from '@mui/material/Checkbox';
@@ -101,7 +101,7 @@ const FormPromo = () => {
                     <InputContainer>
                         <Label>
                             <Checkbox checked={isPaddingLR} onChange={() => setPaddingLR((prev) => !prev)} color="success" />
-                            Padding Left & Right
+                            Padding
                         </Label>
 
                         <FormInput type="text" name="paddingLR" id={paddingLR} placeholder="Padding Left & Right" disabled={!isPaddingLR}/>
@@ -116,14 +116,16 @@ const FormPromo = () => {
                         <FormInput type="text" name="linkUrl" id={linkUrlId} placeholder="Link Url" disabled={!isLinkUrl}/>
                     </InputContainer>
 
-                    <InputContainer>
+                    
+
+                </Container>
+
+                <CheckBoxContainer>
                         <Label>
                             <Checkbox checked={isReplace} onChange={() => setReplace((prev) => !prev)} color="success" />
                             Make Unique
                         </Label>
-                    </InputContainer>
-
-                </Container>
+                </CheckBoxContainer>
 
                 <div>
                     <SubmitInput name="submit" id={submitId} type="text" placeholder="Paste your copy here :)"/>
