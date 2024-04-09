@@ -43,9 +43,9 @@ const makeCopy = ({
     
     
     if (isWidth) {
-        result = result.replace(/<(div|span)\s+width="(\d+)"((?!img)[^>]*)/g, (match, tag, widthAttr, remainingAttrs) => {
+        result = result.replace(/<(?!img)(\w+)\s+[^>]*?\bwidth="(\d+)"((?!img)[^>]*)/g, (match, tag, widthAttr, remainingAttrs) => {
             return `<${tag} width="${width}"${remainingAttrs ? remainingAttrs : ''}`;
-        });
+        });       
         result = result.replace(/max-width:[^;]+;/g, `max-width: ${width}px;`);
     }
     
