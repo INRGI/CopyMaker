@@ -64,3 +64,44 @@ export const CheckBoxContainer = styled.div`
     justify-content: flex-start;
     height: 40px;
 `
+
+export const ImageContaianer = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+`;
+
+export const ImageBlock = styled.div`
+    display: flex;
+    gap: 10px;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+`;
+
+export const ImageToDowload = styled.img`
+    width: 100%;
+    max-width: 60px;
+    border: 2px solid black;
+    border-radius: 10px;
+    &:hover{
+        transform: translateY(-1px);
+        box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+    }
+`;
+
+export const LinkToDownload = styled.a`
+    text-decoration: none;
+    border-radius: 5px;
+    border: 1px solid black;
+    padding: 3px 7px;
+    background-color: #a7c957;
+    cursor: pointer;
+    &:hover{
+        transform: translateY(-1px);
+        box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+    }
+`;
