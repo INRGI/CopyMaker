@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { nanoid } from "nanoid";
 import { editDomain } from "../../redux/domainSlice";
-import { CheckBoxContainer, Container, FormContainer, FormInput, ImageBlock, ImageContaianer, ImageToDowload, InputContainer, Label, LinkToDownload, SubmitInput } from "./FormPromo.styled";
+import { CheckBoxContainer, Container, FormContainer, FormInput, ImageBlock, ImageContaianer, ImageToDowload, InputContainer, InputToDowload, Label, LinkToDownload, SubmitButtonDownload, SubmitInput } from "./FormPromo.styled";
 import { GrDownload } from "react-icons/gr";
 
 import Checkbox from '@mui/material/Checkbox';
@@ -181,8 +181,8 @@ const FormPromo = () => {
 
                                 <LinkToDownload href={match.match(/src=["'](.*?)["']/)[1]} download={`image_${index}`}><GrDownload color="white"/></LinkToDownload>
 
-                                <input type="text" placeholder="Paste new link src" value={newLink} onChange={handleChange} />
-                                <button type="button" onClick={() => handleImageReplace(index, newLink)}>Change</button>
+                                <InputToDowload type="text" placeholder="Paste new link src" value={newLink} onChange={handleChange} />
+                                <SubmitButtonDownload type="button" onClick={() => handleImageReplace(index, newLink)}>Change</SubmitButtonDownload>
                             </ImageBlock>
                         ))}
                         </ImageContaianer>

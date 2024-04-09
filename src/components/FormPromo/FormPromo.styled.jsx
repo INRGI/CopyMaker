@@ -105,3 +105,38 @@ export const LinkToDownload = styled.a`
         box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
     }
 `;
+
+export const InputToDowload = styled.input`
+    display: block;
+    min-height: 30px;
+    width: 85%;
+    max-width: 300px;
+    background-color: rgba(255,255,255,0.07);
+    border-radius: 3px;
+    padding: 0 10px;
+    font-size: 14px;
+    font-weight: 300;
+    &::placeholder{
+        color: black;
+    }
+    &:hover{
+        transform: translateY(-1px);
+        box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+    }
+`;
+
+export const SubmitButtonDownload = styled.button`
+    width: 150px;
+    background-color: #8aa649;
+    color: white;
+    padding: 5px 0;
+    font-size: 18px;
+    font-weight: 600;
+    border-radius: 5px;
+    cursor: pointer;
+
+    &:hover{
+        transform: translateY(-1px);
+        box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+    }
+`;
