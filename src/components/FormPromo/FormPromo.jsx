@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { nanoid } from "nanoid";
 import { editDomain } from "../../redux/domainSlice";
-import { CheckBoxContainer, Container, FormContainer, FormInput, ImageBlock, ImageContaianer, ImageToDowload, InputContainer, InputToDowload, Label, LinkToDownload, SubmitButtonDownload, SubmitInput } from "./FormPromo.styled";
+import { CheckBoxContainer, Container, FormContainer, FormInput, HasImagesContainer, ImageBlock, ImageContaianer, ImageToDowload, InputContainer, InputToDowload, Label, LinkToDownload, SubmitButtonDownload, SubmitInput, TitleImages } from "./FormPromo.styled";
 import { GrDownload } from "react-icons/gr";
 
 import Checkbox from '@mui/material/Checkbox';
@@ -165,15 +165,10 @@ const FormPromo = () => {
                     <button type="submit">Submit</button>
                 </div>
                 
-                {isSubmitted && (
-                    <div>
-                        <p>{submitedResult}</p>
-                    </div>
-                )}
 
                 {hasImages && (
-                    <div>
-                        <p>Images found in text. Replace their source:</p>
+                    <HasImagesContainer>
+                        <TitleImages>Images found in text. Replace their source:</TitleImages>
                         <ImageContaianer>
                         {submitedResult.match(/<img.*?src=["'](.*?)["'].*?>/g).map((match, index) => (
                             <ImageBlock key={index}>
@@ -186,9 +181,15 @@ const FormPromo = () => {
                             </ImageBlock>
                         ))}
                         </ImageContaianer>
+                    </HasImagesContainer>
+                )}
+
+                {isSubmitted && (
+                    <div>
+                        <p>{submitedResult}</p>
                     </div>
                 )}
-            
+
                 </FormContainer>
             
         </Formik>

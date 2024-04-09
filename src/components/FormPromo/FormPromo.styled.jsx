@@ -140,3 +140,20 @@ export const SubmitButtonDownload = styled.button`
         box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
     }
 `;
+
+export const HasImagesContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+`;
+
+export const TitleImages = styled.h3`
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 42px;
+    text-align: center;
+    margin: 0;
+    margin-top: 30px;
+`;
