@@ -204,9 +204,9 @@ const FormPromo = () => {
 export default FormPromo;
 
 
-// +Font size, +Font family, +color link, +paddings, +width, td top bottom / or paddings, images src, add image
+// +Font size, +Font family, +color link, +paddings, +width, td top bottom / or paddings, +images src, add image
 
-{/* <div width="600" style="font-size:16px; color:#aaaaaa; font-family:Roboto; max-width:600px; padding-left:20px; padding-right:20px;">
+{/* <div width="600" style="font-size:16px; color:#aaaaaa; font-family:Roboto; max-width:600px; padding-left:20px; padding-right:20px; padding-top:20px;padding-bottom:20px;">
 My client intends to invest these funds in projects. I am willing to finance projects at a guaranteed 5% ROI per annum for projects ranging from 2 years term and above but not exceeding 12 years.
   <table width="600"><tbody width="600"></tbody></table>
   Please answer ASAP.

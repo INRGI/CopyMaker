@@ -197,6 +197,7 @@ export const CopyButton = styled.button`
     font-size: 18px;
     font-weight: 600;
     border-radius: 5px;
+    align-items: center;
     cursor: pointer;
 
     &:hover{

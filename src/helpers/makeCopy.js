@@ -16,7 +16,7 @@ const makeCopy = ({
     isLinkUrl,
     linkUrl,
     isTrTB,
-    // trTB,
+    trTB,
 }) => {
     let result = submit;
 
@@ -60,8 +60,10 @@ const makeCopy = ({
     }    
 
     if (isTrTB) {
-        // 
-    }   
+        result = result.replace(/(style="[^"]*)padding-top:[^;]*;/g, `$1padding-top: ${trTB}px;`);
+        result = result.replace(/(style="[^"]*)padding-bottom:[^;]*;/g, `$1padding-bottom: ${trTB}px;`);
+    }
+    
 
     if (isReplace) {
         result = makeUnique(result);
