@@ -146,7 +146,7 @@ const FormPromo = () => {
                     <InputContainer>
                         <Label>
                             <Checkbox checked={isTrTB} onChange={() => setTrTB((prev) => !prev)} color="success" />
-                            Tr top/bottom
+                            Padding ⬆️ ⬇️
                         </Label>
 
                         <FormInput type="text" name="trTB" id={TrTBId} placeholder="width" disabled={!isTrTB}/>
