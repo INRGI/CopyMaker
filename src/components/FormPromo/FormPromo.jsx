@@ -5,8 +5,9 @@ import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { nanoid } from "nanoid";
 import { editDomain } from "../../redux/domainSlice";
-import { CheckBoxContainer, Container, FormContainer, FormInput, HasImagesContainer, ImageBlock, ImageContaianer, ImageToDowload, InputContainer, InputToDowload, Label, LinkToDownload, SubmitButtonDownload, SubmitInput, TitleImages } from "./FormPromo.styled";
+import { CheckBoxContainer, Container, CopyButton, FormContainer, FormInput, HasImagesContainer, ImageBlock, ImageContaianer, ImageToDowload, InputContainer, InputToDowload, Label, LabelCheckBox, LinkToDownload, ResultContainer, ResultText, ResultTitle, SubmitButtonDownload, SubmitContainer, SubmitInput, TitleImages } from "./FormPromo.styled";
 import { GrDownload } from "react-icons/gr";
+import { BsCopy } from "react-icons/bs";
 
 import Checkbox from '@mui/material/Checkbox';
 import makeCopy from "../../helpers/makeCopy";
@@ -154,16 +155,16 @@ const FormPromo = () => {
                 </Container>
 
                 <CheckBoxContainer>
-                        <Label>
+                        <LabelCheckBox>
                             <Checkbox checked={isReplace} onChange={() => setReplace((prev) => !prev)} color="success" />
                             Make Unique
-                        </Label>
+                        </LabelCheckBox>
                 </CheckBoxContainer>
 
-                <div>
-                    <SubmitInput name="submit" id={submitId} type="text" placeholder="Paste your copy here :)"/>
-                    <button type="submit">Submit</button>
-                </div>
+                <SubmitContainer>
+                    <SubmitInput autocomplete="off" name="submit" id={submitId} type="text" placeholder="Paste your copy here :)"/>
+                    <SubmitButtonDownload type="submit">Submit</SubmitButtonDownload>
+                </SubmitContainer>
                 
 
                 {hasImages && (
@@ -176,7 +177,7 @@ const FormPromo = () => {
 
                                 <LinkToDownload href={match.match(/src=["'](.*?)["']/)[1]} download={`image_${index}`}><GrDownload color="white"/></LinkToDownload>
 
-                                <InputToDowload type="text" placeholder="Paste new link src" value={newLink} onChange={handleChange} />
+                                <InputToDowload autocomplete="off" type="text" placeholder="Paste new link src" value={newLink} onChange={handleChange} />
                                 <SubmitButtonDownload type="button" onClick={() => handleImageReplace(index, newLink)}>Change</SubmitButtonDownload>
                             </ImageBlock>
                         ))}
@@ -186,7 +187,11 @@ const FormPromo = () => {
 
                 {isSubmitted && (
                     <div>
-                        <p>{submitedResult}</p>
+                        <ResultTitle>Your Copy below</ResultTitle>
+                        <ResultContainer>
+                            <ResultText>{submitedResult}</ResultText>
+                            <CopyButton onClick={() => {navigator.clipboard.writeText(submitedResult)}} type="button"><BsCopy /></CopyButton>
+                        </ResultContainer>
                     </div>
                 )}
 
