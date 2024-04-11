@@ -29,16 +29,15 @@ const makeCopy = ({
     }
     
     if (isColorLink) {
-        result = result.replace(/<a\s+(?:[^>]*?\s+)?style="([^"]*)"/g, (match, styleAttr) => {
-            
+        result = result.replace(/<a(?:\s+[^>]*)?\s+style="([^"]*)"/g, (match, styleAttr) => {
             if (styleAttr.includes('color:')) {
-                return match.replace(/color:[^;]+;/, `color: ${colorLink};`);
+                return match.replace(/color:[^;]+;/g, `color: ${colorLink};`);
             } else {
-                return match.replace(/(style="[^"]*)"/, `$1 color: ${colorLink};`);
+                return match.replace(/(style="[^"]*)"/, `$1;color: ${colorLink};"`);
             }
         });
-        
     }
+        
 
     
     
