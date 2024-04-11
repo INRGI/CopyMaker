@@ -12,7 +12,7 @@ const domainSlice = createSlice({
       reducer(state, action) {
         state.push(action.payload);
       },
-      prepare({name, fontSize, fontFamily, colorLink, width, paddingLR, isFontSize, isFontFamily, isColorLink, isWidth, isPaddingLR, isReplace, isLinkUrl, isTrTB}) {
+      prepare({name, fontSize, fontFamily, colorLink, width, paddingLR, BGColor, isFontSize, isFontFamily, isColorLink, isWidth, isPaddingLR, isReplace, isLinkUrl, isTrTB, isBGColor}) {
         return {
           payload: {
             name,
@@ -21,6 +21,7 @@ const domainSlice = createSlice({
             colorLink,
             width,
             paddingLR,
+            BGColor,
             isFontSize,
             isFontFamily,
             isColorLink,
@@ -29,6 +30,7 @@ const domainSlice = createSlice({
             isReplace,
             isLinkUrl,
             isTrTB,
+            isBGColor,
             id: nanoid()
           },
         };

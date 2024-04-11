@@ -24,6 +24,7 @@ const FormPromo = () => {
     const [isReplace, setReplace] = useState(domain.isReplace);
     const [isLinkUrl, setLinkUrl] = useState(domain.isLinkUrl);
     const [isTrTB, setTrTB] = useState(domain.isTrTB);
+    const [isBGColor, setBGColor] = useState(domain.isBGColor);
 
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [submitedResult, setSubmitedResult] = useState("");
@@ -56,6 +57,7 @@ const FormPromo = () => {
     const submitId = nanoid();
     const linkUrlId = nanoid();
     const TrTBId = nanoid();
+    const BGColorId = nanoid();
 
     const hasImages = /<img.*?src=["'](.*?)["'].*?>/g.test(submitedResult);
 
@@ -74,8 +76,8 @@ const FormPromo = () => {
       };
 
     const handleSubmit = (values) => {
-        dispatch(editDomain({ id: domainId, values: {...values, isFontSize, isFontFamily, isColorLink, isWidth, isPaddingLR, isReplace, isLinkUrl, isTrTB} }));
-        setSubmitedResult(makeCopy({...values, isFontSize, isFontFamily, isColorLink, isWidth, isPaddingLR, isReplace, isLinkUrl, isTrTB}))
+        dispatch(editDomain({ id: domainId, values: {...values, isFontSize, isFontFamily, isColorLink, isWidth, isPaddingLR, isReplace, isLinkUrl, isTrTB, isBGColor} }));
+        setSubmitedResult(makeCopy({...values, isFontSize, isFontFamily, isColorLink, isWidth, isPaddingLR, isReplace, isLinkUrl, isTrTB, isBGColor}))
 
         setIsSubmitted(true);
     };
@@ -150,6 +152,15 @@ const FormPromo = () => {
                         </Label>
 
                         <FormInput type="text" name="trTB" id={TrTBId} placeholder="width" disabled={!isTrTB}/>
+                    </InputContainer>
+
+                    <InputContainer>
+                        <Label>
+                            <Checkbox checked={isBGColor} onChange={() => setBGColor((prev) => !prev)} color="success" />
+                            Bgcolor
+                        </Label>
+
+                        <FormInput type="text" name="BGColor" id={BGColorId} placeholder="width" disabled={!isBGColor}/>
                     </InputContainer>
 
                 </Container>

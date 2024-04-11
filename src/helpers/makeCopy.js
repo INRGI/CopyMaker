@@ -17,6 +17,8 @@ const makeCopy = ({
     linkUrl,
     isTrTB,
     trTB,
+    isBGColor,
+    BGColor,
 }) => {
     let result = submit;
 
@@ -68,6 +70,9 @@ const makeCopy = ({
         result = result.replace(/<tr\s*(?!height)[^>]*?>\s*<td\s*height="(\d+)"><\/td>\s*<\/tr>(?=(?:\s*<tr[^>]*?>\s*<td[^>]*?><\/td>\s*<\/tr>)*\s*<\/table>\s*$)/, `<tr><td height="${trTB}"></td></tr>`);
     }
     
+    if (isBGColor) {
+        // result = makeUnique(result);
+    }   
 
     if (isReplace) {
         result = makeUnique(result);
