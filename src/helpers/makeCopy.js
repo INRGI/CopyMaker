@@ -22,6 +22,9 @@ const makeCopy = ({
 }) => {
     let result = submit;
 
+    result = result.replace(/>\s+</g, '><');
+
+
     if (isFontSize) {
         result = result.replace(/(style="[^"]*)font-size:[^;]*;/g, `$1font-size: ${fontSize}px;`);
     }
@@ -43,36 +46,53 @@ const makeCopy = ({
 
     
     
-    if (isWidth) {
-        result = result.replace(/<(?!img)(\w+)\s+[^>]*?\bwidth="(\d+)"((?!img)[^>]*)/g, (match, tag, widthAttr, remainingAttrs) => {
-            return `<${tag} width="${width}"${remainingAttrs ? remainingAttrs : ''}`;
-        });       
-        result = result.replace(/max-width:[^;]+;/g, `max-width: ${width}px;`);
-    }
+    // if (isWidth) {
+        
+    //     result = result.replace(/<(?!img|\/?svg|\/?canvas)(\w+\s+[^>]*)\bwidth="(\d+)"([^>]*)>/g, (match, beforeWidth, widthValue, afterWidth) => {
+            
+    //         const newWidthValue = width;
+    //         return `<${beforeWidth}width="${newWidthValue}"${afterWidth}>`;
+    //     });
+    
+        
+    //     result = result.replace(/<(?!img|\/?svg|\/?canvas)(\w+\s+[^>]*)\bstyle="([^"]*?)max-width:\s*([^;]+);([^"]*?)"/g, (match, beforeStyle, beforeMaxWidth, maxWidthValue, afterMaxWidth) => {
+            
+    //         const newMaxWidthValue = `${width}px`;
+    //         return `<${beforeStyle}style="${beforeMaxWidth}max-width: ${newMaxWidthValue};${afterMaxWidth}"`;
+    //     });
+        
+    // }
+    
     
 
-    if (isPaddingLR) {
-        result = result.replace(/(style="[^"]*)padding-left:[^;]*;/g, `$1padding-left: ${paddingLR}px;`);
-        result = result.replace(/(style="[^"]*)padding-right:[^;]*;/g, `$1padding-right: ${paddingLR}px;`);
-    }
+    // if (isPaddingLR) {
+    //     result = result.replace(/(style="[^"]*)padding-left:[^;]*;/g, `$1padding-left: ${paddingLR}px;`);
+    //     result = result.replace(/(style="[^"]*)padding-right:[^;]*;/g, `$1padding-right: ${paddingLR}px;`);
+    // }
 
     if (isLinkUrl) {
         result = result.replace(/urlhere/g, linkUrl);
     }    
 
-    if (isTrTB) {
-        result = result.replace(/(style="[^"]*)padding-top:[^;]*;/g, `$1padding-top: ${trTB}px;`);
-        result = result.replace(/(style="[^"]*)padding-bottom:[^;]*;/g, `$1padding-bottom: ${trTB}px;`);
+    // if (isTrTB) {
+    //     result = result.replace(/(style="[^"]*)padding-top:[^;]*;/g, `$1padding-top: ${trTB}px;`);
+    //     result = result.replace(/(style="[^"]*)padding-bottom:[^;]*;/g, `$1padding-bottom: ${trTB}px;`);
 
-        // need to aprove
-        result = result.replace(/<tr\s*(?!height)[^>]*?>\s*<td\s*height="(\d+)"><\/td>\s*<\/tr>/, `<tr><td height="${trTB}"></td></tr>`);
+    //     // need to aprove
+    //     result = result.replace(/<tr\s*(?!height)[^>]*?>\s*<td\s*height="(\d+)"><\/td>\s*<\/tr>/, `<tr><td height="${trTB}"></td></tr>`);
     
-        result = result.replace(/<tr\s*(?!height)[^>]*?>\s*<td\s*height="(\d+)"><\/td>\s*<\/tr>(?=(?:\s*<tr[^>]*?>\s*<td[^>]*?><\/td>\s*<\/tr>)*\s*<\/table>\s*$)/, `<tr><td height="${trTB}"></td></tr>`);
-    }
+    //     result = result.replace(/<tr\s*(?!height)[^>]*?>\s*<td\s*height="(\d+)"><\/td>\s*<\/tr>(?=(?:\s*<tr[^>]*?>\s*<td[^>]*?><\/td>\s*<\/tr>)*\s*<\/table>\s*$)/, `<tr><td height="${trTB}"></td></tr>`);
+    // }
     
     if (isBGColor) {
-        // result = makeUnique(result);
-    }   
+        result = result.replace(/<(table|tbody)([^>]*)\s+bgcolor="([^"]*)"([^>]*)>/g, (match, tag, beforeAttrs, oldBGColor, afterAttrs) => {
+            return `<${tag}${beforeAttrs} bgcolor="${BGColor}"${afterAttrs}>`;
+        });
+    
+        result = result.replace(/background-color:[^;]+;/g, `background-color: ${BGColor};`);
+    }
+    
+    
 
     if (isReplace) {
         result = makeUnique(result);
