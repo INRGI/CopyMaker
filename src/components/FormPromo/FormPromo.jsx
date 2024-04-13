@@ -120,16 +120,16 @@ const FormPromo = () => {
                     
 
                     {/* NEED TO FIX */}
-                    {/* <InputContainer>
+                    <InputContainer>
                         <Label>
                             <Checkbox checked={isWidth} onChange={() => setWidth((prev) => !prev)} color="success" />
-                            Width
+                            Max Width
                         </Label>
 
                         <FormInput type="text" name="width" id={width} placeholder="Width" disabled={!isWidth}/>
-                    </InputContainer> */}
+                    </InputContainer>
                     
-                    {/* NEED TO FIX */}
+                    
                     <InputContainer>
                         <Label>
                             <Checkbox checked={isPaddingLR} onChange={() => setPaddingLR((prev) => !prev)} color="success" />
@@ -157,7 +157,8 @@ const FormPromo = () => {
 
                         <FormInput type="text" name="trTB" id={TrTBId} placeholder="width" disabled={!isTrTB}/>
                     </InputContainer> */}
-
+                    
+                    {/* NEED TO FIX */}
                     {/* <InputContainer>
                         <Label>
                             <Checkbox checked={isBGColor} onChange={() => setBGColor((prev) => !prev)} color="success" />
@@ -181,7 +182,7 @@ const FormPromo = () => {
                     <SubmitButtonDownload type="submit">Submit</SubmitButtonDownload>
                 </SubmitContainer>
                 
-
+                {/* NEED TO FIX */}
                 {hasImages && (
                     <HasImagesContainer>
                         <TitleImages>Images found in text. Replace their source:</TitleImages>

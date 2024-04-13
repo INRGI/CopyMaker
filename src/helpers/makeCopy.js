@@ -44,22 +44,11 @@ const makeCopy = ({
 
     
     
-    // if (isWidth) {
+    if (isWidth) {
+
+        result = result.replace(/(?<!<img[^>]*?)(max-width|width)\s*:\s*\d{1,3}%?/g, `$1: ${width}px`);
         
-    //     result = result.replace(/<(?!img|\/?svg|\/?canvas)(\w+\s+[^>]*)\bwidth="(\d+)"([^>]*)>/g, (match, beforeWidth, widthValue, afterWidth) => {
-            
-    //         const newWidthValue = width;
-    //         return `<${beforeWidth}width="${newWidthValue}"${afterWidth}>`;
-    //     });
-    
-        
-    //     result = result.replace(/<(?!img|\/?svg|\/?canvas)(\w+\s+[^>]*)\bstyle="([^"]*?)max-width:\s*([^;]+);([^"]*?)"/g, (match, beforeStyle, beforeMaxWidth, maxWidthValue, afterMaxWidth) => {
-            
-    //         const newMaxWidthValue = `${width}px`;
-    //         return `<${beforeStyle}style="${beforeMaxWidth}max-width: ${newMaxWidthValue};${afterMaxWidth}"`;
-    //     });
-        
-    // }
+    }
     
 
     if (isPaddingLR) {
