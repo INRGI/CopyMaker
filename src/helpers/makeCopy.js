@@ -22,38 +22,6 @@ const makeCopy = ({
 }) => {
     let result = submit;
 
-    result = result.replace(/>\s+</g, '><');
-    
-    function formatHtml(html) {
-        const tab = '\t';
-        let result = '';
-        let indent = '';
-    
-        html.split(/>\s*</).forEach((element) => {
-            if (element.match(/^\/\w/)) {
-                indent = indent.substring(tab.length);
-            }
-    
-            result += `${indent}<${element}>\r\n`;
-    
-            if (element.match(/^<?\w[^>]*[^\/]$/) && !element.startsWith('input') && !element.startsWith('img') && !element.startsWith('br')) {
-                indent += tab;
-            }
-        });
-
-    
-        return result.trim();
-    }
-
-    function removeFirstAndLastCharacter(str) {
-        return str.slice(1, -1);
-    }
-
-    result = formatHtml(result);
-    
-    
-    result = removeFirstAndLastCharacter(result);
-
 
     if (isFontSize) {
         result = result.replace(/(style="[^"]*)font-size:[^;]*;/g, `$1font-size: ${fontSize}px;`);
@@ -93,12 +61,13 @@ const makeCopy = ({
         
     // }
     
-    
 
-    // if (isPaddingLR) {
-    //     result = result.replace(/(style="[^"]*)padding-left:[^;]*;/g, `$1padding-left: ${paddingLR}px;`);
-    //     result = result.replace(/(style="[^"]*)padding-right:[^;]*;/g, `$1padding-right: ${paddingLR}px;`);
-    // }
+    if (isPaddingLR) {
+       
+        result = result.replace(/padding-left:\s*\d{1,2}\s*px/g, `padding-left: ${paddingLR}px`)
+               .replace(/padding-right:\s*\d{1,2}\s*px/g, `padding-right: ${paddingLR}px`);
+
+    }
     
     
     
@@ -130,6 +99,38 @@ const makeCopy = ({
     if (isReplace) {
         result = makeUnique(result);
     }    
+
+    result = result.replace(/>\s+</g, '><');
+    
+    function formatHtml(html) {
+        const tab = '\t';
+        let result = '';
+        let indent = '';
+    
+        html.split(/>\s*</).forEach((element) => {
+            if (element.match(/^\/\w/)) {
+                indent = indent.substring(tab.length);
+            }
+    
+            result += `${indent}<${element}>\r\n`;
+    
+            if (element.match(/^<?\w[^>]*[^\/]$/) && !element.startsWith('input') && !element.startsWith('img') && !element.startsWith('br')) {
+                indent += tab;
+            }
+        });
+
+    
+        return result.trim();
+    }
+
+    function removeFirstAndLastCharacter(str) {
+        return str.slice(1, -1);
+    }
+
+    result = formatHtml(result);
+    
+    
+    result = removeFirstAndLastCharacter(result);
     
     return result;
 };

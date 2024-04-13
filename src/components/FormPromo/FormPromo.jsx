@@ -130,14 +130,14 @@ const FormPromo = () => {
                     </InputContainer> */}
                     
                     {/* NEED TO FIX */}
-                    {/* <InputContainer>
+                    <InputContainer>
                         <Label>
                             <Checkbox checked={isPaddingLR} onChange={() => setPaddingLR((prev) => !prev)} color="success" />
                             Padding
                         </Label>
 
                         <FormInput type="text" name="paddingLR" id={paddingLR} placeholder="Padding Left & Right" disabled={!isPaddingLR}/>
-                    </InputContainer> */}
+                    </InputContainer>
                     
                     <InputContainer>
                         <Label>
