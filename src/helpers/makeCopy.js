@@ -117,13 +117,13 @@ const makeCopy = ({
     //     result = result.replace(/<tr\s*(?!height)[^>]*?>\s*<td\s*height="(\d+)"><\/td>\s*<\/tr>(?=(?:\s*<tr[^>]*?>\s*<td[^>]*?><\/td>\s*<\/tr>)*\s*<\/table>\s*$)/, `<tr><td height="${trTB}"></td></tr>`);
     // }
     
-    if (isBGColor) {
-        result = result.replace(/<(table|tbody)([^>]*)\s+bgcolor="([^"]*)"([^>]*)>/g, (match, tag, beforeAttrs, oldBGColor, afterAttrs) => {
-            return `<${tag}${beforeAttrs} bgcolor="${BGColor}"${afterAttrs}>`;
-        });
+    // if (isBGColor) {
+    //     result = result.replace(/<(table|tbody)([^>]*)\s+bgcolor="([^"]*)"([^>]*)>/g, (match, tag, beforeAttrs, oldBGColor, afterAttrs) => {
+    //         return `<${tag}${beforeAttrs} bgcolor="${BGColor}"${afterAttrs}>`;
+    //     });
     
-        result = result.replace(/background-color:[^;]+;/g, `background-color: ${BGColor};`);
-    }
+    //     result = result.replace(/background-color:[^;]+;/g, `background-color: ${BGColor};`);
+    // }
     
     
 

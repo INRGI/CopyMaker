@@ -158,14 +158,14 @@ const FormPromo = () => {
                         <FormInput type="text" name="trTB" id={TrTBId} placeholder="width" disabled={!isTrTB}/>
                     </InputContainer> */}
 
-                    <InputContainer>
+                    {/* <InputContainer>
                         <Label>
                             <Checkbox checked={isBGColor} onChange={() => setBGColor((prev) => !prev)} color="success" />
                             Bgcolor
                         </Label>
 
                         <FormInput type="text" name="BGColor" id={BGColorId} placeholder="width" disabled={!isBGColor}/>
-                    </InputContainer>
+                    </InputContainer> */}
 
                 </Container>
 
