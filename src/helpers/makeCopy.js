@@ -23,6 +23,36 @@ const makeCopy = ({
     let result = submit;
 
     result = result.replace(/>\s+</g, '><');
+    
+    function formatHtml(html) {
+        const tab = '\t';
+        let result = '';
+        let indent = '';
+    
+        html.split(/>\s*</).forEach((element) => {
+            if (element.match(/^\/\w/)) {
+                indent = indent.substring(tab.length);
+            }
+    
+            result += `${indent}<${element}>\r\n`;
+    
+            if (element.match(/^<?\w[^>]*[^\/]$/) && !element.startsWith('input') && !element.startsWith('img') && !element.startsWith('br')) {
+                indent += tab;
+            }
+        });
+
+    
+        return result.trim();
+    }
+
+    function removeFirstAndLastCharacter(str) {
+        return str.slice(1, -1);
+    }
+
+    result = formatHtml(result);
+    
+    
+    result = removeFirstAndLastCharacter(result);
 
 
     if (isFontSize) {
@@ -69,6 +99,9 @@ const makeCopy = ({
     //     result = result.replace(/(style="[^"]*)padding-left:[^;]*;/g, `$1padding-left: ${paddingLR}px;`);
     //     result = result.replace(/(style="[^"]*)padding-right:[^;]*;/g, `$1padding-right: ${paddingLR}px;`);
     // }
+    
+    
+    
 
     if (isLinkUrl) {
         result = result.replace(/urlhere/g, linkUrl);
