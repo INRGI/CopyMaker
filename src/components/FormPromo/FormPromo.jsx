@@ -119,7 +119,6 @@ const FormPromo = () => {
                     </InputContainer>
                     
 
-                    {/* NEED TO FIX */}
                     <InputContainer>
                         <Label>
                             <Checkbox checked={isWidth} onChange={() => setWidth((prev) => !prev)} color="success" />
@@ -159,14 +158,14 @@ const FormPromo = () => {
                     </InputContainer> */}
                     
                     {/* NEED TO FIX */}
-                    {/* <InputContainer>
+                    <InputContainer>
                         <Label>
                             <Checkbox checked={isBGColor} onChange={() => setBGColor((prev) => !prev)} color="success" />
                             Bgcolor
                         </Label>
 
                         <FormInput type="text" name="BGColor" id={BGColorId} placeholder="width" disabled={!isBGColor}/>
-                    </InputContainer> */}
+                    </InputContainer>
 
                 </Container>
 
