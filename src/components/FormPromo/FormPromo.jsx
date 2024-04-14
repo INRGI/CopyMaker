@@ -11,6 +11,7 @@ import { BsCopy } from "react-icons/bs";
 
 import Checkbox from '@mui/material/Checkbox';
 import makeCopy from "../../helpers/makeCopy";
+import { Bounce, toast } from "react-toastify";
 
 const FormPromo = () => {
     const { domainId } = useParams();
@@ -79,7 +80,23 @@ const FormPromo = () => {
         dispatch(editDomain({ id: domainId, values: {...values, isFontSize, isFontFamily, isColorLink, isWidth, isPaddingLR, isReplace, isLinkUrl, isTrTB, isBGColor} }));
         setSubmitedResult(makeCopy({...values, isFontSize, isFontFamily, isColorLink, isWidth, isPaddingLR, isReplace, isLinkUrl, isTrTB, isBGColor}))
 
+        if(values.submit === '') {
+            setIsSubmitted(false);
+            return
+        }
+
         setIsSubmitted(true);
+        toast.success('Copy maked', {
+            position: "top-right",
+            autoClose: 1000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            transition: Bounce,
+        });
     };
 
     return (
@@ -176,25 +193,27 @@ const FormPromo = () => {
                 </CheckBoxContainer>
 
                 <SubmitContainer>
-                    <SubmitInput autocomplete="off" name="submit" id={submitId} type="text" placeholder="Paste your copy here :)"/>
+                    <SubmitInput autoComplete="off" name="submit" id={submitId} type="text" placeholder="Paste your copy here :)"/>
                     <SubmitButtonDownload type="submit">Submit</SubmitButtonDownload>
                 </SubmitContainer>
                 
                 {/* NEED TO FIX */}
-                {hasImages && (
+                {hasImages && submitedResult !== "" (
                     <HasImagesContainer>
                         <TitleImages>Images found in text. Replace their source:</TitleImages>
                         <ImageContaianer>
-                        {submitedResult.match(/<img.*?src=["'](.*?)["'].*?>/g).map((match, index) => (
-                            <ImageBlock key={index}>
-                                <ImageToDowload src={match.match(/src=["'](.*?)["']/)[1]} alt="Image" />
+                        {submitedResult.match(/<img.*?src=["'](.*?)["'].*?>/g).map((match, index) => {
+                            
+                            return (
+                                <ImageBlock key={index}>
+                                    <ImageToDowload src={match.match(/src=["'](.*?)["']/)[1]} alt="Image" />
 
-                                <LinkToDownload href={match.match(/src=["'](.*?)["']/)[1]} download={`image_${index}`}><GrDownload color="white"/></LinkToDownload>
+                                    <LinkToDownload href={match.match(/src=["'](.*?)["']/)[1]} download target="_blank"><GrDownload color="white"/></LinkToDownload>
 
-                                <InputToDowload autocomplete="off" type="text" placeholder="Paste new link src" value={newLink} onChange={handleChange} />
-                                <SubmitButtonDownload type="button" onClick={() => handleImageReplace(index, newLink)}>Change</SubmitButtonDownload>
-                            </ImageBlock>
-                        ))}
+                                    <InputToDowload autoComplete="off" type="text" placeholder="Paste new link src" value={newLink} onChange={handleChange} />
+                                    <SubmitButtonDownload type="button" onClick={() => handleImageReplace(index, newLink)}>Change</SubmitButtonDownload>
+                                </ImageBlock>
+                            )})}
                         </ImageContaianer>
                     </HasImagesContainer>
                 )}

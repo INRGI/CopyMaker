@@ -4,7 +4,7 @@ import { nanoid } from 'nanoid';
 import * as Yup from "yup";
 import { Button, Container, Input, Title } from './DomainForm.styled';
 import Error from '../Error/Error';
-import { toast } from 'react-toastify';
+import { Bounce, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
@@ -45,6 +45,19 @@ const DomainForm = () => {
 
 
         dispatch(addDomain(values));
+
+        toast.success('Domain added', {
+            position: "top-right",
+            autoClose: 1000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            transition: Bounce,
+        });
+
         actions.resetForm();
     };
 

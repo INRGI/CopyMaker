@@ -4,6 +4,7 @@ import { Helmet } from "react-helmet";
 import { useSelector } from "react-redux";
 import { useRef } from "react";
 import { Btn, StyledLink } from "./DomainPage.styled";
+import { ToastContainer } from "react-toastify";
 
 const DomainPage = () => {
     const { domainId } = useParams();
@@ -22,7 +23,7 @@ const DomainPage = () => {
             <StyledLink to={backLinkHref.current}>
                 <Btn type="button">Back</Btn>
             </StyledLink>
-
+            <ToastContainer />
             <FormPromo />
         </>
     )
