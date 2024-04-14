@@ -30,23 +30,26 @@ const FormPromo = () => {
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [submitedResult, setSubmitedResult] = useState("");
     
-    const [newLink, setNewLink] = useState('');
+    const [newLinks, setNewLinks] = useState(domain.images ? Array.from({ length: domain.images.length }, () => '') : []);
 
-    const handleChange = (event) => {
-        setNewLink(event.target.value);
+
+    const handleChange = (index, event) => {
+        const newLinkCopy = [...newLinks];
+        newLinkCopy[index] = event.target.value;
+        setNewLinks(newLinkCopy);
     };
+    
 
     const handleImageReplace = (index, newSrc) => {
         const images = submitedResult.match(/<img.*?src=["'](.*?)["'].*?>/g);
         
         if (index >= 0 && index < images.length) {
             const oldSrc = images[index].match(/src=["'](.*?)["']/)[1];
-    
             const updatedResult = submitedResult.replace(oldSrc, newSrc);
-    
             setSubmitedResult(updatedResult);
         }
     };
+    
     
 
     const dispatch = useDispatch();
@@ -198,25 +201,27 @@ const FormPromo = () => {
                 </SubmitContainer>
                 
                 {/* NEED TO FIX */}
-                {hasImages && submitedResult !== "" (
+                {hasImages && submitedResult !== "" && (
                     <HasImagesContainer>
                         <TitleImages>Images found in text. Replace their source:</TitleImages>
                         <ImageContaianer>
                         {submitedResult.match(/<img.*?src=["'](.*?)["'].*?>/g).map((match, index) => {
-                            
+                            const inputId = `newLink${index}`;
                             return (
                                 <ImageBlock key={index}>
                                     <ImageToDowload src={match.match(/src=["'](.*?)["']/)[1]} alt="Image" />
 
                                     <LinkToDownload href={match.match(/src=["'](.*?)["']/)[1]} download target="_blank"><GrDownload color="white"/></LinkToDownload>
 
-                                    <InputToDowload autoComplete="off" type="text" placeholder="Paste new link src" value={newLink} onChange={handleChange} />
-                                    <SubmitButtonDownload type="button" onClick={() => handleImageReplace(index, newLink)}>Change</SubmitButtonDownload>
+                                    <InputToDowload autoComplete="off" type="text" placeholder="Paste new link src" value={newLinks[index]} onChange={(event) => handleChange(index, event)} id={inputId} />
+                                    <SubmitButtonDownload type="button" onClick={() => handleImageReplace(index, newLinks[index])}>Change</SubmitButtonDownload> 
                                 </ImageBlock>
-                            )})}
+                            );
+                        })}
                         </ImageContaianer>
                     </HasImagesContainer>
                 )}
+
 
                 {isSubmitted && (
                     <div>
