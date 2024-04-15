@@ -117,7 +117,7 @@ const FormPromo = () => {
                             Font Size
                         </Label>
 
-                        <FormInput type="text" name="fontSize" id={fontSizeId} placeholder="fontSize" disabled={!isFontSize}/>
+                        <FormInput type="text" name="fontSize" id={fontSizeId} placeholder="ex: 16" disabled={!isFontSize}/>
                     </InputContainer>
 
                     <InputContainer>
@@ -126,7 +126,7 @@ const FormPromo = () => {
                             Font Family
                         </Label>
 
-                        <FormInput type="text" name="fontFamily" id={fontFamilyId} placeholder="Font Family" disabled={!isFontFamily}/>
+                        <FormInput type="text" name="fontFamily" id={fontFamilyId} placeholder="ex: Roboto" disabled={!isFontFamily}/>
                     </InputContainer>
 
                     <InputContainer>
@@ -135,7 +135,7 @@ const FormPromo = () => {
                             Link Color
                         </Label>
 
-                        <FormInput type="text" name="colorLink" id={colorLinkId} placeholder="Link Color" disabled={!isColorLink}/>
+                        <FormInput type="text" name="colorLink" id={colorLinkId} placeholder="ex: #ffffff" disabled={!isColorLink}/>
                     </InputContainer>
                     
 
@@ -145,17 +145,17 @@ const FormPromo = () => {
                             Max Width
                         </Label>
 
-                        <FormInput type="text" name="width" id={width} placeholder="Width" disabled={!isWidth}/>
+                        <FormInput type="text" name="width" id={width} placeholder="ex: 600" disabled={!isWidth}/>
                     </InputContainer>
                     
                     
                     <InputContainer>
                         <Label>
                             <Checkbox checked={isPaddingLR} onChange={() => setPaddingLR((prev) => !prev)} color="success" />
-                            Padding
+                            Padding ⬅️➡️
                         </Label>
 
-                        <FormInput type="text" name="paddingLR" id={paddingLR} placeholder="Padding Left & Right" disabled={!isPaddingLR}/>
+                        <FormInput type="text" name="paddingLR" id={paddingLR} placeholder="ex: 20" disabled={!isPaddingLR}/>
                     </InputContainer>
                     
                     <InputContainer>
@@ -183,7 +183,7 @@ const FormPromo = () => {
                             Bgcolor
                         </Label>
 
-                        <FormInput type="text" name="BGColor" id={BGColorId} placeholder="width" disabled={!isBGColor}/>
+                        <FormInput type="text" name="BGColor" id={BGColorId} placeholder="ex: #ffffff" disabled={!isBGColor}/>
                     </InputContainer>
 
                 </Container>
