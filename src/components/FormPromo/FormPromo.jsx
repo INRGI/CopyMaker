@@ -168,14 +168,14 @@ const FormPromo = () => {
                     </InputContainer>
                     
                     {/* NEED TO FIX */}
-                    {/* <InputContainer>
+                    <InputContainer>
                         <Label>
                             <Checkbox checked={isTrTB} onChange={() => setTrTB((prev) => !prev)} color="success" />
                             Padding ⬆️ ⬇️
                         </Label>
 
                         <FormInput type="text" name="trTB" id={TrTBId} placeholder="width" disabled={!isTrTB}/>
-                    </InputContainer> */}
+                    </InputContainer>
                     
                     <InputContainer>
                         <Label>
@@ -200,7 +200,7 @@ const FormPromo = () => {
                     <SubmitButtonDownload type="submit">Submit</SubmitButtonDownload>
                 </SubmitContainer>
                 
-                {/* NEED TO FIX */}
+                {/* NEED TO TEST */}
                 {hasImages && submitedResult !== "" && (
                     <HasImagesContainer>
                         <TitleImages>Images found in text. Replace their source:</TitleImages>

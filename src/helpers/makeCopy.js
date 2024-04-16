@@ -69,15 +69,15 @@ const makeCopy = ({
         result = result.replace(/urlhere/g, linkUrl);
     }    
 
-    // if (isTrTB) {
-    //     result = result.replace(/(style="[^"]*)padding-top:[^;]*;/g, `$1padding-top: ${trTB}px;`);
-    //     result = result.replace(/(style="[^"]*)padding-bottom:[^;]*;/g, `$1padding-bottom: ${trTB}px;`);
+    // need to aprove
+    if (isTrTB) {
+        result = result.replace(/(style="[^"]*)padding-top:[^;]*;/g, `$1padding-top: ${trTB}px;`);
+        result = result.replace(/(style="[^"]*)padding-bottom:[^;]*;/g, `$1padding-bottom: ${trTB}px;`);
 
-    //     // need to aprove
-    //     result = result.replace(/<tr\s*(?!height)[^>]*?>\s*<td\s*height="(\d+)"><\/td>\s*<\/tr>/, `<tr><td height="${trTB}"></td></tr>`);
+        result = result.replace(/<tr\s*(?!height)[^>]*?>\s*<td\s*height="(\d+)"><\/td>\s*<\/tr>/, `<tr><td height="${trTB}" width="100%"></td></tr>`);
     
-    //     result = result.replace(/<tr\s*(?!height)[^>]*?>\s*<td\s*height="(\d+)"><\/td>\s*<\/tr>(?=(?:\s*<tr[^>]*?>\s*<td[^>]*?><\/td>\s*<\/tr>)*\s*<\/table>\s*$)/, `<tr><td height="${trTB}"></td></tr>`);
-    // }
+        result = result.replace(/<tr\s*(?!height)[^>]*?>\s*<td\s*height="(\d+)"><\/td>\s*<\/tr>(?=(?:\s*<tr[^>]*?>\s*<td[^>]*?><\/td>\s*<\/tr>)*\s*<\/table>\s*$)/, `<tr><td height="${trTB}" width="100%"></td></tr>`);
+    }
     
     if (isBGColor) {
         result = result.replace(/<(table|tbody)([^>]*)\s+bgcolor="([^"]*)"([^>]*)>/g, (match, tag, beforeAttrs, oldBGColor, afterAttrs) => {
@@ -107,6 +107,7 @@ const makeCopy = ({
     
             result += `${indent}<${element}>\r\n`;
     
+            // eslint-disable-next-line no-useless-escape
             if (element.match(/^<?\w[^>]*[^\/]$/) && !element.startsWith('input') && !element.startsWith('img') && !element.startsWith('br')) {
                 indent += tab;
             }
