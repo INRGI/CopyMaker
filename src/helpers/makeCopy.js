@@ -46,9 +46,11 @@ const makeCopy = ({
     
     if (isWidth) {
         
-        result = result.replace(/(?<!<img[^>]*?)(max-width|width)\s*:\s*(?!100%\s*;)(\d+%?)(?!px)/g, `$1: ${width}px`);
+        // result = result.replace(/(?<!<img[^>]*?)(max-width|width)\s*:\s*(?!100%\s*;)(\d+%?)(?!px)/g, `$1: ${width}px`);
+        // result = result.replace(/(\d{1,3})px0px/g, '$1px');
+        result = result.replace(/(?<!<(img|a)[^>]*?)(max-width|width)\s*:\s*(?!100%\s*;)(\d+%?)(?!px)/g, `$2: ${width}px`);
         result = result.replace(/(\d{1,3})px0px/g, '$1px');
-        
+
         
         
         
@@ -69,14 +71,14 @@ const makeCopy = ({
         result = result.replace(/urlhere/g, linkUrl);
     }    
 
-    // need to aprove
+    
     if (isTrTB) {
+ 
         result = result.replace(/(style="[^"]*)padding-top:[^;]*;/g, `$1padding-top: ${trTB}px;`);
         result = result.replace(/(style="[^"]*)padding-bottom:[^;]*;/g, `$1padding-bottom: ${trTB}px;`);
+        // top
+        result = result.replace(/(<tr[^>]*>\s*<td[^>]*height=")(\d+)("[^>]*><\/td>\s*<\/tr>)/, `<tr><td height="${trTB}" width="100%"></td></tr>`);
 
-        result = result.replace(/<tr\s*(?!height)[^>]*?>\s*<td\s*height="(\d+)"><\/td>\s*<\/tr>/, `<tr><td height="${trTB}" width="100%"></td></tr>`);
-    
-        result = result.replace(/<tr\s*(?!height)[^>]*?>\s*<td\s*height="(\d+)"><\/td>\s*<\/tr>(?=(?:\s*<tr[^>]*?>\s*<td[^>]*?><\/td>\s*<\/tr>)*\s*<\/table>\s*$)/, `<tr><td height="${trTB}" width="100%"></td></tr>`);
     }
     
     if (isBGColor) {

@@ -167,14 +167,13 @@ const FormPromo = () => {
                         <FormInput type="text" name="linkUrl" id={linkUrlId} placeholder="Link Url" disabled={!isLinkUrl}/>
                     </InputContainer>
                     
-                    {/* NEED TO FIX */}
                     <InputContainer>
                         <Label>
                             <Checkbox checked={isTrTB} onChange={() => setTrTB((prev) => !prev)} color="success" />
                             Padding ⬆️ ⬇️
                         </Label>
 
-                        <FormInput type="text" name="trTB" id={TrTBId} placeholder="width" disabled={!isTrTB}/>
+                        <FormInput type="text" name="trTB" id={TrTBId} placeholder="ex: 20" disabled={!isTrTB}/>
                     </InputContainer>
                     
                     <InputContainer>
