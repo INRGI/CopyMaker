@@ -82,11 +82,21 @@ const makeCopy = ({
     }
     
     if (isBGColor) {
-        result = result.replace(/<(table|tbody)([^>]*)\s+bgcolor="([^"]*)"([^>]*)>/g, (match, tag, beforeAttrs, oldBGColor, afterAttrs) => {
+        result = result.replace(/<(table|tbody)([^>]*)\s+bgcolor\s*=\s*["']([^"']*)["']([^>]*)>/g, (match, tag, beforeAttrs, oldBGColor, afterAttrs) => {
             return `<${tag}${beforeAttrs} bgcolor="${BGColor}"${afterAttrs}>`;
         });
-    
-        result = result.replace(/background-color:[^;]+;/g, `background-color: ${BGColor};`);
+        
+        result = result.replace(/background-color\s*:\s*([^;]+);/g, `background-color: ${BGColor};`);
+
+        result = result.replace(/<(table|tbody)([^>]*)>/g, (match, tag, attrs) => {
+       
+            if (attrs.includes('bgcolor')) {
+                return match;
+            } else {
+                return `<${tag}${attrs} bgcolor="${BGColor}">`;
+            }
+        });
+                
     }
     
     

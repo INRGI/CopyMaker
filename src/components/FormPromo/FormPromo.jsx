@@ -75,6 +75,7 @@ const FormPromo = () => {
         paddingLR: "",
         linkUrl: "",
         trTB: "",
+        BGColor: "",
         ...domain,
         submit: "",
       };
