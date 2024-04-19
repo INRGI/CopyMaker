@@ -5,10 +5,11 @@ import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { nanoid } from "nanoid";
 import { editDomain } from "../../redux/domainSlice";
-import { CheckBoxContainer, Container, CopyButton, FormContainer, FormInput, HasImagesContainer, ImageBlock, ImageContaianer, ImageToDowload, InputContainer, InputToDowload, Label, LabelCheckBox, LinkToDownload, ResultContainer, ResultText, ResultTitle, SubmitButtonDownload, SubmitContainer, SubmitInput, TitleImages } from "./FormPromo.styled";
+import { AddImageButton, CheckBoxContainer, Container, CopyButton, FormContainer, FormInput, HasImagesContainer, ImageBlock, ImageContaianer, ImageToDowload, InputContainer, InputToDowload, Label, LabelCheckBox, LinkToDownload, ResultContainer, ResultText, ResultTitle, SubmitButtonDownload, SubmitContainer, SubmitInput, TitleImages } from "./FormPromo.styled";
 import { GrDownload } from "react-icons/gr";
 import { BsCopy } from "react-icons/bs";
 
+import AddImageModal from "../AddImageModal";
 import Checkbox from '@mui/material/Checkbox';
 import makeCopy from "../../helpers/makeCopy";
 import { Bounce, toast } from "react-toastify";
@@ -32,6 +33,7 @@ const FormPromo = () => {
     
     const [newLinks, setNewLinks] = useState(domain.images ? Array.from({ length: domain.images.length }, () => '') : []);
 
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     const handleChange = (index, event) => {
         const newLinkCopy = [...newLinks];
@@ -103,139 +105,166 @@ const FormPromo = () => {
         });
     };
 
+    const handleImageAdd = () => {
+
+    };
+
+    const handleAddImageConfirm = () => {
+
+    };
+
     return (
-        <Formik
-            onSubmit={handleSubmit}
-            initialValues={initialValues}
-            validateOnBlur={false}
-            validateOnChange={false}
-        >
-            <FormContainer>
-                <Container>
-                    <InputContainer>
-                        <Label>
-                            <Checkbox checked={isFontSize} onChange={() => setFontSize((prev) => !prev)} color="success" />
-                            Font Size
-                        </Label>
+        <>
+            <Formik
+                onSubmit={handleSubmit}
+                initialValues={initialValues}
+                validateOnBlur={false}
+                validateOnChange={false}
+            >
+                <FormContainer>
+                    <Container>
+                        <InputContainer>
+                            <Label>
+                                <Checkbox checked={isFontSize} onChange={() => setFontSize((prev) => !prev)} color="success" />
+                                Font Size
+                            </Label>
 
-                        <FormInput type="text" name="fontSize" id={fontSizeId} placeholder="ex: 16" disabled={!isFontSize}/>
-                    </InputContainer>
+                            <FormInput type="text" name="fontSize" id={fontSizeId} placeholder="ex: 16" disabled={!isFontSize}/>
+                        </InputContainer>
 
-                    <InputContainer>
-                        <Label>
-                            <Checkbox checked={isFontFamily} onChange={() => setFontFamily((prev) => !prev)} color="success" />
-                            Font Family
-                        </Label>
+                        <InputContainer>
+                            <Label>
+                                <Checkbox checked={isFontFamily} onChange={() => setFontFamily((prev) => !prev)} color="success" />
+                                Font Family
+                            </Label>
 
-                        <FormInput type="text" name="fontFamily" id={fontFamilyId} placeholder="ex: Roboto" disabled={!isFontFamily}/>
-                    </InputContainer>
+                            <FormInput type="text" name="fontFamily" id={fontFamilyId} placeholder="ex: Roboto" disabled={!isFontFamily}/>
+                        </InputContainer>
 
-                    <InputContainer>
-                        <Label>
-                            <Checkbox checked={isColorLink} onChange={() => setColorLink((prev) => !prev)} color="success" />
-                            Link Color
-                        </Label>
+                        <InputContainer>
+                            <Label>
+                                <Checkbox checked={isColorLink} onChange={() => setColorLink((prev) => !prev)} color="success" />
+                                Link Color
+                            </Label>
 
-                        <FormInput type="text" name="colorLink" id={colorLinkId} placeholder="ex: #ffffff" disabled={!isColorLink}/>
-                    </InputContainer>
+                            <FormInput type="text" name="colorLink" id={colorLinkId} placeholder="ex: #ffffff" disabled={!isColorLink}/>
+                        </InputContainer>
+                        
+
+                        <InputContainer>
+                            <Label>
+                                <Checkbox checked={isWidth} onChange={() => setWidth((prev) => !prev)} color="success" />
+                                Max Width
+                            </Label>
+
+                            <FormInput type="text" name="width" id={width} placeholder="ex: 600" disabled={!isWidth}/>
+                        </InputContainer>
+                        
+                        
+                        <InputContainer>
+                            <Label>
+                                <Checkbox checked={isPaddingLR} onChange={() => setPaddingLR((prev) => !prev)} color="success" />
+                                Padding ⬅️➡️
+                            </Label>
+
+                            <FormInput type="text" name="paddingLR" id={paddingLR} placeholder="ex: 20" disabled={!isPaddingLR}/>
+                        </InputContainer>
+                        
+                        <InputContainer>
+                            <Label>
+                                <Checkbox checked={isLinkUrl} onChange={() => setLinkUrl((prev) => !prev)} color="success" />
+                                Link Url
+                            </Label>
+
+                            <FormInput type="text" name="linkUrl" id={linkUrlId} placeholder="Link Url" disabled={!isLinkUrl}/>
+                        </InputContainer>
+                        
+                        <InputContainer>
+                            <Label>
+                                <Checkbox checked={isTrTB} onChange={() => setTrTB((prev) => !prev)} color="success" />
+                                Padding ⬆️ ⬇️
+                            </Label>
+
+                            <FormInput type="text" name="trTB" id={TrTBId} placeholder="ex: 20" disabled={!isTrTB}/>
+                        </InputContainer>
+                        
+                        <InputContainer>
+                            <Label>
+                                <Checkbox checked={isBGColor} onChange={() => setBGColor((prev) => !prev)} color="success" />
+                                Bgcolor
+                            </Label>
+
+                            <FormInput type="text" name="BGColor" id={BGColorId} placeholder="ex: #ffffff" disabled={!isBGColor}/>
+                        </InputContainer>
+
+                    </Container>
+
+                    <CheckBoxContainer>
+                            <LabelCheckBox>
+                                <Checkbox checked={isReplace} onChange={() => setReplace((prev) => !prev)} color="success" />
+                                Make Unique
+                            </LabelCheckBox>
+                    </CheckBoxContainer>
+
+                    <SubmitContainer>
+                        <SubmitInput autoComplete="off" name="submit" id={submitId} type="text" placeholder="Paste your copy here :)"/>
+                        <SubmitButtonDownload type="submit">Submit</SubmitButtonDownload>
+                    </SubmitContainer>
+                    
+                    {/* NEED TO TEST */}
+                    {hasImages && submitedResult !== "" && (
+                        <HasImagesContainer>
+                            <TitleImages>Images found in text. Replace their source:</TitleImages>
+                            <ImageContaianer>
+                            {submitedResult.match(/<img.*?src=["'](.*?)["'].*?>/g).map((match, index) => {
+                                const inputId = `newLink${index}`;
+                                return (
+                                    <ImageBlock key={index}>
+                                        <ImageToDowload src={match.match(/src=["'](.*?)["']/)[1]} alt="Image" />
+
+                                        <LinkToDownload href={match.match(/src=["'](.*?)["']/)[1]} download target="_blank"><GrDownload color="white"/></LinkToDownload>
+
+                                        <InputToDowload autoComplete="off" type="text" placeholder="Paste new link src" value={newLinks[index]} onChange={(event) => handleChange(index, event)} id={inputId} />
+                                        <SubmitButtonDownload type="button" onClick={() => handleImageReplace(index, newLinks[index])}>Change</SubmitButtonDownload> 
+                                    </ImageBlock>
+                                );
+                            })}
+                            </ImageContaianer>
+                        </HasImagesContainer>
+                    )}
+
+                    {isSubmitted && !hasImages && (
+                        <div>
+                            <ResultContainer>
+                                <AddImageButton onClick={()=> handleImageAdd(submitedResult)}>Add Image</AddImageButton>
+                            </ResultContainer>
+                        </div>
+                    )}
+
+
+                    {isSubmitted && (
+                        <div>
+                            <ResultTitle>Your Copy below</ResultTitle>
+                            <ResultContainer>
+                                <ResultText>{submitedResult}</ResultText>
+                                <CopyButton onClick={() => {navigator.clipboard.writeText(submitedResult)}} type="button"><BsCopy /></CopyButton>
+                            </ResultContainer>
+                        </div>
+                    )}
+
                     
 
-                    <InputContainer>
-                        <Label>
-                            <Checkbox checked={isWidth} onChange={() => setWidth((prev) => !prev)} color="success" />
-                            Max Width
-                        </Label>
-
-                        <FormInput type="text" name="width" id={width} placeholder="ex: 600" disabled={!isWidth}/>
-                    </InputContainer>
+                    </FormContainer>
                     
-                    
-                    <InputContainer>
-                        <Label>
-                            <Checkbox checked={isPaddingLR} onChange={() => setPaddingLR((prev) => !prev)} color="success" />
-                            Padding ⬅️➡️
-                        </Label>
 
-                        <FormInput type="text" name="paddingLR" id={paddingLR} placeholder="ex: 20" disabled={!isPaddingLR}/>
-                    </InputContainer>
-                    
-                    <InputContainer>
-                        <Label>
-                            <Checkbox checked={isLinkUrl} onChange={() => setLinkUrl((prev) => !prev)} color="success" />
-                            Link Url
-                        </Label>
-
-                        <FormInput type="text" name="linkUrl" id={linkUrlId} placeholder="Link Url" disabled={!isLinkUrl}/>
-                    </InputContainer>
-                    
-                    <InputContainer>
-                        <Label>
-                            <Checkbox checked={isTrTB} onChange={() => setTrTB((prev) => !prev)} color="success" />
-                            Padding ⬆️ ⬇️
-                        </Label>
-
-                        <FormInput type="text" name="trTB" id={TrTBId} placeholder="ex: 20" disabled={!isTrTB}/>
-                    </InputContainer>
-                    
-                    <InputContainer>
-                        <Label>
-                            <Checkbox checked={isBGColor} onChange={() => setBGColor((prev) => !prev)} color="success" />
-                            Bgcolor
-                        </Label>
-
-                        <FormInput type="text" name="BGColor" id={BGColorId} placeholder="ex: #ffffff" disabled={!isBGColor}/>
-                    </InputContainer>
-
-                </Container>
-
-                <CheckBoxContainer>
-                        <LabelCheckBox>
-                            <Checkbox checked={isReplace} onChange={() => setReplace((prev) => !prev)} color="success" />
-                            Make Unique
-                        </LabelCheckBox>
-                </CheckBoxContainer>
-
-                <SubmitContainer>
-                    <SubmitInput autoComplete="off" name="submit" id={submitId} type="text" placeholder="Paste your copy here :)"/>
-                    <SubmitButtonDownload type="submit">Submit</SubmitButtonDownload>
-                </SubmitContainer>
                 
-                {/* NEED TO TEST */}
-                {hasImages && submitedResult !== "" && (
-                    <HasImagesContainer>
-                        <TitleImages>Images found in text. Replace their source:</TitleImages>
-                        <ImageContaianer>
-                        {submitedResult.match(/<img.*?src=["'](.*?)["'].*?>/g).map((match, index) => {
-                            const inputId = `newLink${index}`;
-                            return (
-                                <ImageBlock key={index}>
-                                    <ImageToDowload src={match.match(/src=["'](.*?)["']/)[1]} alt="Image" />
-
-                                    <LinkToDownload href={match.match(/src=["'](.*?)["']/)[1]} download target="_blank"><GrDownload color="white"/></LinkToDownload>
-
-                                    <InputToDowload autoComplete="off" type="text" placeholder="Paste new link src" value={newLinks[index]} onChange={(event) => handleChange(index, event)} id={inputId} />
-                                    <SubmitButtonDownload type="button" onClick={() => handleImageReplace(index, newLinks[index])}>Change</SubmitButtonDownload> 
-                                </ImageBlock>
-                            );
-                        })}
-                        </ImageContaianer>
-                    </HasImagesContainer>
-                )}
-
-
-                {isSubmitted && (
-                    <div>
-                        <ResultTitle>Your Copy below</ResultTitle>
-                        <ResultContainer>
-                            <ResultText>{submitedResult}</ResultText>
-                            <CopyButton onClick={() => {navigator.clipboard.writeText(submitedResult)}} type="button"><BsCopy /></CopyButton>
-                        </ResultContainer>
-                    </div>
-                )}
-
-                </FormContainer>
-            
-        </Formik>
+            </Formik>
+        <AddImageModal 
+                    isOpen={isModalOpen} 
+                    onClose={() => setIsModalOpen(false)} 
+                    onConfirm={handleAddImageConfirm}
+                    result={submitedResult} />
+        </>
     )
 }
 

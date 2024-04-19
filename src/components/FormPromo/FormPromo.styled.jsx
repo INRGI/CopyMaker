@@ -228,3 +228,18 @@ export const ResultTitle = styled.h3`
     margin: 0;
 `;
 
+export const AddImageButton = styled.button`
+    width: 120px;
+    background-color: #8aa649;
+    color: white;
+    padding: 5px 0;
+    font-size: 18px;
+    font-weight: 600;
+    border-radius: 5px;
+    cursor: pointer;
+
+    &:hover{
+        transform: translateY(-1px);
+        box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+    }
+`;
