@@ -259,11 +259,12 @@ const FormPromo = () => {
 
                 
             </Formik>
-        <AddImageModal 
+            
+        {/* <AddImageModal 
                     isOpen={isModalOpen} 
                     onClose={() => setIsModalOpen(false)} 
                     onConfirm={handleAddImageConfirm}
-                    result={submitedResult} />
+                    result={submitedResult} /> */}
         </>
     )
 }
