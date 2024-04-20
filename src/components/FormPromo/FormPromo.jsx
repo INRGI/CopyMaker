@@ -109,7 +109,8 @@ const FormPromo = () => {
         setIsModalOpen(true);
     };
 
-    const handleAddImageConfirm = () => {
+    const handleAddImageConfirm = (response) => {
+        setSubmitedResult(response);
         setIsModalOpen(false);
     };
 
@@ -233,13 +234,13 @@ const FormPromo = () => {
                         </HasImagesContainer>
                     )}
 
-                    {/* {isSubmitted && !hasImages && (
+                    {isSubmitted && !hasImages && (
                         <div>
                             <ResultContainer>
                                 <AddImageButton type="button" onClick={()=> handleImageAdd(submitedResult)}>Add Image</AddImageButton>
                             </ResultContainer>
                         </div>
-                    )} */}
+                    )}
 
 
                     {isSubmitted && (

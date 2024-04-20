@@ -17,11 +17,23 @@ const AddImageModal = ({isOpen, onClose, result, onConfirm}) =>{
         src: "",        
     };
 
-    const handleSubmit = () => {
+    const handleSubmit = (values) => {
+        const { src } = values;
+        const newImageHTML = `<!-- Here start new image --><table role="presentation" cellpadding="0" cellspacing="0" align="center">
+            <tr>
+                <td align="center" style="text-align: center">
+                    <a href="link" style="font-weight: 900; text-decoration: none;;color: #1F51FF;">
+                        <img src="${src}" alt="${src}" style="width: 100%; height: auto; border: 0; -ms-interpolation-mode: bicubic; max-width: 540px;" width="540" height="auto">
+                        <br>
+                        <br>
+                    </a>
+                </td>
+            </tr>
+        </table><!-- Here end new image -->`;
 
+        const response = newImageHTML + result;
 
-        
-        onConfirm();
+        onConfirm(response);
         toast.success('Image successfully added', {
             position: "top-right",
             autoClose: 2000,
