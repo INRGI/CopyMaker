@@ -6,7 +6,7 @@ import Modal from 'react-modal';
 export const Container = styled(Modal)`
     width: 100%;
     max-width: 350px;
-    height: 400px;
+    height: 370px;
     background-color: white;
     border: 1px solid;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
@@ -52,6 +52,7 @@ export const ButtonNo = styled.button`
   will-change: box-shadow,transform;
   font-size: 18px;
   min-width: 61.5px;
+  width: 100px;
   &:focus {
   box-shadow: #b22b36 0 0 0 1.5px inset, rgba(45, 35, 66, 0.4) 0 2px 4px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #b22b36 0 -3px 0 inset;
     }
@@ -96,6 +97,7 @@ export const ButtonYes = styled.button`
   white-space: nowrap;
   will-change: box-shadow,transform;
   font-size: 18px;
+  width: 100px;
   &:focus {
   box-shadow: #8aa649 0 0 0 1.5px inset, rgba(45, 35, 66, 0.4) 0 2px 4px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #8aa649 0 -3px 0 inset;
     }

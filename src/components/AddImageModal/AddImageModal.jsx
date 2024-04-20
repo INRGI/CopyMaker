@@ -14,16 +14,18 @@ const FeedbackSchema = Yup.object().shape({
 const AddImageModal = ({isOpen, onClose, result, onConfirm}) =>{
 
     const initialValues = {
-        src: "",        
+        src: "",
+        alt: "",
+        width: "",        
     };
 
     const handleSubmit = (values) => {
-        const { src } = values;
+        const { src, alt, width } = values;
         const newImageHTML = `<!-- Here start new image --><table role="presentation" cellpadding="0" cellspacing="0" align="center">
             <tr>
                 <td align="center" style="text-align: center">
                     <a href="link" style="font-weight: 900; text-decoration: none;;color: #1F51FF;">
-                        <img src="${src}" alt="${src}" style="width: 100%; height: auto; border: 0; -ms-interpolation-mode: bicubic; max-width: 540px;" width="540" height="auto">
+                        <img src="${src}" alt="${alt}" style="width: 100%; height: auto; border: 0; -ms-interpolation-mode: bicubic; max-width: ${width}}px;" width="${width}" height="auto">
                         <br>
                         <br>
                     </a>
@@ -64,8 +66,14 @@ const AddImageModal = ({isOpen, onClose, result, onConfirm}) =>{
                 validateOnChange={false}
             >
                 <Form>
-                    <Input name="src" type="text" placeholder="Image src" />
+                    <Input name="src" type="text" placeholder="Image src" autoComplete="off"/>
                     <ErrorMessage name="src">{msg => <Error msg={msg} />}</ErrorMessage>
+
+                    <Input name="alt" type="text" placeholder="Alt text" />
+                    <ErrorMessage name="alt">{msg => <Error msg={msg} />}</ErrorMessage>
+
+                    <Input name="width" type="text" placeholder="Image width" />
+                    <ErrorMessage name="width">{msg => <Error msg={msg} />}</ErrorMessage>
 
                     <ButtonsContainer>
                         <ButtonYes type="submit">Add</ButtonYes>
