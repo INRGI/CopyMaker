@@ -8,14 +8,32 @@ import 'react-toastify/dist/ReactToastify.css';
 
 
 const FeedbackSchema = Yup.object().shape({
-    name: Yup.string().min(3, "Too Short!").max(50, "Too Long!").required("Please enter a name")
+    src: Yup.string().min(3, "Too Short!").max(200, "Too Long!").required("Please enter src")
 });
 
 const AddImageModal = ({isOpen, onClose, result, onConfirm}) =>{
 
-    const initialValues = {};
+    const initialValues = {
+        src: "",        
+    };
 
-    const handleSubmit = () => {};
+    const handleSubmit = () => {
+
+
+        
+        onConfirm();
+        toast.success('Image successfully added', {
+            position: "top-right",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            transition: Bounce,
+        });
+    };
 
 
     return (
@@ -34,8 +52,8 @@ const AddImageModal = ({isOpen, onClose, result, onConfirm}) =>{
                 validateOnChange={false}
             >
                 <Form>
-                    <Input name="name" type="text" placeholder="Domain name" />
-                    <ErrorMessage name="name">{msg => <Error msg={msg} />}</ErrorMessage>
+                    <Input name="src" type="text" placeholder="Image src" />
+                    <ErrorMessage name="src">{msg => <Error msg={msg} />}</ErrorMessage>
 
                     <ButtonsContainer>
                         <ButtonYes type="submit">Add</ButtonYes>

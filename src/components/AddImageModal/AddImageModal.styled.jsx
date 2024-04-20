@@ -6,7 +6,7 @@ import Modal from 'react-modal';
 export const Container = styled(Modal)`
     width: 100%;
     max-width: 350px;
-    height: 220px;
+    height: 400px;
     background-color: white;
     border: 1px solid;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;

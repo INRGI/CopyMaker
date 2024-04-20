@@ -106,11 +106,11 @@ const FormPromo = () => {
     };
 
     const handleImageAdd = () => {
-
+        setIsModalOpen(true);
     };
 
     const handleAddImageConfirm = () => {
-
+        setIsModalOpen(false);
     };
 
     return (
@@ -233,13 +233,13 @@ const FormPromo = () => {
                         </HasImagesContainer>
                     )}
 
-                    {isSubmitted && !hasImages && (
+                    {/* {isSubmitted && !hasImages && (
                         <div>
                             <ResultContainer>
-                                <AddImageButton onClick={()=> handleImageAdd(submitedResult)}>Add Image</AddImageButton>
+                                <AddImageButton type="button" onClick={()=> handleImageAdd(submitedResult)}>Add Image</AddImageButton>
                             </ResultContainer>
                         </div>
-                    )}
+                    )} */}
 
 
                     {isSubmitted && (
@@ -260,11 +260,11 @@ const FormPromo = () => {
                 
             </Formik>
             
-        {/* <AddImageModal 
+        <AddImageModal 
                     isOpen={isModalOpen} 
                     onClose={() => setIsModalOpen(false)} 
                     onConfirm={handleAddImageConfirm}
-                    result={submitedResult} /> */}
+                    result={submitedResult} />
         </>
     )
 }
