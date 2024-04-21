@@ -144,8 +144,3 @@ const makeCopy = ({
 
 export default makeCopy;
 
-
-
-
-
-// check if image on submit -> find src -> display downl img + input for new src -> replace

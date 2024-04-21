@@ -139,8 +139,4 @@ export const Input = styled(Field)`
     &::placeholder{
         color: black;
     }
-    &:hover{
-        transform: translateY(-1px);
-        box-shadow: #8ecae6 0 4px 12px;
-    }
 `;

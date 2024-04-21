@@ -110,7 +110,8 @@ export const ImageBlock = styled.div`
 
 export const ImageToDowload = styled.img`
     width: 100%;
-    max-width: 60px;
+    width: 60px;
+    object-fit: cover;
     border: 2px solid black;
     border-radius: 10px;
     &:hover{
@@ -153,7 +154,7 @@ export const InputToDowload = styled.input`
 
 export const SubmitButtonDownload = styled.button`
     width: 150px;
-    background-color: #8aa649;
+    background-color: #a7c957;
     color: white;
     padding: 5px 0;
     font-size: 18px;
@@ -191,7 +192,7 @@ export const SubmitContainer = styled.div`
 `;
 
 export const CopyButton = styled.button`
-    background-color: #8aa649;
+    background-color: #a7c957;
     color: white;
     padding: 5px 7px;
     font-size: 18px;
@@ -230,7 +231,8 @@ export const ResultTitle = styled.h3`
 
 export const AddImageButton = styled.button`
     width: 120px;
-    background-color: #8aa649;
+    background-color: #a7c957;
+    
     color: white;
     padding: 5px 0;
     font-size: 18px;
