@@ -86,7 +86,8 @@ const makeCopy = ({
             return `<${tag}${beforeAttrs} bgcolor="${BGColor}"${afterAttrs}>`;
         });
         
-        result = result.replace(/background-color\s*:\s*([^;]+);/g, `background-color: ${BGColor};`);
+        // result = result.replace(/background-color\s*:\s*([^;]+);/g, `background-color: ${BGColor};`);
+        result = result.replace(/background-color\s*:\s*([^;]+);(?![^<]*<\/a>)/g, `background-color: ${BGColor};`);
 
         result = result.replace(/<(table|tbody)([^>]*)>/g, (match, tag, attrs) => {
        
