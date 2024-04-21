@@ -13,6 +13,7 @@ import AddImageModal from "../AddImageModal";
 import Checkbox from '@mui/material/Checkbox';
 import makeCopy from "../../helpers/makeCopy";
 import { Bounce, toast } from "react-toastify";
+import InfoButton from "../InfoButton/InfoButton";
 
 const FormPromo = () => {
     const { domainId } = useParams();
@@ -131,6 +132,7 @@ const FormPromo = () => {
                             </Label>
 
                             <FormInput type="text" name="fontSize" id={fontSizeId} placeholder="ex: 16" disabled={!isFontSize}/>
+                            <InfoButton  text="Please paste Font Size value without px"/>
                         </InputContainer>
 
                         <InputContainer>
@@ -140,6 +142,7 @@ const FormPromo = () => {
                             </Label>
 
                             <FormInput type="text" name="fontFamily" id={fontFamilyId} placeholder="ex: Roboto" disabled={!isFontFamily}/>
+                            <InfoButton  text="Please paste Font Family value here"/>
                         </InputContainer>
 
                         <InputContainer>
@@ -149,6 +152,7 @@ const FormPromo = () => {
                             </Label>
 
                             <FormInput type="text" name="colorLink" id={colorLinkId} placeholder="ex: #ffffff" disabled={!isColorLink}/>
+                            <InfoButton  text="Please paste Link Color like this #ffffff"/>
                         </InputContainer>
                         
 
@@ -159,6 +163,7 @@ const FormPromo = () => {
                             </Label>
 
                             <FormInput type="text" name="width" id={width} placeholder="ex: 600" disabled={!isWidth}/>
+                            <InfoButton  text="Please paste Width value without px"/>
                         </InputContainer>
                         
                         
@@ -169,6 +174,7 @@ const FormPromo = () => {
                             </Label>
 
                             <FormInput type="text" name="paddingLR" id={paddingLR} placeholder="ex: 20" disabled={!isPaddingLR}/>
+                            <InfoButton  text="Please paste Padding value without px"/>
                         </InputContainer>
                         
                         <InputContainer>
@@ -178,6 +184,7 @@ const FormPromo = () => {
                             </Label>
 
                             <FormInput type="text" name="linkUrl" id={linkUrlId} placeholder="Link Url" disabled={!isLinkUrl}/>
+                            <InfoButton  text="Please paste Link Address here"/>
                         </InputContainer>
                         
                         <InputContainer>
@@ -187,6 +194,7 @@ const FormPromo = () => {
                             </Label>
 
                             <FormInput type="text" name="trTB" id={TrTBId} placeholder="ex: 20" disabled={!isTrTB}/>
+                            <InfoButton  text="Please paste Padding value without px"/>
                         </InputContainer>
                         
                         <InputContainer>
@@ -196,6 +204,7 @@ const FormPromo = () => {
                             </Label>
 
                             <FormInput type="text" name="BGColor" id={BGColorId} placeholder="ex: #ffffff" disabled={!isBGColor}/>
+                            <InfoButton  text="Please paste Background Color like this #ffffff"/>
                         </InputContainer>
 
                     </Container>
@@ -205,6 +214,7 @@ const FormPromo = () => {
                                 <Checkbox checked={isReplace} onChange={() => setReplace((prev) => !prev)} color="success" />
                                 Make Unique
                             </LabelCheckBox>
+                            <InfoButton  text="Replace the symbols against the spam checker"/>
                     </CheckBoxContainer>
 
                     <SubmitContainer>
@@ -238,6 +248,7 @@ const FormPromo = () => {
                         <div>
                             <ResultContainer>
                                 <AddImageButton type="button" onClick={()=> handleImageAdd(submitedResult)}>Add Image</AddImageButton>
+                                <InfoButton  text="Add custom image at start html, after that you just move all that block to place what you need"/>
                             </ResultContainer>
                         </div>
                     )}

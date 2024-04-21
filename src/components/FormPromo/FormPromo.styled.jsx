@@ -7,7 +7,7 @@ export const FormInput = styled(Field)`
     display: block;
     min-height: 30px;
     width: 85%;
-    max-width: 300px;
+    max-width: 280px;
     background-color: rgba(255,255,255,0.07);
     border-radius: 3px;
     padding: 0 10px;
