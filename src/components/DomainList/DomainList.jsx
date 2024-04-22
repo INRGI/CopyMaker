@@ -7,6 +7,8 @@ import { Bounce, toast } from "react-toastify";
 import { deleteDomain } from '../../redux/domainSlice';
 import EditModal from "../EditModal/EditModal";
 import { useLocation } from "react-router-dom";
+import { MdModeEdit } from "react-icons/md";
+import { MdDeleteOutline } from "react-icons/md";
 
 const DomainList = () => {
     const visibleDomains = useSelector(selectVisibleDomains);
@@ -68,14 +70,14 @@ const DomainList = () => {
                                 <ButtonEdit type='button' name='edit' 
                                 onClick={() => handleEditClick(domain)}
                                 >
-                                    Edit
+                                    <MdModeEdit  size={24}/>
                                 </ButtonEdit>
                                 <Button
                                     type='button'
                                     name='delete'
                                     onClick={() => handleDeleteClick(domain.id)}
                                 >
-                                    Delete
+                                    <MdDeleteOutline size={24}/>
                                 </Button>
                             </ButtonsContainer>
                         </Domain>
