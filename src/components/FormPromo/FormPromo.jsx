@@ -170,7 +170,7 @@ const FormPromo = () => {
                         <InputContainer>
                             <Label>
                                 <Checkbox checked={isPaddingLR} onChange={() => setPaddingLR((prev) => !prev)} color="success" />
-                                Padding ⬅️➡️
+                                Padding ⬅️ ➡️
                             </Label>
 
                             <FormInput type="text" name="paddingLR" id={paddingLR} placeholder="ex: 20" disabled={!isPaddingLR}/>

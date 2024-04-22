@@ -45,20 +45,12 @@ const makeCopy = ({
     
     
     if (isWidth) {
-        
-        // result = result.replace(/(?<!<img[^>]*?)(max-width|width)\s*:\s*(?!100%\s*;)(\d+%?)(?!px)/g, `$1: ${width}px`);
-        // result = result.replace(/(\d{1,3})px0px/g, '$1px');
         result = result.replace(/(?<!<(img|a)[^>]*?)(max-width|width)\s*:\s*(?!100%\s*;)(\d+%?)(?!px)/g, `$2: ${width}px`);
-        result = result.replace(/(\d{1,3})px0px/g, '$1px');
-
-        
-        
-        
+        result = result.replace(/(\d{1,3})px0px/g, '$1px');    
     }
     
 
     if (isPaddingLR) {
-       
         result = result.replace(/padding-left:\s*\d{1,2}\s*px/g, `padding-left: ${paddingLR}px`)
                .replace(/padding-right:\s*\d{1,2}\s*px/g, `padding-right: ${paddingLR}px`);
 
@@ -73,10 +65,8 @@ const makeCopy = ({
 
     
     if (isTrTB) {
- 
         result = result.replace(/(style="[^"]*)padding-top:[^;]*;/g, `$1padding-top: ${trTB}px;`);
         result = result.replace(/(style="[^"]*)padding-bottom:[^;]*;/g, `$1padding-bottom: ${trTB}px;`);
-        // top
         result = result.replace(/(<tr[^>]*>\s*<td[^>]*height=")(\d+)("[^>]*><\/td>\s*<\/tr>)/, `<tr><td height="${trTB}" width="100%"></td></tr>`);
 
     }
@@ -86,11 +76,9 @@ const makeCopy = ({
             return `<${tag}${beforeAttrs} bgcolor="${BGColor}"${afterAttrs}>`;
         });
         
-        // result = result.replace(/background-color\s*:\s*([^;]+);/g, `background-color: ${BGColor};`);
         result = result.replace(/background-color\s*:\s*([^;]+);(?![^<]*<\/a>)/g, `background-color: ${BGColor};`);
 
         result = result.replace(/<(table|tbody)([^>]*)>/g, (match, tag, attrs) => {
-       
             if (attrs.includes('bgcolor')) {
                 return match;
             } else {
@@ -135,7 +123,6 @@ const makeCopy = ({
     }
 
     result = formatHtml(result);
-    
     
     result = removeFirstAndLastCharacter(result);
     

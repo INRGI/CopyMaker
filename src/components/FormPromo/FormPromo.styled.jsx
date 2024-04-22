@@ -17,7 +17,6 @@ export const FormInput = styled(Field)`
         color: black;
     }
     &:hover{
-        transform: translateY(-1px);
         box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
     }
 `;
@@ -43,7 +42,7 @@ export const SubmitInput = styled(Field)`
 
 export const InputContainer = styled.div`
     display: flex;
-    gap: 10px;
+    gap: 5px;
     align-items: center;
     justify-content: center;
     height: 40px;
