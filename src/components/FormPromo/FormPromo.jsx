@@ -283,3 +283,4 @@ const FormPromo = () => {
 
 export default FormPromo;
 
+// parse link to different inputs or create link builder in another place

@@ -25,7 +25,7 @@ export const SubmitInput = styled(Field)`
     display: block;
     min-height: 30px;
     width: 85%;
-    max-width: 230px;
+    max-width: 254px;
     background-color: rgba(255,255,255,0.07);
     border-radius: 3px;
     padding: 0 10px;
@@ -62,7 +62,7 @@ export const FormContainer = styled(Form)`
     display: flex;
     flex-direction: column;
     gap: 20px;
-    margin-top: 15px;
+    margin-top: 0px;
 `;
 
 

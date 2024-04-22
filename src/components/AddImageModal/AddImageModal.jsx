@@ -25,7 +25,7 @@ const AddImageModal = ({isOpen, onClose, result, onConfirm}) =>{
             <tr>
                 <td align="center" style="text-align: center">
                     <a href="link" style="font-weight: 900; text-decoration: none;;color: #1F51FF;">
-                        <img src="${src}" alt="${alt}" style="width: 100%; height: auto; border: 0; -ms-interpolation-mode: bicubic; max-width: ${width}}px;" width="${width}" height="auto">
+                        <img src="${src}" alt="${alt}" style="width: 100%; height: auto; border: 0; -ms-interpolation-mode: bicubic; max-width: ${width}px;" width="${width}" height="auto">
                         <br>
                         <br>
                     </a>
