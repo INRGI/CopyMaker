@@ -131,7 +131,7 @@ const FormPromo = () => {
                                 Font Size
                             </Label>
 
-                            <FormInput type="text" name="fontSize" id={fontSizeId} placeholder="ex: 16" disabled={!isFontSize}/>
+                            <FormInput type="text" name="fontSize" id={fontSizeId} placeholder="ex: 16" disabled={!isFontSize} required/>
                             <InfoButton  text="Please paste Font Size value without px"/>
                         </InputContainer>
 
@@ -141,7 +141,7 @@ const FormPromo = () => {
                                 Font Family
                             </Label>
 
-                            <FormInput type="text" name="fontFamily" id={fontFamilyId} placeholder="ex: Roboto" disabled={!isFontFamily}/>
+                            <FormInput type="text" name="fontFamily" id={fontFamilyId} placeholder="ex: Roboto" disabled={!isFontFamily} required/>
                             <InfoButton  text="Please paste Font Family value here"/>
                         </InputContainer>
 
@@ -151,7 +151,7 @@ const FormPromo = () => {
                                 Link Color
                             </Label>
 
-                            <FormInput type="text" name="colorLink" id={colorLinkId} placeholder="ex: #ffffff" disabled={!isColorLink}/>
+                            <FormInput type="text" name="colorLink" id={colorLinkId} placeholder="ex: #ffffff" disabled={!isColorLink} required/>
                             <InfoButton  text="Please paste Link Color like this #ffffff"/>
                         </InputContainer>
                         
@@ -162,7 +162,7 @@ const FormPromo = () => {
                                 Max Width
                             </Label>
 
-                            <FormInput type="text" name="width" id={width} placeholder="ex: 600" disabled={!isWidth}/>
+                            <FormInput type="text" name="width" id={width} placeholder="ex: 600" disabled={!isWidth} required/>
                             <InfoButton  text="Please paste Width value without px"/>
                         </InputContainer>
                         
@@ -173,7 +173,7 @@ const FormPromo = () => {
                                 Padding ⬅️ ➡️
                             </Label>
 
-                            <FormInput type="text" name="paddingLR" id={paddingLR} placeholder="ex: 20" disabled={!isPaddingLR}/>
+                            <FormInput type="text" name="paddingLR" id={paddingLR} placeholder="ex: 20" disabled={!isPaddingLR} required/>
                             <InfoButton  text="Please paste Padding value without px"/>
                         </InputContainer>
                         
@@ -183,17 +183,17 @@ const FormPromo = () => {
                                 Link Url
                             </Label>
 
-                            <FormInput type="text" name="linkUrl" id={linkUrlId} placeholder="Link Url" disabled={!isLinkUrl}/>
+                            <FormInput type="text" name="linkUrl" id={linkUrlId} placeholder="Link Url" disabled={!isLinkUrl} required/>
                             <InfoButton  text="Please paste Link Address here"/>
                         </InputContainer>
                         
                         <InputContainer>
                             <Label>
-                                <Checkbox checked={isTrTB} onChange={() => setTrTB((prev) => !prev)} color="success" />
+                                <Checkbox checked={isTrTB} onChange={() => setTrTB((prev) => !prev)} color="success"/>
                                 Padding ⬆️ ⬇️
                             </Label>
 
-                            <FormInput type="text" name="trTB" id={TrTBId} placeholder="ex: 20" disabled={!isTrTB}/>
+                            <FormInput type="text" name="trTB" id={TrTBId} placeholder="ex: 20" disabled={!isTrTB} required/>
                             <InfoButton  text="Please paste Padding value without px"/>
                         </InputContainer>
                         
@@ -203,7 +203,7 @@ const FormPromo = () => {
                                 Bgcolor
                             </Label>
 
-                            <FormInput type="text" name="BGColor" id={BGColorId} placeholder="ex: #ffffff" disabled={!isBGColor}/>
+                            <FormInput type="text" name="BGColor" id={BGColorId} placeholder="ex: #ffffff" disabled={!isBGColor} required/>
                             <InfoButton  text="Please paste Background Color like this #ffffff"/>
                         </InputContainer>
 
