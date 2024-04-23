@@ -19,12 +19,21 @@ const AddImageModal = ({isOpen, onClose, result, onConfirm}) =>{
         width: "",        
     };
 
+    const regex = /<a\s+(?:[^>]*?\s+)?href=(["'])(.*?)\1/g;
+    
+    let link = 'urlhere';
+    let match;
+    while ((match = regex.exec(result)) !== null) {
+        link = match[2];
+        break;
+    }
+
     const handleSubmit = (values) => {
         const { src, alt, width } = values;
         const newImageHTML = `<!-- Here start new image --><table role="presentation" cellpadding="0" cellspacing="0" align="center">
             <tr>
                 <td align="center" style="text-align: center">
-                    <a href="link" style="font-weight: 900; text-decoration: none;;color: #1F51FF;">
+                    <a href="${link}" style="font-weight: 900; text-decoration: none;;color: #1F51FF;">
                         <img src="${src}" alt="${alt}" style="width: 100%; height: auto; border: 0; -ms-interpolation-mode: bicubic; max-width: ${width}px;" width="${width}" height="auto">
                         <br>
                         <br>

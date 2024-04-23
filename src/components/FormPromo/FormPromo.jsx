@@ -112,6 +112,7 @@ const FormPromo = () => {
 
     const handleAddImageConfirm = (response) => {
         setSubmitedResult(response);
+       
         setIsModalOpen(false);
     };
 
@@ -276,7 +277,8 @@ const FormPromo = () => {
                     isOpen={isModalOpen} 
                     onClose={() => setIsModalOpen(false)} 
                     onConfirm={handleAddImageConfirm}
-                    result={submitedResult} />
+                    result={submitedResult} 
+        />
         </>
     )
 }
