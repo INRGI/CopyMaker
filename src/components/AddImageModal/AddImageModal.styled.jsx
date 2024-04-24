@@ -131,6 +131,7 @@ export const Input = styled(Field)`
     width: 276px;
     background-color: rgba(255,255,255,0.07);
     border-radius: 3px;
+    border: 1px solid;
     padding: 0 10px;
     margin-top: 8px;
     font-size: 14px;

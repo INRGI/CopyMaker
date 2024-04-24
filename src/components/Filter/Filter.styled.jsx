@@ -12,6 +12,7 @@ export const Input = styled.input`
     background-color: rgba(255,255,255,0.07);
     border-radius: 3px;
     padding: 0 10px;
+    border: 1px solid;
     margin-top: 8px;
     font-size: 14px;
     font-weight: 300;

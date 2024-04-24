@@ -10,6 +10,7 @@ export const FormInput = styled(Field)`
     max-width: 280px;
     background-color: rgba(255,255,255,0.07);
     border-radius: 3px;
+    border: 1px solid;
     padding: 0 10px;
     font-size: 14px;
     font-weight: 300;
@@ -28,6 +29,7 @@ export const SubmitInput = styled(Field)`
     max-width: 254px;
     background-color: rgba(255,255,255,0.07);
     border-radius: 3px;
+    border: 1px solid;
     padding: 0 10px;
     font-size: 14px;
     font-weight: 300;
@@ -111,7 +113,7 @@ export const ImageToDowload = styled.img`
     width: 100%;
     width: 60px;
     object-fit: cover;
-    border: 2px solid black;
+    border: 1px solid black;
     border-radius: 10px;
     &:hover{
         transform: translateY(-1px);
@@ -139,6 +141,7 @@ export const InputToDowload = styled.input`
     max-width: 300px;
     background-color: rgba(255,255,255,0.07);
     border-radius: 3px;
+    border: 1px solid;
     padding: 0 10px;
     font-size: 14px;
     font-weight: 300;

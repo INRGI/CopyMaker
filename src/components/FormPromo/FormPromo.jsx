@@ -223,7 +223,6 @@ const FormPromo = () => {
                         <SubmitButtonDownload type="submit">Submit</SubmitButtonDownload>
                     </SubmitContainer>
                     
-                    {/* NEED TO TEST */}
                     {hasImages && submitedResult !== "" && (
                         <HasImagesContainer>
                             <TitleImages>Images found in text. Replace their source:</TitleImages>
