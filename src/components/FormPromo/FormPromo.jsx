@@ -244,7 +244,7 @@ const FormPromo = () => {
                         </HasImagesContainer>
                     )}
 
-                    {isSubmitted && !hasImages && (
+                    {isSubmitted && submitedResult !== "" && (
                         <div>
                             <ResultContainer>
                                 <AddImageButton type="button" onClick={()=> handleImageAdd(submitedResult)}>Add Image</AddImageButton>
