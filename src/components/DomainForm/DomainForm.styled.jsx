@@ -7,7 +7,7 @@ export const Container = styled.div`
     gap: 20px;
     align-items: center;
     justify-content: flex-start;
-    height: 400px;
+    height: 320px;
     width: 400px;
     margin-left: 20px;
     border: 1.5px solid;
@@ -89,3 +89,4 @@ export const Button = styled.button`
     transform: translateY(2px);
     }
 `;
+

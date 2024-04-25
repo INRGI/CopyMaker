@@ -4,10 +4,11 @@ import { getDomains } from "../../redux/selectors";
 import DomainForm from "../../components/DomainForm/DomainForm";
 import DomainList from "../../components/DomainList/DomainList";
 import Filter from "../../components/Filter/Filter";
-import { Container, DomainsContainer, EmptyDomains } from "./Home.styled";
+import { Container, DomainsContainer, EmptyDomains, LeftContainer, MakeUniqueButton } from "./Home.styled";
 import { Helmet } from "react-helmet";
 import MakeUniqueModal from "../../components/MakeUniqueModa/MakeUniqueModal";
 import { useState } from "react";
+
 
 const Home = () => {
     const domains = useSelector(getDomains);
@@ -18,7 +19,10 @@ const Home = () => {
             <Helmet>
                 <title>Your Domains</title>
             </Helmet>
-            <DomainForm />
+            <LeftContainer>
+                <DomainForm />
+                <MakeUniqueButton onClick={() => setModalIsOpen(true)}>Anti Spam(NOT READY)</MakeUniqueButton>
+            </LeftContainer>
             <DomainsContainer>      
                 {domains.length > 0 ? (
                 <>
