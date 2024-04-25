@@ -6,9 +6,12 @@ import DomainList from "../../components/DomainList/DomainList";
 import Filter from "../../components/Filter/Filter";
 import { Container, DomainsContainer, EmptyDomains } from "./Home.styled";
 import { Helmet } from "react-helmet";
+import MakeUniqueModal from "../../components/MakeUniqueModa/MakeUniqueModal";
+import { useState } from "react";
 
 const Home = () => {
     const domains = useSelector(getDomains);
+    const [modalIsOpen, setModalIsOpen] = useState(false);
 
     return (
         <Container>
@@ -27,6 +30,10 @@ const Home = () => {
                 )
             }
           </DomainsContainer>
+          <MakeUniqueModal
+                isOpen={modalIsOpen}
+                onClose={() => setModalIsOpen(false)}
+            />   
         </Container>
     )
 }
