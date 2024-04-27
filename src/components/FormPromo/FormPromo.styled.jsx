@@ -1,7 +1,14 @@
 import styled from "@emotion/styled";
 import { Field, Form } from "formik";
 
-
+export const PageContainer = styled.div`
+    display: flex;
+    align-content: center;
+    width: 100%;
+    padding: 0 30px;
+    justify-content: center;
+    gap: 30px;
+`;
 
 export const FormInput = styled(Field)`
     display: block;

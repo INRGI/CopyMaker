@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { nanoid } from "nanoid";
 import { editDomain } from "../../redux/domainSlice";
-import { AddImageButton, CheckBoxContainer, Container, CopyButton, FormContainer, FormInput, HasImagesContainer, ImageBlock, ImageContaianer, ImageToDowload, InputContainer, InputToDowload, Label, LabelCheckBox, LinkToDownload, ResultContainer, ResultText, ResultTitle, SubmitButtonDownload, SubmitContainer, SubmitInput, TitleImages } from "./FormPromo.styled";
+import { AddImageButton, CheckBoxContainer, Container, CopyButton, FormContainer, FormInput, HasImagesContainer, ImageBlock, ImageContaianer, ImageToDowload, InputContainer, InputToDowload, Label, LabelCheckBox, LinkToDownload, PageContainer, ResultContainer, ResultText, ResultTitle, SubmitButtonDownload, SubmitContainer, SubmitInput, TitleImages } from "./FormPromo.styled";
 import { GrDownload } from "react-icons/gr";
 import { BsCopy } from "react-icons/bs";
 
@@ -14,6 +14,7 @@ import Checkbox from '@mui/material/Checkbox';
 import makeCopy from "../../helpers/makeCopy";
 import { Bounce, toast } from "react-toastify";
 import InfoButton from "../InfoButton/InfoButton";
+import Preview from "../Preview/Preview";
 
 const FormPromo = () => {
     const { domainId } = useParams();
@@ -117,7 +118,7 @@ const FormPromo = () => {
     };
 
     return (
-        <>
+        <PageContainer>
             <Formik
                 onSubmit={handleSubmit}
                 initialValues={initialValues}
@@ -272,13 +273,15 @@ const FormPromo = () => {
                 
             </Formik>
             
+            <Preview result={submitedResult} />
+            
         <AddImageModal 
                     isOpen={isModalOpen} 
                     onClose={() => setIsModalOpen(false)} 
                     onConfirm={handleAddImageConfirm}
                     result={submitedResult} 
         />
-        </>
+        </PageContainer>
     )
 }
 

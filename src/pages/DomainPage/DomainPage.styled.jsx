@@ -51,3 +51,8 @@ export const Btn = styled.button`
     }
   
 `;
+
+export const PageContainer = styled.div`
+  display: flex;
+  justify-content: center;
+`;

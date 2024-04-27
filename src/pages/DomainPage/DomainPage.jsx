@@ -3,7 +3,7 @@ import FormPromo from "../../components/FormPromo";
 import { Helmet } from "react-helmet";
 import { useSelector } from "react-redux";
 import { useRef } from "react";
-import { Btn, StyledLink } from "./DomainPage.styled";
+import { Btn, PageContainer, StyledLink } from "./DomainPage.styled";
 import { ToastContainer } from "react-toastify";
 
 const DomainPage = () => {
@@ -23,8 +23,12 @@ const DomainPage = () => {
             <StyledLink to={backLinkHref.current}>
                 <Btn type="button">Back</Btn>
             </StyledLink>
-            <ToastContainer />
-            <FormPromo />
+            
+                <ToastContainer />
+           
+            <PageContainer>
+                <FormPromo />
+            </PageContainer>
         </>
     )
 }
