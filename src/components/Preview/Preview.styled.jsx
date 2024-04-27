@@ -6,8 +6,8 @@ export const Container = styled.div`
     border: 1.5px solid;
     box-shadow: rgba(34, 34, 34, 0.35) 0px 5px 15px;
     border-radius: 5px;
-    overflow: hidden; /* Обрізаємо контент, який виходить за межі контейнера */
-    box-sizing: border-box; /* Враховуємо товщину рамок і полів у розрахунках розміру контейнера */
+    overflow: hidden;
+    box-sizing: border-box;
 `;
 
 export const ContentContainer = styled.div`
