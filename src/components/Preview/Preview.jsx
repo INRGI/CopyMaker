@@ -1,4 +1,4 @@
-import { Container, ContentContainer } from "./Preview.styled";
+import { Container, ContentContainer, Empty } from "./Preview.styled";
 
 const Preview = ({result}) =>{
 
@@ -6,7 +6,7 @@ const Preview = ({result}) =>{
         
     return (
         <Container>
-            <ContentContainer dangerouslySetInnerHTML={{ __html: prew }} />
+            {result === "" ? (<Empty>Preview</Empty>):(<ContentContainer dangerouslySetInnerHTML={{ __html: prew }} />)}
         </Container>
     )
 }

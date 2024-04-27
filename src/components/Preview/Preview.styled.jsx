@@ -13,3 +13,11 @@ export const Container = styled.div`
 export const ContentContainer = styled.div`
   
 `;
+
+export const Empty = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    font-size: 40px;
+`;
