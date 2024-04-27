@@ -23,7 +23,7 @@ const Home = () => {
             </Helmet>
             <LeftContainer>
                 <DomainForm />
-                <MakeUniqueButton onClick={() => setModalIsOpen(true)}>Anti Spam(NOT READY)</MakeUniqueButton>
+                <MakeUniqueButton onClick={() => setModalIsOpen(true)}>Anti Spam</MakeUniqueButton>
             </LeftContainer>
             <DomainsContainer>      
                 {domains.length > 0 ? (

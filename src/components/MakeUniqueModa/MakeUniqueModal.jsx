@@ -42,7 +42,8 @@ const MakeUniqueModal = ({ isOpen, onClose }) =>{
             onRequestClose={handleClose}
             contentLabel="Edit Confirmation Modal"
         >
-            <TitleContainer><Title>Anti Spam v1.0</Title>
+            <TitleContainer>
+                <Title>Anti Spam v1.0</Title>
                 <BtnBack type="button" onClick={onClose}><IoMdClose size={26}/></BtnBack>
                 
             </TitleContainer> 

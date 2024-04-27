@@ -116,6 +116,7 @@ export const ResultContainer = styled.div`
     justify-content: center;
     align-items: center;
     gap: 15px;
+    max-width: 300px;
 `;
 
 
