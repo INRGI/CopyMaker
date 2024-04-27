@@ -8,6 +8,7 @@ import { Container, DomainsContainer, EmptyDomains, LeftContainer, MakeUniqueBut
 import { Helmet } from "react-helmet";
 import MakeUniqueModal from "../../components/MakeUniqueModa/MakeUniqueModal";
 import { useState } from "react";
+import AboutAuthor from "../../components/AboutAuthor/AboutAuthor";
 
 
 const Home = () => {
@@ -15,6 +16,7 @@ const Home = () => {
     const [modalIsOpen, setModalIsOpen] = useState(false);
 
     return (
+        <>
         <Container>
             <Helmet>
                 <title>Your Domains</title>
@@ -34,11 +36,16 @@ const Home = () => {
                 )
             }
           </DomainsContainer>
+
+            
+
           <MakeUniqueModal
                 isOpen={modalIsOpen}
                 onClose={() => setModalIsOpen(false)}
             />   
         </Container>
+        <AboutAuthor></AboutAuthor>
+        </>
     )
 }
 
