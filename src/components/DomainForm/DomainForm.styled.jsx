@@ -10,9 +10,13 @@ export const Container = styled.div`
     height: 320px;
     width: 400px;
     margin-left: 20px;
-    border: 1.5px solid;
+    /* border: 1.5px solid;
     box-shadow: rgba(34, 34, 34, 0.35) 0px 5px 15px;
-    border-radius: 5px;
+    border-radius: 5px; */
+    border-radius: 16px;
+    box-shadow: 0 30px 30px -25px rgba(65, 51, 183, 0.25);
+    background-color:#fff;
+    
 `;
 
 export const Title = styled.h3`

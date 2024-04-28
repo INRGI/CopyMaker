@@ -72,6 +72,10 @@ export const FormContainer = styled(Form)`
     flex-direction: column;
     gap: 20px;
     margin-top: 0px;
+    border-radius: 16px;
+    box-shadow: 0 30px 30px -25px rgba(65, 51, 183, 0.25);
+    background-color:#fff;
+    padding: 20px 0;
 `;
 
 

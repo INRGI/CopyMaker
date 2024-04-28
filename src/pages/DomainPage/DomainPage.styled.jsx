@@ -1,13 +1,12 @@
 import styled from "@emotion/styled";
 import { Link } from "react-router-dom";
 
-
 export const StyledLink = styled(Link)`
     text-decoration: none;
 `;
 
 export const Btn = styled.button`
-    align-items: center;
+  align-items: center;
   appearance: none;
   background-color: #e63946;
   border-radius: 4px;
