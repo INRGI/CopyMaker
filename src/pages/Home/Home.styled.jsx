@@ -6,6 +6,7 @@ export const Container = styled.div`
     gap: 20px;
     align-items: center;
     justify-content: center;
+    flex-wrap: wrap;
 `;
 
 export const EmptyDomains = styled.h2`

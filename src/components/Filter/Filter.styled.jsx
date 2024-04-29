@@ -23,6 +23,8 @@ export const Input = styled.input`
         transform: translateY(-1px);
         box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
     }
+    
+    
 `;
 
 export const Label = styled.label`
