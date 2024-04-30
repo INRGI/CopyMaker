@@ -21,12 +21,13 @@ export const PageContainer = styled.div`
     border-radius: 16px;
     box-shadow: 0 30px 30px -25px rgba(65, 51, 183, 0.25);
     background-color:#fff;
-    padding-top:20px;
+    padding: 20px;
     overflow-y: auto;
 `;
 
 export const Title = styled.p`
   font-size: 32px;
+  text-align: center;
 `;
 
 export const StyledLink = styled(Link)`

@@ -67,7 +67,7 @@ const makeCopy = ({
     if (isTrTB) {
         result = result.replace(/(style="[^"]*)padding-top:[^;]*;/g, `$1padding-top: ${trTB}px;`);
         result = result.replace(/(style="[^"]*)padding-bottom:[^;]*;/g, `$1padding-bottom: ${trTB}px;`);
-        result = result.replace(/(<tr[^>]*>\s*<td[^>]*height=")(\d+)("[^>]*><\/td>\s*<\/tr>)/, `<tr><td height="${trTB}" width="100%"></td></tr>`);
+        // result = result.replace(/(<tr[^>]*>\s*<td[^>]*height=")(\d+)("[^>]*><\/td>\s*<\/tr>)/, `<tr><td height="${trTB}" width="100%"></td></tr>`);
 
     }
     

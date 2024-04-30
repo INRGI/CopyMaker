@@ -6,7 +6,7 @@ const NotFound = () => {
         <Container>
             <PageContainer>
                 <TbError404 size={100}/>
-                <Title>Something went wrong😥 Please return to Home page</Title>
+                <Title>Something went wrong😥<br></br>Please return to Home page</Title>
                 <StyledLink to='/'>
                     <BtnBack type="button">Return to Home</BtnBack>
                 </StyledLink>
