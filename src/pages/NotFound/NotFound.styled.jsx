@@ -1,9 +1,33 @@
 import styled from "@emotion/styled";
 import { Link } from "react-router-dom";
 
-export const Container = styled.div``;
+export const Container = styled.div`
+    display: flex;
+    margin-top: 30px;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+`;
 
-export const Title = styled.p``;
+export const PageContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    height: 380px;
+    width: 100%;
+    max-width: 700px;
+    border-radius: 16px;
+    box-shadow: 0 30px 30px -25px rgba(65, 51, 183, 0.25);
+    background-color:#fff;
+    padding-top:20px;
+    overflow-y: auto;
+`;
+
+export const Title = styled.p`
+  font-size: 32px;
+`;
 
 export const StyledLink = styled(Link)`
     text-decoration: none;

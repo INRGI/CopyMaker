@@ -1,12 +1,16 @@
-import { BtnBack, Container, StyledLink, Title } from "./NotFound.styled";
+import { BtnBack, Container, PageContainer, StyledLink, Title } from "./NotFound.styled";
+import { TbError404 } from "react-icons/tb";
 
 const NotFound = () => {
     return (
         <Container>
-            <StyledLink to='/'>
-                <BtnBack type="button">Back</BtnBack>
-            </StyledLink>
-            <Title>Not Found</Title>
+            <PageContainer>
+                <TbError404 size={100}/>
+                <Title>Something went wrong😥 Please return to Home page</Title>
+                <StyledLink to='/'>
+                    <BtnBack type="button">Return to Home</BtnBack>
+                </StyledLink>
+            </PageContainer>
         </Container>
     )
 }
