@@ -37,7 +37,7 @@ export const Input = styled(Field)`
     padding: 0 10px;
     margin-top: 8px;
     font-size: 14px;
-    border: 1px solid;
+    border: 0.5px solid;
     font-weight: 300;
     margin-bottom: 0px;
     &::placeholder{

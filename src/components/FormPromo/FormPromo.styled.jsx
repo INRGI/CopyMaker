@@ -124,10 +124,10 @@ export const ImageToDowload = styled.img`
     width: 100%;
     width: 60px;
     object-fit: cover;
-    border: 1px solid black;
+    border: 0.5px solid black;
     border-radius: 10px;
     &:hover{
-        transform: translateY(-1px);
+        transform: translateY(-0.5px);
         box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
     }
 `;
@@ -135,13 +135,22 @@ export const ImageToDowload = styled.img`
 export const LinkToDownload = styled.a`
     text-decoration: none;
     border-radius: 5px;
-    border: 1px solid black;
     padding: 3px 7px;
     background-color: #a7c957;
     cursor: pointer;
-    &:hover{
-        transform: translateY(-1px);
-        box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+    box-shadow: rgba(45, 35, 66, 0.4) 0 2px 4px,rgba(45, 35, 66, 0.3) 0 7px 13px -3px,#8aa649 0 -3px 0 inset;
+    &&:focus {
+    box-shadow: #8aa649 0 0 0 1.5px inset, rgba(45, 35, 66, 0.4) 0 2px 4px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #8aa649 0 -3px 0 inset;
+    }
+
+    &:hover {
+    box-shadow: rgba(45, 35, 66, 0.4) 0 4px 8px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #8aa649 0 -3px 0 inset;
+    transform: translateY(-1px);
+    }
+
+    &:active {
+    box-shadow: #8aa649 0 3px 7px inset;
+    transform: translateY(1px);
     }
 `;
 
@@ -201,7 +210,7 @@ export const SubmitButtonDownload = styled.button`
 
     &:hover {
     box-shadow: rgba(45, 35, 66, 0.4) 0 4px 8px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #8aa649 0 -3px 0 inset;
-    transform: translateY(-2px);
+    transform: translateY(-1px);
     }
 
     &:active {
@@ -267,7 +276,7 @@ export const CopyButton = styled.button`
 
     &:hover {
     box-shadow: rgba(45, 35, 66, 0.4) 0 4px 8px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #8aa649 0 -3px 0 inset;
-    transform: translateY(-2px);
+    transform: translateY(-1px);
     }
 
     &:active {
@@ -334,7 +343,7 @@ export const AddImageButton = styled.button`
 
     &:hover {
     box-shadow: rgba(45, 35, 66, 0.4) 0 4px 8px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #8aa649 0 -3px 0 inset;
-    transform: translateY(-2px);
+    transform: translateY(-1px);
     }
 
     &:active {

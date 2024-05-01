@@ -5,10 +5,10 @@ export const Container = styled.div`
     bottom: 0;
     right: 0;
     padding-right: 20px;
-    padding-bottom: 20px;
+    padding-bottom: 5px;
     display: flex;
     gap: 10px;
-    align-items: center
+    align-items: center;
 `;
 
 export const Text = styled.p`

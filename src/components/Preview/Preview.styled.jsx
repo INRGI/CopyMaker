@@ -12,6 +12,7 @@ export const Container = styled.div`
     overflow: hidden;
     box-sizing: border-box;
     background-color: #fff;
+    padding: 20px;
 `;
 
 export const ContentContainer = styled.div`
