@@ -7,6 +7,8 @@ export const Container = styled.div`
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;
+    padding: 0 10px;
+
 `;
 
 export const EmptyDomains = styled.h2`
@@ -21,7 +23,6 @@ export const DomainsContainer = styled.div`
     height: 380px;
     width: 100%;
     max-width: 700px;
-    margin-left: 20px;
     /* border: 1.5px solid; */
     /* box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; */
     border-radius: 16px;

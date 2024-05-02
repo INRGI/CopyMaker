@@ -9,7 +9,6 @@ export const Container = styled.div`
     justify-content: flex-start;
     height: 320px;
     width: 400px;
-    margin-left: 20px;
     /* border: 1.5px solid;
     box-shadow: rgba(34, 34, 34, 0.35) 0px 5px 15px;
     border-radius: 5px; */

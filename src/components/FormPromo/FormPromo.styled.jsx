@@ -8,6 +8,7 @@ export const PageContainer = styled.div`
     padding: 0 30px;
     justify-content: center;
     gap: 30px;
+    flex-wrap: wrap;
 `;
 
 export const FormInput = styled(Field)`
@@ -240,6 +241,7 @@ export const SubmitContainer = styled.div`
     justify-content: center;
     align-items: center;
     gap: 15px;
+    padding: 0 10px;
 `;
 
 export const CopyButton = styled.button`
