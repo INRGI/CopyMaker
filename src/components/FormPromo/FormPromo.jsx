@@ -26,6 +26,7 @@ const FormPromo = () => {
     const [isWidth, setWidth] = useState(domain.isWidth);
     const [isPaddingLR, setPaddingLR] = useState(domain.isPaddingLR);
     const [isReplace, setReplace] = useState(domain.isReplace);
+    const [isDeleteLift, setDeleteLift] = useState(domain.isDeleteLift);
     const [isLinkUrl, setLinkUrl] = useState(domain.isLinkUrl);
     const [isTrTB, setTrTB] = useState(domain.isTrTB);
     const [isBGColor, setBGColor] = useState(domain.isBGColor);
@@ -85,8 +86,8 @@ const FormPromo = () => {
       };
 
     const handleSubmit = (values) => {
-        dispatch(editDomain({ id: domainId, values: {...values, isFontSize, isFontFamily, isColorLink, isWidth, isPaddingLR, isReplace, isLinkUrl, isTrTB, isBGColor} }));
-        setSubmitedResult(makeCopy({...values, isFontSize, isFontFamily, isColorLink, isWidth, isPaddingLR, isReplace, isLinkUrl, isTrTB, isBGColor}))
+        dispatch(editDomain({ id: domainId, values: {...values, isFontSize, isFontFamily, isColorLink, isWidth, isPaddingLR, isReplace, isLinkUrl, isTrTB, isBGColor, isDeleteLift} }));
+        setSubmitedResult(makeCopy({...values, isFontSize, isFontFamily, isColorLink, isWidth, isPaddingLR, isReplace, isLinkUrl, isTrTB, isBGColor, isDeleteLift}))
 
         if(values.submit === '') {
             setIsSubmitted(false);
@@ -215,8 +216,13 @@ const FormPromo = () => {
                             <LabelCheckBox>
                                 <Checkbox checked={isReplace} onChange={() => setReplace((prev) => !prev)} color="success" />
                                 Make Unique
+                                <InfoButton  text="Replace the symbols against the spam checker"/>
                             </LabelCheckBox>
-                            <InfoButton  text="Replace the symbols against the spam checker"/>
+                            <LabelCheckBox>
+                                <Checkbox checked={isDeleteLift} onChange={() => setDeleteLift((prev) => !prev)} color="success" />
+                                Delete lift
+                                <InfoButton  text="Remove text before copy(lift text)"/>
+                            </LabelCheckBox>
                     </CheckBoxContainer>
 
                     <SubmitContainer>

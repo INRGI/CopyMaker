@@ -13,6 +13,7 @@ const makeCopy = ({
     paddingLR,
     isPaddingLR,
     isReplace,
+    isDeleteLift,
     isLinkUrl,
     linkUrl,
     isTrTB,
@@ -87,8 +88,11 @@ const makeCopy = ({
         });
                 
     }
-    
-    
+
+    if (isDeleteLift) {
+        result = result.replace(/lift.*?\.html/g, '');
+    }
+
 
     if (isReplace) {
         result = makeUnique(result);

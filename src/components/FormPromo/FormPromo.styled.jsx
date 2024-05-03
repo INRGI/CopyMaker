@@ -93,12 +93,12 @@ export const LabelCheckBox = styled.label`
     align-items: center;
     justify-content: flex-start;
     font-size: 14px;
-    width: 150px;
+    width: 180px;
 `;
 
 export const CheckBoxContainer = styled.div`
     display: flex;
-    gap: 10px;
+    gap: 5px;
     align-items: center;
     justify-content: center;
     height: 40px;
