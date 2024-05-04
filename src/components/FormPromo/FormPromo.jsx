@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { nanoid } from "nanoid";
 import { editDomain } from "../../redux/domainSlice";
-import { AddImageButton, CheckBoxContainer, Container, CopyButton, FormContainer, FormInput, HasImagesContainer, ImageBlock, ImageContaianer, ImageToDowload, InputContainer, InputToDowload, Label, LabelCheckBox, LinkToDownload, PageContainer, ResultContainer, ResultText, ResultTitle, SubmitButtonDownload, SubmitContainer, SubmitInput, TitleImages } from "./FormPromo.styled";
+import { AddImageButton, CheckBoxContainer, Container, CopyButton, FormContainer, FormInput, HasImagesContainer, ImageBlock, ImageContaianer, ImageToDowload, InputContainer, InputToDowload, Label, LabelCheckBox, LinkBuilderButton, LinkToDownload, PageContainer, ResultContainer, ResultText, ResultTitle, SubmitButtonDownload, SubmitContainer, SubmitInput, TitleImages } from "./FormPromo.styled";
 import { GrDownload } from "react-icons/gr";
 import { BsCopy } from "react-icons/bs";
 
@@ -15,6 +15,7 @@ import makeCopy from "../../helpers/makeCopy";
 import { Bounce, toast } from "react-toastify";
 import InfoButton from "../InfoButton/InfoButton";
 import Preview from "../Preview/Preview";
+import LinkBuilder from "../LinkBuilder/LinkBuilder";
 
 const FormPromo = () => {
     const { domainId } = useParams();
@@ -36,7 +37,12 @@ const FormPromo = () => {
     
     const [newLinks, setNewLinks] = useState(domain.images ? Array.from({ length: domain.images.length }, () => '') : []);
 
+    const [linkBuilder, setlinkBuilder] = useState('');
+
     const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const [isBuilderOpen, setBuilderOpen] = useState(false);
+    const [BuilderLink, setBuilderLink] = useState('');
 
     const handleChange = (index, event) => {
         const newLinkCopy = [...newLinks];
@@ -78,7 +84,7 @@ const FormPromo = () => {
         colorLink: "",
         width: "",
         paddingLR: "",
-        linkUrl: "",
+        linkUrl: BuilderLink,
         trTB: "",
         BGColor: "",
         ...domain,
@@ -93,6 +99,8 @@ const FormPromo = () => {
             setIsSubmitted(false);
             return
         }
+
+        setlinkBuilder(values.linkUrl)
 
         setIsSubmitted(true);
         toast.success('Copy maked', {
@@ -112,10 +120,20 @@ const FormPromo = () => {
         setIsModalOpen(true);
     };
 
+    const handleLinkBuilder = () => {
+        setBuilderOpen(true);
+    };
+
     const handleAddImageConfirm = (response) => {
         setSubmitedResult(response);
        
         setIsModalOpen(false);
+    };
+
+    const handleBuilderConfirm = (response) => {
+        setBuilderLink(response);
+       
+        setBuilderOpen(false);
     };
 
     return (
@@ -215,13 +233,16 @@ const FormPromo = () => {
                     <CheckBoxContainer>
                             <LabelCheckBox>
                                 <Checkbox checked={isReplace} onChange={() => setReplace((prev) => !prev)} color="success" />
-                                Make Unique
+                                AntiSpam
                                 <InfoButton  text="Replace the symbols against the spam checker"/>
                             </LabelCheckBox>
                             <LabelCheckBox>
                                 <Checkbox checked={isDeleteLift} onChange={() => setDeleteLift((prev) => !prev)} color="success" />
                                 Delete lift
                                 <InfoButton  text="Remove text before copy(lift text)"/>
+                            </LabelCheckBox>
+                            <LabelCheckBox>
+                                <LinkBuilderButton type="button" onClick={()=> handleLinkBuilder()}>Link Builder</LinkBuilderButton>
                             </LabelCheckBox>
                     </CheckBoxContainer>
 
@@ -287,6 +308,14 @@ const FormPromo = () => {
                     onConfirm={handleAddImageConfirm}
                     result={submitedResult} 
         />
+
+        <LinkBuilder 
+            builder={linkBuilder}
+            isOpen={isBuilderOpen} 
+            onClose={() => setBuilderOpen(false)} 
+            onConfirm={handleBuilderConfirm}
+        />
+
         </PageContainer>
     )
 }
