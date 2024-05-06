@@ -6,7 +6,7 @@ import Modal from 'react-modal';
 export const Container = styled(Modal)`
     width: 100%;
     max-width: 350px;
-    height: 520px;
+    height: 420px;
     background-color: white;
     border: 1px solid;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
@@ -28,6 +28,13 @@ export const FormContainer = styled(Form)`
     justify-content: center;
     align-items: center;
     gap: 10px;
+`;
+
+export const ButtonContainer = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
 `;
 
 export const Input = styled(Field)`
@@ -99,7 +106,7 @@ export const CLoseModal = styled.button`
   cursor: pointer;
   display: inline-flex;
   font-family: "JetBrains Mono",monospace;
-  height: 48px;
+  height: 40px;
   justify-content: center;
   line-height: 1;
   list-style: none;
@@ -116,7 +123,6 @@ export const CLoseModal = styled.button`
   white-space: nowrap;
   will-change: box-shadow,transform;
   font-size: 18px;
-  margin: 10px;
   &:focus {
   box-shadow: #b22b36 0 0 0 1.5px inset, rgba(45, 35, 66, 0.4) 0 2px 4px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #b22b36 0 -3px 0 inset;
     }

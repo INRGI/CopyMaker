@@ -1,5 +1,5 @@
 import { ErrorMessage, Formik } from "formik";
-import { CLoseModal, Container, FormContainer, Input, SubmitButton } from "./LinkBuilder.styled";
+import { ButtonContainer, CLoseModal, Container, FormContainer, Input, SubmitButton } from "./LinkBuilder.styled";
 import Error from "../Error";
 
 const LinkBuilder = ({isOpen, onClose, onConfirm, builder}) => {
@@ -24,7 +24,6 @@ const LinkBuilder = ({isOpen, onClose, onConfirm, builder}) => {
             onRequestClose={onClose}
             contentLabel="Edit Confirmation Modal"
         >   
-            <CLoseModal type="button" onClick={onClose}>Close</CLoseModal>
             <Formik
                 initialValues={initialValues}
                 onSubmit={handleSubmit}
@@ -50,7 +49,11 @@ const LinkBuilder = ({isOpen, onClose, onConfirm, builder}) => {
                     <Input name="track" type="copy" placeholder="Copy Code" autoComplete="off" required/>
                     <ErrorMessage name="copy">{msg => <Error msg={msg} />}</ErrorMessage>
 
-                    <SubmitButton type="submit">Submit</SubmitButton>
+                    <ButtonContainer>
+                        <CLoseModal type="button" onClick={onClose}>Back</CLoseModal>
+                        <SubmitButton type="submit">Apply</SubmitButton>
+                    </ButtonContainer>
+                    
                 </FormContainer>
             </Formik>
         </Container>
