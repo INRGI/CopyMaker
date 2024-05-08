@@ -2,22 +2,16 @@ import { ErrorMessage, Formik } from "formik";
 import { ButtonContainer, CLoseModal, Container, FormContainer, Input, SubmitButton } from "./LinkBuilder.styled";
 import Error from "../Error";
 
-const LinkBuilder = ({isOpen, onClose, onConfirm}) => {
+const LinkBuilder = ({isOpen, onClose, onConfirm, link}) => {
 
     const handleSubmit = (values) => {
-        const {track, linkId, merge, mark, type, copy} = values;
+        const {link} = values;
 
-        const link = `${track}${linkId}${merge}${mark}${type}${copy}`;
         onConfirm()
     }
 
     const initialValues = {
-        track: '',
-        linkId: '',
-        merge: '',
-        mark: '',
-        type: '',
-        copy: '',        
+        link: link,    
     };
 
     return (
@@ -34,23 +28,8 @@ const LinkBuilder = ({isOpen, onClose, onConfirm}) => {
                 validateOnChange={false}
             >
                 <FormContainer>
-                    <Input name="track" type="text" placeholder="Tracking domain" autoComplete="off" required/>
-                    <ErrorMessage name="track">{msg => <Error msg={msg} />}</ErrorMessage>
-
-                    <Input name="linkId" type="text" placeholder="Redirect ID / Link ID" autoComplete="off" required/>
-                    <ErrorMessage name="linkId">{msg => <Error msg={msg} />}</ErrorMessage>
-
-                    <Input name="merge" type="text" placeholder="Email Merge Tag" autoComplete="off" required/>
-                    <ErrorMessage name="merge">{msg => <Error msg={msg} />}</ErrorMessage>
-
-                    <Input name="mark" type="text" placeholder="Code Mark" autoComplete="off" required/>
-                    <ErrorMessage name="mark">{msg => <Error msg={msg} />}</ErrorMessage>
-
-                    <Input name="type" type="text" placeholder="Type of email" autoComplete="off" required/>
-                    <ErrorMessage name="type">{msg => <Error msg={msg} />}</ErrorMessage>
-
-                    <Input name="copy" type="text" placeholder="Copy Code" autoComplete="off" required/>
-                    <ErrorMessage name="copy">{msg => <Error msg={msg} />}</ErrorMessage>
+                    <Input name="link" type="text" placeholder="Your link here" autoComplete="off" required/>
+                    <ErrorMessage name="link">{msg => <Error msg={msg} />}</ErrorMessage>
 
                     <ButtonContainer>
                         <CLoseModal type="button" onClick={onClose}>Back</CLoseModal>

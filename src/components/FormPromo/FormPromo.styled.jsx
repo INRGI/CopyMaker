@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import { Field, Form } from "formik";
+import TextField from '@mui/material/TextField';
 
 export const PageContainer = styled.div`
     display: flex;
@@ -30,6 +31,10 @@ export const FormInput = styled(Field)`
     }
 `;
 
+export const MuiInput = styled(TextField)`
+    width: 85%;
+`;
+
 export const SubmitInput = styled(Field)`
     display: block;
     min-height: 30px;
@@ -45,7 +50,7 @@ export const SubmitInput = styled(Field)`
         color: black;
     }
     &:hover{
-        transform: translateY(-1px);
+        transform: translateY(-0.5px);
         box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
     }
 `;
@@ -56,13 +61,14 @@ export const InputContainer = styled.div`
     align-items: center;
     justify-content: center;
     height: 40px;
+    width: 100%;
 `;
 
 export const Container = styled.div`
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
-    gap: 10px;
+    gap: 20px;
     align-items: center;
     justify-content: center;
     
@@ -76,7 +82,8 @@ export const FormContainer = styled(Form)`
     border-radius: 16px;
     box-shadow: 0 30px 30px -25px rgba(65, 51, 183, 0.25);
     background-color:#fff;
-    padding: 20px 0;
+    padding: 20px 10px;
+    min-width: 450px;
 `;
 
 
