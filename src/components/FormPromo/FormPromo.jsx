@@ -142,110 +142,69 @@ const FormPromo = () => {
                 <FormContainer>
                     <Container>
                         <InputContainer>
-                            {/* <Label>
-                                <Checkbox checked={isFontSize} onChange={() => setFontSize((prev) => !prev)} color="success" />
-                                Font Size
-                            </Label> */}
 
                             <Checkbox checked={isFontSize} onChange={() => setFontSize((prev) => !prev)} color="success" />
 
                             <Field as={MuiInput} label="Font Size" size="small" variant="outlined" type="text" name="fontSize" id={fontSizeId} placeholder="ex: 16" disabled={!isFontSize} required ></Field>
 
-                            {/* <FormInput type="text" name="fontSize" id={fontSizeId} placeholder="ex: 16" disabled={!isFontSize} required/> */}
                             <InfoButton  text="Please paste Font Size value without px"/>
                         </InputContainer>
 
                         <InputContainer>
-                            {/* <Label>
-                                <Checkbox checked={isFontFamily} onChange={() => setFontFamily((prev) => !prev)} color="success" />
-                                Font Family
-                            </Label> */}
 
                             <Checkbox checked={isFontFamily} onChange={() => setFontFamily((prev) => !prev)} color="success" />
                             <Field as={MuiInput} label="Font Family" size="small" variant="outlined" type="text" name="fontFamily" id={fontFamilyId} placeholder="ex: Roboto" disabled={!isFontFamily} required ></Field>
 
-                            {/* <FormInput type="text" name="fontFamily" id={fontFamilyId} placeholder="ex: Roboto" disabled={!isFontFamily} required/> */}
                             <InfoButton  text="Please paste Font Family value here"/>
                         </InputContainer>
 
                         <InputContainer>
-                            {/* <Label>
-                                <Checkbox checked={isColorLink} onChange={() => setColorLink((prev) => !prev)} color="success" />
-                                Link Color
-                            </Label> */}
 
                             <Checkbox checked={isColorLink} onChange={() => setColorLink((prev) => !prev)} color="success" />
                             <Field as={MuiInput} label="Link Color" size="small" variant="outlined" type="text" name="colorLink" id={colorLinkId} placeholder="ex: #ffffff" disabled={!isColorLink} required ></Field>
 
-                            {/* <FormInput type="text" name="colorLink" id={colorLinkId} placeholder="ex: #ffffff" disabled={!isColorLink} required/> */}
                             <InfoButton  text="Please paste Link Color like this #ffffff"/>
                         </InputContainer>
                         
 
                         <InputContainer>
-                            {/* <Label>
-                                <Checkbox checked={isWidth} onChange={() => setWidth((prev) => !prev)} color="success" />
-                                Max Width
-                            </Label> */}
 
                             <Checkbox checked={isWidth} onChange={() => setWidth((prev) => !prev)} color="success" />
                             <Field as={MuiInput} label="Max Width" size="small" variant="outlined" type="text" name="width" id={width} placeholder="ex: 600" disabled={!isWidth} required ></Field>
 
-
-                            {/* <FormInput type="text" name="width" id={width} placeholder="ex: 600" disabled={!isWidth} required/> */}
                             <InfoButton  text="Please paste Width value without px"/>
                         </InputContainer>
                         
                         
                         <InputContainer>
-                            {/* <Label>
-                                <Checkbox checked={isPaddingLR} onChange={() => setPaddingLR((prev) => !prev)} color="success" />
-                                Padding ⬅️ ➡️
-                            </Label> */}
 
                             <Checkbox checked={isPaddingLR} onChange={() => setPaddingLR((prev) => !prev)} color="success" />
                             <Field as={MuiInput} label="Padding ⬅️ ➡️" size="small" variant="outlined" type="text" name="paddingLR" id={paddingLR} placeholder="ex: 20" disabled={!isPaddingLR} required ></Field>
 
-                            {/* <FormInput type="text" name="paddingLR" id={paddingLR} placeholder="ex: 20" disabled={!isPaddingLR} required/> */}
                             <InfoButton  text="Please paste Padding value without px"/>
                         </InputContainer>
                         
                         <InputContainer>
-                            {/* <Label>
-                                <Checkbox checked={isLinkUrl} onChange={() => setLinkUrl((prev) => !prev)} color="success" />
-                                Link Url
-                            </Label> */}
 
                             <Checkbox checked={isLinkUrl} onChange={() => setLinkUrl((prev) => !prev)} color="success" />
                             <Field as={MuiInput} label="Link Url" size="small" variant="outlined" type="text" name="linkUrl" id={linkUrlId} placeholder="Link Url" disabled={!isLinkUrl} required ></Field>
 
-                            {/* <FormInput type="text" name="linkUrl" id={linkUrlId} placeholder="Link Url" disabled={!isLinkUrl} required/> */}
                             <InfoButton  text="Please paste Link Address here"/>
                         </InputContainer>
                         
                         <InputContainer>
-                            {/* <Label>
-                                <Checkbox checked={isTrTB} onChange={() => setTrTB((prev) => !prev)} color="success"/>
-                                Padding ⬆️ ⬇️
-                            </Label> */}
 
                             <Checkbox checked={isTrTB} onChange={() => setTrTB((prev) => !prev)} color="success"/>
                             <Field as={MuiInput} label="Padding ⬆️ ⬇️" size="small" variant="outlined" type="text" name="trTB" id={TrTBId} placeholder="ex: 20" disabled={!isTrTB} required ></Field>
 
-                            {/* <FormInput type="text" name="trTB" id={TrTBId} placeholder="ex: 20" disabled={!isTrTB} required/> */}
                             <InfoButton  text="Please paste Padding value without px"/>
                         </InputContainer>
                         
                         <InputContainer>
-                            {/* <Label>
-                                <Checkbox checked={isBGColor} onChange={() => setBGColor((prev) => !prev)} color="success" />
-                                Bgcolor
-                            </Label> */}
 
                             <Checkbox checked={isBGColor} onChange={() => setBGColor((prev) => !prev)} color="success" />
                             <Field as={MuiInput} label="Bgcolor" size="small" variant="outlined" type="text" name="BGColor" id={BGColorId} placeholder="ex: #ffffff" disabled={!isBGColor} required ></Field>
 
-                            {/* <FormInput type="text" name="BGColor" id={BGColorId} placeholder="ex: #ffffff" disabled={!isBGColor} required/> */}
                             <InfoButton  text="Please paste Background Color like this #ffffff"/>
                         </InputContainer>
 
