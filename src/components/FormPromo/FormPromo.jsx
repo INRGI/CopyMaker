@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { nanoid } from "nanoid";
 import { editDomain } from "../../redux/domainSlice";
-import { AddImageButton, CheckBoxContainer, Container, CopyButton, FormContainer, HasImagesContainer, ImageBlock, ImageContaianer, ImageToDowload, InputContainer, InputToDowload, LabelCheckBox, LinkToDownload, MuiInput, PageContainer, ResultContainer, ResultText, ResultTitle, SubmitButtonDownload, SubmitContainer, SubmitInput, TitleImages } from "./FormPromo.styled";
+import { AddImageButton, CheckBoxContainer, Container, CopyButton, FormContainer, HasImagesContainer, ImageBlock, ImageContaianer, ImageToDowload, InputContainer, InputToDowload, LabelCheckBox, LinkToDownload, MuiInput, PageContainer, ResultContainer, ResultText, ResultTitle, SubmitButtonDownload, SubmitContainer, TitleImages } from "./FormPromo.styled";
 import { GrDownload } from "react-icons/gr";
 import { BsCopy } from "react-icons/bs";
 
@@ -211,7 +211,7 @@ const FormPromo = () => {
                     </CheckBoxContainer>
 
                     <SubmitContainer>
-                        <SubmitInput autoComplete="off" name="submit" id={submitId} type="text" placeholder="Paste your copy here :)"/>
+                        <Field autoComplete="off" fullWidth as={MuiInput} size="small" variant="outlined" type="text" name="submit" id={submitId} placeholder="Paste your copy here :)" />
                         <SubmitButtonDownload type="submit">Submit</SubmitButtonDownload>
                     </SubmitContainer>
                     

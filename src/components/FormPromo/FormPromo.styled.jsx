@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { Field, Form } from "formik";
+import { Form } from "formik";
 import TextField from '@mui/material/TextField';
 
 export const PageContainer = styled.div`
@@ -12,48 +12,7 @@ export const PageContainer = styled.div`
     flex-wrap: wrap;
 `;
 
-export const FormInput = styled(Field)`
-    display: block;
-    min-height: 30px;
-    width: 85%;
-    max-width: 280px;
-    background-color: rgba(255,255,255,0.07);
-    border-radius: 3px;
-    border: 0.5px solid;
-    padding: 0 10px;
-    font-size: 14px;
-    font-weight: 300;
-    &::placeholder{
-        color: black;
-    }
-    &:hover{
-        box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
-    }
-`;
-
-export const MuiInput = styled(TextField)`
-    /* width: 85%; */
-`;
-
-export const SubmitInput = styled(Field)`
-    display: block;
-    min-height: 30px;
-    width: 85%;
-    max-width: 254px;
-    background-color: rgba(255,255,255,0.07);
-    border-radius: 3px;
-    border: 0.5px solid;
-    padding: 0 10px;
-    font-size: 14px;
-    font-weight: 300;
-    &::placeholder{
-        color: black;
-    }
-    &:hover{
-        transform: translateY(-0.5px);
-        box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
-    }
-`;
+export const MuiInput = styled(TextField)``;
 
 export const InputContainer = styled.div`
     display: flex;
@@ -84,15 +43,6 @@ export const FormContainer = styled(Form)`
     background-color:#fff;
     padding: 20px 10px;
     min-width: 450px;
-`;
-
-
-export const Label = styled.label`
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    font-size: 14px;
-    width: 250px;
 `;
 
 export const LabelCheckBox = styled.label`
@@ -346,54 +296,6 @@ export const AddImageButton = styled.button`
     white-space: nowrap;
     will-change: box-shadow,transform;
     font-size: 18px;
-    width: 120px;
-    &:focus {
-    box-shadow: #8aa649 0 0 0 1.5px inset, rgba(45, 35, 66, 0.4) 0 2px 4px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #8aa649 0 -3px 0 inset;
-    }
-
-    &:hover {
-    box-shadow: rgba(45, 35, 66, 0.4) 0 4px 8px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #8aa649 0 -3px 0 inset;
-    transform: translateY(-1px);
-    }
-
-    &:active {
-    box-shadow: #8aa649 0 3px 7px inset;
-    transform: translateY(1px);
-    }
-`;
-
-
-
-export const LinkBuilderButton = styled.button`
-    align-items: center;
-    appearance: none;
-    background-color: #a7c957;
-    border-radius: 4px;
-    border-width: 0;
-    box-shadow: rgba(45, 35, 66, 0.4) 0 2px 4px,rgba(45, 35, 66, 0.3) 0 7px 13px -3px,#8aa649 0 -3px 0 inset;
-    box-sizing: border-box;
-    color: white;
-    cursor: pointer;
-    display: inline-flex;
-    font-family: "JetBrains Mono",monospace;
-    height: 26px;
-    justify-content: center;
-    line-height: 1;
-    list-style: none;
-    overflow: hidden;
-    padding-left: 8px;
-    padding-right: 8px;
-    position: relative;
-    text-align: left;
-    text-decoration: none;
-    transition: box-shadow 0.15s,transform 0.15s;
-    user-select: none;
-    -webkit-user-select: none;
-    touch-action: manipulation;
-    white-space: nowrap;
-    will-change: box-shadow,transform;
-    font-size: 14px;
-    font-weight: bold;
     width: 120px;
     &:focus {
     box-shadow: #8aa649 0 0 0 1.5px inset, rgba(45, 35, 66, 0.4) 0 2px 4px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #8aa649 0 -3px 0 inset;
