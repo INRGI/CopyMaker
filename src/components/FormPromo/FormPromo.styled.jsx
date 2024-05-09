@@ -32,7 +32,7 @@ export const FormInput = styled(Field)`
 `;
 
 export const MuiInput = styled(TextField)`
-    width: 85%;
+    /* width: 85%; */
 `;
 
 export const SubmitInput = styled(Field)`
