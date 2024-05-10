@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { nanoid } from "nanoid";
 import { editDomain } from "../../redux/domainSlice";
-import { AddImageButton, CheckBoxContainer, Container, CopyButton, FormContainer, HasImagesContainer, ImageBlock, ImageContaianer, ImageToDowload, InputContainer, InputToDowload, LabelCheckBox, LinkToDownload, MuiInput, PageContainer, ResultContainer, ResultText, ResultTitle, SubmitButtonDownload, SubmitContainer, TitleImages } from "./FormPromo.styled";
+import { AddImageButton, CheckBoxContainer, Container, CopyButton, FormContainer, FuncContainer, HasImagesContainer, ImageBlock, ImageContaianer, ImageToDowload, InputContainer, InputToDowload, LabelCheckBox, LinkToDownload, MuiInput, PageContainer, ResultContainer, ResultText, ResultTitle, SubmitButtonDownload, SubmitContainer, TitleImages } from "./FormPromo.styled";
 import { GrDownload } from "react-icons/gr";
 import { BsCopy } from "react-icons/bs";
 
@@ -120,6 +120,26 @@ const FormPromo = () => {
 
     return (
         <PageContainer>
+            <FuncContainer>
+                <CheckBoxContainer>
+                            <LabelCheckBox>
+                                <Checkbox checked={isReplace} onChange={() => setReplace((prev) => !prev)} color="success" />
+                                AntiSpam
+                                <InfoButton  text="Replace the symbols against the spam checker"/>
+                            </LabelCheckBox>
+                            <LabelCheckBox>
+                                <Checkbox checked={isDeleteLift} onChange={() => setDeleteLift((prev) => !prev)} color="success" />
+                                Delete lift
+                                <InfoButton  text="Remove text before copy(lift text)"/>
+                            </LabelCheckBox>         
+                            
+                </CheckBoxContainer>
+                <ResultContainer>
+                                <AddImageButton disabled={!isSubmitted && submitedResult === ""} type="button" onClick={()=> handleImageAdd(submitedResult)}>Add Image</AddImageButton>
+                                {/* <InfoButton  text="Add custom image at start html, after that you just move all that block to place what you need"/> */}
+                </ResultContainer>
+            </FuncContainer>
+
             <Formik
                 onSubmit={handleSubmit}
                 initialValues={initialValues}
@@ -197,18 +217,7 @@ const FormPromo = () => {
 
                     </Container>
 
-                    <CheckBoxContainer>
-                            <LabelCheckBox>
-                                <Checkbox checked={isReplace} onChange={() => setReplace((prev) => !prev)} color="success" />
-                                AntiSpam
-                                <InfoButton  text="Replace the symbols against the spam checker"/>
-                            </LabelCheckBox>
-                            <LabelCheckBox>
-                                <Checkbox checked={isDeleteLift} onChange={() => setDeleteLift((prev) => !prev)} color="success" />
-                                Delete lift
-                                <InfoButton  text="Remove text before copy(lift text)"/>
-                            </LabelCheckBox>
-                    </CheckBoxContainer>
+                    
 
                     <SubmitContainer>
                         <Field autoComplete="off" fullWidth as={MuiInput} size="small" variant="outlined" type="text" name="submit" id={submitId} placeholder="Paste your copy here :)" />
@@ -235,16 +244,6 @@ const FormPromo = () => {
                             </ImageContaianer>
                         </HasImagesContainer>
                     )}
-
-                    {isSubmitted && submitedResult !== "" && (
-                        <div>
-                            <ResultContainer>
-                                <AddImageButton type="button" onClick={()=> handleImageAdd(submitedResult)}>Add Image</AddImageButton>
-                                <InfoButton  text="Add custom image at start html, after that you just move all that block to place what you need"/>
-                            </ResultContainer>
-                        </div>
-                    )}
-
 
                     {isSubmitted && (
                         <div>

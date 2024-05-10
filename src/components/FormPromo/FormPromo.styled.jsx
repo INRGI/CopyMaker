@@ -33,6 +33,21 @@ export const Container = styled.div`
     
 `;
 
+export const FuncContainer = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 0px;
+    border-radius: 16px;
+    box-shadow: 0 30px 30px -25px rgba(65, 51, 183, 0.25);
+    background-color:#fff;
+    padding: 20px 10px;
+    min-width: 160px;
+    height: 140px;
+`;
+
 export const FormContainer = styled(Form)`
     display: flex;
     flex-direction: column;
@@ -55,11 +70,11 @@ export const LabelCheckBox = styled.label`
 
 export const CheckBoxContainer = styled.div`
     display: flex;
+    flex-direction: column;
     gap: 5px;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
     height: 40px;
-    padding: 0 10px;
 `
 
 export const ImageContaianer = styled.div`
@@ -256,7 +271,7 @@ export const ResultContainer = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 15px;
+    margin-top: 20px;
 `;
 
 export const ResultTitle = styled.h3`
