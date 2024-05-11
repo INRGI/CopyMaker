@@ -12,7 +12,9 @@ export const PageContainer = styled.div`
     flex-wrap: wrap;
 `;
 
-export const MuiInput = styled(TextField)``;
+export const MuiInput = styled(TextField)`
+    z-index: 0;
+`;
 
 export const InputContainer = styled.div`
     display: flex;
@@ -44,6 +46,7 @@ export const FuncContainer = styled.div`
     box-shadow: 0 30px 30px -25px rgba(65, 51, 183, 0.25);
     background-color:#fff;
     padding: 20px 10px;
+    padding-top:30px;
     min-width: 160px;
     height: 140px;
 `;
@@ -271,7 +274,7 @@ export const ResultContainer = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 20px;
+    margin-top: 0px;
 `;
 
 export const ResultTitle = styled.h3`
@@ -286,6 +289,7 @@ export const AddImageButton = styled.button`
     align-items: center;
     appearance: none;
     background-color: #a7c957;
+    margin-top: 20px;
     border-radius: 4px;
     border-width: 0;
     box-shadow: rgba(45, 35, 66, 0.4) 0 2px 4px,rgba(45, 35, 66, 0.3) 0 7px 13px -3px,#8aa649 0 -3px 0 inset;

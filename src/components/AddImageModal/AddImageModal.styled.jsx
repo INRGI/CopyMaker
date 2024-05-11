@@ -3,6 +3,8 @@ import styled from "@emotion/styled";
 import { Field } from "formik";
 import Modal from 'react-modal';
 
+import TextField from '@mui/material/TextField';
+
 export const Container = styled(Modal)`
     width: 100%;
     max-width: 350px;
@@ -20,6 +22,12 @@ export const Container = styled(Modal)`
     flex-direction: column;
     gap: 20px;
     align-items: center;
+    z-index: 999;
+`;
+
+export const MuiInput = styled(TextField)`
+    z-index: 0;
+    margin-top: 10px;
 `;
 
 export const ButtonNo = styled.button`
