@@ -30,6 +30,7 @@ const FormPromo = () => {
     const [isLinkUrl, setLinkUrl] = useState(domain.isLinkUrl);
     const [isTrTB, setTrTB] = useState(domain.isTrTB);
     const [isBGColor, setBGColor] = useState(domain.isBGColor);
+    const [isAddHidden, setAddHidden] = useState(domain.isAddHidden);
 
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [submitedResult, setSubmitedResult] = useState("");
@@ -86,8 +87,8 @@ const FormPromo = () => {
       };
 
     const handleSubmit = (values) => {
-        dispatch(editDomain({ id: domainId, values: {...values, isFontSize, isFontFamily, isColorLink, isWidth, isPaddingLR, isReplace, isLinkUrl, isTrTB, isBGColor, isDeleteLift} }));
-        setSubmitedResult(makeCopy({...values, isFontSize, isFontFamily, isColorLink, isWidth, isPaddingLR, isReplace, isLinkUrl, isTrTB, isBGColor, isDeleteLift}))
+        dispatch(editDomain({ id: domainId, values: {...values, isFontSize, isFontFamily, isColorLink, isWidth, isPaddingLR, isReplace, isLinkUrl, isTrTB, isBGColor, isDeleteLift, isAddHidden} }));
+        setSubmitedResult(makeCopy({...values, isFontSize, isFontFamily, isColorLink, isWidth, isPaddingLR, isReplace, isLinkUrl, isTrTB, isBGColor, isDeleteLift, isAddHidden}))
 
         if(values.submit === '') {
             setIsSubmitted(false);
@@ -131,13 +132,18 @@ const FormPromo = () => {
                                 <Checkbox checked={isDeleteLift} onChange={() => setDeleteLift((prev) => !prev)} color="success" />
                                 Delete lift
                                 <InfoButton  text="Remove text before copy(lift text)"/>
+                            </LabelCheckBox>   
+                            <LabelCheckBox>
+                                <Checkbox checked={isAddHidden} onChange={() => setAddHidden((prev) => !prev)} color="success" />
+                                HiddenText
+                                <InfoButton  text="Add hiden unique block to start and end"/>
                             </LabelCheckBox>         
-                            
-                </CheckBoxContainer>
-                <ResultContainer>
+                            <ResultContainer>
                                 <AddImageButton disabled={!isSubmitted && submitedResult === ""} type="button" onClick={()=> handleImageAdd(submitedResult)}>Add Image</AddImageButton>
                                 {/* <InfoButton  text="Add custom image at start html, after that you just move all that block to place what you need"/> */}
-                </ResultContainer>
+                            </ResultContainer>
+                </CheckBoxContainer>
+                
             </FuncContainer>
 
             <Formik
@@ -275,3 +281,4 @@ const FormPromo = () => {
 }
 
 export default FormPromo;
+

@@ -48,7 +48,7 @@ export const FuncContainer = styled.div`
     padding: 20px 10px;
     padding-top:30px;
     min-width: 160px;
-    height: 140px;
+    height: 180px;
 `;
 
 export const FormContainer = styled(Form)`
@@ -66,7 +66,7 @@ export const FormContainer = styled(Form)`
 export const LabelCheckBox = styled.label`
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     font-size: 14px;
     width: 100%;
 `;
@@ -275,6 +275,7 @@ export const ResultContainer = styled.div`
     justify-content: center;
     align-items: center;
     margin-top: 0px;
+    width: 100%;
 `;
 
 export const ResultTitle = styled.h3`
@@ -289,7 +290,6 @@ export const AddImageButton = styled.button`
     align-items: center;
     appearance: none;
     background-color: #a7c957;
-    margin-top: 20px;
     border-radius: 4px;
     border-width: 0;
     box-shadow: rgba(45, 35, 66, 0.4) 0 2px 4px,rgba(45, 35, 66, 0.3) 0 7px 13px -3px,#8aa649 0 -3px 0 inset;

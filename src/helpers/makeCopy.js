@@ -1,3 +1,4 @@
+import addHiddenBlock from "./addHidenBlock";
 import makeUnique from "./makeUnique";
 
 const makeCopy = ({
@@ -20,6 +21,7 @@ const makeCopy = ({
     trTB,
     isBGColor,
     BGColor,
+    isAddHidden,
 }) => {
     let result = submit;
 
@@ -129,6 +131,11 @@ const makeCopy = ({
     result = formatHtml(result);
     
     result = removeFirstAndLastCharacter(result);
+
+    if (isAddHidden) {
+        result = addHiddenBlock(result);
+    }   
+    
     
     return result;
 };
