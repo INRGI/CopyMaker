@@ -46,7 +46,7 @@ export const FuncContainer = styled.div`
     box-shadow: 0 30px 30px -25px rgba(65, 51, 183, 0.25);
     background-color:#fff;
     padding: 20px 10px;
-    padding-top:30px;
+    padding-top: 10px;
     min-width: 160px;
     height: 180px;
 `;
@@ -66,7 +66,7 @@ export const FormContainer = styled(Form)`
 export const LabelCheckBox = styled.label`
     display: flex;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: space-between;
     font-size: 14px;
     width: 100%;
 `;
@@ -303,8 +303,9 @@ export const AddImageButton = styled.button`
     line-height: 1;
     list-style: none;
     overflow: hidden;
-    padding-left: 16px;
-    padding-right: 16px;
+    /* padding-left: 16px;
+    padding-right: 16px; */
+    width: 85%;
     position: relative;
     text-align: left;
     text-decoration: none;
@@ -315,7 +316,7 @@ export const AddImageButton = styled.button`
     white-space: nowrap;
     will-change: box-shadow,transform;
     font-size: 18px;
-    width: 120px;
+    /* width: 120px; */
     &:focus {
     box-shadow: #8aa649 0 0 0 1.5px inset, rgba(45, 35, 66, 0.4) 0 2px 4px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #8aa649 0 -3px 0 inset;
     }
