@@ -136,7 +136,7 @@ const FormPromo = () => {
                             <LabelCheckBox>
                                 <Checkbox checked={isAddHidden} onChange={() => setAddHidden((prev) => !prev)} color="success" />
                                 HiddenText
-                                <InfoButton  text="Add hiden unique block to start and end"/>
+                                <InfoButton  text="Add hiden unique block to start and end (each one contain 1000 random symbols)"/>
                             </LabelCheckBox>         
                             <ResultContainer>
                                 <AddImageButton disabled={!isSubmitted && submitedResult === ""} type="button" onClick={()=> handleImageAdd(submitedResult)}>Add Image</AddImageButton>
