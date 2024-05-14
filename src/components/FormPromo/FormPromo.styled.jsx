@@ -38,9 +38,10 @@ export const Container = styled.div`
 export const FuncContainer = styled.div`
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     flex-direction: column;
     gap: 20px;
+    /* gap: 20px;
     margin-top: 0px;
     border-radius: 16px;
     box-shadow: 0 30px 30px -25px rgba(65, 51, 183, 0.25);
@@ -48,8 +49,26 @@ export const FuncContainer = styled.div`
     padding: 20px 10px;
     padding-top: 10px;
     min-width: 160px;
-    height: 180px;
+    height: 180px; */
 `;
+
+export const CheckBoxContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    align-items: flex-start;
+    justify-content: center;
+    height: 40px;
+    gap: 5px;
+    margin-top: 0px;
+    border-radius: 16px;
+    box-shadow: 0 30px 30px -25px rgba(65, 51, 183, 0.25);
+    background-color:#fff;
+    padding: 20px 10px;
+    padding-top: 10px;
+    min-width: 160px;
+    height: 140px;
+`
 
 export const FormContainer = styled(Form)`
     display: flex;
@@ -71,14 +90,6 @@ export const LabelCheckBox = styled.label`
     width: 100%;
 `;
 
-export const CheckBoxContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    align-items: flex-start;
-    justify-content: center;
-    height: 40px;
-`
 
 export const ImageContaianer = styled.div`
     display: flex;
@@ -305,7 +316,7 @@ export const AddImageButton = styled.button`
     overflow: hidden;
     /* padding-left: 16px;
     padding-right: 16px; */
-    width: 85%;
+    width: 95%;
     position: relative;
     text-align: left;
     text-decoration: none;
