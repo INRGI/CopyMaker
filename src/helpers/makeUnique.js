@@ -3,7 +3,6 @@ const makeUnique = (text) => {
     const replacements = {
         'A': 'А',
         'E': 'Е',
-        'Y': 'У',
         'I': 'І',
         'O': 'О',
         'P': 'Р',
