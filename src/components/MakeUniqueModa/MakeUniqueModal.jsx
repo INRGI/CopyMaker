@@ -1,15 +1,17 @@
 
-import { Formik, Form } from 'formik';
+import { Formik, Form, Field } from 'formik';
 
 import { Bounce, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { BtnBack, Container, CopyButton, Input, ResultContainer, ResultText, SubmitButtonDownload, Title, TitleContainer } from './MakeUniqueModal.styled';
-import { IoMdClose } from "react-icons/io";
+import { BtnBack, ButtonContainer, Container, CopyButton, MuiInput, ResultContainer, ResultText, SubmitButtonDownload, Title, TitleContainer } from './MakeUniqueModal.styled';
 import { useState } from 'react';
 import makeUnique from '../../helpers/makeUnique';
+import { nanoid } from 'nanoid';
 
 const MakeUniqueModal = ({ isOpen, onClose }) =>{
     const [submitedResult, setSubmitedResult] = useState("");
+
+    const inputId = nanoid()
 
     const initialValues = {
         textToChange: "",       
@@ -44,7 +46,7 @@ const MakeUniqueModal = ({ isOpen, onClose }) =>{
         >
             <TitleContainer>
                 <Title>Anti Spam v1.0</Title>
-                <BtnBack type="button" onClick={onClose}><IoMdClose size={26}/></BtnBack>
+                
                 
             </TitleContainer> 
             <Formik
@@ -54,9 +56,13 @@ const MakeUniqueModal = ({ isOpen, onClose }) =>{
                 validateOnChange={false}
             >
                 <Form>
-                    <Input name="textToChange" type="text" placeholder="Your text to transform paste here" required/>
+                    {/* <Input name="textToChange" type="text" placeholder="Your text to transform paste here" required/> */}
+                    <Field fullWidth as={MuiInput} label="Your text" size="small" variant="outlined" type="text" name="textToChange" id={inputId} placeholder="Your text to transform paste here" required autoComplete="off" />
+                    <ButtonContainer>
+                        <BtnBack type="button" onClick={onClose}>Cancel</BtnBack>
+                        <SubmitButtonDownload type="submit">Submit</SubmitButtonDownload>   
+                    </ButtonContainer>
                     
-                    <SubmitButtonDownload type="submit">Submit</SubmitButtonDownload>
 
                     {submitedResult && (
                         <div>

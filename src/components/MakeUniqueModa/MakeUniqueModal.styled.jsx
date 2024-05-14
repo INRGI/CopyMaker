@@ -1,12 +1,12 @@
 
 import styled from "@emotion/styled";
-import { Field } from "formik";
+import { TextField } from "@mui/material";
 import Modal from 'react-modal';
 
 export const Container = styled(Modal)`
     width: 100%;
     max-width: 350px;
-    height: 250px;
+    height: 220px;
     background-color: white;
     border: 1px solid;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
@@ -28,26 +28,6 @@ export const Title = styled.h4`
     font-size: 24px;
 `
 
-export const Input = styled(Field)`
-    display: block;
-    height: 50px;
-    width: 276px;
-    background-color: rgba(255,255,255,0.07);
-    border-radius: 3px;
-    padding: 0 10px;
-    border: 1px solid;
-    margin-top: 8px;
-    font-size: 14px;
-    font-weight: 300;
-    margin-bottom: 20px;
-    &::placeholder{
-        color: black;
-    }
-    &:hover{
-        box-shadow: rgba(0, 0, 0, 0.25) 0px 5px 10px;
-    }
-`;
-
 export const TitleContainer = styled.div`
     display: flex;
     align-items: center;
@@ -55,6 +35,17 @@ export const TitleContainer = styled.div`
     width: 100%;
     max-width: 300px;
    
+`;
+
+export const MuiInput = styled(TextField)`
+    z-index: 0;
+    height: 50px;
+    width: 300px;
+`;
+
+export const ButtonContainer = styled.div`
+    display: flex;
+    gap: 20px;
 `;
 
 export const BtnBack = styled.button`
@@ -66,10 +57,11 @@ export const BtnBack = styled.button`
   box-shadow: rgba(45, 35, 66, 0.4) 0 2px 4px,rgba(45, 35, 66, 0.3) 0 7px 13px -3px,#b22b36 0 -3px 0 inset;
   box-sizing: border-box;
   color: white;
+  width: 50%;
   cursor: pointer;
   display: inline-flex;
   font-family: "JetBrains Mono",monospace;
-  height: 30px;
+  height: 35px;
   justify-content: center;
   line-height: 1;
   list-style: none;
@@ -193,7 +185,7 @@ export const SubmitButtonDownload = styled.button`
     white-space: nowrap;
     will-change: box-shadow,transform;
     font-size: 18px;
-    width: 100%;
+    width: 50%;
     &:focus {
     box-shadow: #8aa649 0 0 0 1.5px inset, rgba(45, 35, 66, 0.4) 0 2px 4px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #8aa649 0 -3px 0 inset;
     }
