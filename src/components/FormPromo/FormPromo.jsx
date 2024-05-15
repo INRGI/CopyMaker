@@ -139,8 +139,7 @@ const FormPromo = () => {
                                 <InfoButton  text="Add hiden unique block to start and end (each one contain 1000 random symbols)"/>
                             </LabelCheckBox>         
                             <ResultContainer>
-                                
-                                {/* <InfoButton  text="Add custom image at start html, after that you just move all that block to place what you need"/> */}
+                            
                             </ResultContainer>
                 </CheckBoxContainer>
                 <AddImageButton type="button" onClick={()=> handleImageAdd(submitedResult)}>Add Image</AddImageButton>

@@ -56,7 +56,6 @@ const MakeUniqueModal = ({ isOpen, onClose }) =>{
                 validateOnChange={false}
             >
                 <Form>
-                    {/* <Input name="textToChange" type="text" placeholder="Your text to transform paste here" required/> */}
                     <Field fullWidth as={MuiInput} label="Your text" size="small" variant="outlined" type="text" name="textToChange" id={inputId} placeholder="Your text to transform paste here" required autoComplete="off" />
                     <ButtonContainer>
                         <BtnBack type="button" onClick={onClose}>Cancel</BtnBack>

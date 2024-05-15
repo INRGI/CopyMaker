@@ -61,7 +61,6 @@ export const Domain = styled.li`
     align-items: center;
     border: 0px solid;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-    /* box-shadow: 0 30px 30px -25px rgba(65, 51, 183, 0.25); */
     padding: 9px;
     border-radius: 5px;
     max-width: 800px;

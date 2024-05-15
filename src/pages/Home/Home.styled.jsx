@@ -23,12 +23,9 @@ export const DomainsContainer = styled.div`
     height: 380px;
     width: 100%;
     max-width: 700px;
-    /* border: 1.5px solid; */
-    /* box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; */
     border-radius: 16px;
     box-shadow: 0 30px 30px -25px rgba(65, 51, 183, 0.25);
     background-color:#fff;
-    /* border-radius: 5px; */
     padding-top:20px;
     overflow-y: auto;
 `;
