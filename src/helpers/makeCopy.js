@@ -132,9 +132,10 @@ const makeCopy = ({
     
     result = removeFirstAndLastCharacter(result);
 
-    if (isAddHidden) {
-        result = addHiddenBlock(result);
-    }   
+    // if (isAddHidden) {
+    //     result = addHiddenBlock(result);
+    // }   
+    // NEED TO CHANGE
     
     
     return result;
