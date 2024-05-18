@@ -12,9 +12,13 @@ const addHiddenBlock = (text) => {
 
     const uniqueBlock = generateRandomString();
 
-    const newText = `<div style="display:none;">${uniqueBlock}</div>${text}<div style="display:none;">${uniqueBlock}</div>`;
+    const newText = `<table border="0" cellpadding="0" cellspacing="0" class="body" role="presentation" style="display:none; width: 100%" ><tbody><tr><td align="center" valign="top">${uniqueBlock}</td></tr></tbody></table>${text}<table border="0" cellpadding="0" cellspacing="0" class="body" role="presentation" style="display:none; width: 100%" ><tbody><tr><td align="center" valign="top">${uniqueBlock}</td></tr></tbody></table>`;
 
     return newText;
 };
 
 export default addHiddenBlock;
+
+{/* <table style="display:none;" role="presentation" cellpadding="0" cellspacing="0" align="center"><tr><td align="center" style="text-align: center">
+
+                </td></tr></table> */}
