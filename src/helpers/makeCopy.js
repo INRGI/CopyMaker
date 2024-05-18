@@ -47,10 +47,19 @@ const makeCopy = ({
 
     
     
+    // if (isWidth) {
+    //     result = result.replace(/(?<!<(img|a)[^>]*?)(max-width|width)\s*:\s*(?!100%\s*;)(\d+%?)(?!px)/g, `$2: ${width}px`);
+    //     result = result.replace(/(\d{1,3})px0px/g, '$1px');    
+    // }
+
     if (isWidth) {
-        result = result.replace(/(?<!<(img|a)[^>]*?)(max-width|width)\s*:\s*(?!100%\s*;)(\d+%?)(?!px)/g, `$2: ${width}px`);
-        result = result.replace(/(\d{1,3})px0px/g, '$1px');    
+        result = result.replace(/(?<!<(img|a)[^>]*?)(max-width|width)\s*:\s*(?!100%\s*;)(\d+%?)(?!px)/g, (match, p1, p2) => {
+            return match.includes('100%') ? match : `${p2}: ${width}px`;
+        });
+
+        result = result.replace(/(\d{1,3})px0px/g, '$1px');
     }
+    
     
 
     if (isPaddingLR) {
