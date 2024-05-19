@@ -1,11 +1,2 @@
-<?xml version="1.0" encoding="utf-8"?>
-
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
-<svg width="800px" height="800px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-<g id="icomoon-ignore">
-</g>
-<path d="M27.845 7.385l-5.384-5.384h-11.845v4.307h-6.461v23.69h17.229v-4.307h6.461v-18.306zM22.461 3.524l3.861 3.861h-3.861v-3.861zM5.232 28.922v-21.537h9.692v5.384h5.384v16.153h-15.076zM16 7.831l3.861 3.861h-3.861v-3.861zM21.384 24.615v-12.922l-5.384-5.384h-4.307v-3.231h9.692v5.384h5.384v16.153h-5.384z" fill="#000000">
-
-</path>
-</svg>
+<?xml version="1.0" ?><!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+<svg width="800px" height="800px" viewBox="0 0 64 64" data-name="Layer 1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"><defs><style>.cls-1{fill:#0074ff;}.cls-2{fill:#ffb300;}</style></defs><title/><path class="cls-1" d="M23,55.5H11.6a2,2,0,0,1-2-2V9.5a2,2,0,0,1,2-2H22.1a2,2,0,0,1,2,2v3h11v-3a2,2,0,0,1,2-2H47.6a2,2,0,0,1,2,2V25.11a2,2,0,1,1-4,0V11.5H39.1v3a2,2,0,0,1-2,2h-15a2,2,0,0,1-2-2v-3H13.6v40H23a2,2,0,0,1,0,4Z"/><path class="cls-1" d="M37.1,16.5h-15a2,2,0,0,1-2-2V4.5a2,2,0,0,1,2-2h15a2,2,0,0,1,2,2v10A2,2,0,0,1,37.1,16.5Zm-13-4h11v-6h-11Z"/><path class="cls-1" d="M46.06,52.5h-8a2,2,0,0,1,0-4h8a2,2,0,0,1,0,4Z"/><path class="cls-1" d="M46.06,45.5h-8a2,2,0,0,1,0-4h8a2,2,0,0,1,0,4Z"/><path class="cls-2" d="M52.4,61.5H31.6a2,2,0,0,1-2-2v-26a2,2,0,0,1,2-2H52.4a2,2,0,0,1,2,2v26A2,2,0,0,1,52.4,61.5Zm-18.8-4H50.4v-22H33.6Z"/></svg>
