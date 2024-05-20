@@ -73,6 +73,7 @@ const DomainForm = () => {
                     <Container>
                         <Title>Add Domain</Title>
                         <Field as={Input} type="text" name="name" id={nameId} placeholder="Name"/>
+
                         <ErrorMessage name="name">{msg => <Error msg={msg} />}</ErrorMessage>
                         <Button type='submit'>Add</Button>
                     </Container>
