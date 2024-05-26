@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { nanoid } from "nanoid";
 import { editDomain } from "../../redux/domainSlice";
-import { AddImageButton, CheckBoxContainer, Container, CopyButton, FormContainer, FuncContainer, HasImagesContainer, ImageBlock, ImageContaianer, ImageToDowload, InputContainer, InputToDowload, LabelCheckBox, LinkToDownload, MuiInput, PageContainer, ResultContainer, ResultText, ResultTitle, SubmitButtonDownload, SubmitContainer, TitleImages } from "./FormPromo.styled";
+import { AddImageButton, CheckBoxContainer, Container, CopyButton, FormContainer, FuncContainer, HasImagesContainer, HiddenImageButton, ImageBlock, ImageContaianer, ImageToDowload, InputContainer, InputToDowload, LabelCheckBox, LinkToDownload, MuiInput, PageContainer, ResultContainer, ResultText, ResultTitle, SubmitButtonDownload, SubmitContainer, TitleImages } from "./FormPromo.styled";
 import { GrDownload } from "react-icons/gr";
 import { BsCopy } from "react-icons/bs";
 
@@ -15,6 +15,7 @@ import makeCopy from "../../helpers/makeCopy";
 import { Bounce, toast } from "react-toastify";
 import InfoButton from "../InfoButton/InfoButton";
 import Preview from "../Preview/Preview";
+import AddHiddenModal from "../AddHiddenModal/AddHiddenModal";
 
 const FormPromo = () => {
     const { domainId } = useParams();
@@ -38,6 +39,7 @@ const FormPromo = () => {
     const [newLinks, setNewLinks] = useState(domain.images ? Array.from({ length: domain.images.length }, () => '') : []);
 
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isHiddenModalOpen, setHiddenModalOpen] = useState(false);
 
     const handleChange = (index, event) => {
         const newLinkCopy = [...newLinks];
@@ -113,11 +115,21 @@ const FormPromo = () => {
         setIsModalOpen(true);
     };
 
+    const handleHiddenModal = () => {
+        setHiddenModalOpen(true);
+    };
+
     const handleAddImageConfirm = (response) => {
         setSubmitedResult(response);
        
         setIsModalOpen(false);
     };
+
+    const handleHiddenModalConfirm = (response) => {
+        setSubmitedResult(response);
+       
+        setHiddenModalOpen(false);
+    }
 
     return (
         <PageContainer>
@@ -143,6 +155,8 @@ const FormPromo = () => {
                             </ResultContainer>
                 </CheckBoxContainer>
                 <AddImageButton type="button" onClick={()=> handleImageAdd(submitedResult)}>Add Image</AddImageButton>
+
+                <HiddenImageButton type="button" onClick={()=> handleHiddenModal(submitedResult)}>Custom Block</HiddenImageButton>
             </FuncContainer>
 
             <Formik
@@ -272,6 +286,13 @@ const FormPromo = () => {
                     isOpen={isModalOpen} 
                     onClose={() => setIsModalOpen(false)} 
                     onConfirm={handleAddImageConfirm}
+                    result={submitedResult} 
+        />
+
+        <AddHiddenModal
+                    isOpen={isHiddenModalOpen} 
+                    onClose={() => setHiddenModalOpen(false)} 
+                    onConfirm={handleHiddenModalConfirm}
                     result={submitedResult} 
         />
 

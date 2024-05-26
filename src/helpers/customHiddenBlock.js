@@ -1,4 +1,4 @@
-const addHiddenBlock = (text, symbols) => {
+const customHiddenBlock = (text, symbols) => {
 
     const generateRandomString = () => {
         let result = '';
@@ -17,7 +17,7 @@ const addHiddenBlock = (text, symbols) => {
     return newText;
 };
 
-export default addHiddenBlock;
+export default customHiddenBlock;
 
 {/* <table style="display:none;" role="presentation" cellpadding="0" cellspacing="0" align="center"><tr><td align="center" style="text-align: center">
 

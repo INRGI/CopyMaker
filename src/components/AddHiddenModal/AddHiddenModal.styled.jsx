@@ -8,7 +8,7 @@ import TextField from '@mui/material/TextField';
 export const Container = styled(Modal)`
     width: 100%;
     max-width: 350px;
-    height: 370px;
+    height: 200px;
     background-color: white;
     border: 1px solid;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
@@ -20,7 +20,7 @@ export const Container = styled(Modal)`
     padding: 20px;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 15px;
     align-items: center;
     z-index: 999;
 `;
@@ -125,7 +125,7 @@ export const ButtonsContainer = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-top: 40px;
+    margin-top: 20px;
 `
 export const Title = styled.h4`
     margin: 0;
