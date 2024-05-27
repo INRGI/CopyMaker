@@ -55,7 +55,7 @@ const AddHiddenModal = ({isOpen, onClose, result, onConfirm}) =>{
                 validateOnChange={false}
             >
                 <Form>
-                    <Input name="quantity" type="text" placeholder="Quantity symbols" autoComplete="off" required/>
+                    <Input name="quantity" type="text" placeholder="Quantity of symbols" autoComplete="off" required/>
                     <ErrorMessage name="quantity">{msg => <Error msg={msg} />}</ErrorMessage>
 
                     <ButtonsContainer>
