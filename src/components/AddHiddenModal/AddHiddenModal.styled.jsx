@@ -25,8 +25,15 @@ export const Container = styled(Modal)`
     z-index: 999;
 `;
 
+export const InputContainer = styled.div`
+    display: flex;
+    gap: 10px;
+    width: 100%;
+`;
+
 export const MuiInput = styled(TextField)`
     z-index: 0;
+    width: 100%;
     margin-top: 10px;
 `;
 

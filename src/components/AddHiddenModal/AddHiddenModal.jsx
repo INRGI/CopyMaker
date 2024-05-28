@@ -1,11 +1,14 @@
-import { ButtonNo, ButtonYes, ButtonsContainer, Container, Input, Title } from './AddHiddenModal.styled';
-import { Formik, ErrorMessage, Form } from 'formik';
+import { ButtonNo, ButtonYes, ButtonsContainer, Container, InputContainer, MuiInput, Title } from './AddHiddenModal.styled';
+import { Formik, ErrorMessage, Form, Field } from 'formik';
 import Error from "../Error";
 import * as Yup from "yup";
 
 import { Bounce, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import customHiddenBlock from '../../helpers/customHiddenBlock';
+import { Checkbox } from '@mui/material';
+import { useState } from 'react';
+
 
 
 const FeedbackSchema = Yup.object().shape({
@@ -13,6 +16,7 @@ const FeedbackSchema = Yup.object().shape({
 });
 
 const AddHiddenModal = ({isOpen, onClose, result, onConfirm}) =>{
+    const [isChecked, setChecked] = useState(false)
 
     const initialValues = {
         quantity: "",   
@@ -55,9 +59,12 @@ const AddHiddenModal = ({isOpen, onClose, result, onConfirm}) =>{
                 validateOnChange={false}
             >
                 <Form>
-                    <Input name="quantity" type="text" placeholder="Quantity of symbols" autoComplete="off" required/>
-                    <ErrorMessage name="quantity">{msg => <Error msg={msg} />}</ErrorMessage>
-
+                
+                    <InputContainer>
+                        <Checkbox checked={isChecked} onChange={() => setChecked((prev) => !prev)} color="success" />
+                        <Field fullWidth as={MuiInput} name="quantity" type="text" placeholder="Quantity of symbols" autoComplete="off" required disabled={!isChecked}/>
+                        <ErrorMessage name="quantity">{msg => <Error msg={msg} />}</ErrorMessage>
+                    </InputContainer>
                     <ButtonsContainer>
                         <ButtonYes type="submit">Add</ButtonYes>
                         <ButtonNo onClick={onClose}>Back</ButtonNo>
