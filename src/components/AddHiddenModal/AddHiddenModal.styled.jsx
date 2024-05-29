@@ -8,7 +8,7 @@ import TextField from '@mui/material/TextField';
 export const Container = styled(Modal)`
     width: 100%;
     max-width: 350px;
-    height: 200px;
+    height: 250px;
     background-color: white;
     border: 1px solid;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
@@ -24,6 +24,7 @@ export const Container = styled(Modal)`
     align-items: center;
     z-index: 999;
 `;
+
 
 export const InputContainer = styled.div`
     display: flex;
@@ -155,4 +156,11 @@ export const Input = styled(Field)`
     &::placeholder{
         color: black;
     }
+`;
+
+
+export const ContentContainer = styled.div`
+    width: 100%;
+    max-width: 400px;
+
 `;
