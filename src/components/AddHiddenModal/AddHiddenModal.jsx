@@ -87,7 +87,7 @@ const AddHiddenModal = ({isOpen, onClose, result, onConfirm}) =>{
                         <p>Random words</p>
 
                     </InputContainer>
-                    <Field fullWidth as={MuiInput} name="quantity" type="text" placeholder="Quantity of symbols" autoComplete="off" required/>
+                    <Field fullWidth as={MuiInput} name="quantity" type="text" label="Quantity of symbols" placeholder="Quantity of symbols" autoComplete="off" required/>
                     <ErrorMessage name="quantity">{msg => <Error msg={msg} />}</ErrorMessage>
                     <ButtonsContainer>
                         <ButtonYes type="submit">Add</ButtonYes>
