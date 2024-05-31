@@ -5,6 +5,7 @@ import { lazy } from "react";
 const Home = lazy(() => import("../../pages/Home"));
 const DomainPage = lazy(() => import("../../pages/DomainPage"));
 const NotFound = lazy(() => import("../../pages/NotFound"));
+const CsvPage = lazy(() => import("../../pages/CsvPage"));
 
 const App = () => {
 
@@ -13,6 +14,8 @@ const App = () => {
             <Route path="/" element={<Layout />}>
                 <Route index element={<Home />} />
                 <Route path="/:domainId" element={<DomainPage />} />
+
+                <Route path="/emailFilter" element={<CsvPage />} />
 
                 <Route path="*" element={<NotFound />} />
             </Route>

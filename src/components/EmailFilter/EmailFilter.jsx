@@ -15,7 +15,7 @@ const EmailFilter = () => {
       const sheetName = workbook.SheetNames[0];
       const worksheet = workbook.Sheets[sheetName];
       const emailData = XLSX.utils.sheet_to_json(worksheet, { header: 1 }).flat();
-      setEmails(emailData);
+      setEmails(emailData.map(String).map(email => email.trim()));
     };
 
     reader.readAsArrayBuffer(file);
@@ -24,7 +24,10 @@ const EmailFilter = () => {
   const filterEmails = () => {
     const excludeDomains = ['comcast'];
     const filtered = emails.filter(email => {
-      return !excludeDomains.some(domain => email.endsWith(`@${domain}.net`));
+      const emailDomain = email.split('@')[1];
+      const result = !excludeDomains.some(domain => emailDomain.includes(domain));
+      console.log(`Checking ${email} for domain: ${result}`);
+      return result;
     });
     setFilteredEmails(filtered);
   };
