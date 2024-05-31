@@ -26,7 +26,6 @@ const EmailFilter = () => {
     const filtered = emails.filter(email => {
       const emailDomain = email.split('@')[1];
       const result = !excludeDomains.some(domain => emailDomain.includes(domain));
-      console.log(`Checking ${email} for domain: ${result}`);
       return result;
     });
     setFilteredEmails(filtered);
