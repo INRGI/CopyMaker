@@ -27,7 +27,9 @@ const EmailFilter = () => {
   const filterEmails = () => {
     const excludeDomains = ['comcast'];
     const filtered = emails.filter(email => {
-      const emailDomain = email.split('@')[1];
+      const parts = email.split('@');
+      if (parts.length !== 2) return false;
+      const emailDomain = parts[1];
       return !excludeDomains.some(domain => emailDomain.includes(domain));
     });
     setFilteredEmails(filtered);
@@ -38,7 +40,7 @@ const EmailFilter = () => {
     const ws = XLSX.utils.aoa_to_sheet(filteredEmails.map(email => [email]));
     const wb = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, 'Filtered Emails');
-    XLSX.writeFile(wb, 'YourNewCsv.csv');
+    XLSX.writeFile(wb, 'YourNewCSV.csv');
   };
 
   return (
@@ -46,7 +48,7 @@ const EmailFilter = () => {
       <input type="file" onChange={handleFileUpload} />
       <button onClick={filterEmails}>Filter Emails</button>
       {isFiltered && (
-        <button onClick={downloadCSV}>Download New Csv</button>
+        <button onClick={downloadCSV}>Download New CSV</button>
       )}
       <div>
         <p>Total emails: {emails.length}</p>
