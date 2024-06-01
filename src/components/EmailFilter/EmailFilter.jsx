@@ -4,6 +4,7 @@ import * as XLSX from 'xlsx';
 const EmailFilter = () => {
   const [emails, setEmails] = useState([]);
   const [filteredEmails, setFilteredEmails] = useState([]);
+  const [isFiltered, setIsFiltered] = useState(false);
 
   const handleFileUpload = (e) => {
     const file = e.target.files[0];
@@ -16,6 +17,8 @@ const EmailFilter = () => {
       const worksheet = workbook.Sheets[sheetName];
       const emailData = XLSX.utils.sheet_to_json(worksheet, { header: 1 }).flat();
       setEmails(emailData.map(String).map(email => email.trim()));
+      setIsFiltered(false);
+      setFilteredEmails([]);
     };
 
     reader.readAsArrayBuffer(file);
@@ -25,24 +28,30 @@ const EmailFilter = () => {
     const excludeDomains = ['comcast'];
     const filtered = emails.filter(email => {
       const emailDomain = email.split('@')[1];
-      const result = !excludeDomains.some(domain => emailDomain.includes(domain));
-      return result;
+      return !excludeDomains.some(domain => emailDomain.includes(domain));
     });
     setFilteredEmails(filtered);
+    setIsFiltered(true);
+  };
+
+  const downloadCSV = () => {
+    const ws = XLSX.utils.aoa_to_sheet(filteredEmails.map(email => [email]));
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Filtered Emails');
+    XLSX.writeFile(wb, 'YourNewCsv.csv');
   };
 
   return (
     <div>
       <input type="file" onChange={handleFileUpload} />
-      <textarea
-        value={emails.join('\n')}
-        readOnly
-        rows="20"
-        cols="50"
-        placeholder="Emails will appear here..."
-      />
       <button onClick={filterEmails}>Filter Emails</button>
-      <pre>{filteredEmails.join('\n')}</pre>
+      {isFiltered && (
+        <button onClick={downloadCSV}>Download New Csv</button>
+      )}
+      <div>
+        <p>Total emails: {emails.length}</p>
+        {isFiltered && <p>Filtered emails: {filteredEmails.length}</p>}
+      </div>
     </div>
   );
 };
