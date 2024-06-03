@@ -11,6 +11,8 @@ const EmailFilter = () => {
     yahoo: false,
     outlook: false,
     aol: false,
+    icloud: false,
+    cox: false,
   });
 
   const handleFileUpload = (e) => {
@@ -106,6 +108,24 @@ const EmailFilter = () => {
             onChange={handleCheckboxChange}
           />
           AOL
+        </label>
+        <label>
+          <input
+            type="checkbox"
+            name="icloud"
+            checked={excludeDomains.icloud}
+            onChange={handleCheckboxChange}
+          />
+          Icloud
+        </label>
+        <label>
+          <input
+            type="checkbox"
+            name="cox"
+            checked={excludeDomains.cox}
+            onChange={handleCheckboxChange}
+          />
+          Cox
         </label>
       </div>
       <button onClick={filterEmails}>Filter Emails</button>
