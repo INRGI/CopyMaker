@@ -1,18 +1,22 @@
 import { useState } from 'react';
 import * as XLSX from 'xlsx';
+import { FilterEmailsButton } from './EmailFilter.styled';
+import Checkbox from '@mui/material/Checkbox';
 
 const EmailFilter = () => {
   const [emails, setEmails] = useState([]);
   const [filteredEmails, setFilteredEmails] = useState([]);
   const [isFiltered, setIsFiltered] = useState(false);
   const [excludeDomains, setExcludeDomains] = useState({
-    comcast: false,
     gmail: false,
     yahoo: false,
     outlook: false,
+    comcast: false,
     aol: false,
     icloud: false,
     cox: false,
+    charter: false,
+    whidbey: false,
   });
 
   const handleFileUpload = (e) => {
@@ -65,7 +69,7 @@ const EmailFilter = () => {
       <input type="file" onChange={handleFileUpload} />
       <div>
         <label>
-          <input
+          <Checkbox
             type="checkbox"
             name="comcast"
             checked={excludeDomains.comcast}
@@ -74,7 +78,7 @@ const EmailFilter = () => {
           Comcast
         </label>
         <label>
-          <input
+          <Checkbox
             type="checkbox"
             name="gmail"
             checked={excludeDomains.gmail}
@@ -83,7 +87,7 @@ const EmailFilter = () => {
           Gmail
         </label>
         <label>
-          <input
+          <Checkbox
             type="checkbox"
             name="yahoo"
             checked={excludeDomains.yahoo}
@@ -92,7 +96,7 @@ const EmailFilter = () => {
           Yahoo
         </label>
         <label>
-          <input
+          <Checkbox
             type="checkbox"
             name="outlook"
             checked={excludeDomains.outlook}
@@ -101,16 +105,17 @@ const EmailFilter = () => {
           Outlook
         </label>
         <label>
-          <input
+          <Checkbox
             type="checkbox"
             name="aol"
             checked={excludeDomains.aol}
             onChange={handleCheckboxChange}
+            color="success"
           />
           AOL
         </label>
         <label>
-          <input
+          <Checkbox
             type="checkbox"
             name="icloud"
             checked={excludeDomains.icloud}
@@ -119,7 +124,7 @@ const EmailFilter = () => {
           Icloud
         </label>
         <label>
-          <input
+          <Checkbox
             type="checkbox"
             name="cox"
             checked={excludeDomains.cox}
@@ -127,8 +132,26 @@ const EmailFilter = () => {
           />
           Cox
         </label>
+        <label>
+          <Checkbox
+            type="checkbox"
+            name="charter"
+            checked={excludeDomains.charter}
+            onChange={handleCheckboxChange}
+          />
+          Charter
+        </label>
+        <label>
+          <Checkbox
+            type="checkbox"
+            name="whidbey"
+            checked={excludeDomains.whidbey}
+            onChange={handleCheckboxChange}
+          />
+          Whidbey
+        </label>
       </div>
-      <button onClick={filterEmails}>Filter Emails</button>
+      <FilterEmailsButton onClick={filterEmails}>Filter Emails</FilterEmailsButton>
       {isFiltered && (
         <button onClick={downloadCSV}>Download New CSV</button>
       )}
@@ -141,3 +164,22 @@ const EmailFilter = () => {
 };
 
 export default EmailFilter;
+
+
+
+
+
+// roadrunner
+// embarqmail
+// centurytel
+// centurylink
+// shaw
+// Bigpond
+// chartermi
+// netzero
+// juno
+// tas
+// twc
+// hotmail
+// windstream
+// verizon
