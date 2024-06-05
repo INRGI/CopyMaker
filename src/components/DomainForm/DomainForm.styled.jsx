@@ -7,7 +7,7 @@ export const Container = styled.div`
     gap: 20px;
     align-items: center;
     justify-content: flex-start;
-    height: 320px;
+    height: 255px;
     width: 400px;
     border-radius: 16px;
     box-shadow: 0 30px 30px -25px rgba(65, 51, 183, 0.25);

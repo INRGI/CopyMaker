@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import * as XLSX from 'xlsx';
-import { FilterEmailsButton } from './EmailFilter.styled';
+import { CheckBoxLabel, Container, FileInput, FilterEmailsButton, LeftContainer, RightContainer } from './EmailFilter.styled';
 import Checkbox from '@mui/material/Checkbox';
 
 const EmailFilter = () => {
@@ -65,10 +65,21 @@ const EmailFilter = () => {
   };
 
   return (
-    <div>
-      <input type="file" onChange={handleFileUpload} />
-      <div>
-        <label>
+    <Container>
+      <LeftContainer>
+        <FileInput type="file" onChange={handleFileUpload} />
+        <FilterEmailsButton onClick={filterEmails}>Filter Emails</FilterEmailsButton>
+        {isFiltered && (
+          <button onClick={downloadCSV}>Download New CSV</button>
+        )}
+        <div>
+          <p>Total emails: {emails.length}</p>
+          {isFiltered && <p>Filtered emails: {filteredEmails.length}</p>}
+        </div>
+      </LeftContainer>
+
+      <RightContainer>
+        <CheckBoxLabel>
           <Checkbox
             type="checkbox"
             name="comcast"
@@ -76,8 +87,8 @@ const EmailFilter = () => {
             onChange={handleCheckboxChange}
           />
           Comcast
-        </label>
-        <label>
+        </CheckBoxLabel>
+        <CheckBoxLabel>
           <Checkbox
             type="checkbox"
             name="gmail"
@@ -85,8 +96,8 @@ const EmailFilter = () => {
             onChange={handleCheckboxChange}
           />
           Gmail
-        </label>
-        <label>
+        </CheckBoxLabel>
+        <CheckBoxLabel>
           <Checkbox
             type="checkbox"
             name="yahoo"
@@ -94,8 +105,8 @@ const EmailFilter = () => {
             onChange={handleCheckboxChange}
           />
           Yahoo
-        </label>
-        <label>
+        </CheckBoxLabel>
+        <CheckBoxLabel>
           <Checkbox
             type="checkbox"
             name="outlook"
@@ -103,8 +114,8 @@ const EmailFilter = () => {
             onChange={handleCheckboxChange}
           />
           Outlook
-        </label>
-        <label>
+        </CheckBoxLabel>
+        <CheckBoxLabel>
           <Checkbox
             type="checkbox"
             name="aol"
@@ -113,8 +124,8 @@ const EmailFilter = () => {
             color="success"
           />
           AOL
-        </label>
-        <label>
+        </CheckBoxLabel>
+        <CheckBoxLabel>
           <Checkbox
             type="checkbox"
             name="icloud"
@@ -122,8 +133,8 @@ const EmailFilter = () => {
             onChange={handleCheckboxChange}
           />
           Icloud
-        </label>
-        <label>
+        </CheckBoxLabel>
+        <CheckBoxLabel>
           <Checkbox
             type="checkbox"
             name="cox"
@@ -131,8 +142,8 @@ const EmailFilter = () => {
             onChange={handleCheckboxChange}
           />
           Cox
-        </label>
-        <label>
+        </CheckBoxLabel>
+        <CheckBoxLabel>
           <Checkbox
             type="checkbox"
             name="charter"
@@ -140,8 +151,8 @@ const EmailFilter = () => {
             onChange={handleCheckboxChange}
           />
           Charter
-        </label>
-        <label>
+        </CheckBoxLabel>
+        <CheckBoxLabel>
           <Checkbox
             type="checkbox"
             name="whidbey"
@@ -149,17 +160,9 @@ const EmailFilter = () => {
             onChange={handleCheckboxChange}
           />
           Whidbey
-        </label>
-      </div>
-      <FilterEmailsButton onClick={filterEmails}>Filter Emails</FilterEmailsButton>
-      {isFiltered && (
-        <button onClick={downloadCSV}>Download New CSV</button>
-      )}
-      <div>
-        <p>Total emails: {emails.length}</p>
-        {isFiltered && <p>Filtered emails: {filteredEmails.length}</p>}
-      </div>
-    </div>
+        </CheckBoxLabel>
+      </RightContainer>
+    </Container>
   );
 };
 
