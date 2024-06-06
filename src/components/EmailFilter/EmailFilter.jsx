@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import * as XLSX from 'xlsx';
-import { CheckBoxLabel, Container, FileInput, FilterEmailsButton, LeftContainer, RightContainer } from './EmailFilter.styled';
+import { CheckBoxLabel, Container, FileInput, FileInputLabel, FilterEmailsButton, LeftContainer, RightContainer } from './EmailFilter.styled';
 import Checkbox from '@mui/material/Checkbox';
 
 const EmailFilter = () => {
@@ -67,7 +67,10 @@ const EmailFilter = () => {
   return (
     <Container>
       <LeftContainer>
-        <FileInput type="file" onChange={handleFileUpload} />
+        <div>
+          <FileInput type="file" id="file-upload" onChange={handleFileUpload} />
+          <FileInputLabel htmlFor="file-upload">Upload File</FileInputLabel>
+        </div>
         <FilterEmailsButton onClick={filterEmails}>Filter Emails</FilterEmailsButton>
         {isFiltered && (
           <button onClick={downloadCSV}>Download New CSV</button>

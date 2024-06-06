@@ -17,7 +17,7 @@ const CsvPage = () => {
             <StyledLink to={backLinkHref.current}>
                 <Btn type="button">Back</Btn>
             </StyledLink>
-            <h1>Email Filter (NOT READY, BUT YOU CAN TRY)</h1>
+            <center><h1>Email Filter (NOT READY, BUT YOU CAN TRY)</h1></center>
             <EmailFilter />
         </>
     )
