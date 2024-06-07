@@ -17,6 +17,7 @@ const EmailFilter = () => {
     cox: false,
     charter: false,
     whidbey: false,
+    twc: false,
   });
 
   const handleFileUpload = (e) => {
@@ -163,6 +164,15 @@ const EmailFilter = () => {
             onChange={handleCheckboxChange}
           />
           Whidbey
+        </CheckBoxLabel>
+        <CheckBoxLabel>
+          <Checkbox
+            type="checkbox"
+            name="twc"
+            checked={excludeDomains.twc}
+            onChange={handleCheckboxChange}
+          />
+          Twc
         </CheckBoxLabel>
       </RightContainer>
     </Container>
