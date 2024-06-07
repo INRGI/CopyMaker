@@ -124,7 +124,7 @@ export const RightContainer = styled.div`
     justify-content: space-between;
     flex-wrap: wrap;
     width: 100%;
-    max-width: 260px;
+    max-width: 300px;
     border-radius: 16px;
     box-shadow: 0 30px 30px -25px rgba(65, 51, 183, 0.25);
     background-color:#fff;
@@ -134,5 +134,5 @@ export const RightContainer = styled.div`
 
 export const CheckBoxLabel = styled.label`
     width: 100%;
-    max-width: 120px;
+    max-width: 130px;
 `

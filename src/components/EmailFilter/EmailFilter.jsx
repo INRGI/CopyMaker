@@ -18,6 +18,8 @@ const EmailFilter = () => {
     charter: false,
     whidbey: false,
     twc: false,
+    hotmail: false,
+    windstream: false,
   });
 
   const handleFileUpload = (e) => {
@@ -174,6 +176,24 @@ const EmailFilter = () => {
           />
           Twc
         </CheckBoxLabel>
+        <CheckBoxLabel>
+          <Checkbox
+            type="checkbox"
+            name="hotmail"
+            checked={excludeDomains.hotmail}
+            onChange={handleCheckboxChange}
+          />
+          Hotmail
+        </CheckBoxLabel>
+        <CheckBoxLabel>
+          <Checkbox
+            type="checkbox"
+            name="windstream"
+            checked={excludeDomains.windstream}
+            onChange={handleCheckboxChange}
+          />
+          Windstream
+        </CheckBoxLabel>
       </RightContainer>
     </Container>
   );
@@ -195,7 +215,5 @@ export default EmailFilter;
 // netzero
 // juno
 // tas
-// twc
-// hotmail
 // windstream
 // verizon
