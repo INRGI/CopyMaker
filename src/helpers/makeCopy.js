@@ -22,6 +22,8 @@ const makeCopy = ({
     isBGColor,
     BGColor,
     isAddHidden,
+    isLineHeight,
+    LineHeight,
 }) => {
     let result = submit;
 
@@ -68,6 +70,9 @@ const makeCopy = ({
 
     }
     
+    if(isLineHeight){
+        result = result = result.replace(/(style="[^"]*)line-height:[^;]*;/g, `$1line-height: ${LineHeight};`);
+    }
     
     
 
