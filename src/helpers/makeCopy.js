@@ -71,7 +71,9 @@ const makeCopy = ({
     }
     
     if(isLineHeight){
-        result = result = result.replace(/(style="[^"]*)line-height:[^;]*;/g, `$1line-height: ${LineHeight};`);
+        result = result.replace(/(style="[^"]*)line-height:[^;]*;/g, `$1line-height: ${LineHeight};`);
+        
+        result = result.replace(/(style="[^"]*[^;])"/g, `$1; line-height: ${LineHeight}"`);
     }
     
     

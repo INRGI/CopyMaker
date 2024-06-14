@@ -32,6 +32,7 @@ const FormPromo = () => {
     const [isTrTB, setTrTB] = useState(domain.isTrTB);
     const [isBGColor, setBGColor] = useState(domain.isBGColor);
     const [isAddHidden, setAddHidden] = useState(domain.isAddHidden);
+    const [isLineHeight, setLineHeight] = useState(domain.isLineHeight);
 
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [submitedResult, setSubmitedResult] = useState("");
@@ -70,6 +71,7 @@ const FormPromo = () => {
     const linkUrlId = nanoid();
     const TrTBId = nanoid();
     const BGColorId = nanoid();
+    const LineHeightId = nanoid();
 
     const hasImages = /<img.*?src=["'](.*?)["'].*?>/g.test(submitedResult);
 
@@ -84,13 +86,14 @@ const FormPromo = () => {
         linkUrl: '',
         trTB: "",
         BGColor: "",
+        LineHeight: "",
         ...domain,
         submit: "",
       };
 
     const handleSubmit = (values) => {
-        dispatch(editDomain({ id: domainId, values: {...values, isFontSize, isFontFamily, isColorLink, isWidth, isPaddingLR, isReplace, isLinkUrl, isTrTB, isBGColor, isDeleteLift, isAddHidden} }));
-        setSubmitedResult(makeCopy({...values, isFontSize, isFontFamily, isColorLink, isWidth, isPaddingLR, isReplace, isLinkUrl, isTrTB, isBGColor, isDeleteLift, isAddHidden}))
+        dispatch(editDomain({ id: domainId, values: {...values, isFontSize, isFontFamily, isColorLink, isWidth, isPaddingLR, isReplace, isLinkUrl, isTrTB, isBGColor, isDeleteLift, isAddHidden, isLineHeight} }));
+        setSubmitedResult(makeCopy({...values, isFontSize, isFontFamily, isColorLink, isWidth, isPaddingLR, isReplace, isLinkUrl, isTrTB, isBGColor, isDeleteLift, isAddHidden, isLineHeight}))
 
         if(values.submit === '') {
             setIsSubmitted(false);
@@ -199,6 +202,14 @@ const FormPromo = () => {
                             <Field fullWidth as={MuiInput} label="Max Width" size="small" variant="outlined" type="text" name="width" id={width} placeholder="ex: 600" disabled={!isWidth} required ></Field>
 
                             <InfoButton  text="Please paste Width value without px"/>
+                        </InputContainer>
+
+                        <InputContainer>
+
+                            <Checkbox checked={isLineHeight} onChange={() => setLineHeight((prev) => !prev)} color="success" />
+                            <Field fullWidth as={MuiInput} label="Line Height" size="small" variant="outlined" type="text" name="LineHeight" id={LineHeightId} placeholder="ex: 1.5" disabled={!isLineHeight} required ></Field>
+
+                            <InfoButton  text="Please paste Line Height value without px / another symbols after number"/>
                         </InputContainer>
                         
                         
