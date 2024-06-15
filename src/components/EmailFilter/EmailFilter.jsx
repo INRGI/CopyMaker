@@ -127,7 +127,6 @@ const EmailFilter = () => {
             name="aol"
             checked={excludeDomains.aol}
             onChange={handleCheckboxChange}
-            color="success"
           />
           AOL
         </CheckBoxLabel>
