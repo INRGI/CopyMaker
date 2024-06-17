@@ -16,7 +16,8 @@ const AddImageModal = ({isOpen, onClose, result, onConfirm}) =>{
     const initialValues = {
         src: "",
         alt: "",
-        width: "",        
+        width: "",    
+        padding: "",    
     };
 
     const regex = /<a\s+(?:[^>]*?\s+)?href=(["'])(.*?)\1/g;
@@ -29,14 +30,12 @@ const AddImageModal = ({isOpen, onClose, result, onConfirm}) =>{
     }
 
     const handleSubmit = (values) => {
-        const { src, alt, width } = values;
+        const { src, alt, width, padding } = values;
         const newImageHTML = `<!-- Here start new image --><table role="presentation" cellpadding="0" cellspacing="0" align="center">
             <tr>
-                <td align="center" style="text-align: center">
+                <td align="center" style="text-align: center; padding: ${padding} 0">
                     <a href="${link}" style="font-weight: 900; text-decoration: none;;color: #1F51FF;">
                         <img src="${src}" alt="${alt}" style="width: 100%; height: auto; border: 0; -ms-interpolation-mode: bicubic; max-width: ${width}px;" width="${width}" height="auto">
-                        <br>
-                        <br>
                     </a>
                 </td>
             </tr>
@@ -83,6 +82,9 @@ const AddImageModal = ({isOpen, onClose, result, onConfirm}) =>{
 
                     <Input name="width" type="text" placeholder="Image width" />
                     <ErrorMessage name="width">{msg => <Error msg={msg} />}</ErrorMessage>
+
+                    <Input name="padding" type="text" placeholder="Padding top/bottom" />
+                    <ErrorMessage name="padding">{msg => <Error msg={msg} />}</ErrorMessage>
 
                     <ButtonsContainer>
                         <ButtonYes type="submit">Add</ButtonYes>

@@ -8,7 +8,7 @@ import TextField from '@mui/material/TextField';
 export const Container = styled(Modal)`
     width: 100%;
     max-width: 350px;
-    height: 370px;
+    height: 420px;
     background-color: white;
     border: 1px solid;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
