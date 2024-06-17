@@ -33,7 +33,7 @@ const AddImageModal = ({isOpen, onClose, result, onConfirm}) =>{
         const { src, alt, width, padding } = values;
         const newImageHTML = `<!-- Here start new image --><table role="presentation" cellpadding="0" cellspacing="0" align="center">
             <tr>
-                <td align="center" style="text-align: center; padding: ${padding} 0">
+                <td align="center" style="text-align: center; padding: ${padding}px 0">
                     <a href="${link}" style="font-weight: 900; text-decoration: none;;color: #1F51FF;">
                         <img src="${src}" alt="${alt}" style="width: 100%; height: auto; border: 0; -ms-interpolation-mode: bicubic; max-width: ${width}px;" width="${width}" height="auto">
                     </a>
