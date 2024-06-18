@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Field, Formik } from 'formik';
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -16,23 +16,42 @@ import { Bounce, toast } from "react-toastify";
 import InfoButton from "../InfoButton/InfoButton";
 import Preview from "../Preview/Preview";
 import AddHiddenModal from "../AddHiddenModal/AddHiddenModal";
+// import FastRedirect from "../FastRedirect/FastRedirect";
 
 const FormPromo = () => {
     const { domainId } = useParams();
     const domain = useSelector(state => state.domains.find(domain => domain.id === domainId));
 
-    const [isFontSize, setFontSize] = useState(domain.isFontSize);
-    const [isFontFamily, setFontFamily] = useState(domain.isFontFamily);
-    const [isColorLink, setColorLink] = useState(domain.isColorLink);
-    const [isWidth, setWidth] = useState(domain.isWidth);
-    const [isPaddingLR, setPaddingLR] = useState(domain.isPaddingLR);
-    const [isReplace, setReplace] = useState(domain.isReplace);
-    const [isDeleteLift, setDeleteLift] = useState(domain.isDeleteLift);
-    const [isLinkUrl, setLinkUrl] = useState(domain.isLinkUrl);
-    const [isTrTB, setTrTB] = useState(domain.isTrTB);
-    const [isBGColor, setBGColor] = useState(domain.isBGColor);
-    const [isAddHidden, setAddHidden] = useState(domain.isAddHidden);
-    const [isLineHeight, setLineHeight] = useState(domain.isLineHeight);
+    const [isFontSize, setFontSize] = useState(domain?.isFontSize || false);
+    const [isFontFamily, setFontFamily] = useState(domain?.isFontFamily || false);
+    const [isColorLink, setColorLink] = useState(domain?.isColorLink || false);
+    const [isWidth, setWidth] = useState(domain?.isWidth || false);
+    const [isPaddingLR, setPaddingLR] = useState(domain?.isPaddingLR || false);
+    const [isReplace, setReplace] = useState(domain?.isReplace || false);
+    const [isDeleteLift, setDeleteLift] = useState(domain?.isDeleteLift || false);
+    const [isLinkUrl, setLinkUrl] = useState(domain?.isLinkUrl || false);
+    const [isTrTB, setTrTB] = useState(domain?.isTrTB || false);
+    const [isBGColor, setBGColor] = useState(domain?.isBGColor || false);
+    const [isAddHidden, setAddHidden] = useState(domain?.isAddHidden || false);
+    const [isLineHeight, setLineHeight] = useState(domain?.isLineHeight || false);
+
+    useEffect(() => {
+        if (domain) {
+            setFontSize(domain.isFontSize);
+            setFontFamily(domain.isFontFamily);
+            setColorLink(domain.isColorLink);
+            setWidth(domain.isWidth);
+            setPaddingLR(domain.isPaddingLR);
+            setReplace(domain.isReplace);
+            setDeleteLift(domain.isDeleteLift);
+            setLinkUrl(domain.isLinkUrl);
+            setTrTB(domain.isTrTB);
+            setBGColor(domain.isBGColor);
+            setAddHidden(domain.isAddHidden);
+            setLineHeight(domain.isLineHeight);
+            setNewLinks(domain.images ? Array.from({ length: domain.images.length }, () => '') : []);
+        }
+    }, [domain]);
 
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [submitedResult, setSubmitedResult] = useState("");
@@ -152,7 +171,8 @@ const FormPromo = () => {
                                 <Checkbox checked={isAddHidden} onChange={() => setAddHidden((prev) => !prev)} color="success" />
                                 HiddenBlocks
                                 <InfoButton  text="Please be carefull using this function!!! Add hiden unique block to start and end (each one contain 1000 random symbols)"/>
-                            </LabelCheckBox>         
+                            </LabelCheckBox>    
+                               
                             <ResultContainer>
                             
                             </ResultContainer>
@@ -160,7 +180,7 @@ const FormPromo = () => {
                 <AddImageButton type="button" onClick={()=> handleImageAdd(submitedResult)}>Add Image</AddImageButton>
 
                 <HiddenImageButton type="button" onClick={()=> handleHiddenModal(submitedResult)}>Custom Block</HiddenImageButton>
-                
+                {/* <FastRedirect />   */}
             </FuncContainer>
 
             <Formik
