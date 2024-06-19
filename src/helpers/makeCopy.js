@@ -47,13 +47,6 @@ const makeCopy = ({
     }
         
 
-    
-    
-    // if (isWidth) {
-    //     result = result.replace(/(?<!<(img|a)[^>]*?)(max-width|width)\s*:\s*(?!100%\s*;)(\d+%?)(?!px)/g, `$2: ${width}px`);
-    //     result = result.replace(/(\d{1,3})px0px/g, '$1px');    
-    // }
-
     if (isWidth) {
         result = result.replace(/(?<!<(img|a)[^>]*?)(max-width|width)\s*:\s*(?!100%\s*;)(\d+%?)(?!px)/g, (match, p1, p2) => {
             return match.includes('100%') ? match : `${p2}: ${width}px`;
@@ -86,8 +79,7 @@ const makeCopy = ({
     if (isTrTB) {
         result = result.replace(/(style="[^"]*)padding-top:[^;]*;/g, `$1padding-top: ${trTB}px;`);
         result = result.replace(/(style="[^"]*)padding-bottom:[^;]*;/g, `$1padding-bottom: ${trTB}px;`);
-        // result = result.replace(/(<tr[^>]*>\s*<td[^>]*height=")(\d+)("[^>]*><\/td>\s*<\/tr>)/, `<tr><td height="${trTB}" width="100%"></td></tr>`);
-
+        
     }
     
     if (isBGColor) {
@@ -151,7 +143,7 @@ const makeCopy = ({
     if (isAddHidden) {
         result = addHiddenBlock(result);
     }   
-    // NEED TO CHANGE
+
     
     
     return result;
