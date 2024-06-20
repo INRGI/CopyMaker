@@ -35,6 +35,20 @@ const FormPromo = () => {
     const [isAddHidden, setAddHidden] = useState(domain?.isAddHidden || false);
     const [isLineHeight, setLineHeight] = useState(domain?.isLineHeight || false);
 
+    const initialValues = {
+        fontSize: "",
+        fontFamily: "",
+        colorLink: "",
+        width: "",
+        paddingLR: "",
+        linkUrl: '',
+        trTB: "",
+        BGColor: "",
+        LineHeight: "",
+        ...domain,
+        submit: "",
+      };
+
     useEffect(() => {
         if (domain) {
             setFontSize(domain.isFontSize);
@@ -50,6 +64,7 @@ const FormPromo = () => {
             setAddHidden(domain.isAddHidden);
             setLineHeight(domain.isLineHeight);
             setNewLinks(domain.images ? Array.from({ length: domain.images.length }, () => '') : []);
+
         }
     }, [domain]);
 
@@ -93,22 +108,6 @@ const FormPromo = () => {
     const LineHeightId = nanoid();
 
     const hasImages = /<img.*?src=["'](.*?)["'].*?>/g.test(submitedResult);
-
-
-
-    const initialValues = {
-        fontSize: "",
-        fontFamily: "",
-        colorLink: "",
-        width: "",
-        paddingLR: "",
-        linkUrl: '',
-        trTB: "",
-        BGColor: "",
-        LineHeight: "",
-        ...domain,
-        submit: "",
-      };
 
     const handleSubmit = (values) => {
         dispatch(editDomain({ id: domainId, values: {...values, isFontSize, isFontFamily, isColorLink, isWidth, isPaddingLR, isReplace, isLinkUrl, isTrTB, isBGColor, isDeleteLift, isAddHidden, isLineHeight} }));
