@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Container, Input, Item } from "./TopFromEmail.styled";
+import FromNameModal from "../FromNameModal.jsx/FromNameModal";
 
 const topFroms = [
   {
@@ -14,6 +15,7 @@ const topFroms = [
 
 const TopFromEmail = () => {
   const [searchTerm, setSearchTerm] = useState("");
+  const [modalIsOpen, setModalIsOpen] = useState(false);
 
   const handleInputChange = (event) => {
     setSearchTerm(event.target.value);
@@ -33,11 +35,16 @@ const TopFromEmail = () => {
       />
       <Container>
         {filteredFroms.map((item) => (
-          <Item key={item.id}>
+          <Item key={item.id} onClick={() => setModalIsOpen(true)}>
             <p>{item.name}</p>
           </Item>
         ))}
       </Container>
+
+      <FromNameModal
+                isOpen={modalIsOpen}
+                onClose={() => setModalIsOpen(false)}
+      />
     </>
   );
 };
