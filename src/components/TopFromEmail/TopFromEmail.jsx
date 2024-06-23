@@ -2,23 +2,9 @@ import React, { useState } from "react";
 import { Container, Input, Item } from "./TopFromEmail.styled";
 import FromNameModal from "../FromNameModal.jsx/FromNameModal";
 import { ToastContainer } from "react-toastify";
+import { topFroms } from "../../helpers/topFroms";
 
-const topFroms = [
-  {
-    id: 1,
-    name: "test1",
-    from: "fromname1",
-    sl: "sl1",
-    ph: "ph1",
-  },
-  {
-    id: 2,
-    name: "test2",
-    from: "fromname2",
-    sl: "sl2",
-    ph: "ph2",
-  },
-];
+
 
 const TopFromEmail = () => {
   const [searchTerm, setSearchTerm] = useState("");
