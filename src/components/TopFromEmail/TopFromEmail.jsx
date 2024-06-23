@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Container, Input, Item } from "./TopFromEmail.styled";
 import FromNameModal from "../FromNameModal.jsx/FromNameModal";
+import { ToastContainer } from "react-toastify";
 
 const topFroms = [
   {
@@ -58,6 +59,7 @@ const TopFromEmail = () => {
         onClose={() => setModalIsOpen(false)}
         activeItem={activeItem}
       />
+      <ToastContainer />
     </>
   );
 };

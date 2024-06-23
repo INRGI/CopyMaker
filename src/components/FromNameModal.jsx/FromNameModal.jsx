@@ -15,6 +15,20 @@ const FromNameModal = ({ isOpen, onClose, activeItem }) => {
     onClose();
   };
 
+  const handleCopy = () => {
+    toast.success('Text copied', {
+        position: "top-right",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+    });
+  };
+
   return (
     <Container
       ariaHideApp={false}
@@ -37,6 +51,7 @@ const FromNameModal = ({ isOpen, onClose, activeItem }) => {
           <CopyButton
             onClick={() => {
               navigator.clipboard.writeText(activeItem.from);
+              handleCopy();
             }}
             type="button"
           >
@@ -49,6 +64,7 @@ const FromNameModal = ({ isOpen, onClose, activeItem }) => {
           <CopyButton
             onClick={() => {
               navigator.clipboard.writeText(activeItem.sl);
+              handleCopy();
             }}
             type="button"
           >
@@ -61,6 +77,7 @@ const FromNameModal = ({ isOpen, onClose, activeItem }) => {
           <CopyButton
             onClick={() => {
               navigator.clipboard.writeText(activeItem.ph);
+              handleCopy();
             }}
             type="button"
           >
