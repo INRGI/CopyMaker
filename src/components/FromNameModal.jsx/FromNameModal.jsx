@@ -8,6 +8,7 @@ import {
   TextContainer,
   Title,
   TitleContainer,
+  ButtonDownload,
 } from "./FromNameModal.styled";
 
 const FromNameModal = ({ isOpen, onClose, activeItem }) => {
@@ -16,17 +17,26 @@ const FromNameModal = ({ isOpen, onClose, activeItem }) => {
   };
 
   const handleCopy = () => {
-    toast.success('Text copied', {
-        position: "top-right",
-        autoClose: 1000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-        transition: Bounce,
+    toast.success("Text copied", {
+      position: "top-right",
+      autoClose: 1000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      transition: Bounce,
     });
+  };
+
+  const handleDownload = () => {
+    const link = document.createElement("a");
+    link.href = activeItem.imageUrl[0]; // Assuming the first item in the array is the URL
+    link.download = "image.jpg"; // You can customize the file name
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   };
 
   return (
@@ -45,8 +55,10 @@ const FromNameModal = ({ isOpen, onClose, activeItem }) => {
       </TitleContainer>
 
       <div>
-      <TextContainer>
-          <Text><strong>FN:</strong> {activeItem.from}</Text>
+        <TextContainer>
+          <Text>
+            <strong>FN:</strong> {activeItem.from}
+          </Text>
 
           <CopyButton
             onClick={() => {
@@ -59,7 +71,9 @@ const FromNameModal = ({ isOpen, onClose, activeItem }) => {
           </CopyButton>
         </TextContainer>
         <TextContainer>
-          <Text><strong>SL:</strong> {activeItem.sl}</Text>
+          <Text>
+            <strong>SL:</strong> {activeItem.sl}
+          </Text>
 
           <CopyButton
             onClick={() => {
@@ -72,7 +86,9 @@ const FromNameModal = ({ isOpen, onClose, activeItem }) => {
           </CopyButton>
         </TextContainer>
         <TextContainer>
-          <Text><strong>PH:</strong> {activeItem.ph}</Text>
+          <Text>
+            <strong>PH:</strong> {activeItem.ph}
+          </Text>
 
           <CopyButton
             onClick={() => {
@@ -84,6 +100,16 @@ const FromNameModal = ({ isOpen, onClose, activeItem }) => {
             Copy
           </CopyButton>
         </TextContainer>
+        {activeItem.imageUrl && activeItem.imageUrl.length > 0 && (
+          <TextContainer>
+            <Text>
+              <strong>Image:</strong>
+            </Text>
+            <ButtonDownload onClick={handleDownload} type="button">
+              Download Image
+            </ButtonDownload>
+          </TextContainer>
+        )}
       </div>
     </Container>
   );
