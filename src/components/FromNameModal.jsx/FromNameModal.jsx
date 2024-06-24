@@ -30,13 +30,19 @@ const FromNameModal = ({ isOpen, onClose, activeItem }) => {
     });
   };
 
-  const handleDownload = () => {
+  const handleDownload = async () => {
+    const response = await fetch(activeItem.imageUrl[0]);
+    const blob = await response.blob();
+    const url = window.URL.createObjectURL(blob);
+
     const link = document.createElement("a");
-    link.href = activeItem.imageUrl[0]; // Assuming the first item in the array is the URL
-    link.download = "image.jpg"; // You can customize the file name
+    link.href = url;
+    link.download = "image.jpg";
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
+
+    window.URL.revokeObjectURL(url);
   };
 
   return (
