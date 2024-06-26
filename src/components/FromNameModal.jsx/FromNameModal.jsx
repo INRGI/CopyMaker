@@ -33,7 +33,13 @@ const FromNameModal = ({ isOpen, onClose, activeItem }) => {
   const handleDownload = async () => {
     try {
       const url = `/api/download?url=${encodeURIComponent(activeItem.imageUrl[0])}`;
-      const response = await fetch(url);
+      const response = await fetch(url, {
+        headers: {
+          'Cache-Control': 'no-cache',
+          'Pragma': 'no-cache',
+          'Expires': '0'
+        }
+      });
 
       if (!response.ok) {
         throw new Error('Network response was not ok');

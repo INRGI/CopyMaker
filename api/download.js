@@ -1,5 +1,3 @@
-import fetch from 'node-fetch';
-
 export default async function handler(req, res) {
   const { url } = req.query;
 
@@ -8,20 +6,28 @@ export default async function handler(req, res) {
   }
 
   try {
-    const response = await fetch(url);
+    const response = await fetch(url, {
+      headers: {
+        'Cache-Control': 'no-cache',
+        'Pragma': 'no-cache',
+        'Expires': '0'
+      }
+    });
 
     if (!response.ok) {
       throw new Error('Network response was not ok');
     }
 
-    const arrayBuffer = await response.arrayBuffer();
-    const buffer = Buffer.from(arrayBuffer);
     const contentType = response.headers.get('content-type');
-    const contentDisposition = response.headers.get('content-disposition') || 'attachment';
+    const contentDisposition = response.headers.get('content-disposition') || `attachment; filename="${url.split('/').pop()}"`;
 
     res.setHeader('Content-Type', contentType);
     res.setHeader('Content-Disposition', contentDisposition);
-    res.send(buffer);
+    res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+    res.setHeader('Pragma', 'no-cache');
+    res.setHeader('Expires', '0');
+
+    response.body.pipe(res);
   } catch (error) {
     console.error('Error fetching image:', error);
     res.status(500).send('Error fetching image');
