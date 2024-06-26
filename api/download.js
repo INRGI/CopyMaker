@@ -6,16 +6,10 @@ export default async function handler(req, res) {
   }
 
   try {
-    const response = await fetch(url, {
-      headers: {
-        'Cache-Control': 'no-cache',
-        'Pragma': 'no-cache',
-        'Expires': '0'
-      }
-    });
+    const response = await fetch(url);
 
     if (!response.ok) {
-      throw new Error('Network response was not ok');
+      throw new Error(`Network response was not ok, status: ${response.status}`);
     }
 
     const contentType = response.headers.get('content-type');
@@ -23,13 +17,10 @@ export default async function handler(req, res) {
 
     res.setHeader('Content-Type', contentType);
     res.setHeader('Content-Disposition', contentDisposition);
-    res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
-    res.setHeader('Pragma', 'no-cache');
-    res.setHeader('Expires', '0');
 
     response.body.pipe(res);
   } catch (error) {
-    console.error('Error fetching image:', error);
-    res.status(500).send('Error fetching image');
+    console.error('Error fetching image:', error.message);
+    res.status(500).send(`Error fetching image: ${error.message}`);
   }
 }
