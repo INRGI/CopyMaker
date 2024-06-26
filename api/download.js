@@ -1,3 +1,6 @@
+import https from 'https';
+import { PassThrough } from 'stream';
+
 export default async function handler(req, res) {
   const { url } = req.query;
 
@@ -6,19 +9,23 @@ export default async function handler(req, res) {
   }
 
   try {
-    const response = await fetch(url);
+    https.get(url, (response) => {
+      if (response.statusCode !== 200) {
+        throw new Error(`Network response was not ok, status: ${response.statusCode}`);
+      }
 
-    if (!response.ok) {
-      throw new Error(`Network response was not ok, status: ${response.status}`);
-    }
+      const contentType = response.headers['content-type'];
+      const contentDisposition = response.headers['content-disposition'] || `attachment; filename="${url.split('/').pop()}"`;
 
-    const contentType = response.headers.get('content-type');
-    const contentDisposition = response.headers.get('content-disposition') || `attachment; filename="${url.split('/').pop()}"`;
+      res.setHeader('Content-Type', contentType);
+      res.setHeader('Content-Disposition', contentDisposition);
 
-    res.setHeader('Content-Type', contentType);
-    res.setHeader('Content-Disposition', contentDisposition);
-
-    response.body.pipe(res);
+      const passThrough = new PassThrough();
+      response.pipe(passThrough).pipe(res);
+    }).on('error', (error) => {
+      console.error('Error fetching image:', error.message);
+      res.status(500).send(`Error fetching image: ${error.message}`);
+    });
   } catch (error) {
     console.error('Error fetching image:', error.message);
     res.status(500).send(`Error fetching image: ${error.message}`);
