@@ -32,28 +32,24 @@ const FromNameModal = ({ isOpen, onClose, activeItem }) => {
 
   const handleDownload = async () => {
     try {
-      const response = await fetch(activeItem.imageUrl[0], {
-        mode: 'cors',
-      });
+      const url = `/api/download?url=${encodeURIComponent(activeItem.imageUrl[0])}`;
+      const response = await fetch(url);
 
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
 
       const blob = await response.blob();
-      const url = window.URL.createObjectURL(blob);
+      const downloadUrl = window.URL.createObjectURL(blob);
 
       const link = document.createElement("a");
-      link.href = url;
-
-      const fileName = activeItem.imageUrl[0].split('/').pop();
-      link.download = fileName;
-
+      link.href = downloadUrl;
+      link.download = activeItem.imageUrl[0].split('/').pop();
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
 
-      window.URL.revokeObjectURL(url);
+      window.URL.revokeObjectURL(downloadUrl);
     } catch (error) {
       console.error('There was an error downloading the image:', error);
     }
