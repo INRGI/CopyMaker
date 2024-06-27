@@ -4,7 +4,7 @@ import Modal from "react-modal";
 export const Container = styled(Modal)`
   width: 100%;
   max-width: 350px;
-  height: 265px;
+  height: 300px;
   background-color: white;
   border: 1px solid;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
@@ -191,4 +191,13 @@ export const ButtonDownload = styled.button`
     box-shadow: #8aa649 0 3px 7px inset;
     transform: translateY(1px);
     }
+`;
+
+export const ImageContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
 `;

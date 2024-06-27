@@ -9,6 +9,7 @@ import {
   Title,
   TitleContainer,
   ButtonDownload,
+  ImageContainer,
 } from "./FromNameModal.styled";
 
 const FromNameModal = ({ isOpen, onClose, activeItem }) => {
@@ -30,9 +31,9 @@ const FromNameModal = ({ isOpen, onClose, activeItem }) => {
     });
   };
 
-  const handleDownload = async () => {
+  const handleDownload = async (imageUrl) => {
     try {
-      const url = `/api/download?url=${encodeURIComponent(activeItem.imageUrl[0])}`;
+      const url = `/api/download?url=${encodeURIComponent(imageUrl)}`;
       const response = await fetch(url, {
         headers: {
           'Cache-Control': 'no-cache',
@@ -50,7 +51,7 @@ const FromNameModal = ({ isOpen, onClose, activeItem }) => {
 
       const link = document.createElement("a");
       link.href = downloadUrl;
-      link.download = activeItem.imageUrl[0].split('/').pop();
+      link.download = imageUrl.split('/').pop();
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
@@ -124,12 +125,17 @@ const FromNameModal = ({ isOpen, onClose, activeItem }) => {
         </TextContainer>
         {activeItem.imageUrl && activeItem.imageUrl.length > 0 && (
           <TextContainer>
-            <Text>
-              <strong>Image:</strong>
-            </Text>
-            <ButtonDownload onClick={handleDownload} type="button">
-              Download Image
-            </ButtonDownload>
+            <ImageContainer>
+            {activeItem.imageUrl.map((imageUrl, index) => (
+              <ButtonDownload
+                key={index}
+                onClick={() => handleDownload(imageUrl)}
+                type="button"
+              >
+                Download Image {index + 1}
+              </ButtonDownload>
+            ))}
+            </ImageContainer>
           </TextContainer>
         )}
       </div>
