@@ -76,3 +76,8 @@ export const Btn = styled.button`
     transform: translateY(2px);
   }
 `;
+
+export const BlockContainer = styled.div`
+  display: flex;
+  gap: 0px;
+`;

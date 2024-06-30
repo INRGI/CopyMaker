@@ -1,8 +1,9 @@
 import { useLocation } from "react-router-dom";
 import TopFromEmail from "../../components/TopFromEmail/TopFromEmail";
-import { Btn, HeaderContainer, StyledLink, TopFromContainer } from "./TopPage.styled";
+import { BlockContainer, Btn, HeaderContainer, StyledLink, TopFromContainer } from "./TopPage.styled";
 import { useRef } from "react";
 import { Helmet } from "react-helmet";
+import TopEmojie from "../../components/TopEmojie/TopEmojie";
 
 const TopPage = () => {
     const location = useLocation();
@@ -22,11 +23,13 @@ const TopPage = () => {
             </StyledLink>
             </HeaderContainer>
 
-
+            <BlockContainer>
             <TopFromContainer>
                 <TopFromEmail />
             </TopFromContainer>
             
+            <TopEmojie />
+            </BlockContainer>
         </>
     )
 }
