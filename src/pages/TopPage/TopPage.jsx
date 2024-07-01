@@ -4,6 +4,7 @@ import { BlockContainer, Btn, HeaderContainer, StyledLink, TopFromContainer } fr
 import { useRef } from "react";
 import { Helmet } from "react-helmet";
 import TopEmojie from "../../components/TopEmojie/TopEmojie";
+import TopNames from "../../components/TopNames/TopNames";
 
 const TopPage = () => {
     const location = useLocation();
@@ -29,6 +30,7 @@ const TopPage = () => {
             </TopFromContainer>
             
             <TopEmojie />
+            <TopNames />
             </BlockContainer>
         </>
     )
