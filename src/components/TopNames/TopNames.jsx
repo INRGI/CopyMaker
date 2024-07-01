@@ -247,7 +247,7 @@ const TopNames = () => {
   };
 
   const handleCopy = () => {
-    toast.success("Emoji copied", {
+    toast.success("Sender copied", {
       position: "top-right",
       autoClose: 1000,
       hideProgressBar: false,
