@@ -102,7 +102,7 @@ export const Container = styled.div`
     justify-content: center;
 `;
 
-export const LeftContainer = styled.div`
+export const ExcludeContainer = styled.div`
     display: flex;
     gap: 15px;
     flex-direction: column;
@@ -117,22 +117,11 @@ export const LeftContainer = styled.div`
     overflow-y: auto;
 `;
 
-export const RightContainer = styled.div`
-    display: flex;
-    gap: 15px;
-    align-content: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    width: 100%;
-    max-width: 300px;
-    border-radius: 16px;
-    box-shadow: 0 30px 30px -25px rgba(65, 51, 183, 0.25);
-    background-color:#fff;
-    padding: 20px 10px;
-    overflow-y: auto;
+export const Title = styled.h2`
+    margin: 0;
 `;
 
-export const CheckBoxLabel = styled.label`
-    width: 100%;
-    max-width: 130px;
-`
+export const Text = styled.p`
+    margin: 0;
+    padding: 0;
+`;

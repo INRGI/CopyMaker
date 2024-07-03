@@ -2,6 +2,7 @@ import { useState } from 'react';
 import * as XLSX from 'xlsx';
 import { CheckBoxLabel, Container, FileInput, FileInputLabel, FilterEmailsButton, LeftContainer, RightContainer } from './EmailFilter.styled';
 import Checkbox from '@mui/material/Checkbox';
+import EmailExcluder from '../EmailExcluder/EmailExcluder';
 
 const EmailFilter = () => {
   const [emails, setEmails] = useState([]);
@@ -194,25 +195,11 @@ const EmailFilter = () => {
           Windstream
         </CheckBoxLabel>
       </RightContainer>
+
+      <EmailExcluder />
     </Container>
   );
 };
 
 export default EmailFilter;
 
-
-
-
-
-// roadrunner
-// embarqmail
-// centurytel
-// centurylink
-// shaw
-// Bigpond
-// chartermi
-// netzero
-// juno
-// tas
-// windstream
-// verizon
