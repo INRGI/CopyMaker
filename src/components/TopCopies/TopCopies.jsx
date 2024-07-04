@@ -1,6 +1,7 @@
 import { Container, Item, List, Title } from "./TopCopies.styled";
 import { Bounce, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import AboutAuthor from "../AboutAuthor";
 
 const notPriority = [
   "MPPX41OZ8",
@@ -81,6 +82,7 @@ const TopCopies = () => {
           })}
         </List>
       </Container>
+      <AboutAuthor />
     </>
   );
 };
