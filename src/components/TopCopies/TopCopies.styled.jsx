@@ -28,6 +28,7 @@ export const List = styled.ul`
     gap: 15px;
     width: 90%;
     padding: 0;
+    margin: 0;
 `;
 
 export const Item = styled.li`
