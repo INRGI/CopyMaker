@@ -7,6 +7,7 @@ const DomainPage = lazy(() => import("../../pages/DomainPage"));
 const NotFound = lazy(() => import("../../pages/NotFound"));
 const CsvPage = lazy(() => import("../../pages/CsvPage"));
 const TopPage = lazy(() => import("../../pages/TopPage"));
+const AutoPage = lazy(() => import("../../pages/AutoPage"));
 
 const App = () => {
 
@@ -18,6 +19,7 @@ const App = () => {
 
                 <Route path="/emailFilter" element={<CsvPage />} />
                 <Route path="/top" element={<TopPage />} />
+                <Route path="/auto" element={<AutoPage />} />
 
                 <Route path="*" element={<NotFound />} />
             </Route>

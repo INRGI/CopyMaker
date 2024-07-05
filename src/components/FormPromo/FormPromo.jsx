@@ -16,6 +16,7 @@ import { Bounce, toast } from "react-toastify";
 import InfoButton from "../InfoButton/InfoButton";
 import Preview from "../Preview/Preview";
 import AddHiddenModal from "../AddHiddenModal/AddHiddenModal";
+import LinkBuilderModal from "../LInkBuilderModal/LInkBuilderModal";
 // import FastRedirect from "../FastRedirect/FastRedirect";
 
 const FormPromo = () => {
@@ -75,6 +76,7 @@ const FormPromo = () => {
 
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isHiddenModalOpen, setHiddenModalOpen] = useState(false);
+    const [isLinkBuilderOpen, setLinkBuilderOpen] = useState(false);
 
     const handleChange = (index, event) => {
         const newLinkCopy = [...newLinks];
@@ -152,6 +154,11 @@ const FormPromo = () => {
         setHiddenModalOpen(false);
     }
 
+    const handleLinkBuilderConfirm = (response) => {
+       
+        setLinkBuilderOpen(false);
+    }
+
     return (
         <PageContainer>
             <FuncContainer>
@@ -179,6 +186,12 @@ const FormPromo = () => {
                 <AddImageButton type="button" onClick={()=> handleImageAdd(submitedResult)}>Add Image</AddImageButton>
 
                 <HiddenImageButton type="button" onClick={()=> handleHiddenModal(submitedResult)}>Custom Block</HiddenImageButton>
+
+
+
+
+
+                {/* <HiddenImageButton type="button" onClick={()=> setLinkBuilderOpen(true)}>Link Builder</HiddenImageButton> */}
                 {/* <FastRedirect />   */}
             </FuncContainer>
 
@@ -325,6 +338,12 @@ const FormPromo = () => {
                     onClose={() => setHiddenModalOpen(false)} 
                     onConfirm={handleHiddenModalConfirm}
                     result={submitedResult} 
+        />
+
+        <LinkBuilderModal
+                    isOpen={isLinkBuilderOpen} 
+                    onClose={() => setLinkBuilderOpen(false)} 
+                    onConfirm={handleLinkBuilderConfirm}
         />
 
         </PageContainer>
