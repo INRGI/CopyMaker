@@ -1,31 +1,53 @@
 import { Bounce, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { Container, LinkContainer, LinkText, MuiInput } from "./LInkBuilderModal.styled";
+import { Button, ButtonContainer, Container, LinkContainer, LinkText, MuiInput, TestButton } from "./LInkBuilderModal.styled";
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import { useState } from "react";
 import * as Yup from "yup";
-import { ErrorMessage, Field, Form, Formik } from "formik";
+import { Field, Form, Formik } from "formik";
 import { nanoid } from "nanoid";
+import { useDispatch, useSelector } from "react-redux";
+import { editDomain } from "../../redux/domainSlice";
+import { useParams } from "react-router-dom";
 
 const FeedbackSchema = Yup.object().shape({
-  ulrStart: Yup.string()
+  urlStart: Yup.string()
     .min(3, "Too Short!")
     .max(50, "Too Long!")
     .required("Please enter a url start"),
+    urlEnd: Yup.string()
+    .min(3, "Too Short!")
+    .max(50, "Too Long!")
+    .required("Please enter a url end"),
+    copyName: Yup.string()
+    .min(3, "Too Short!")
+    .max(10, "Too Long!")
+    .required("Please enter copy name"),
 });
 
 const LinkBuilderModal = ({ isOpen, onClose, onConfirm }) => {
   const [linkType, setLinkType] = useState("");
   const [typeRT, setTypeRT] = useState("");
+  const [result, setResult] = useState("https://google.com"); 
 
   const linkStartId = nanoid();
+  const linkEndId = nanoid();
+  const copyNameId = nanoid();
+
+  const dispatch = useDispatch();
+  const { domainId } = useParams();
+  const domain = useSelector(state => state.domains.find(domain => domain.id === domainId));
 
   const initialValues = {
-    ulrStart: "",
+    urlStart: domain ? domain.urlStart : "",
+    urlEnd: domain ? domain.urlEnd : "",
+    copyName: "",
   };
 
-  const handleSubmit = () => {
-    toast.success("Your text changed", {
+  const handleSubmit = (values) => {
+    console.log(domain)
+    dispatch(editDomain({ id: domainId, values: {...values}}));
+    toast.success("Your link created", {
       position: "top-right",
       autoClose: 2000,
       hideProgressBar: false,
@@ -36,6 +58,24 @@ const LinkBuilderModal = ({ isOpen, onClose, onConfirm }) => {
       theme: "light",
       transition: Bounce,
     });
+  };
+
+  const handleCopy = () => {
+    toast.success("Link copied", {
+      position: "top-right",
+      autoClose: 1000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      transition: Bounce,
+    });
+  };
+
+  const handleOpenLink = () => {
+    window.open(result, '_blank');
   };
 
   const handleChange = (event) => {
@@ -86,7 +126,7 @@ const LinkBuilderModal = ({ isOpen, onClose, onConfirm }) => {
           >
             <MenuItem value={"RT GNF"}>RT GNF</MenuItem>
             <MenuItem value={"RT GF"}>RT GF</MenuItem>
-            <MenuItem value={"RT R"}>RT R</MenuItem>
+            {/* <MenuItem value={"RT R"}>RT R</MenuItem>
             <MenuItem value={"RT FR"}>RT FR</MenuItem>
             <MenuItem value={"RT Blue"}>RT Blue</MenuItem>
             <MenuItem value={"RT2 Blue STR"}>RT2 Blue STR</MenuItem>
@@ -96,7 +136,7 @@ const LinkBuilderModal = ({ isOpen, onClose, onConfirm }) => {
             <MenuItem value={"RT Purple (IT3+other)"}>
               RT Purple (IT3+other)
             </MenuItem>
-            <MenuItem value={"RT3 Blue (Killing)"}>RT3 Blue (Killing)</MenuItem>
+            <MenuItem value={"RT3 Blue (Killing)"}>RT3 Blue (Killing)</MenuItem> */}
           </Select>
         </FormControl>
       )}
@@ -117,13 +157,49 @@ const LinkBuilderModal = ({ isOpen, onClose, onConfirm }) => {
                 size="small"
                 variant="outlined"
                 type="text"
-                name="ulrStart"
+                name="urlStart"
                 id={linkStartId}
                 placeholder="Link Start"
                 required
               />
-              <LinkText>Your RT</LinkText>
+              <LinkText>RT</LinkText>
+              <Field
+                fullWidth
+                as={MuiInput}
+                label="Link End"
+                size="small"
+                variant="outlined"
+                type="text"
+                name="urlEnd"
+                id={linkEndId}
+                placeholder="Link End"
+                required
+              />
+              <LinkText>COPY</LinkText>
             </LinkContainer>
+
+            <LinkContainer>
+            <Field
+                fullWidth
+                as={MuiInput}
+                label="Copy Name"
+                size="small"
+                variant="outlined"
+                type="text"
+                name="copyName"
+                id={copyNameId}
+                placeholder="Copy Name"
+                required
+              />
+
+              <Button type="submit" onClick={()=> handleSubmit()}>Make a link</Button>
+              </LinkContainer>
+              {result !== '' && (
+                <ButtonContainer>
+                  <TestButton type="button" onClick={handleOpenLink}>Try Link</TestButton>
+                  <TestButton type="button" onClick={() => {navigator.clipboard.writeText(result) ; handleCopy();}}>Copy Link</TestButton>
+                </ButtonContainer>
+              )}
           </Form>
         </Formik>
       )}
