@@ -191,7 +191,7 @@ const FormPromo = () => {
 
 
                 
-                <HiddenImageButton type="button" onClick={()=> setLinkBuilderOpen(true)} disabled>Link Builder</HiddenImageButton>
+                <HiddenImageButton type="button" onClick={()=> setLinkBuilderOpen(true)} >Link Builder</HiddenImageButton>
                 {/* <FastRedirect />   */}
             </FuncContainer>
 
