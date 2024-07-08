@@ -85,7 +85,7 @@ const LinkBuilderModal = ({ isOpen, onClose, onConfirm }) => {
         transition: Bounce,
       });
     } else {
-      toast.error("Product not found in the Excel file", {
+      toast.error("Product not found", {
         position: "top-right",
         autoClose: 2000,
         hideProgressBar: false,
@@ -120,7 +120,7 @@ const LinkBuilderModal = ({ isOpen, onClose, onConfirm }) => {
         transition: Bounce,
       });
     } else {
-      toast.error("Product not found in the Excel file", {
+      toast.error("Product not found", {
         position: "top-right",
         autoClose: 2000,
         hideProgressBar: false,
@@ -240,6 +240,7 @@ const LinkBuilderModal = ({ isOpen, onClose, onConfirm }) => {
               name="urlStart"
               id={linkStartId}
               placeholder="Link Start"
+              autoComplete="off"
               required
             />
             <LinkText>RT</LinkText>
@@ -253,6 +254,7 @@ const LinkBuilderModal = ({ isOpen, onClose, onConfirm }) => {
               name="urlEnd"
               id={linkEndId}
               placeholder="Link End"
+              autoComplete="off"
               required
             />
             <LinkText>COPY</LinkText>
@@ -269,6 +271,7 @@ const LinkBuilderModal = ({ isOpen, onClose, onConfirm }) => {
               name="copyName"
               id={copyNameId}
               placeholder="Copy Name"
+              autoComplete="off"
               required
             />
 
@@ -333,6 +336,7 @@ const LinkBuilderModal = ({ isOpen, onClose, onConfirm }) => {
               name="urlStart"
               id={linkStartId}
               placeholder="Link Start"
+              autoComplete="off"
               required
             />
             <LinkText>Volume</LinkText>
@@ -346,6 +350,7 @@ const LinkBuilderModal = ({ isOpen, onClose, onConfirm }) => {
               name="urlEnd"
               id={linkEndId}
               placeholder="Link End"
+              autoComplete="off"
               required
             />
             <LinkText>IMG</LinkText>
@@ -362,6 +367,7 @@ const LinkBuilderModal = ({ isOpen, onClose, onConfirm }) => {
               name="copyName"
               id={copyNameId}
               placeholder="Copy Name"
+              autoComplete="off"
               required
             />
 
