@@ -203,17 +203,20 @@ const LinkBuilderModal = ({ isOpen, onClose, onConfirm }) => {
         >
           <MenuItem value={"RT GNF"}>RT GNF</MenuItem>
           <MenuItem value={"RT GF"}>RT GF</MenuItem>
-          {/* <MenuItem value={"RT R"}>RT R</MenuItem>
-          <MenuItem value={"RT FR"}>RT FR</MenuItem>
+          <MenuItem value={"RT GK"}>RT GK</MenuItem>
           <MenuItem value={"RT Blue"}>RT Blue</MenuItem>
           <MenuItem value={"RT2 Blue STR"}>RT2 Blue STR</MenuItem>
+          <MenuItem value={"RT3 Blue (Killing)"}>RT3 Blue (Killing)</MenuItem>
+          {/* <MenuItem value={"RT R"}>RT R</MenuItem>
+          <MenuItem value={"RT FR"}>RT FR</MenuItem>
+          
           <MenuItem value={"RT Purple Kill (ETP6)"}>
             RT Purple Kill (ETP6)
           </MenuItem>
           <MenuItem value={"RT Purple (IT3+other)"}>
             RT Purple (IT3+other)
           </MenuItem>
-          <MenuItem value={"RT3 Blue (Killing)"}>RT3 Blue (Killing)</MenuItem> */}
+           */}
         </Select>
       </FormControl>
     )}
@@ -306,6 +309,7 @@ const LinkBuilderModal = ({ isOpen, onClose, onConfirm }) => {
           onChange={handleRTChange}
         >
           <MenuItem value={"Vol Green"}>Vol Green</MenuItem>
+          <MenuItem value={"Vol Blue"}>Vol Blue</MenuItem>
         </Select>
       </FormControl>
     )}
