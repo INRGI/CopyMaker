@@ -21,8 +21,8 @@ import useExcelData from "../../hooks/useExcelData";
 import * as XLSX from "xlsx";
 
 const FeedbackSchema = Yup.object().shape({
-  urlStart: Yup.string().min(3, "Too Short!").max(50, "Too Long!").required("Please enter a url start"),
-  urlEnd: Yup.string().min(3, "Too Short!").max(50, "Too Long!").required("Please enter a url end"),
+  urlStart: Yup.string().min(3, "Too Short!").max(100, "Too Long!").required("Please enter a url start"),
+  urlEnd: Yup.string().min(3, "Too Short!").max(100, "Too Long!").required("Please enter a url end"),
   copyName: Yup.string().min(3, "Too Short!").max(10, "Too Long!").required("Please enter copy name"),
 });
 
