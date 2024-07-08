@@ -60,8 +60,10 @@ const LinkBuilderModal = ({ isOpen, onClose, onConfirm }) => {
 
       const row = json.find((row) => {
         const cellValue = row[0];
+        if (!cellValue) return false;
         const prefix = productName.match(/[a-zA-Z]+/)[0];
-        return cellValue && cellValue.toString().startsWith(prefix);
+        const cleanedCellValue = cellValue.toString().replace(/[^a-zA-Z0-9]/g, '');
+        return cellValue && cleanedCellValue.toString().startsWith(prefix);
       });
 
       return row ? row[columnIndex] : null;
