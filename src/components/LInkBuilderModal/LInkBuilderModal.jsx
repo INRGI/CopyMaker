@@ -312,7 +312,6 @@ const LinkBuilderModal = ({ isOpen, onClose, onConfirm }) => {
           onChange={handleRTChange}
         >
           <MenuItem value={"Vol Green"}>Vol Green</MenuItem>
-          <MenuItem value={"Vol Blue"}>Vol Blue</MenuItem>
         </Select>
       </FormControl>
     )}
