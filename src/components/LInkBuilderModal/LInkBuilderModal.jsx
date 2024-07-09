@@ -307,7 +307,7 @@ const LinkBuilderModal = ({ isOpen, onClose, onConfirm }) => {
           labelId="demo-simple-select-label"
           id="demo-simple-select"
           value={typeRT}
-          label="Choose type of RT"
+          label="Choose type of Volume"
           onChange={handleRTChange}
         >
           <MenuItem value={"Vol Green"}>Vol Green</MenuItem>
