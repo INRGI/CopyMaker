@@ -72,9 +72,9 @@ const LinkBuilderModal = ({ isOpen, onClose, onConfirm }) => {
     if(linkType === 'RedTrack'){
       const value = extractValue(excelData, productName, columnName);
     if (value) {
-      const generatedLink = `${values.urlStart}${value}${values.urlEnd}${productName}`;
-      setResult(generatedLink);
-      dispatch(editDomain({ id: domainId, values: { ...values, linkType, typeRT } }));
+      const linkUrl = `${values.urlStart}${value}${values.urlEnd}${productName}`;
+      setResult(linkUrl);
+      dispatch(editDomain({ id: domainId, values: { ...values, linkType, typeRT, linkUrl} }));
       toast.success("Your link created", {
         position: "top-right",
         autoClose: 2000,
@@ -107,9 +107,9 @@ const LinkBuilderModal = ({ isOpen, onClose, onConfirm }) => {
       const img = extractValue(excelData, productName, 'IMG-IT');
       const prefix = productName.match(/[a-zA-Z]+(.+)/)[1];
     if (value) {
-      const generatedLink = `${values.urlStart}${value}${values.urlEnd}${img}_${prefix}`;
-      setResult(generatedLink);
-      dispatch(editDomain({ id: domainId, values: { ...values, linkType, typeRT } }));
+      const linkUrl = `${values.urlStart}${value}${values.urlEnd}${img}_${prefix}`;
+      setResult(linkUrl);
+      dispatch(editDomain({ id: domainId, values: { ...values, linkType, typeRT, linkUrl } }));
       toast.success("Your link created", {
         position: "top-right",
         autoClose: 2000,

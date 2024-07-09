@@ -1,6 +1,6 @@
 
 import { useEffect, useState } from "react";
-import { Field, Formik } from 'formik';
+import { Field, Formik, useFormikContext } from 'formik';
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { nanoid } from "nanoid";
@@ -37,15 +37,15 @@ const FormPromo = () => {
     const [isLineHeight, setLineHeight] = useState(domain?.isLineHeight || false);
 
     const initialValues = {
-        fontSize: "",
-        fontFamily: "",
-        colorLink: "",
-        width: "",
-        paddingLR: "",
-        linkUrl: '',
-        trTB: "",
-        BGColor: "",
-        LineHeight: "",
+        fontSize: domain?.fontSize || "",
+        fontFamily: domain?.fontFamily || "",
+        colorLink: domain?.colorLink || "",
+        width: domain?.width || "",
+        paddingLR: domain?.paddingLR || "",
+        linkUrl: domain?.linkUrl || '',
+        trTB: domain?.trTB || "",
+        BGColor: domain?.BGColor || "",
+        LineHeight: domain?.LineHeight || "",
         ...domain,
         submit: "",
       };
@@ -201,6 +201,25 @@ const FormPromo = () => {
                 validateOnBlur={false}
                 validateOnChange={false}
             >
+                {({ setValues }) => {
+                    useEffect(() => {
+                        if (domain) {
+                            setValues({
+                                fontSize: domain.fontSize || "",
+                                fontFamily: domain.fontFamily || "",
+                                colorLink: domain.colorLink || "",
+                                width: domain.width || "",
+                                paddingLR: domain.paddingLR || "",
+                                linkUrl: domain.linkUrl || "",
+                                trTB: domain.trTB || "",
+                                BGColor: domain.BGColor || "",
+                                LineHeight: domain.LineHeight || "",
+    
+                            });
+                        }
+                    }, [domain, setValues]);
+
+                    return (
                 <FormContainer>
                     <Container>
                         <InputContainer>
@@ -321,6 +340,8 @@ const FormPromo = () => {
                     
 
                     </FormContainer>
+                    );
+                }}
                 
             </Formik>
             
