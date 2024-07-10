@@ -19,7 +19,7 @@ const App = () => {
 
                 <Route path="/emailFilter" element={<CsvPage />} />
                 <Route path="/top" element={<TopPage />} />
-                <Route path="/auto" element={<AutoPage />} />
+                <Route path="/auto/:domainId" element={<AutoPage />} />
 
                 <Route path="*" element={<NotFound />} />
             </Route>
