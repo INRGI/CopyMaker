@@ -11,6 +11,7 @@ const AutoCopies = () => {
   const [productName, setProductName] = useState('');
   const [productNumber, setProductNumber] = useState('');
   const [fileContent, setFileContent] = useState('');
+  const [error, setError] = useState('');
 
   useEffect(() => {
     const initClient = () => {
@@ -21,6 +22,8 @@ const AutoCopies = () => {
         scope: SCOPES,
       }).then(() => {
         gapi.auth2.getAuthInstance().signIn();
+      }).catch(err => {
+        setError('Failed to initialize Google API client: ' + err.message);
       });
     };
     gapi.load('client:auth2', initClient);
@@ -28,27 +31,62 @@ const AutoCopies = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const folderName = productName.slice(0, 4);  // BTDD from BTDD30
-    const query = `name contains '${folderName}' and mimeType = 'application/vnd.google-apps.folder'`;
-    const res = await gapi.client.drive.files.list({ q: query });
-    const folderId = res.result.files[0].id;
+    setError(''); // Clear previous error message
+    try {
+      // Step 1: Fetch the product folder based on the product name in the entire Google Drive
+      const productQuery = `name contains '${productName}' and mimeType = 'application/vnd.google-apps.folder'`;
+      console.log('Query for product folder:', productQuery);
+      let res = await gapi.client.drive.files.list({ q: productQuery });
+      console.log('Product folder response:', res);
 
-    const subFolderRes = await gapi.client.drive.files.list({
-      q: `'${folderId}' in parents and mimeType = 'application/vnd.google-apps.folder' and name contains 'HTML+SL'`
-    });
-    const subFolderId = subFolderRes.result.files[0].id;
+      if (res.result.files.length === 0) {
+        throw new Error('No product folder found with the specified name.');
+      }
+      const productFolderId = res.result.files[0].id;
 
-    const fileRes = await gapi.client.drive.files.list({
-      q: `'${subFolderId}' in parents and mimeType = 'text/html'`
-    });
-    const fileId = fileRes.result.files[0].id;
+      // Step 2: Fetch the "HTML+SL" subfolder within the product folder
+      const subFolderQuery = `'${productFolderId}' in parents and mimeType = 'application/vnd.google-apps.folder' and name contains 'HTML+SL'`;
+      console.log('Query for HTML+SL subfolder:', subFolderQuery);
+      const subFolderRes = await gapi.client.drive.files.list({ q: subFolderQuery });
+      console.log('HTML+SL subfolder response:', subFolderRes);
 
-    const fileContentRes = await gapi.client.drive.files.get({
-      fileId,
-      alt: 'media'
-    });
+      if (subFolderRes.result.files.length === 0) {
+        throw new Error('No "HTML+SL" subfolder found.');
+      }
+      const subFolderId = subFolderRes.result.files[0].id;
 
-    setFileContent(fileContentRes.body);
+      // Step 3: Fetch the "Lift {productNumber}" subfolder within the "HTML+SL" subfolder
+      const liftFolderQuery = `'${subFolderId}' in parents and mimeType = 'application/vnd.google-apps.folder' and name contains 'Lift ${productNumber}'`;
+      console.log('Query for Lift subfolder:', liftFolderQuery);
+      const liftFolderRes = await gapi.client.drive.files.list({ q: liftFolderQuery });
+      console.log('Lift subfolder response:', liftFolderRes);
+
+      if (liftFolderRes.result.files.length === 0) {
+        throw new Error(`No "Lift ${productNumber}" subfolder found.`);
+      }
+      const liftFolderId = liftFolderRes.result.files[0].id;
+
+      // Step 4: Fetch the HTML file within the "Lift {productNumber}" subfolder
+      const htmlFileQuery = `'${liftFolderId}' in parents and mimeType = 'text/html'`;
+      console.log('Query for HTML file:', htmlFileQuery);
+      const fileRes = await gapi.client.drive.files.list({ q: htmlFileQuery });
+      console.log('HTML file response:', fileRes);
+
+      if (fileRes.result.files.length === 0) {
+        throw new Error('No HTML file found in the specified subfolder.');
+      }
+      const fileId = fileRes.result.files[0].id;
+
+      const fileContentRes = await gapi.client.drive.files.get({
+        fileId,
+        alt: 'media'
+      });
+
+      setFileContent(fileContentRes.body);
+    } catch (err) {
+      console.error('Error:', err);
+      setError(err.message);
+    }
   };
 
   return (
@@ -68,6 +106,7 @@ const AutoCopies = () => {
         />
         <button type="submit">Fetch File</button>
       </form>
+      {error && <div style={{color: 'red'}}>{error}</div>}
       <div>
         <h2>File Content:</h2>
         <div dangerouslySetInnerHTML={{ __html: fileContent }} />
@@ -75,7 +114,5 @@ const AutoCopies = () => {
     </div>
   );
 };
-
-
 
 export default AutoCopies;
