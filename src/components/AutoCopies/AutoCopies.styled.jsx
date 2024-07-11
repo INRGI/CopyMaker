@@ -12,7 +12,7 @@ export const PageContainer = styled.div`
     flex-wrap: wrap;
 `;
 
-export const LoadingCont = styled.div`
+export const LoadingContainer = styled.div`
     width: 100%;
     max-width: 400px;
     border-radius: 16px;
