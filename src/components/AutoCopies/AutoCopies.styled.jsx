@@ -12,6 +12,21 @@ export const PageContainer = styled.div`
     flex-wrap: wrap;
 `;
 
+export const LoadingCont = styled.div`
+    width: 100%;
+    max-width: 400px;
+    border-radius: 16px;
+    box-shadow: 0 30px 30px -25px rgba(65, 51, 183, 0.25);
+    background-color:#fff;
+    overflow: hidden;
+    box-sizing: border-box;
+    background-color: #fff;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+`;
+
 export const MuiInput = styled(TextField)`
     z-index: 0;
 `;

@@ -22,6 +22,7 @@ import {
   InputToDowload,
   LabelCheckBox,
   LinkToDownload,
+  LoadingCont,
   MuiInput,
   PageContainer,
   ResultContainer,
@@ -34,6 +35,7 @@ import {
 import { GrDownload } from "react-icons/gr";
 import { BsCopy } from "react-icons/bs";
 
+import Loader from "../Loader";
 import AddImageModal from "../AddImageModal";
 import Checkbox from "@mui/material/Checkbox";
 import makeCopy from "../../helpers/makeCopy";
@@ -84,6 +86,8 @@ const AutoCopies = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isHiddenModalOpen, setHiddenModalOpen] = useState(false);
   const [isLinkBuilderOpen, setLinkBuilderOpen] = useState(false);
+
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const initClient = () => {
@@ -172,9 +176,8 @@ const AutoCopies = () => {
 
   const hasImages = /<img.*?src=["'](.*?)["'].*?>/g.test(submitedResult);
 
-  const handleSubmit = async (values) => {    
-    if(values.submit === productName){
-      
+  const handleSubmit = async (values) => {
+    if (values.submit === productName) {
       dispatch(
         editDomain({
           id: domainId,
@@ -238,6 +241,7 @@ const AutoCopies = () => {
     }
     setError("");
     try {
+      setIsLoading(true);
       setProductName(values.submit);
       const copyName = productName.match(/[a-zA-Z]+/)[0];
       const liftName = productName.match(/[a-zA-Z]+(\d+)/)[1];
@@ -338,8 +342,10 @@ const AutoCopies = () => {
       );
       if (values.submit === "") {
         setIsSubmitted(false);
+        setIsLoading(false);
         return;
       }
+      setIsLoading(false);
 
       setIsSubmitted(true);
       toast.success("Copy maked", {
@@ -739,7 +745,7 @@ const AutoCopies = () => {
                 </HasImagesContainer>
               )}
 
-              {(isSubmitted && submitedResult !== "") && (
+              {isSubmitted && submitedResult !== "" && (
                 <div>
                   <ResultTitle>Your Copy below</ResultTitle>
                   <ResultContainer>
@@ -759,8 +765,7 @@ const AutoCopies = () => {
           );
         }}
       </Formik>
-
-      <Preview result={submitedResult} />
+      {isLoading ? <LoadingCont><Loader /></LoadingCont> : <Preview result={submitedResult} />}
 
       <AddImageModal
         isOpen={isModalOpen}
