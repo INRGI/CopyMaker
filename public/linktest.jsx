@@ -1,5 +1,8 @@
 import { gapi } from "gapi-script";
 
+import useExcelData from "../../hooks/useExcelData";
+import * as XLSX from "xlsx";
+
 import { useCallback, useEffect, useState } from "react";
 import { Field, Formik } from "formik";
 import { useParams } from "react-router-dom";
@@ -57,7 +60,7 @@ const SCOPES = "https://www.googleapis.com/auth/drive.readonly";
 const AutoCopies = () => {
   const [productName, setProductName] = useState("");
   const [error, setError] = useState("");
-
+  const dispatch = useDispatch();
   const { domainId } = useParams();
   const domain = useSelector((state) =>
     state.domains.find((domain) => domain.id === domainId)
@@ -88,6 +91,11 @@ const AutoCopies = () => {
   const [isLinkBuilderOpen, setLinkBuilderOpen] = useState(false);
 
   const [isLoading, setIsLoading] = useState(false);
+
+  const excelData = useExcelData("/products.xlsx");
+  const [linkType, setLinkType] = useState(domain ? domain.linkType : "");
+  const [typeRT, setTypeRT] = useState(domain ? domain.typeRT : "");
+  const [result, setResult] = useState("");
 
   useEffect(() => {
     const initClient = () => {
@@ -162,7 +170,6 @@ const AutoCopies = () => {
     }
   };
 
-  const dispatch = useDispatch();
   const fontSizeId = nanoid();
   const fontFamilyId = nanoid();
   const colorLinkId = nanoid();
@@ -224,9 +231,105 @@ const AutoCopies = () => {
           isLineHeight,
         })
       );
-        return;
+      return;
     }
     setError("");
+
+    if (linkType && typeRT && excelData && values.submit) {
+      const columnName = typeRT;
+
+      const extractValue = (data, productName, columnName) => {
+        const sheet = data.Sheets[data.SheetNames[0]];
+        const json = XLSX.utils.sheet_to_json(sheet, { header: 1 });
+        const header = json[0];
+        const columnIndex = header.indexOf(columnName);
+
+        if (columnIndex === -1) return null;
+
+        const row = json.find((row) => {
+          const cellValue = row[0];
+          if (!cellValue) return false;
+          const prefix = productName.match(/[a-zA-Z]+/)[0];
+          const cleanedCellValue = cellValue
+            .toString()
+            .replace(/[^a-zA-Z0-9]/g, "");
+          return cellValue && cleanedCellValue.toString().startsWith(prefix);
+        });
+
+        return row ? row[columnIndex] : null;
+      };
+
+      const generateLink = () => {
+        if (linkType === "RedTrack") {
+          const value = extractValue(excelData, values.submit, columnName);
+          if (value) {
+            const linkUrl = `${domain.urlStart}${value}${domain.urlEnd}${productName}`;
+            setResult(linkUrl);
+            dispatch(editDomain({ id: domainId, values: { linkUrl } }));
+            toast.success("Your link created", {
+              position: "top-right",
+              autoClose: 2000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "light",
+              transition: Bounce,
+            });
+            return linkUrl;
+          } else {
+            toast.error("Product not found", {
+              position: "top-right",
+              autoClose: 2000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "light",
+              transition: Bounce,
+            });
+          }
+        }
+
+        if (linkType === "Volume") {
+          const value = extractValue(excelData, values.submit, columnName);
+          const img = extractValue(excelData, values.submit, "IMG-IT");
+          const prefix = values.submit.match(/[a-zA-Z]+(.+)/)[1];
+          if (value) {
+            const linkUrl = `${domain.urlStart}${value}${domain.urlEnd}${img}_${prefix}`;
+            setResult(linkUrl);
+            dispatch(editDomain({ id: domainId, values: { linkUrl } }));
+            toast.success("Your link created", {
+              position: "top-right",
+              autoClose: 2000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "light",
+              transition: Bounce,
+            });
+            return linkUrl;
+          } else {
+            toast.error("Product not found", {
+              position: "top-right",
+              autoClose: 2000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "light",
+              transition: Bounce,
+            });
+          }
+        }
+      };
+      const linka = generateLink();
+
     try {
       setIsLoading(true);
       setProductName(values.submit);
@@ -293,6 +396,7 @@ const AutoCopies = () => {
           id: domainId,
           values: {
             ...values,
+            linkUrl: linka,
             submit: fileContentRes.body,
             isFontSize,
             isFontFamily,
@@ -313,6 +417,7 @@ const AutoCopies = () => {
         makeCopy({
           ...values,
           submit: fileContentRes.body,
+          linkUrl: linka,
           isFontSize,
           isFontFamily,
           isColorLink,
@@ -345,7 +450,7 @@ const AutoCopies = () => {
       setIsLoading(false);
       setSubmitting(false);
     }
-  });
+  }});
 
   const handleImageAdd = () => {
     setIsModalOpen(true);
@@ -748,7 +853,13 @@ const AutoCopies = () => {
           );
         }}
       </Formik>
-      {isLoading ? <LoadingContainer><Loader /></LoadingContainer> : <Preview result={submitedResult} />}
+      {isLoading ? (
+        <LoadingContainer>
+          <Loader />
+        </LoadingContainer>
+      ) : (
+        <Preview result={submitedResult} />
+      )}
 
       <AddImageModal
         isOpen={isModalOpen}
