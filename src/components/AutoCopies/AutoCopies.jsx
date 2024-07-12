@@ -262,7 +262,7 @@ const AutoCopies = () => {
         if (linkType === "RedTrack") {
           const value = extractValue(excelData, values.submit, columnName);
           if (value) {
-            const linkUrl = `${domain.urlStart}${value}${domain.urlEnd}${productName}`;
+            const linkUrl = `${domain.urlStart}${value}${domain.urlEnd}${values.submit}`;
             setResult(linkUrl);
             dispatch(editDomain({ id: domainId, values: { linkUrl } }));
             toast.success("Your link created", {
