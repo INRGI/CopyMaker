@@ -475,6 +475,20 @@ const AutoCopies = () => {
     setLinkBuilderOpen(false);
   };
 
+  const handleCopy = () => {
+    toast.success("Copy copied", {
+      position: "top-right",
+      autoClose: 1000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      transition: Bounce,
+    });
+  }
+
   return (
     <PageContainer>
       <FuncContainer>
@@ -841,6 +855,7 @@ const AutoCopies = () => {
                     <CopyButton
                       onClick={() => {
                         navigator.clipboard.writeText(submitedResult);
+                        handleCopy();
                       }}
                       type="button"
                     >
