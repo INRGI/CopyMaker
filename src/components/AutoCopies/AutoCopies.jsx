@@ -360,7 +360,7 @@ const AutoCopies = () => {
       }
       const subFolderId = subFolderRes.result.files[0].id;
 
-      const liftFolderQuery = `'${subFolderId}' in parents and mimeType = 'application/vnd.google-apps.folder' and name contains 'Lift ${liftName}'`;
+      const liftFolderQuery = `'${subFolderId}' in parents and mimeType = 'application/vnd.google-apps.folder' and name = 'Lift ${liftName}'`;
       const liftFolderRes = await gapi.client.drive.files.list({
         q: liftFolderQuery,
         includeItemsFromAllDrives: true,
