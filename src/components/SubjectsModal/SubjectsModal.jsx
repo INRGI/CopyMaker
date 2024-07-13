@@ -1,6 +1,6 @@
 import { Container } from './SubjectsModal.styled';
 
-const SubjectsModal = ({ isOpen, onClose }) => {
+const SubjectsModal = ({ isOpen, onClose, subjects }) => {
     return (
         <Container
             isOpen={isOpen}

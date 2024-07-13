@@ -58,6 +58,7 @@ const DISCOVERY_DOCS = [
 const SCOPES = "https://www.googleapis.com/auth/drive.readonly";
 
 const AutoCopies = () => {
+  const [textArray, setTextArray] = useState([]);
   const [productName, setProductName] = useState("");
   const [error, setError] = useState("");
   const dispatch = useDispatch();
@@ -329,73 +330,115 @@ const AutoCopies = () => {
       };
       const linka = generateLink();
 
-    try {
-      setIsLoading(true);
-      setProductName(values.submit);
-      const copyName = values.submit.match(/[a-zA-Z]+/)[0];
-      const liftName = values.submit.match(/[a-zA-Z]+(\d+)/)[1];
+      try {
+        setIsLoading(true);
+        setProductName(values.submit);
+        const copyName = values.submit.match(/[a-zA-Z]+/)[0];
+        const liftName = values.submit.match(/[a-zA-Z]+(\d+)/)[1];
 
-      const productQuery = `name contains '${copyName}' and mimeType = 'application/vnd.google-apps.folder'`;
-      let res = await gapi.client.drive.files.list({
-        q: productQuery,
-        includeItemsFromAllDrives: true,
-        supportsAllDrives: true,
-      });
+        const productQuery = `name contains '${copyName}' and mimeType = 'application/vnd.google-apps.folder'`;
+        let res = await gapi.client.drive.files.list({
+          q: productQuery,
+          includeItemsFromAllDrives: true,
+          supportsAllDrives: true,
+        });
 
-      if (res.result.files.length === 0) {
-        throw new Error("No product folder found with the specified name.");
-      }
-      const productFolderId = res.result.files[0].id;
+        if (res.result.files.length === 0) {
+          throw new Error("No product folder found with the specified name.");
+        }
+        const productFolderId = res.result.files[0].id;
 
-      const subFolderQuery = `'${productFolderId}' in parents and mimeType = 'application/vnd.google-apps.folder' and name contains 'HTML+SL'`;
+        const subFolderQuery = `'${productFolderId}' in parents and mimeType = 'application/vnd.google-apps.folder' and name contains 'HTML+SL'`;
 
-      const subFolderRes = await gapi.client.drive.files.list({
-        q: subFolderQuery,
-        includeItemsFromAllDrives: true,
-        supportsAllDrives: true,
-      });
+        const subFolderRes = await gapi.client.drive.files.list({
+          q: subFolderQuery,
+          includeItemsFromAllDrives: true,
+          supportsAllDrives: true,
+        });
 
-      if (subFolderRes.result.files.length === 0) {
-        throw new Error('No "HTML+SL" subfolder found.');
-      }
-      const subFolderId = subFolderRes.result.files[0].id;
+        if (subFolderRes.result.files.length === 0) {
+          throw new Error('No "HTML+SL" subfolder found.');
+        }
+        const subFolderId = subFolderRes.result.files[0].id;
 
-      const liftFolderQuery = `'${subFolderId}' in parents and mimeType = 'application/vnd.google-apps.folder' and name = 'Lift ${liftName}'`;
-      const liftFolderRes = await gapi.client.drive.files.list({
-        q: liftFolderQuery,
-        includeItemsFromAllDrives: true,
-        supportsAllDrives: true,
-      });
+        const liftFolderQuery = `'${subFolderId}' in parents and mimeType = 'application/vnd.google-apps.folder' and name = 'Lift ${liftName}'`;
+        const liftFolderRes = await gapi.client.drive.files.list({
+          q: liftFolderQuery,
+          includeItemsFromAllDrives: true,
+          supportsAllDrives: true,
+        });
 
-      if (liftFolderRes.result.files.length === 0) {
-        throw new Error(`No "Lift ${liftName}" subfolder found.`);
-      }
-      const liftFolderId = liftFolderRes.result.files[0].id;
+        if (liftFolderRes.result.files.length === 0) {
+          throw new Error(`No "Lift ${liftName}" subfolder found.`);
+        }
+        const liftFolderId = liftFolderRes.result.files[0].id;
+        // TEST
+        // const docFileQuery = `'${liftFolderId}' in parents and mimeType = 'application/vnd.google-apps.document'`;
+        // const fileResDock = await gapi.client.drive.files.list({
+        //   q: docFileQuery,
+        //   includeItemsFromAllDrives: true,
+        //   supportsAllDrives: true,
+        // });
 
-      const htmlFileQuery = `'${liftFolderId}' in parents and mimeType = 'text/html'`;
-      const fileRes = await gapi.client.drive.files.list({
-        q: htmlFileQuery,
-        includeItemsFromAllDrives: true,
-        supportsAllDrives: true,
-      });
+        // const fileIdDock = fileResDock.result.files[0].id;
 
-      if (fileRes.result.files.length === 0) {
-        throw new Error("No HTML file found in the specified subfolder.");
-      }
-      const fileId = fileRes.result.files[0].id;
+        // const fileContentResDock = await gapi.client.drive.files.export({
+        //   fileId: fileIdDock,
+        //   mimeType: "text/plain",
+        // });
 
-      const fileContentRes = await gapi.client.drive.files.get({
-        fileId,
-        alt: "media",
-      });
+        // const text = fileContentResDock.body;
+        // const sentences = text
+        //   .split("\n")
+        //   .map((sentence) => sentence.trim())
+        //   .filter((sentence) => sentence.length > 0);
+        // setTextArray(sentences);
+        // TEST
 
-      setSubmitedResult(fileContentRes.body);
-      dispatch(
-        editDomain({
-          id: domainId,
-          values: {
+        const htmlFileQuery = `'${liftFolderId}' in parents and mimeType = 'text/html'`;
+        const fileRes = await gapi.client.drive.files.list({
+          q: htmlFileQuery,
+          includeItemsFromAllDrives: true,
+          supportsAllDrives: true,
+        });
+
+        if (fileRes.result.files.length === 0) {
+          throw new Error("No HTML file found in the specified subfolder.");
+        }
+        const fileId = fileRes.result.files[0].id;
+
+        const fileContentRes = await gapi.client.drive.files.get({
+          fileId,
+          alt: "media",
+        });
+
+        setSubmitedResult(fileContentRes.body);
+        dispatch(
+          editDomain({
+            id: domainId,
+            values: {
+              ...values,
+              submit: values.submit,
+              linkUrl: linka,
+              isFontSize,
+              isFontFamily,
+              isColorLink,
+              isWidth,
+              isPaddingLR,
+              isReplace,
+              isLinkUrl,
+              isTrTB,
+              isBGColor,
+              isDeleteLift,
+              isAddHidden,
+              isLineHeight,
+            },
+          })
+        );
+        setSubmitedResult(
+          makeCopy({
             ...values,
-            submit: values.submit,
+            submit: fileContentRes.body,
             linkUrl: linka,
             isFontSize,
             isFontFamily,
@@ -409,47 +452,28 @@ const AutoCopies = () => {
             isDeleteLift,
             isAddHidden,
             isLineHeight,
-          },
-        })
-      );
-      setSubmitedResult(
-        makeCopy({
-          ...values,
-          submit: fileContentRes.body,
-          linkUrl: linka,
-          isFontSize,
-          isFontFamily,
-          isColorLink,
-          isWidth,
-          isPaddingLR,
-          isReplace,
-          isLinkUrl,
-          isTrTB,
-          isBGColor,
-          isDeleteLift,
-          isAddHidden,
-          isLineHeight,
-        })
-      );
-      setIsSubmitted(true);
-      toast.success("Copy made", {
-        position: "top-right",
-        autoClose: 1000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-        transition: Bounce,
-      });
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setIsLoading(false);
-      setSubmitting(false);
+          })
+        );
+        setIsSubmitted(true);
+        toast.success("Copy made", {
+          position: "top-right",
+          autoClose: 1000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Bounce,
+        });
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setIsLoading(false);
+        setSubmitting(false);
+      }
     }
-  }});
+  });
 
   const handleImageAdd = () => {
     setIsModalOpen(true);
@@ -487,7 +511,7 @@ const AutoCopies = () => {
       theme: "light",
       transition: Bounce,
     });
-  }
+  };
 
   return (
     <PageContainer>
