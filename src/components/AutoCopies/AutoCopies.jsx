@@ -47,6 +47,7 @@ import InfoButton from "../InfoButton/InfoButton";
 import Preview from "../Preview/Preview";
 import AddHiddenModal from "../AddHiddenModal/AddHiddenModal";
 import LinkBuilderModal from "../LInkBuilderModal/LInkBuilderModal";
+import SubjectsModal from "../SubjectsModal/SubjectsModal";
 
 const CLIENT_ID =
   "1042942150757-2q0dlbnb2ti5dhu68nf8bia7eusuj795.apps.googleusercontent.com";
@@ -90,6 +91,7 @@ const AutoCopies = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isHiddenModalOpen, setHiddenModalOpen] = useState(false);
   const [isLinkBuilderOpen, setLinkBuilderOpen] = useState(false);
+  const [isSubjectsModal, setSubjectsModal] = useState(false);
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -332,6 +334,7 @@ const AutoCopies = () => {
 
       try {
         setIsLoading(true);
+        setTextArray([]);
         setProductName(values.submit);
         const copyName = values.submit.match(/[a-zA-Z]+/)[0];
         const liftName = values.submit.match(/[a-zA-Z]+(\d+)/)[1];
@@ -372,28 +375,6 @@ const AutoCopies = () => {
           throw new Error(`No "Lift ${liftName}" subfolder found.`);
         }
         const liftFolderId = liftFolderRes.result.files[0].id;
-        // TEST
-        // const docFileQuery = `'${liftFolderId}' in parents and mimeType = 'application/vnd.google-apps.document'`;
-        // const fileResDock = await gapi.client.drive.files.list({
-        //   q: docFileQuery,
-        //   includeItemsFromAllDrives: true,
-        //   supportsAllDrives: true,
-        // });
-
-        // const fileIdDock = fileResDock.result.files[0].id;
-
-        // const fileContentResDock = await gapi.client.drive.files.export({
-        //   fileId: fileIdDock,
-        //   mimeType: "text/plain",
-        // });
-
-        // const text = fileContentResDock.body;
-        // const sentences = text
-        //   .split("\n")
-        //   .map((sentence) => sentence.trim())
-        //   .filter((sentence) => sentence.length > 0);
-        // setTextArray(sentences);
-        // TEST
 
         const htmlFileQuery = `'${liftFolderId}' in parents and mimeType = 'text/html'`;
         const fileRes = await gapi.client.drive.files.list({
@@ -466,6 +447,29 @@ const AutoCopies = () => {
           theme: "light",
           transition: Bounce,
         });
+
+        // TEST
+         const docFileQuery = `'${liftFolderId}' in parents and mimeType = 'application/vnd.google-apps.document'`;
+         const fileResDock = await gapi.client.drive.files.list({
+           q: docFileQuery,
+           includeItemsFromAllDrives: true,
+           supportsAllDrives: true,
+         });
+
+         const fileIdDock = fileResDock.result.files[0].id;
+
+         const fileContentResDock = await gapi.client.drive.files.export({
+           fileId: fileIdDock,
+           mimeType: "text/plain",
+         });
+
+         const text = fileContentResDock.body;
+         const sentences = text
+           .split("\n")
+           .map((sentence) => sentence.trim())
+           .filter((sentence) => sentence.length > 0);
+         setTextArray(sentences);
+        // TEST
       } catch (err) {
         setError(err.message);
       } finally {
@@ -567,6 +571,9 @@ const AutoCopies = () => {
         >
           Link Builder
         </HiddenImageButton>
+        <AddImageButton type="button" onClick={() => setSubjectsModal(true)}>
+          Subjects
+        </AddImageButton>
         {/* <FastRedirect />   */}
       </FuncContainer>
 
@@ -918,6 +925,11 @@ const AutoCopies = () => {
         isOpen={isLinkBuilderOpen}
         onClose={() => setLinkBuilderOpen(false)}
         onConfirm={handleLinkBuilderConfirm}
+      />
+      <SubjectsModal
+        isOpen={isSubjectsModal}
+        onClose={() => setSubjectsModal(false)}
+        subjects={textArray}
       />
     </PageContainer>
   );

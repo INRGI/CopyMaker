@@ -1,6 +1,21 @@
-import { Container } from './SubjectsModal.styled';
+import { Container, Item, List } from './SubjectsModal.styled';
+import { Bounce, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const SubjectsModal = ({ isOpen, onClose, subjects }) => {
+    const handleCopy = () => {
+        toast.success("Text copied", {
+          position: "top-right",
+          autoClose: 1000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Bounce,
+        });
+      };
     return (
         <Container
             isOpen={isOpen}
@@ -8,7 +23,14 @@ const SubjectsModal = ({ isOpen, onClose, subjects }) => {
             contentLabel="Subjects Modal"
             ariaHideApp={false}
         >
-            <p>SubjectsModal</p>
+            <List>
+                {subjects.map(item => (
+                    <Item onClick={() => {
+                        navigator.clipboard.writeText(item);
+                        handleCopy();
+                      }}>{item}</Item>
+                ))}
+            </List>
         </Container>
     );
 };
