@@ -48,6 +48,7 @@ import Preview from "../Preview/Preview";
 import AddHiddenModal from "../AddHiddenModal/AddHiddenModal";
 import LinkBuilderModal from "../LInkBuilderModal/LInkBuilderModal";
 import SubjectsModal from "../SubjectsModal/SubjectsModal";
+import makeUnique from "../../helpers/makeUnique";
 
 const CLIENT_ID =
   "1042942150757-2q0dlbnb2ti5dhu68nf8bia7eusuj795.apps.googleusercontent.com";
@@ -376,6 +377,17 @@ const AutoCopies = () => {
         });
 
         if (subFolderRes.result.files.length === 0) {
+          toast.error("No 'HTML+SL' subfolder found.", {
+            position: "top-right",
+            autoClose: 1000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            transition: Bounce,
+          });
           throw new Error('No "HTML+SL" subfolder found.');
         }
         const subFolderId = subFolderRes.result.files[0].id;
@@ -388,6 +400,17 @@ const AutoCopies = () => {
         });
 
         if (liftFolderRes.result.files.length === 0) {
+          toast.error("Copy not found(Lift)", {
+            position: "top-right",
+            autoClose: 1000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            transition: Bounce,
+          });
           throw new Error(`No "Lift ${liftName}" subfolder found.`);
         }
 
@@ -400,6 +423,17 @@ const AutoCopies = () => {
         );
 
         if (liftFolderRes.result.files.length === 0) {
+          toast.error("Copy not found(Lift)", {
+            position: "top-right",
+            autoClose: 1000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            transition: Bounce,
+          });
           throw new Error(`No exact "Lift ${liftName}" subfolder found.`);
         }
 
@@ -413,6 +447,17 @@ const AutoCopies = () => {
         });
 
         if (fileRes.result.files.length === 0) {
+          toast.error("Copy not found(HTML File)", {
+            position: "top-right",
+            autoClose: 1000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            transition: Bounce,
+          });
           throw new Error("No HTML file found in the specified subfolder.");
         }
         const fileId = fileRes.result.files[0].id;
@@ -495,7 +540,7 @@ const AutoCopies = () => {
         const text = fileContentResDock.body;
         const sentences = text
           .split("\n")
-          .map((sentence) => sentence.trim())
+          .map((sentence) => makeUnique(sentence.trim()))
           .filter((sentence) => sentence.length > 0);
         setTextArray(sentences);
         // TEST

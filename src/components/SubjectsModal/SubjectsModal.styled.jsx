@@ -43,6 +43,5 @@ export const Item = styled.li`
     border-radius: 5px;
     max-width: 800px;
     width: 95%;
-    height: 40px;
     cursor: pointer;
 `;
