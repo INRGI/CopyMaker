@@ -336,6 +336,7 @@ const AutoCopies = () => {
         setIsLoading(true);
         setTextArray([]);
         setProductName(values.submit);
+
         const copyName = values.submit.match(/[a-zA-Z]+/)[0];
         const liftName = values.submit.match(/[a-zA-Z]+(\d+)/)[1];
 
@@ -349,10 +350,25 @@ const AutoCopies = () => {
         if (res.result.files.length === 0) {
           throw new Error("No product folder found with the specified name.");
         }
-        const productFolderId = res.result.files[0].id;
+
+        const cleanFolderName = (name) =>
+          name
+            .replace(/[^\w\s]/g, "")
+            .split(" ")[0]
+            .trim();
+        let productFolder = res.result.files.find(
+          (file) => cleanFolderName(file.name) === copyName
+        );
+
+        if (!productFolder) {
+          throw new Error(
+            "No exact product folder found with the specified name."
+          );
+        }
+
+        const productFolderId = productFolder.id;
 
         const subFolderQuery = `'${productFolderId}' in parents and mimeType = 'application/vnd.google-apps.folder' and name contains 'HTML+SL'`;
-
         const subFolderRes = await gapi.client.drive.files.list({
           q: subFolderQuery,
           includeItemsFromAllDrives: true,
@@ -364,7 +380,7 @@ const AutoCopies = () => {
         }
         const subFolderId = subFolderRes.result.files[0].id;
 
-        const liftFolderQuery = `'${subFolderId}' in parents and mimeType = 'application/vnd.google-apps.folder' and name = 'Lift ${liftName}'`;
+        const liftFolderQuery = `'${subFolderId}' in parents and mimeType = 'application/vnd.google-apps.folder' and name contains 'Lift '`;
         const liftFolderRes = await gapi.client.drive.files.list({
           q: liftFolderQuery,
           includeItemsFromAllDrives: true,
@@ -374,6 +390,19 @@ const AutoCopies = () => {
         if (liftFolderRes.result.files.length === 0) {
           throw new Error(`No "Lift ${liftName}" subfolder found.`);
         }
+
+        const liftNumber = liftName.match(/\d+/)[0];
+        liftFolderRes.result.files = liftFolderRes.result.files.filter(
+          (file) => {
+            const match = file.name.match(/Lift (\d+)/);
+            return match && match[1] === liftNumber;
+          }
+        );
+
+        if (liftFolderRes.result.files.length === 0) {
+          throw new Error(`No exact "Lift ${liftName}" subfolder found.`);
+        }
+
         const liftFolderId = liftFolderRes.result.files[0].id;
 
         const htmlFileQuery = `'${liftFolderId}' in parents and mimeType = 'text/html'`;
@@ -449,26 +478,26 @@ const AutoCopies = () => {
         });
 
         // TEST
-         const docFileQuery = `'${liftFolderId}' in parents and mimeType = 'application/vnd.google-apps.document'`;
-         const fileResDock = await gapi.client.drive.files.list({
-           q: docFileQuery,
-           includeItemsFromAllDrives: true,
-           supportsAllDrives: true,
-         });
+        const docFileQuery = `'${liftFolderId}' in parents and mimeType = 'application/vnd.google-apps.document'`;
+        const fileResDock = await gapi.client.drive.files.list({
+          q: docFileQuery,
+          includeItemsFromAllDrives: true,
+          supportsAllDrives: true,
+        });
 
-         const fileIdDock = fileResDock.result.files[0].id;
+        const fileIdDock = fileResDock.result.files[0].id;
 
-         const fileContentResDock = await gapi.client.drive.files.export({
-           fileId: fileIdDock,
-           mimeType: "text/plain",
-         });
+        const fileContentResDock = await gapi.client.drive.files.export({
+          fileId: fileIdDock,
+          mimeType: "text/plain",
+        });
 
-         const text = fileContentResDock.body;
-         const sentences = text
-           .split("\n")
-           .map((sentence) => sentence.trim())
-           .filter((sentence) => sentence.length > 0);
-         setTextArray(sentences);
+        const text = fileContentResDock.body;
+        const sentences = text
+          .split("\n")
+          .map((sentence) => sentence.trim())
+          .filter((sentence) => sentence.length > 0);
+        setTextArray(sentences);
         // TEST
       } catch (err) {
         setError(err.message);
