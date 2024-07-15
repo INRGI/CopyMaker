@@ -510,7 +510,7 @@ const AutoCopies = () => {
           })
         );
         setIsSubmitted(true);
-        toast.success("Copy made", {
+        toast.success("Copy done", {
           position: "top-right",
           autoClose: 1000,
           hideProgressBar: false,
@@ -530,7 +530,24 @@ const AutoCopies = () => {
           supportsAllDrives: true,
         });
 
-        const fileIdDock = fileResDock.result.files[0].id;
+        const filteredFilesDock = fileResDock.result.files.filter(file => !file.name.toLowerCase().includes('html'));
+
+        if (filteredFilesDock.length === 0) {
+          toast.error("SL not found", {
+            position: "top-right",
+            autoClose: 1000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            transition: Bounce,
+          });
+          throw new Error("No Word document found that doesn't contain 'html' in the name.");
+        }
+
+        const fileIdDock = filteredFilesDock[0].id;
 
         const fileContentResDock = await gapi.client.drive.files.export({
           fileId: fileIdDock,
@@ -543,6 +560,17 @@ const AutoCopies = () => {
           .map((sentence) => makeUnique(sentence.trim()))
           .filter((sentence) => sentence.length > 0);
         setTextArray(sentences);
+        toast.success("SL done", {
+          position: "top-right",
+          autoClose: 1000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Bounce,
+        });
         // TEST
       } catch (err) {
         setError(err.message);
