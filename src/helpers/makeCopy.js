@@ -1,4 +1,5 @@
 import addHiddenBlock from "./addHidenBlock";
+import botsLink from "./botsLink";
 import makeUnique from "./makeUnique";
 
 const makeCopy = ({
@@ -24,6 +25,8 @@ const makeCopy = ({
     isAddHidden,
     isLineHeight,
     LineHeight,
+    isBotLink,
+    botUrl,
 }) => {
     let result = submit;
 
@@ -36,8 +39,17 @@ const makeCopy = ({
         result = result.replace(/(style="[^"]*)font-family:[^;]*;/g, `$1font-family: ${fontFamily};`);
     }
     
+    // if (isColorLink) {
+    //     result = result.replace(/<a(?:\s+[^>]*)?\s+style="([^"]*)"/g, (match, styleAttr) => {
+    //         if (styleAttr.includes('color:')) {
+    //             return match.replace(/color:[^;]+;/g, `color: ${colorLink};`);
+    //         } else {
+    //             return match.replace(/(style="[^"]*)"/, `$1;color: ${colorLink};"`);
+    //         }
+    //     });
+    // }
     if (isColorLink) {
-        result = result.replace(/<a(?:\s+[^>]*)?\s+style="([^"]*)"/g, (match, styleAttr) => {
+        result = result.replace(/<a(?![^>]*class=["']bots["'])\s+[^>]*style="([^"]*)"/g, (match, styleAttr) => {
             if (styleAttr.includes('color:')) {
                 return match.replace(/color:[^;]+;/g, `color: ${colorLink};`);
             } else {
@@ -45,6 +57,7 @@ const makeCopy = ({
             }
         });
     }
+    
         
 
     if (isWidth) {
@@ -107,6 +120,12 @@ const makeCopy = ({
     if (isReplace) {
         result = makeUnique(result);
     }    
+
+    // TEST
+    if(isBotLink){
+        result = botsLink(result, botUrl);
+    }
+    // TEST
 
     result = result.replace(/>\s+</g, '><');
     

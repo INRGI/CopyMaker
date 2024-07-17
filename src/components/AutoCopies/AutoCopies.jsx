@@ -81,7 +81,9 @@ const AutoCopies = () => {
   const [isBGColor, setBGColor] = useState(domain?.isBGColor || false);
   const [isAddHidden, setAddHidden] = useState(domain?.isAddHidden || false);
   const [isLineHeight, setLineHeight] = useState(domain?.isLineHeight || false);
+  const [isBotLink, setBotLink] = useState(domain?.isLineHeight || false);
 
+  
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [submitedResult, setSubmitedResult] = useState("");
 
@@ -132,10 +134,11 @@ const AutoCopies = () => {
     trTB: domain?.trTB || "",
     BGColor: domain?.BGColor || "",
     LineHeight: domain?.LineHeight || "",
+    botUrl: domain?.botUrl || "",
     ...domain,
     submit: "",
   };
-
+  
   useEffect(() => {
     if (domain) {
       setFontSize(domain.isFontSize);
@@ -150,6 +153,7 @@ const AutoCopies = () => {
       setBGColor(domain.isBGColor);
       setAddHidden(domain.isAddHidden);
       setLineHeight(domain.isLineHeight);
+      setBotLink(domain.isBotLink);
       setNewLinks(
         domain.images
           ? Array.from({ length: domain.images.length }, () => "")
@@ -184,6 +188,7 @@ const AutoCopies = () => {
   const TrTBId = nanoid();
   const BGColorId = nanoid();
   const LineHeightId = nanoid();
+  const BotLinkId = nanoid();
 
   const hasImages = /<img.*?src=["'](.*?)["'].*?>/g.test(submitedResult);
 
@@ -206,6 +211,7 @@ const AutoCopies = () => {
             isDeleteLift,
             isAddHidden,
             isLineHeight,
+            isBotLink,
           },
         })
       );
@@ -232,6 +238,7 @@ const AutoCopies = () => {
           isDeleteLift,
           isAddHidden,
           isLineHeight,
+          isBotLink,
         })
       );
       return;
@@ -487,6 +494,7 @@ const AutoCopies = () => {
               isDeleteLift,
               isAddHidden,
               isLineHeight,
+              isBotLink,
             },
           })
         );
@@ -507,6 +515,7 @@ const AutoCopies = () => {
             isDeleteLift,
             isAddHidden,
             isLineHeight,
+            isBotLink,
           })
         );
         setIsSubmitted(true);
@@ -574,6 +583,8 @@ const AutoCopies = () => {
         // TEST
       } catch (err) {
         setError(err.message);
+        setIsLoading(false);
+        setSubmitting(false);
       } finally {
         setIsLoading(false);
         setSubmitting(false);
@@ -698,6 +709,7 @@ const AutoCopies = () => {
                 trTB: domain.trTB || "",
                 BGColor: domain.BGColor || "",
                 LineHeight: domain.LineHeight || "",
+                botUrl: domain.botUrl || "",
                 submit: domain.submit || "",
               });
             }
@@ -912,6 +924,28 @@ const AutoCopies = () => {
                   ></Field>
 
                   <InfoButton text="Please paste Background Color like this #ffffff" />
+                </InputContainer>
+                <InputContainer>
+                  <Checkbox
+                    checked={isBotLink}
+                    onChange={() => setBotLink((prev) => !prev)}
+                    color="success"
+                  />
+                  <Field
+                    fullWidth
+                    as={MuiInput}
+                    label="botTrap"
+                    size="small"
+                    variant="outlined"
+                    type="text"
+                    name="botUrl"
+                    id={BotLinkId}
+                    placeholder="Paste your bot link here"
+                    disabled={!isBotLink}
+                    required
+                  ></Field>
+
+                  <InfoButton text="Please paste your bot link here" />
                 </InputContainer>
               </Container>
 

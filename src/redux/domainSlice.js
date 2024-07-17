@@ -12,7 +12,7 @@ const domainSlice = createSlice({
       reducer(state, action) {
         state.push(action.payload);
       },
-      prepare({name, linkUrl, fontSize, fontFamily, colorLink, width, paddingLR, BGColor, isFontSize, isFontFamily, isColorLink, isWidth, isPaddingLR, isReplace, isDeleteLift, isLinkUrl, isTrTB, isBGColor,isAddHidden, isLineHeight, LineHeight, urlStart, urlEnd, linkType, typeRT }) {
+      prepare({name, linkUrl, fontSize, fontFamily, colorLink, width, paddingLR, BGColor, botUrl ,isBotLink, isFontSize, isFontFamily, isColorLink, isWidth, isPaddingLR, isReplace, isDeleteLift, isLinkUrl, isTrTB, isBGColor,isAddHidden, isLineHeight, LineHeight, urlStart, urlEnd, linkType, typeRT }) {
         return {
           payload: {
             name,
@@ -23,6 +23,8 @@ const domainSlice = createSlice({
             width,
             paddingLR,
             BGColor,
+            botUrl,
+            isBotLink,
             isFontSize,
             isFontFamily,
             isColorLink,
