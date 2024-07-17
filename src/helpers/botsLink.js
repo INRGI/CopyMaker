@@ -1,6 +1,7 @@
 
 const botsLink = (htmlText, url) => {
-    const linkRegex = new RegExp(`<a\\s+class=["']bots["']\\s+href=["']${url}["']\\s+style=["'][^"']*text-decoration:\\s*none;[^"']*["']>.*?<\\/a>`, 'i');
+    // const linkRegex = new RegExp(`<a\\s+class=["']bots["']\\s+href=["']${url}["']\\s+style=["'][^"']*text-decoration:\\s*none;[^"']*["']>.*?<\\/a>`, 'i');
+    const linkRegex = new RegExp(`class="bots"`, 'i');
     if (linkRegex.test(htmlText)) {
         return htmlText;
     }
