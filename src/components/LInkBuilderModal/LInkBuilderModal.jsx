@@ -203,6 +203,7 @@ const LinkBuilderModal = ({ isOpen, onClose, onConfirm }) => {
           label="Choose type of RT"
           onChange={handleRTChange}
         >
+          <MenuItem value={"RT GF"}>RT TM</MenuItem>
           <MenuItem value={"RT GNF"}>RT GNF</MenuItem>
           <MenuItem value={"RT GF"}>RT GF</MenuItem>
           <MenuItem value={"RT GK"}>RT GK</MenuItem>
