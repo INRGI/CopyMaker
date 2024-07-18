@@ -192,6 +192,34 @@ const AutoCopies = () => {
 
   const hasImages = /<img.*?src=["'](.*?)["'].*?>/g.test(submitedResult);
 
+  const toastSuccess = (text) => {
+    toast.success(text, {
+      position: "top-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      transition: Bounce,
+    });
+  }
+
+  const toastError = (text) => {
+    toast.error(text, {
+      position: "top-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      transition: Bounce,
+    });
+  }
+
   const handleSubmit = useCallback(async (values, { setSubmitting }) => {
     if (values.submit === productName) {
       dispatch(
@@ -276,30 +304,10 @@ const AutoCopies = () => {
             const linkUrl = `${domain.urlStart}${value}${domain.urlEnd}${values.submit}`;
             setResult(linkUrl);
             dispatch(editDomain({ id: domainId, values: { linkUrl } }));
-            toast.success("Your link created", {
-              position: "top-right",
-              autoClose: 2000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              progress: undefined,
-              theme: "light",
-              transition: Bounce,
-            });
+            toastSuccess("Your link created");
             return linkUrl;
           } else {
-            toast.error("Product not found", {
-              position: "top-right",
-              autoClose: 2000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              progress: undefined,
-              theme: "light",
-              transition: Bounce,
-            });
+            toastError("Product not found");
           }
         }
 
@@ -311,30 +319,10 @@ const AutoCopies = () => {
             const linkUrl = `${domain.urlStart}${value}${domain.urlEnd}${img}_${prefix}`;
             setResult(linkUrl);
             dispatch(editDomain({ id: domainId, values: { linkUrl } }));
-            toast.success("Your link created", {
-              position: "top-right",
-              autoClose: 2000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              progress: undefined,
-              theme: "light",
-              transition: Bounce,
-            });
+            toastSuccess("Your link created");
             return linkUrl;
           } else {
-            toast.error("Product not found", {
-              position: "top-right",
-              autoClose: 2000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              progress: undefined,
-              theme: "light",
-              transition: Bounce,
-            });
+            toastError("Product not found");
           }
         }
       };
@@ -384,17 +372,7 @@ const AutoCopies = () => {
         });
 
         if (subFolderRes.result.files.length === 0) {
-          toast.error("No 'HTML+SL' subfolder found.", {
-            position: "top-right",
-            autoClose: 1000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-            transition: Bounce,
-          });
+          toastError("No 'HTML+SL' subfolder found.");
           throw new Error('No "HTML+SL" subfolder found.');
         }
         const subFolderId = subFolderRes.result.files[0].id;
@@ -407,17 +385,7 @@ const AutoCopies = () => {
         });
 
         if (liftFolderRes.result.files.length === 0) {
-          toast.error("Copy not found(Lift)", {
-            position: "top-right",
-            autoClose: 1000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-            transition: Bounce,
-          });
+          toastError("Copy not found(Lift)")
           throw new Error(`No "Lift ${liftName}" subfolder found.`);
         }
 
@@ -430,17 +398,7 @@ const AutoCopies = () => {
         );
 
         if (liftFolderRes.result.files.length === 0) {
-          toast.error("Copy not found(Lift)", {
-            position: "top-right",
-            autoClose: 1000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-            transition: Bounce,
-          });
+          toastError("Copy not found(Lift)");
           throw new Error(`No exact "Lift ${liftName}" subfolder found.`);
         }
 
@@ -454,17 +412,7 @@ const AutoCopies = () => {
         });
 
         if (fileRes.result.files.length === 0) {
-          toast.error("Copy not found(HTML File)", {
-            position: "top-right",
-            autoClose: 1000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-            transition: Bounce,
-          });
+          toastError("Copy not found(HTML File)");
           throw new Error("No HTML file found in the specified subfolder.");
         }
         const fileId = fileRes.result.files[0].id;
@@ -519,17 +467,7 @@ const AutoCopies = () => {
           })
         );
         setIsSubmitted(true);
-        toast.success("Copy done", {
-          position: "top-right",
-          autoClose: 1000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-          transition: Bounce,
-        });
+        toastSuccess("Copy done");
 
         // TEST
         const docFileQuery = `'${liftFolderId}' in parents and mimeType = 'application/vnd.google-apps.document'`;
@@ -542,17 +480,7 @@ const AutoCopies = () => {
         const filteredFilesDock = fileResDock.result.files.filter(file => !file.name.toLowerCase().includes('html'));
 
         if (filteredFilesDock.length === 0) {
-          toast.error("SL not found", {
-            position: "top-right",
-            autoClose: 1000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-            transition: Bounce,
-          });
+          toastError("SL not found");
           throw new Error("No Word document found that doesn't contain 'html' in the name.");
         }
 
@@ -563,23 +491,13 @@ const AutoCopies = () => {
           mimeType: "text/plain",
         });
 
-        const text = fileContentResDock.body;
-        const sentences = text
+        const subjbody = fileContentResDock.body;
+        const sentences = subjbody
           .split("\n")
           .map((sentence) => makeUnique(sentence.trim()))
           .filter((sentence) => sentence.length > 0);
         setTextArray(sentences);
-        toast.success("SL done", {
-          position: "top-right",
-          autoClose: 1000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-          transition: Bounce,
-        });
+        toastSuccess("SL done");
         // TEST
       } catch (err) {
         setError(err.message);
@@ -617,17 +535,7 @@ const AutoCopies = () => {
   };
 
   const handleCopy = () => {
-    toast.success("Copy copied", {
-      position: "top-right",
-      autoClose: 1000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "light",
-      transition: Bounce,
-    });
+    toastSuccess("Copy copied");
   };
 
   return (
