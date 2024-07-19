@@ -169,7 +169,7 @@ const AutoCopies = () => {
   };
 
   const handleImageReplace = (index, newSrc) => {
-    const images = submitedResult.match(/<img.*?src=["'](.*?)["'].*?>/g);
+    const images = submitedResult.match(/<img\s+[^>]*src=["'](.*?)["'][^>]*>/g);
 
     if (index >= 0 && index < images.length) {
       const oldSrc = images[index].match(/src=["'](.*?)["']/)[1];
@@ -190,7 +190,7 @@ const AutoCopies = () => {
   const LineHeightId = nanoid();
   const BotLinkId = nanoid();
 
-  const hasImages = /<img.*?src=["'](.*?)["'].*?>/g.test(submitedResult);
+  const hasImages = /<img\s+[^>]*src=["'](.*?)["'][^>]*>/g.test(submitedResult);
 
   const toastSuccess = (text) => {
     toast.success(text, {
@@ -881,7 +881,7 @@ const AutoCopies = () => {
                   </TitleImages>
                   <ImageContaianer>
                     {submitedResult
-                      .match(/<img.*?src=["'](.*?)["'].*?>/g)
+                      .match(/<img\s+[^>]*src=["'](.*?)["'][^>]*>/g)
                       .map((match, index) => {
                         const inputId = `newLink${index}`;
                         return (
