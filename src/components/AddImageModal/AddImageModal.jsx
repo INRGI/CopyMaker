@@ -20,7 +20,7 @@ const AddImageModal = ({isOpen, onClose, result, onConfirm}) =>{
         padding: "",    
     };
 
-    const regex = /<a\s+(?:[^>]*?\s+)?href=(["'])(.*?)\1/g;
+    const regex = /<a\s+(?![^>]*\bclass\s*=\s*["'][^"']*\bbots\b[^"']*["'])[^>]*href=(["'])(.*?)\1/g;
     
     let link = 'urlhere';
     let match;
