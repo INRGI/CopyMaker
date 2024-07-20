@@ -49,6 +49,7 @@ import AddHiddenModal from "../AddHiddenModal/AddHiddenModal";
 import LinkBuilderModal from "../LInkBuilderModal/LInkBuilderModal";
 import SubjectsModal from "../SubjectsModal/SubjectsModal";
 import makeUnique from "../../helpers/makeUnique";
+import { toastError, toastSuccess } from "../../helpers/toastics";
 
 const CLIENT_ID =
   "1042942150757-2q0dlbnb2ti5dhu68nf8bia7eusuj795.apps.googleusercontent.com";
@@ -191,34 +192,6 @@ const AutoCopies = () => {
   const BotLinkId = nanoid();
 
   const hasImages = /<img\s+[^>]*src=["'](.*?)["'][^>]*>/g.test(submitedResult);
-
-  const toastSuccess = (text) => {
-    toast.success(text, {
-      position: "top-right",
-      autoClose: 2000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "light",
-      transition: Bounce,
-    });
-  }
-
-  const toastError = (text) => {
-    toast.error(text, {
-      position: "top-right",
-      autoClose: 2000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "light",
-      transition: Bounce,
-    });
-  }
 
   const handleSubmit = useCallback(async (values, { setSubmitting }) => {
     if (values.submit === productName) {

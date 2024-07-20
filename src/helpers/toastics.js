@@ -1,3 +1,4 @@
+import { Bounce, toast } from "react-toastify";
 export const toastSuccess = (text) => {
     toast.success(text, {
       position: "top-right",
