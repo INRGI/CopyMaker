@@ -50,6 +50,7 @@ import LinkBuilderModal from "../LInkBuilderModal/LInkBuilderModal";
 import SubjectsModal from "../SubjectsModal/SubjectsModal";
 import makeUnique from "../../helpers/makeUnique";
 import { toastError, toastSuccess } from "../../helpers/toastics";
+import FastRedirect from "../FastRedirect/FastRedirect";
 
 const CLIENT_ID =
   "1042942150757-2q0dlbnb2ti5dhu68nf8bia7eusuj795.apps.googleusercontent.com";
@@ -568,7 +569,7 @@ const AutoCopies = () => {
         <AddImageButton type="button" onClick={() => setSubjectsModal(true)}>
           Subjects
         </AddImageButton>
-        {/* <FastRedirect />   */}
+        <FastRedirect />  
       </FuncContainer>
 
       <Formik
