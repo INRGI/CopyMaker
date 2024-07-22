@@ -7,12 +7,23 @@ export const Container = styled.div`
     padding-left: 20px;
     padding-bottom: 5px;
     display: flex;
-    gap: 10px;
+    gap: 20px;
     align-items: center;
 `;
 
 export const Text = styled.p`
     padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    font-size: 18px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+`;
+
+export const SupportText = styled.p`
+    padding: 0;
+    cursor: pointer;
     margin: 0;
     display: flex;
     gap: 5px;

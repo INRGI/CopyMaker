@@ -21,16 +21,27 @@ import useExcelData from "../../hooks/useExcelData";
 import * as XLSX from "xlsx";
 
 const FeedbackSchema = Yup.object().shape({
-  urlStart: Yup.string().min(3, "Too Short!").max(100, "Too Long!").required("Please enter a url start"),
-  urlEnd: Yup.string().min(3, "Too Short!").max(100, "Too Long!").required("Please enter a url end"),
-  copyName: Yup.string().min(3, "Too Short!").max(10, "Too Long!").required("Please enter copy name"),
+  urlStart: Yup.string()
+    .min(3, "Too Short!")
+    .max(100, "Too Long!")
+    .required("Please enter a url start"),
+  urlEnd: Yup.string()
+    .min(3, "Too Short!")
+    .max(100, "Too Long!")
+    .required("Please enter a url end"),
+  copyName: Yup.string()
+    .min(3, "Too Short!")
+    .max(10, "Too Long!")
+    .required("Please enter copy name"),
 });
 
 const LinkBuilderModal = ({ isOpen, onClose, onConfirm }) => {
   const dispatch = useDispatch();
   const { domainId } = useParams();
-  const domain = useSelector((state) => state.domains.find((domain) => domain.id === domainId));
-  const excelData = useExcelData('/products.xlsx');
+  const domain = useSelector((state) =>
+    state.domains.find((domain) => domain.id === domainId)
+  );
+  const excelData = useExcelData("/products.xlsx");
 
   const [linkType, setLinkType] = useState(domain ? domain.linkType : "");
   const [typeRT, setTypeRT] = useState(domain ? domain.typeRT : "");
@@ -62,80 +73,129 @@ const LinkBuilderModal = ({ isOpen, onClose, onConfirm }) => {
         const cellValue = row[0];
         if (!cellValue) return false;
         const prefix = productName.match(/[a-zA-Z]+/)[0];
-        const cleanedCellValue = cellValue.toString().replace(/[^a-zA-Z0-9]/g, '');
+        const cleanedCellValue = cellValue
+          .toString()
+          .replace(/[^a-zA-Z0-9]/g, "");
         return cellValue && cleanedCellValue.toString().startsWith(prefix);
       });
 
       return row ? row[columnIndex] : null;
     };
 
-    if(linkType === 'RedTrack'){
-      const value = extractValue(excelData, productName, columnName);
-    if (value) {
-      const linkUrl = `${values.urlStart}${value}${values.urlEnd}${productName}`;
-      setResult(linkUrl);
-      dispatch(editDomain({ id: domainId, values: { ...values, linkType, typeRT, linkUrl} }));
-      toast.success("Your link created", {
-        position: "top-right",
-        autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-        transition: Bounce,
-      });
-    } else {
-      toast.error("Product not found", {
-        position: "top-right",
-        autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-        transition: Bounce,
-      });
-    }
+    if (linkType === "RedTrack") {
+      if (typeRT === "RT2 Blue STR") {
+        const value = extractValue(excelData, productName, columnName);
+        const img = extractValue(excelData, productName, "IMG-IT").match(/[a-zA-Z]+(.+)/)[1];
+        const prefix = productName.match(/[a-zA-Z]+(.+)/)[1];
+        if (value) {
+          const linkUrl = `${values.urlStart}${value}${values.urlEnd}${img}_${prefix}`;
+          setResult(linkUrl);
+          dispatch(
+            editDomain({
+              id: domainId,
+              values: { ...values, linkType, typeRT, linkUrl },
+            })
+          );
+          toast.success("Your link created", {
+            position: "top-right",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            transition: Bounce,
+          });
+        } else {
+          toast.error("Product not found", {
+            position: "top-right",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            transition: Bounce,
+          });
+        }
+      } else {
+        const value = extractValue(excelData, productName, columnName);
+        if (value) {
+          const linkUrl = `${values.urlStart}${value}${values.urlEnd}${productName}`;
+          setResult(linkUrl);
+          dispatch(
+            editDomain({
+              id: domainId,
+              values: { ...values, linkType, typeRT, linkUrl },
+            })
+          );
+          toast.success("Your link created", {
+            position: "top-right",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            transition: Bounce,
+          });
+        } else {
+          toast.error("Product not found", {
+            position: "top-right",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            transition: Bounce,
+          });
+        }
+      }
     }
 
-
-    if(linkType === 'Volume'){
+    if (linkType === "Volume") {
       const value = extractValue(excelData, productName, columnName);
-      const img = extractValue(excelData, productName, 'IMG-IT');
+      const img = extractValue(excelData, productName, "IMG-IT");
       const prefix = productName.match(/[a-zA-Z]+(.+)/)[1];
-    if (value) {
-      const linkUrl = `${values.urlStart}${value}${values.urlEnd}${img}_${prefix}`;
-      setResult(linkUrl);
-      dispatch(editDomain({ id: domainId, values: { ...values, linkType, typeRT, linkUrl } }));
-      toast.success("Your link created", {
-        position: "top-right",
-        autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-        transition: Bounce,
-      });
-    } else {
-      toast.error("Product not found", {
-        position: "top-right",
-        autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-        transition: Bounce,
-      });
+      if (value) {
+        const linkUrl = `${values.urlStart}${value}${values.urlEnd}${img}_${prefix}`;
+        setResult(linkUrl);
+        dispatch(
+          editDomain({
+            id: domainId,
+            values: { ...values, linkType, typeRT, linkUrl },
+          })
+        );
+        toast.success("Your link created", {
+          position: "top-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Bounce,
+        });
+      } else {
+        toast.error("Product not found", {
+          position: "top-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Bounce,
+        });
+      }
     }
-    }
-    
   };
 
   const handleCopy = () => {
@@ -171,230 +231,229 @@ const LinkBuilderModal = ({ isOpen, onClose, onConfirm }) => {
 
   return (
     <Container
-    ariaHideApp={false}
-    isOpen={isOpen}
-    onRequestClose={handleClose}
-    contentLabel="Link Builder Modal"
-  >
-    <FormControl fullWidth>
-      <InputLabel id="demo-simple-select-label">
-        Choose type of links
-      </InputLabel>
-      <Select
-        labelId="demo-simple-select-label"
-        id="demo-simple-select"
-        value={linkType}
-        label="Choose type of links"
-        onChange={handleChange}
-      >
-        <MenuItem value={"Volume"}>Volume</MenuItem>
-        <MenuItem value={"RedTrack"}>RedTrack</MenuItem>
-      </Select>
-    </FormControl>
-    {linkType === "RedTrack" && (
+      ariaHideApp={false}
+      isOpen={isOpen}
+      onRequestClose={handleClose}
+      contentLabel="Link Builder Modal"
+    >
       <FormControl fullWidth>
         <InputLabel id="demo-simple-select-label">
-          Choose type of RT
+          Choose type of links
         </InputLabel>
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
-          value={typeRT}
-          label="Choose type of RT"
-          onChange={handleRTChange}
+          value={linkType}
+          label="Choose type of links"
+          onChange={handleChange}
         >
-          <MenuItem value={"RT TM"}>RT TM</MenuItem>
-          <MenuItem value={"RT GNF"}>RT GNF</MenuItem>
-          <MenuItem value={"RT GF"}>RT GF</MenuItem>
-          <MenuItem value={"RT GK"}>RT GK</MenuItem>
-          <MenuItem value={"RT Blue"}>RT Blue</MenuItem>
-          <MenuItem value={"RT2 Blue STR"}>RT2 Blue STR</MenuItem>
-          <MenuItem value={"RT3 Blue (Killing)"}>RT3 Blue (Killing)</MenuItem>
-          <MenuItem value={"RT R"}>RT R</MenuItem>
-          <MenuItem value={"RT FR"}>RT FR</MenuItem>
-          <MenuItem value={"RT D"}>RT D</MenuItem>
-          <MenuItem value={"RT O"}>RT O</MenuItem>
-          <MenuItem value={"RT Purple Kill (ETP6)"}>
-            RT Purple Kill (ETP6)
-          </MenuItem>
+          <MenuItem value={"Volume"}>Volume</MenuItem>
+          <MenuItem value={"RedTrack"}>RedTrack</MenuItem>
         </Select>
       </FormControl>
-    )}
-    {typeRT !== "" && linkType === "RedTrack" && (
-      <Formik
-        initialValues={initialValues}
-        onSubmit={handleSubmit}
-        validationSchema={FeedbackSchema}
-        validateOnBlur={false}
-        validateOnChange={false}
-      >
-        <Form>
-          <LinkContainer>
-            <Field
-              fullWidth
-              as={MuiInput}
-              label="Link Start"
-              size="small"
-              variant="outlined"
-              type="text"
-              name="urlStart"
-              id={linkStartId}
-              placeholder="Link Start"
-              autoComplete="off"
-              required
-            />
-            <LinkText>RT</LinkText>
-            <Field
-              fullWidth
-              as={MuiInput}
-              label="Link End"
-              size="small"
-              variant="outlined"
-              type="text"
-              name="urlEnd"
-              id={linkEndId}
-              placeholder="Link End"
-              autoComplete="off"
-              required
-            />
-            <LinkText>COPY</LinkText>
-          </LinkContainer>
-
-          <LinkContainer>
-            <Field
-              fullWidth
-              as={MuiInput}
-              label="Copy Name"
-              size="small"
-              variant="outlined"
-              type="text"
-              name="copyName"
-              id={copyNameId}
-              placeholder="Copy Name"
-              autoComplete="off"
-              required
-            />
-
-            <Button type="submit" onClick={() => handleSubmit()}>
-              Make a link
-            </Button>
-          </LinkContainer>
-          {result !== "" && (
-            <ButtonContainer>
-              <TestButton type="button" onClick={handleOpenLink}>
-                Try Link
-              </TestButton>
-              <TestButton
-                type="button"
-                onClick={() => {
-                  navigator.clipboard.writeText(result);
-                  handleCopy();
-                }}
-              >
-                Copy Link
-              </TestButton>
-            </ButtonContainer>
-          )}
-        </Form>
-      </Formik>
-    )}
-
-    {linkType === "Volume" && (
-      <FormControl fullWidth>
-        <InputLabel id="demo-simple-select-label">
-          Choose type of Volume
-        </InputLabel>
-        <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={typeRT}
-          label="Choose type of Volume"
-          onChange={handleRTChange}
+      {linkType === "RedTrack" && (
+        <FormControl fullWidth>
+          <InputLabel id="demo-simple-select-label">
+            Choose type of RT
+          </InputLabel>
+          <Select
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            value={typeRT}
+            label="Choose type of RT"
+            onChange={handleRTChange}
+          >
+            <MenuItem value={"RT TM"}>RT TM</MenuItem>
+            <MenuItem value={"RT GNF"}>RT GNF</MenuItem>
+            <MenuItem value={"RT GF"}>RT GF</MenuItem>
+            <MenuItem value={"RT GK"}>RT GK</MenuItem>
+            <MenuItem value={"RT Blue"}>RT Blue</MenuItem>
+            <MenuItem value={"RT2 Blue STR"}>RT2 Blue STR</MenuItem>
+            <MenuItem value={"RT3 Blue (Killing)"}>RT3 Blue (Killing)</MenuItem>
+            <MenuItem value={"RT R"}>RT R</MenuItem>
+            <MenuItem value={"RT FR"}>RT FR</MenuItem>
+            <MenuItem value={"RT D"}>RT D</MenuItem>
+            <MenuItem value={"RT O"}>RT O</MenuItem>
+            <MenuItem value={"RT Purple Kill (ETP6)"}>
+              RT Purple Kill (ETP6)
+            </MenuItem>
+          </Select>
+        </FormControl>
+      )}
+      {typeRT !== "" && linkType === "RedTrack" && (
+        <Formik
+          initialValues={initialValues}
+          onSubmit={handleSubmit}
+          validationSchema={FeedbackSchema}
+          validateOnBlur={false}
+          validateOnChange={false}
         >
-          <MenuItem value={"Vol Green"}>Vol Green</MenuItem>
-        </Select>
-      </FormControl>
-    )}
-    {typeRT !== "" && linkType === "Volume" && (
-      <Formik
-        initialValues={initialValues}
-        onSubmit={handleSubmit}
-        validationSchema={FeedbackSchema}
-        validateOnBlur={false}
-        validateOnChange={false}
-      >
-        <Form>
-          <LinkContainer>
-            <Field
-              fullWidth
-              as={MuiInput}
-              label="Link Start"
-              size="small"
-              variant="outlined"
-              type="text"
-              name="urlStart"
-              id={linkStartId}
-              placeholder="Link Start"
-              autoComplete="off"
-              required
-            />
-            <LinkText>Volume</LinkText>
-            <Field
-              fullWidth
-              as={MuiInput}
-              label="Link End"
-              size="small"
-              variant="outlined"
-              type="text"
-              name="urlEnd"
-              id={linkEndId}
-              placeholder="Link End"
-              autoComplete="off"
-              required
-            />
-            <LinkText>IMG</LinkText>
-          </LinkContainer>
+          <Form>
+            <LinkContainer>
+              <Field
+                fullWidth
+                as={MuiInput}
+                label="Link Start"
+                size="small"
+                variant="outlined"
+                type="text"
+                name="urlStart"
+                id={linkStartId}
+                placeholder="Link Start"
+                autoComplete="off"
+                required
+              />
+              <LinkText>RT</LinkText>
+              <Field
+                fullWidth
+                as={MuiInput}
+                label="Link End"
+                size="small"
+                variant="outlined"
+                type="text"
+                name="urlEnd"
+                id={linkEndId}
+                placeholder="Link End"
+                autoComplete="off"
+                required
+              />
+              <LinkText>COPY</LinkText>
+            </LinkContainer>
 
-          <LinkContainer>
-            <Field
-              fullWidth
-              as={MuiInput}
-              label="Copy Name"
-              size="small"
-              variant="outlined"
-              type="text"
-              name="copyName"
-              id={copyNameId}
-              placeholder="Copy Name"
-              autoComplete="off"
-              required
-            />
+            <LinkContainer>
+              <Field
+                fullWidth
+                as={MuiInput}
+                label="Copy Name"
+                size="small"
+                variant="outlined"
+                type="text"
+                name="copyName"
+                id={copyNameId}
+                placeholder="Copy Name"
+                autoComplete="off"
+                required
+              />
 
-            <Button type="submit" onClick={() => handleSubmit()}>
-              Make a link
-            </Button>
-          </LinkContainer>
-          {result !== "" && (
-            <ButtonContainer>
-              <TestButton type="button" onClick={handleOpenLink}>
-                Try Link
-              </TestButton>
-              <TestButton
-                type="button"
-                onClick={() => {
-                  navigator.clipboard.writeText(result);
-                  handleCopy();
-                }}
-              >
-                Copy Link
-              </TestButton>
-            </ButtonContainer>
-          )}
-        </Form>
-      </Formik>
-    )}
-  </Container>
+              <Button type="submit" onClick={() => handleSubmit()}>
+                Make a link
+              </Button>
+            </LinkContainer>
+            {result !== "" && (
+              <ButtonContainer>
+                <TestButton type="button" onClick={handleOpenLink}>
+                  Try Link
+                </TestButton>
+                <TestButton
+                  type="button"
+                  onClick={() => {
+                    navigator.clipboard.writeText(result);
+                    handleCopy();
+                  }}
+                >
+                  Copy Link
+                </TestButton>
+              </ButtonContainer>
+            )}
+          </Form>
+        </Formik>
+      )}
 
+      {linkType === "Volume" && (
+        <FormControl fullWidth>
+          <InputLabel id="demo-simple-select-label">
+            Choose type of Volume
+          </InputLabel>
+          <Select
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            value={typeRT}
+            label="Choose type of Volume"
+            onChange={handleRTChange}
+          >
+            <MenuItem value={"Vol Green"}>Vol Green</MenuItem>
+          </Select>
+        </FormControl>
+      )}
+      {typeRT !== "" && linkType === "Volume" && (
+        <Formik
+          initialValues={initialValues}
+          onSubmit={handleSubmit}
+          validationSchema={FeedbackSchema}
+          validateOnBlur={false}
+          validateOnChange={false}
+        >
+          <Form>
+            <LinkContainer>
+              <Field
+                fullWidth
+                as={MuiInput}
+                label="Link Start"
+                size="small"
+                variant="outlined"
+                type="text"
+                name="urlStart"
+                id={linkStartId}
+                placeholder="Link Start"
+                autoComplete="off"
+                required
+              />
+              <LinkText>Volume</LinkText>
+              <Field
+                fullWidth
+                as={MuiInput}
+                label="Link End"
+                size="small"
+                variant="outlined"
+                type="text"
+                name="urlEnd"
+                id={linkEndId}
+                placeholder="Link End"
+                autoComplete="off"
+                required
+              />
+              <LinkText>IMG</LinkText>
+            </LinkContainer>
+
+            <LinkContainer>
+              <Field
+                fullWidth
+                as={MuiInput}
+                label="Copy Name"
+                size="small"
+                variant="outlined"
+                type="text"
+                name="copyName"
+                id={copyNameId}
+                placeholder="Copy Name"
+                autoComplete="off"
+                required
+              />
+
+              <Button type="submit" onClick={() => handleSubmit()}>
+                Make a link
+              </Button>
+            </LinkContainer>
+            {result !== "" && (
+              <ButtonContainer>
+                <TestButton type="button" onClick={handleOpenLink}>
+                  Try Link
+                </TestButton>
+                <TestButton
+                  type="button"
+                  onClick={() => {
+                    navigator.clipboard.writeText(result);
+                    handleCopy();
+                  }}
+                >
+                  Copy Link
+                </TestButton>
+              </ButtonContainer>
+            )}
+          </Form>
+        </Formik>
+      )}
+    </Container>
   );
 };
 
