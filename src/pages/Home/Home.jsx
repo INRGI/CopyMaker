@@ -10,6 +10,7 @@ import MakeUniqueModal from "../../components/MakeUniqueModa/MakeUniqueModal";
 import { useState } from "react";
 import AboutAuthor from "../../components/AboutAuthor/AboutAuthor";
 import { useLocation } from "react-router-dom";
+import UploadInfo from "../../components/UploadInfo/UploadInfo";
 
 
 const Home = () => {
@@ -47,6 +48,7 @@ const Home = () => {
                 onClose={() => setModalIsOpen(false)}
             />   
         </Container>
+        <UploadInfo />
         <AboutAuthor></AboutAuthor>
         </>
     )
