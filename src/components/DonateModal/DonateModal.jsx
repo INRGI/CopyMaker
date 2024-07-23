@@ -9,7 +9,7 @@ const DonateModal = ({ isOpen, onClose }) => {
             ariaHideApp={false}
         >
             <Title>You can support us using Monobank</Title>
-            <img width={300} src='../../../public/mono.jpg'></img>
+            <img width={300} src='/mono.jpg'></img>
         </Container>
     );
 };
