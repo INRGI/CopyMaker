@@ -30,5 +30,14 @@ export const SupportText = styled.p`
     align-items: center;
     font-size: 18px;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    transition: color .15s,transform .15s;
+    &:focus {
+        color: #cb0404;
+    }
+
+    &:hover {
+        color: #cb0404;
+    transform: translateY(-1px);
+    }
 `;
 
