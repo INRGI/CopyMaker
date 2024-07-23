@@ -10,7 +10,7 @@ const FastRedirect = () => {
 
   return (
     <Container>
-      <Title>Fast Redirect</Title>
+      <Title>Domains</Title>
       <List>
       {visibleDomains.map((domain) => (
         <Domain key={domain.id}>

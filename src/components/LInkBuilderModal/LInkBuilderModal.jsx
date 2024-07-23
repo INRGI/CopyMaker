@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { editDomain } from "../../redux/domainSlice";
@@ -38,14 +38,20 @@ const FeedbackSchema = Yup.object().shape({
 const LinkBuilderModal = ({ isOpen, onClose, onConfirm }) => {
   const dispatch = useDispatch();
   const { domainId } = useParams();
-  const domain = useSelector((state) =>
+  let domain = useSelector((state) =>
     state.domains.find((domain) => domain.id === domainId)
   );
+
   const excelData = useExcelData("/products.xlsx");
 
   const [linkType, setLinkType] = useState(domain ? domain.linkType : "");
   const [typeRT, setTypeRT] = useState(domain ? domain.typeRT : "");
   const [result, setResult] = useState("");
+
+  useEffect(() => {
+    setLinkType(domain ? domain.linkType : "")
+    setTypeRT(domain ? domain.typeRT : "")
+  }, [domainId, dispatch]);
 
   const linkStartId = nanoid();
   const linkEndId = nanoid();
