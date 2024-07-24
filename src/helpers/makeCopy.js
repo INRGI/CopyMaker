@@ -59,6 +59,10 @@ const makeCopy = ({
         result = result.replace(/(\d{1,3})px0px/g, '$1px');
     }
 
+    if (isReplace) {
+        result = makeUnique(result);
+    }  
+
     if (isPaddingLR) {
         function replaceAllOccurrences(str, regex, replacement) {
             return str.replace(regex, replacement);
@@ -140,9 +144,7 @@ const makeCopy = ({
     }
 
 
-    if (isReplace) {
-        result = makeUnique(result);
-    }    
+      
 
     // TEST
     if(isBotLink){
