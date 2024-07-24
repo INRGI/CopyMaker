@@ -38,16 +38,7 @@ const makeCopy = ({
     if (isFontFamily) {
         result = result.replace(/(style="[^"]*)font-family:[^;]*;/g, `$1font-family: ${fontFamily};`);
     }
-    
-    // if (isColorLink) {
-    //     result = result.replace(/<a(?:\s+[^>]*)?\s+style="([^"]*)"/g, (match, styleAttr) => {
-    //         if (styleAttr.includes('color:')) {
-    //             return match.replace(/color:[^;]+;/g, `color: ${colorLink};`);
-    //         } else {
-    //             return match.replace(/(style="[^"]*)"/, `$1;color: ${colorLink};"`);
-    //         }
-    //     });
-    // }
+
     if (isColorLink) {
         result = result.replace(/<a(?![^>]*class=["']bots["'])\s+[^>]*style="([^"]*)"/g, (match, styleAttr) => {
             if (styleAttr.includes('color:')) {
@@ -67,29 +58,33 @@ const makeCopy = ({
 
         result = result.replace(/(\d{1,3})px0px/g, '$1px');
     }
-    
-    
-
-    // if (isPaddingLR) {
-    //     result = result.replace(/padding-left:\s*\d{1,2}\s*px/g, `padding-left: ${paddingLR}px`)
-    //            .replace(/padding-right:\s*\d{1,2}\s*px/g, `padding-right: ${paddingLR}px`);
-
-    // }
-
-    // if (isPaddingLR) {
-    //     result = result.replace(/padding:\s*\d+px\s*\d+px\s*\d+px\s*\d+px;/g, `padding-left: ${paddingLR}px; padding-right: ${paddingLR}px;`);
-    //     result = result.replace(/padding-left:\s*\d{1,2}\s*px/g, `padding-left: ${paddingLR}px`);
-    //     result = result.replace(/padding-right:\s*\d{1,2}\s*px/g, `padding-right: ${paddingLR}px`);
-    //     result = result.replace(/padding:\s*\d{1,2}\s*px\s*\d{1,2}\s*px/g, `padding-left: ${paddingLR}px; padding-right: ${paddingLR}px`);
-    // }
 
     if (isPaddingLR) {
-        // Заміна всіх можливих варіантів padding
-        result = result.replace(/padding:\s*\d+px\s+\d+px\s+\d+px\s+\d+px;/g, `padding: 10px ${paddingLR}px;`);
-        result = result.replace(/padding:\s*(\d+)px\s+(\d+)px;/g, `padding: 10px ${paddingLR}px;`);
-        result = result.replace(/padding-left:\s*\d{1,2}\s*px/g, `padding-left: ${paddingLR}px`);
-        result = result.replace(/padding-right:\s*\d{1,2}\s*px/g, `padding-right: ${paddingLR}px`);
+        function replaceAllOccurrences(str, regex, replacement) {
+            return str.replace(regex, replacement);
+        }
+    
+        function replaceFirstOccurrence(str, regex, replacement) {
+            const match = str.match(regex);
+            if (match) {
+                return str.replace(match[0], replacement);
+            }
+            return str;
+        }
+    
+        result = replaceAllOccurrences(result, /padding:\s*\d+px\s+\d+px\s+\d+px\s+\d+px;/g, 'padding: $1px 0 $3px 0;');
+        result = replaceAllOccurrences(result, /padding:\s*(\d+)px\s+(\d+)px;/g, 'padding: $1px 0;');
+        result = replaceAllOccurrences(result, /padding-left:\s*\d+px/g, 'padding-left: 0');
+        result = replaceAllOccurrences(result, /padding-right:\s*\d+px/g, 'padding-right: 0');
+    
+        result = replaceFirstOccurrence(result, /padding:\s*\d+px\s+0\s+\d+px\s+0;/g, `padding: 10px ${paddingLR}px;`);
+        result = replaceFirstOccurrence(result, /padding:\s*(\d+)px\s+0;/g, `padding: 10px ${paddingLR}px;`);
+        result = replaceFirstOccurrence(result, /padding-left:\s*0/g, `padding-left: ${paddingLR}px`);
+        result = replaceFirstOccurrence(result, /padding-right:\s*0/g, `padding-right: ${paddingLR}px`);
+    
+        result = result.replace(/(<[^>]+>)/, `$1\n<style>padding: 10px ${paddingLR}px;</style>`);
     }
+    
     
     if(isLineHeight){
         result = result.replace(/(style="[^"]*)line-height:[^;]*;/g, `$1line-height: ${LineHeight};`);
@@ -103,8 +98,6 @@ const makeCopy = ({
         result = result.replace(/urlhere/g, linkUrl);
     }    
 
-     // result = result.replace(/(style="[^"]*)padding-top:[^;]*;/g, `$1padding-top: ${trTB}px;`);
-        // result = result.replace(/(style="[^"]*)padding-bottom:[^;]*;/g, `$1padding-bottom: ${trTB}px;`);
     if (isTrTB) {
        
         result = result.replace(/padding:\s*(\d+)px\s+(\d+)px\s+(\d+)px\s+(\d+)px;/g, (match, top, right, bottom, left) => {
