@@ -78,15 +78,15 @@ const makeCopy = ({
     //         return str;
     //     }
     
-    //     result = replaceAllOccurrences(result, /padding:\s*\d+px\s+\d+px\s+\d+px\s+\d+px;/g, 'padding: $1px 0 $3px 0;');
-    //     result = replaceAllOccurrences(result, /padding:\s*(\d+)px\s+(\d+)px;/g, 'padding: $1px 0;');
-    //     result = replaceAllOccurrences(result, /padding-left:\s*\d+px/g, 'padding-left: 0');
-    //     result = replaceAllOccurrences(result, /padding-right:\s*\d+px/g, 'padding-right: 0');
+        // result = replaceAllOccurrences(result, /padding:\s*\d+px\s+\d+px\s+\d+px\s+\d+px;/g, 'padding: $1px 0 $3px 0;');
+        // result = replaceAllOccurrences(result, /padding:\s*(\d+)px\s+(\d+)px;/g, 'padding: $1px 0;');
+        // result = replaceAllOccurrences(result, /padding-left:\s*\d+px/g, 'padding-left: 0');
+        // result = replaceAllOccurrences(result, /padding-right:\s*\d+px/g, 'padding-right: 0');
     
-    //     result = replaceFirstOccurrence(result, /padding:\s*\d+px\s+0\s+\d+px\s+0;/g, `padding: 10px ${paddingLR}px;`);
-    //     result = replaceFirstOccurrence(result, /padding:\s*(\d+)px\s+0;/g, `padding: 10px ${paddingLR}px;`);
-    //     result = replaceFirstOccurrence(result, /padding-left:\s*0/g, `padding-left: ${paddingLR}px`);
-    //     result = replaceFirstOccurrence(result, /padding-right:\s*0/g, `padding-right: ${paddingLR}px`);
+        // result = replaceFirstOccurrence(result, /padding:\s*\d+px\s+0\s+\d+px\s+0;/g, `padding: 10px ${paddingLR}px;`);
+        // result = replaceFirstOccurrence(result, /padding:\s*(\d+)px\s+0;/g, `padding: 10px ${paddingLR}px;`);
+        // result = replaceFirstOccurrence(result, /padding-left:\s*0/g, `padding-left: ${paddingLR}px`);
+        // result = replaceFirstOccurrence(result, /padding-right:\s*0/g, `padding-right: ${paddingLR}px`);
     
     //     result = result.replace(/(<[^>]+>)/, `$1\n<style>padding: 10px ${paddingLR}px;</style>`);
     // }
@@ -96,18 +96,14 @@ const makeCopy = ({
     //         return str.replace(regex, replacement);
     //     }
     
-    //     // Replace all occurrences of padding with zero
-    //     result = replaceAllOccurrences(result, /padding:\s*\d+px\s+\d+px\s+\d+px\s+\d+px;/g, 'padding: 0;');
-    //     result = replaceAllOccurrences(result, /padding:\s*\d+px\s+\d+px;/g, 'padding: 0;');
-    //     result = replaceAllOccurrences(result, /padding:\s*\d+px;/g, 'padding: 0;');
-    //     result = replaceAllOccurrences(result, /padding-left:\s*\d+px;/g, 'padding-left: 0;');
-    //     result = replaceAllOccurrences(result, /padding-right:\s*\d+px;/g, 'padding-right: 0;');
-    //     result = replaceAllOccurrences(result, /padding-top:\s*\d+px;/g, 'padding-top: 0;');
-    //     result = replaceAllOccurrences(result, /padding-bottom:\s*\d+px;/g, 'padding-bottom: 0;');
+    //     result = replaceAllOccurrences(result, /padding:\s*\d+px\s+\d+px\s+\d+px\s+\d+px;/g, 'padding: $1px 0 $3px 0;');
+    //     result = replaceAllOccurrences(result, /padding:\s*(\d+)px\s+(\d+)px;/g, 'padding: $1px 0;');
+    //     result = replaceAllOccurrences(result, /padding-left:\s*\d+px/g, 'padding-left: 0');
+    //     result = replaceAllOccurrences(result, /padding-right:\s*\d+px/g, 'padding-right: 0');
+
     
-    //     // Wrap the modified content in a table with the specified padding
     //     result = `
-    //         <table width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="padding: 10px ${paddingLR}px;">
+    //         <table bgcolor="#fff" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="padding: 0px ${paddingLR}px;">
     //             <tr>
     //                 <td align="center" valign="top">
     //                     ${result}
@@ -117,28 +113,81 @@ const makeCopy = ({
     //     `;
     // }
 
-    if (isPaddingLR) {
-        function replaceAllOccurrences(str, regex, replacement) {
-            return str.replace(regex, replacement);
-        }
+    // if (isPaddingLR) {
+    //     function replaceAllOccurrences(str, regex, replacement) {
+    //         return str.replace(regex, replacement);
+    //     }
     
-        const paddingRegex = /padding(-left|-right)?:\s*\d+px\s*;\s*/g;
-        const fullPaddingRegex = /padding:\s*(\d+px\s*){1,4};/g;
+    //     const paddingRegex = /padding(-left|-right)?:\s*\d+px\s*;\s*/g;
+    //     const fullPaddingRegex = /padding:\s*(\d+px\s*){1,4};/g;
         
-        result = replaceAllOccurrences(result, fullPaddingRegex, 'padding: 0;');
-        result = replaceAllOccurrences(result, paddingRegex, 'padding: 0;');
+    //     result = replaceAllOccurrences(result, fullPaddingRegex, 'padding: 0;');
+    //     result = replaceAllOccurrences(result, paddingRegex, 'padding: 0;');
     
+    //     result = `
+    //         <table bgcolor="#fff" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="padding: 10px ${paddingLR}px;">
+    //             <tr>
+    //                 <td>
+    //                         ${result}
+    //                 </td>
+    //             </tr>
+    //         </table>
+    //     `;
+    // }
+
+    
+
+    // if (isTrTB) {
+       
+    //     result = result.replace(/padding:\s*(\d+)px\s+(\d+)px\s+(\d+)px\s+(\d+)px;/g, (match, top, right, bottom, left) => {
+    //         const newTop = top === '0' ? '0' : `${trTB}`;
+    //         const newBottom = bottom === '0' ? '0' : `${trTB}`;
+    //         return `padding: ${newTop}px ${right}px ${newBottom}px ${left}px;`;
+    //     });
+    //     result = result.replace(/padding:\s*(\d+)px\s+(\d+)px;/g, (match, top, leftRight) => {
+    //         const newTop = top === '0' ? '0' : `${trTB}`;
+    //         return `padding: ${newTop}px ${leftRight}px;`;
+    //     });
+    //     result = result.replace(/padding-top:\s*\d{1,2}\s*px/g, (match) => {
+    //         return match.includes('0px') ? match : `padding-top: ${trTB}px`;
+    //     });
+    //     result = result.replace(/padding-bottom:\s*\d{1,2}\s*px/g, (match) => {
+    //         return match.includes('0px') ? match : `padding-bottom: ${trTB}px`;
+    //     });
+        
+    // }
+    
+    if (isTrTB) {
+        result = result.replace(/padding:\s*(\d+)px\s+(\d+)px\s+(\d+)px\s+(\d+)px;/g, (match, top, right, bottom, left) => {
+            const newTop = top === '0' ? '0' : `${trTB}`;
+            const newBottom = bottom === '0' ? '0' : `${trTB}`;
+            return `padding: ${newTop}px 0 ${newBottom}px 0;`;
+        });
+
+        result = result.replace(/padding:\s*(\d+)px\s+(\d+)px;/g, (match, topBottom, leftRight) => {
+            const newTopBottom = topBottom === '0' ? '0' : `${trTB}`;
+            return `padding: ${newTopBottom}px 0;`;
+        });
+
+        result = result.replace(/padding-left:\s*\d+px\s*;/gi, 'padding-left: 0;');
+        result = result.replace(/padding-right:\s*\d+px\s*;/gi, 'padding-right: 0;');
+
+        result = result.replace(/padding-left:\s*\d+px/gi, 'padding-left: 0');
+    }
+
+    if (isPaddingLR) {
         result = `
             <table bgcolor="#fff" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="padding: 10px ${paddingLR}px;">
                 <tr>
                     <td>
-                            ${result}
+                        ${result}
                     </td>
                 </tr>
             </table>
         `;
     }
-
+    
+    
     
     
     
@@ -155,25 +204,7 @@ const makeCopy = ({
         result = result.replace(/urlhere/g, linkUrl);
     }    
 
-    if (isTrTB) {
-       
-        result = result.replace(/padding:\s*(\d+)px\s+(\d+)px\s+(\d+)px\s+(\d+)px;/g, (match, top, right, bottom, left) => {
-            const newTop = top === '0' ? '0' : `${trTB}`;
-            const newBottom = bottom === '0' ? '0' : `${trTB}`;
-            return `padding: ${newTop}px ${right}px ${newBottom}px ${left}px;`;
-        });
-        result = result.replace(/padding:\s*(\d+)px\s+(\d+)px;/g, (match, top, leftRight) => {
-            const newTop = top === '0' ? '0' : `${trTB}`;
-            return `padding: ${newTop}px ${leftRight}px;`;
-        });
-        result = result.replace(/padding-top:\s*\d{1,2}\s*px/g, (match) => {
-            return match.includes('0px') ? match : `padding-top: ${trTB}px`;
-        });
-        result = result.replace(/padding-bottom:\s*\d{1,2}\s*px/g, (match) => {
-            return match.includes('0px') ? match : `padding-bottom: ${trTB}px`;
-        });
-        
-    }
+    
     
     if (isBGColor) {
         result = result.replace(/<(table|tbody)([^>]*)\s+bgcolor\s*=\s*["']([^"']*)["']([^>]*)>/g, (match, tag, beforeAttrs, oldBGColor, afterAttrs) => {
