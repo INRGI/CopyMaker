@@ -403,7 +403,7 @@ const AutoCopies = () => {
           toastError("Copy not found(HTML File)");
           throw new Error("No HTML file found in the specified subfolder.");
         }
-        const fileId = fileRes.result.files[0].id;
+        const fileId = fileRes.result.files.filter(file => !file.name.toLowerCase().includes('mjml'))[0].id;
 
         const fileContentRes = await gapi.client.drive.files.get({
           fileId,

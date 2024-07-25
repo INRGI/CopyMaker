@@ -59,35 +59,88 @@ const makeCopy = ({
         result = result.replace(/(\d{1,3})px0px/g, '$1px');
     }
 
+    
+
     if (isReplace) {
         result = makeUnique(result);
     }  
+
+    // if (isPaddingLR) {
+    //     function replaceAllOccurrences(str, regex, replacement) {
+    //         return str.replace(regex, replacement);
+    //     }
+    
+    //     function replaceFirstOccurrence(str, regex, replacement) {
+    //         const match = str.match(regex);
+    //         if (match) {
+    //             return str.replace(match[0], replacement);
+    //         }
+    //         return str;
+    //     }
+    
+    //     result = replaceAllOccurrences(result, /padding:\s*\d+px\s+\d+px\s+\d+px\s+\d+px;/g, 'padding: $1px 0 $3px 0;');
+    //     result = replaceAllOccurrences(result, /padding:\s*(\d+)px\s+(\d+)px;/g, 'padding: $1px 0;');
+    //     result = replaceAllOccurrences(result, /padding-left:\s*\d+px/g, 'padding-left: 0');
+    //     result = replaceAllOccurrences(result, /padding-right:\s*\d+px/g, 'padding-right: 0');
+    
+    //     result = replaceFirstOccurrence(result, /padding:\s*\d+px\s+0\s+\d+px\s+0;/g, `padding: 10px ${paddingLR}px;`);
+    //     result = replaceFirstOccurrence(result, /padding:\s*(\d+)px\s+0;/g, `padding: 10px ${paddingLR}px;`);
+    //     result = replaceFirstOccurrence(result, /padding-left:\s*0/g, `padding-left: ${paddingLR}px`);
+    //     result = replaceFirstOccurrence(result, /padding-right:\s*0/g, `padding-right: ${paddingLR}px`);
+    
+    //     result = result.replace(/(<[^>]+>)/, `$1\n<style>padding: 10px ${paddingLR}px;</style>`);
+    // }
+
+    // if (isPaddingLR) {
+    //     function replaceAllOccurrences(str, regex, replacement) {
+    //         return str.replace(regex, replacement);
+    //     }
+    
+    //     // Replace all occurrences of padding with zero
+    //     result = replaceAllOccurrences(result, /padding:\s*\d+px\s+\d+px\s+\d+px\s+\d+px;/g, 'padding: 0;');
+    //     result = replaceAllOccurrences(result, /padding:\s*\d+px\s+\d+px;/g, 'padding: 0;');
+    //     result = replaceAllOccurrences(result, /padding:\s*\d+px;/g, 'padding: 0;');
+    //     result = replaceAllOccurrences(result, /padding-left:\s*\d+px;/g, 'padding-left: 0;');
+    //     result = replaceAllOccurrences(result, /padding-right:\s*\d+px;/g, 'padding-right: 0;');
+    //     result = replaceAllOccurrences(result, /padding-top:\s*\d+px;/g, 'padding-top: 0;');
+    //     result = replaceAllOccurrences(result, /padding-bottom:\s*\d+px;/g, 'padding-bottom: 0;');
+    
+    //     // Wrap the modified content in a table with the specified padding
+    //     result = `
+    //         <table width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="padding: 10px ${paddingLR}px;">
+    //             <tr>
+    //                 <td align="center" valign="top">
+    //                     ${result}
+    //                 </td>
+    //             </tr>
+    //         </table>
+    //     `;
+    // }
 
     if (isPaddingLR) {
         function replaceAllOccurrences(str, regex, replacement) {
             return str.replace(regex, replacement);
         }
     
-        function replaceFirstOccurrence(str, regex, replacement) {
-            const match = str.match(regex);
-            if (match) {
-                return str.replace(match[0], replacement);
-            }
-            return str;
-        }
+        const paddingRegex = /padding(-left|-right)?:\s*\d+px\s*;\s*/g;
+        const fullPaddingRegex = /padding:\s*(\d+px\s*){1,4};/g;
+        
+        result = replaceAllOccurrences(result, fullPaddingRegex, 'padding: 0;');
+        result = replaceAllOccurrences(result, paddingRegex, 'padding: 0;');
     
-        result = replaceAllOccurrences(result, /padding:\s*\d+px\s+\d+px\s+\d+px\s+\d+px;/g, 'padding: $1px 0 $3px 0;');
-        result = replaceAllOccurrences(result, /padding:\s*(\d+)px\s+(\d+)px;/g, 'padding: $1px 0;');
-        result = replaceAllOccurrences(result, /padding-left:\s*\d+px/g, 'padding-left: 0');
-        result = replaceAllOccurrences(result, /padding-right:\s*\d+px/g, 'padding-right: 0');
-    
-        result = replaceFirstOccurrence(result, /padding:\s*\d+px\s+0\s+\d+px\s+0;/g, `padding: 10px ${paddingLR}px;`);
-        result = replaceFirstOccurrence(result, /padding:\s*(\d+)px\s+0;/g, `padding: 10px ${paddingLR}px;`);
-        result = replaceFirstOccurrence(result, /padding-left:\s*0/g, `padding-left: ${paddingLR}px`);
-        result = replaceFirstOccurrence(result, /padding-right:\s*0/g, `padding-right: ${paddingLR}px`);
-    
-        result = result.replace(/(<[^>]+>)/, `$1\n<style>padding: 10px ${paddingLR}px;</style>`);
+        result = `
+            <table width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="padding: 10px ${paddingLR}px;">
+                <tr>
+                    <td>
+                            ${result}
+                    </td>
+                </tr>
+            </table>
+        `;
     }
+
+    
+    
     
     
     if(isLineHeight){
