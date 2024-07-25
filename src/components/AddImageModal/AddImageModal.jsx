@@ -57,6 +57,55 @@ const AddImageModal = ({isOpen, onClose, result, onConfirm}) =>{
         });
     };
 
+    // const handleSubmit = (values) => {
+    //     const { src, alt, width, padding } = values;
+    //     const newImageHTML = `<!-- Here start new image --><table role="presentation" cellpadding="0" cellspacing="0" align="center">
+    //         <tr>
+    //             <td align="center" style="text-align: center; padding: ${padding}px 0">
+    //                 <a href="${link}" style="font-weight: 900; text-decoration: none;;color: #1F51FF;">
+    //                     <img src="${src}" alt="${alt}" style="width: 100%; height: auto; border: 0; -ms-interpolation-mode: bicubic; max-width: ${width}px;" width="${width}" height="auto">
+    //                 </a>
+    //             </td>
+    //         </tr>
+    //     </table><!-- Here end new image -->`;
+
+    //     // Regular expression to find the end of the first sentence
+    //     const sentenceEndRegex = /(?<![A-Z])([.?!])[\s\r\n]*(?=<br\s*\/?>|<\/?[a-zA-Z\s]*>|$)/;
+
+    //     // Find the match
+    //     const matchResult = sentenceEndRegex.exec(result);
+
+    //     let response;
+    //     if (matchResult) {
+    //         // Find end position
+    //         const endPosition = matchResult.index + matchResult[0].length;
+    //         const beforeSentenceEnd = result.substring(0, endPosition);
+    //         const afterSentenceEnd = result.substring(endPosition);
+
+    //         // Replace <br> tags with the image
+    //         const cleanedAfterSentenceEnd = afterSentenceEnd.replace(/^\s*<\/?br\s*\/?>\s*/gi, '');
+
+    //         response = beforeSentenceEnd + newImageHTML + cleanedAfterSentenceEnd;
+    //     } else {
+    //         // If no sentence end is found, append image at the end
+    //         response = result + newImageHTML;
+    //     }
+
+    //     onConfirm(response);
+    //     toast.success('Image successfully added', {
+    //         position: "top-right",
+    //         autoClose: 2000,
+    //         hideProgressBar: false,
+    //         closeOnClick: true,
+    //         pauseOnHover: true,
+    //         draggable: true,
+    //         progress: undefined,
+    //         theme: "light",
+    //         transition: Bounce,
+    //     });
+    // };
+    
+
 
     return (
         <Container

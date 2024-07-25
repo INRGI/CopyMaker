@@ -129,7 +129,7 @@ const makeCopy = ({
         result = replaceAllOccurrences(result, paddingRegex, 'padding: 0;');
     
         result = `
-            <table width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="padding: 10px ${paddingLR}px;">
+            <table bgcolor="#fff" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="padding: 10px ${paddingLR}px;">
                 <tr>
                     <td>
                             ${result}
