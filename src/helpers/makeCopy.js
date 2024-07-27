@@ -177,9 +177,9 @@ const makeCopy = ({
 
     if (isPaddingLR) {
         result = `
-            <table bgcolor="#fff" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="padding: ${trTB}px ${paddingLR}px;">
+            <table bgcolor="#fff" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" >
                 <tr>
-                    <td>
+                    <td style="padding: ${trTB}px ${paddingLR}px;">
                         ${result}
                     </td>
                 </tr>
