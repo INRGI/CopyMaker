@@ -29,34 +29,6 @@ const AddImageModal = ({isOpen, onClose, result, onConfirm}) =>{
         break;
     }
 
-    const handleSubmit = (values) => {
-        const { src, alt, width, padding } = values;
-        const newImageHTML = `<!-- Here start new image --><table role="presentation" cellpadding="0" cellspacing="0" align="center">
-            <tr>
-                <td align="center" style="text-align: center; padding: ${padding}px 0">
-                    <a href="${link}" style="font-weight: 900; text-decoration: none;;color: #1F51FF;">
-                        <img src="${src}" alt="${alt}" style="width: 100%; height: auto; border: 0; -ms-interpolation-mode: bicubic; max-width: ${width}px;" width="${width}" height="auto">
-                    </a>
-                </td>
-            </tr>
-        </table><!-- Here end new image -->`;
-
-        const response = newImageHTML + result;
-
-        onConfirm(response);
-        toast.success('Image successfully added', {
-            position: "top-right",
-            autoClose: 2000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-            transition: Bounce,
-        });
-    };
-
     // const handleSubmit = (values) => {
     //     const { src, alt, width, padding } = values;
     //     const newImageHTML = `<!-- Here start new image --><table role="presentation" cellpadding="0" cellspacing="0" align="center">
@@ -69,27 +41,7 @@ const AddImageModal = ({isOpen, onClose, result, onConfirm}) =>{
     //         </tr>
     //     </table><!-- Here end new image -->`;
 
-    //     // Regular expression to find the end of the first sentence
-    //     const sentenceEndRegex = /(?<![A-Z])([.?!])[\s\r\n]*(?=<br\s*\/?>|<\/?[a-zA-Z\s]*>|$)/;
-
-    //     // Find the match
-    //     const matchResult = sentenceEndRegex.exec(result);
-
-    //     let response;
-    //     if (matchResult) {
-    //         // Find end position
-    //         const endPosition = matchResult.index + matchResult[0].length;
-    //         const beforeSentenceEnd = result.substring(0, endPosition);
-    //         const afterSentenceEnd = result.substring(endPosition);
-
-    //         // Replace <br> tags with the image
-    //         const cleanedAfterSentenceEnd = afterSentenceEnd.replace(/^\s*<\/?br\s*\/?>\s*/gi, '');
-
-    //         response = beforeSentenceEnd + newImageHTML + cleanedAfterSentenceEnd;
-    //     } else {
-    //         // If no sentence end is found, append image at the end
-    //         response = result + newImageHTML;
-    //     }
+    //     const response = newImageHTML + result;
 
     //     onConfirm(response);
     //     toast.success('Image successfully added', {
@@ -104,6 +56,110 @@ const AddImageModal = ({isOpen, onClose, result, onConfirm}) =>{
     //         transition: Bounce,
     //     });
     // };
+
+
+    // IT WORKS BUT WITH BUGs
+    // const handleSubmit = (values) => {
+    //     const { src, alt, width, padding } = values;
+    //     const newImageHTML = `<!-- Here start new image --><table role="presentation" cellpadding="0" cellspacing="0" align="center">
+    //         <tr>
+    //             <td align="center" style="text-align: center; padding: ${padding}px 0">
+    //                 <a href="${link}" style="font-weight: 900; text-decoration: none;color: #1F51FF;">
+    //                     <img src="${src}" alt="${alt}" style="width: 100%; height: auto; border: 0; -ms-interpolation-mode: bicubic; max-width: ${width}px;" width="${width}" height="auto">
+    //                 </a>
+    //             </td>
+    //         </tr>
+    //     </table><!-- Here end new image -->`;
+    
+    //     const sentenceEndRegex = /([.!?…]["']?|\b<br\s*\/?>)[\s\r\n]*(?=<br\s*\/?>|<\/?[a-zA-Z\s]*>|$)/i;
+    //     const lineBreakRegex = /<br\s*\/?>/i;
+    
+    //     let response;
+    //     let matchResult = lineBreakRegex.exec(result);
+    
+    //     if (matchResult) {
+    //         const beforeBreak = result.substring(0, matchResult.index);
+    //         const afterBreak = result.substring(matchResult.index + matchResult[0].length);
+    
+    //         response = beforeBreak + newImageHTML + afterBreak;
+    //     } else {
+    //         matchResult = sentenceEndRegex.exec(result);
+    
+    //         if (matchResult) {
+    //             const endPosition = matchResult.index + matchResult[0].length;
+    //             const beforeSentenceEnd = result.substring(0, endPosition);
+    //             const afterSentenceEnd = result.substring(endPosition);
+    
+    //             response = beforeSentenceEnd + newImageHTML + afterSentenceEnd;
+    //         } else {
+    //             response = result + newImageHTML;
+    //         }
+    //     }
+    
+    //     onConfirm(response);
+    //     toast.success('Image successfully added', {
+    //         position: "top-right",
+    //         autoClose: 2000,
+    //         hideProgressBar: false,
+    //         closeOnClick: true,
+    //         pauseOnHover: true,
+    //         draggable: true,
+    //         progress: undefined,
+    //         theme: "light",
+    //         transition: Bounce,
+    //     });
+    // };
+    
+    const handleSubmit = (values) => {
+        const { src, alt, width, padding } = values;
+        const newImageHTML = `<!-- Here start new image --><table role="presentation" cellpadding="0" cellspacing="0" align="center">
+            <tr>
+                <td align="center" style="text-align: center; padding: ${padding}px 0">
+                    <a href="${link}" style="font-weight: 900; text-decoration: none;color: #1F51FF;">
+                        <img src="${src}" alt="${alt}" style="width: 100%; height: auto; border: 0; -ms-interpolation-mode: bicubic; max-width: ${width}px;" width="${width}" height="auto">
+                    </a>
+                </td>
+            </tr>
+        </table><!-- Here end new image -->`;
+    
+        const sentenceEndRegex = /([.!?…]["']?|\b<br\s*\/?>)[\s\r\n]*(?=<br\s*\/?>|<\/?[a-zA-Z\s]*>|$)/i;
+        const lineBreakRegex = /<br\s*\/?>/i;
+    
+        let response;
+        let matchResult = lineBreakRegex.exec(result);
+    
+        if (matchResult) {
+            const beforeBreak = result.substring(0, matchResult.index);
+            const afterBreak = result.substring(matchResult.index + matchResult[0].length).replace(/^\s*<\/?br\s*\/?>\s*/gi, '');
+    
+            response = beforeBreak + newImageHTML + afterBreak;
+        } else {
+            matchResult = sentenceEndRegex.exec(result);
+    
+            if (matchResult) {
+                const endPosition = matchResult.index + matchResult[0].length;
+                const beforeSentenceEnd = result.substring(0, endPosition);
+                const afterSentenceEnd = result.substring(endPosition).replace(/^\s*<\/?br\s*\/?>\s*/gi, '');
+    
+                response = beforeSentenceEnd + newImageHTML + afterSentenceEnd;
+            } else {
+                response = result + newImageHTML;
+            }
+        }
+    
+        onConfirm(response);
+        toast.success('Image successfully added', {
+            position: "top-right",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            transition: Bounce,
+        });
+    };
     
 
 
