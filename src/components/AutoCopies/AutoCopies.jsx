@@ -104,31 +104,6 @@ const AutoCopies = () => {
   const [typeRT, setTypeRT] = useState(domain ? domain.typeRT : "");
   const [result, setResult] = useState("");
   
-  // useEffect(() => {
-  //   const initClient = () => {
-  //     gapi.client
-  //       .init({
-  //         apiKey: API_KEY,
-  //         clientId: CLIENT_ID,
-  //         discoveryDocs: DISCOVERY_DOCS,
-  //         scope: SCOPES,
-  //         ux_mode: "popup",
-  //         redirect_uri: "https://copy-maker.vercel.app",
-  //       })
-  //       .then(() => {
-  //         gapi.auth2.getAuthInstance().signIn();
-  //       })
-  //       .catch((err) => {
-  //         setError("Failed to initialize Google API client: " + err.message);
-  //       });
-  //   };
-  //   gapi.load("client:auth2", initClient);
-  // }, []);
-
-
-  // // TEST WITH NEW AUTH START
-  const [isSignedIn, setIsSignedIn] = useState(false);
-
   useEffect(() => {
     const initClient = () => {
       gapi.client
@@ -141,29 +116,54 @@ const AutoCopies = () => {
           redirect_uri: "https://copy-maker.vercel.app",
         })
         .then(() => {
-          const authInstance = gapi.auth2.getAuthInstance();
-
-          const isSignedIn = authInstance.isSignedIn.get();
-          setIsSignedIn(isSignedIn);
-
-          if (!isSignedIn) {
-            authInstance.signIn();
-          }
-
-          localStorage.setItem('isSignedIn', isSignedIn);
+          gapi.auth2.getAuthInstance().signIn();
         })
         .catch((err) => {
           setError("Failed to initialize Google API client: " + err.message);
         });
     };
-
     gapi.load("client:auth2", initClient);
-
-    const storedIsSignedIn = localStorage.getItem('isSignedIn');
-    if (storedIsSignedIn) {
-      setIsSignedIn(storedIsSignedIn === 'true');
-    }
   }, []);
+
+
+  // // TEST WITH NEW AUTH START
+  // const [isSignedIn, setIsSignedIn] = useState(false);
+
+  // useEffect(() => {
+  //   const initClient = () => {
+  //     gapi.client
+  //       .init({
+  //         apiKey: API_KEY,
+  //         clientId: CLIENT_ID,
+  //         discoveryDocs: DISCOVERY_DOCS,
+  //         scope: SCOPES,
+  //         ux_mode: "popup",
+  //         redirect_uri: "https://copy-maker.vercel.app",
+  //       })
+  //       .then(() => {
+  //         const authInstance = gapi.auth2.getAuthInstance();
+
+  //         const isSignedIn = authInstance.isSignedIn.get();
+  //         setIsSignedIn(isSignedIn);
+
+  //         if (!isSignedIn) {
+  //           authInstance.signIn();
+  //         }
+
+  //         localStorage.setItem('isSignedIn', isSignedIn);
+  //       })
+  //       .catch((err) => {
+  //         setError("Failed to initialize Google API client: " + err.message);
+  //       });
+  //   };
+
+  //   gapi.load("client:auth2", initClient);
+
+  //   const storedIsSignedIn = localStorage.getItem('isSignedIn');
+  //   if (storedIsSignedIn) {
+  //     setIsSignedIn(storedIsSignedIn === 'true');
+  //   }
+  // }, []);
 
   // // TEST WITH NEW AUTH END
 
