@@ -25,15 +25,17 @@ const PriorityDetails = ({ productName }) => {
 
   useEffect(() => {
     const getProductDetails = (productName) => {
-      // Trim whitespace from productName and CSV data for accurate comparison
       const trimmedProductName = productName.trim();
-      const productDetails = csvData.find(item => item.PRODUCT.trim() === trimmedProductName);
+      const productDetails = csvData.find(item => {
+        const productParts = item.PRODUCT.split(/[/\\]/).map(part => part.trim());
+        return productParts.includes(trimmedProductName);
+      });
 
       if (productDetails) {
         setUnsubDetails({
           unsubText: productDetails['UNSUB TEXT'] || 'N/A',
           unsubId: productDetails['UNSUB ID'] || 'N/A',
-          voluumUnsubId: productDetails['Voluum unsub ID'] || 'N/A',
+          voluumUnsubId: productDetails['Voluum unsub ID '] || 'N/A',
           unsubUrl: productDetails['UNSUB URL'] || 'N/A'
         });
       } else {
@@ -47,19 +49,21 @@ const PriorityDetails = ({ productName }) => {
   }, [productName, csvData]);
 
   return (
-    <div>
+    <>
       {Object.keys(unsubDetails).length > 0 ? (
         <div>
           <h2>Unsubscribe Details for {productName}</h2>
-          <p><strong>Unsubscribe Text:</strong> {unsubDetails.unsubText}</p>
+          <p><strong>Unsubscribe Text:</strong> 
+            <span dangerouslySetInnerHTML={{ __html: unsubDetails.unsubText }} />
+          </p>
           <p><strong>Unsubscribe ID:</strong> {unsubDetails.unsubId}</p>
           <p><strong>Voluum Unsubscribe ID:</strong> {unsubDetails.voluumUnsubId}</p>
           <p><strong>Unsubscribe URL:</strong> <a href={unsubDetails.unsubUrl} target="_blank" rel="noopener noreferrer">{unsubDetails.unsubUrl}</a></p>
         </div>
       ) : (
-        <p>No details available for {productName}</p>
+        <></>
       )}
-    </div>
+    </>
   );
 };
 

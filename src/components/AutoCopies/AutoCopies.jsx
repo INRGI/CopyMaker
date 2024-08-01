@@ -541,6 +541,9 @@ const AutoCopies = () => {
     }
   });
 
+  const matchResult = productName.match(/[a-zA-Z]+/);
+  const productNamePart = matchResult ? matchResult[0] : '';
+
   const handleImageAdd = () => {
     setIsModalOpen(true);
   };
@@ -980,8 +983,9 @@ const AutoCopies = () => {
         </LoadingContainer>
       ) : (
         <>
-        <Preview result={submitedResult} />
-        {/* <PriorityDetails productName={productName.match(/[a-zA-Z]+/)[0]}/> */}
+        <Preview result={submitedResult} >
+        <PriorityDetails productName={productNamePart}/>
+        </Preview>
         </>
       )}
 
