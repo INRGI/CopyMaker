@@ -24,8 +24,8 @@ const SubjectsModal = ({ isOpen, onClose, subjects }) => {
             ariaHideApp={false}
         >
             <List>
-                {subjects.map(item => (
-                    <Item onClick={() => {
+                {subjects.map((item, index) => (
+                    <Item key={index} onClick={() => {
                         navigator.clipboard.writeText(item);
                         handleCopy();
                       }}>{item}</Item>
