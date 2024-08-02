@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import Papa from 'papaparse';
+import { Bounce, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { toastSuccess } from '../../helpers/toastics';
+import { Container, Text, Title, TitleOfText } from './PriorityDetails.styled';
 
 const PriorityDetails = ({ productName }) => {
   const [csvData, setCsvData] = useState([]);
@@ -51,15 +55,34 @@ const PriorityDetails = ({ productName }) => {
   return (
     <>
       {Object.keys(unsubDetails).length > 0 ? (
-        <div>
-          <h2>Unsubscribe Details for {productName}</h2>
-          <p><strong>Unsubscribe Text:</strong> 
-            <span dangerouslySetInnerHTML={{ __html: unsubDetails.unsubText }} />
+        <Container>
+          <Title>Unsubscribe Details for {productName}</Title>
+          <p><TitleOfText>Unsubscribe Text: </TitleOfText> 
+            <Text onClick={() => {
+                  navigator.clipboard.writeText(unsubDetails.unsubText);
+                  toastSuccess("Unsubscribe Text copied");
+                }} dangerouslySetInnerHTML={{ __html: unsubDetails.unsubText }} />
           </p>
-          <p><strong>Unsubscribe ID:</strong> {unsubDetails.unsubId}</p>
-          <p><strong>Voluum Unsubscribe ID:</strong> {unsubDetails.voluumUnsubId}</p>
-          <p><strong>Unsubscribe URL:</strong> <a href={unsubDetails.unsubUrl} target="_blank" rel="noopener noreferrer">{unsubDetails.unsubUrl}</a></p>
-        </div>
+          {unsubDetails.unsubId !== 'N/A' && (
+            <p><TitleOfText>Unsubscribe ID: </TitleOfText> <Text onClick={() => {
+              navigator.clipboard.writeText(unsubDetails.unsubId);
+              toastSuccess("Unsubscribe ID copied");
+            }}>{unsubDetails.unsubId}</Text></p>
+          )}
+          {unsubDetails.voluumUnsubId !== 'N/A' && (
+            <p><TitleOfText>Voluum Unsubscribe ID: </TitleOfText> <Text onClick={() => {
+              navigator.clipboard.writeText(unsubDetails.voluumUnsubId);
+              toastSuccess("Voluum Unsubscribe ID copied");
+            }}>{unsubDetails.voluumUnsubId}</Text></p>
+          )}
+          {unsubDetails.unsubUrl !== 'N/A' && (
+            <p><TitleOfText>Unsubscribe URL: </TitleOfText> <Text onClick={() => {
+              navigator.clipboard.writeText(unsubDetails.unsubUrl);
+              toastSuccess("Unsubscribe URL copied");
+            }}>{unsubDetails.unsubUrl}</Text></p>
+          )}
+          
+        </Container>
       ) : (
         <></>
       )}
