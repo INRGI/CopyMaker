@@ -17,7 +17,6 @@ import InfoButton from "../InfoButton/InfoButton";
 import Preview from "../Preview/Preview";
 import AddHiddenModal from "../AddHiddenModal/AddHiddenModal";
 import LinkBuilderModal from "../LInkBuilderModal/LInkBuilderModal";
-// import FastRedirect from "../FastRedirect/FastRedirect";
 
 const FormPromo = () => {
     const { domainId } = useParams();
@@ -192,7 +191,6 @@ const FormPromo = () => {
 
                 
                 <HiddenImageButton type="button" onClick={()=> setLinkBuilderOpen(true)} >Link Builder</HiddenImageButton>
-                {/* <FastRedirect />   */}
             </FuncContainer>
 
             <Formik
