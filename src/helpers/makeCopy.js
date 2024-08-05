@@ -166,7 +166,8 @@ const makeCopy = ({
 
         result = result.replace(/padding:\s*(\d+)px\s+(\d+)px;/g, (match, topBottom, leftRight) => {
             const newTopBottom = topBottom === '0' ? '0' : `${trTB}`;
-            return `padding: ${newTopBottom}px 0;`;
+            // return `padding: ${newTopBottom}px 0;`;
+            return `padding: 0px 0;`;
         });
 
         result = result.replace(/padding-left:\s*\d+px\s*;/gi, 'padding-left: 0;');
