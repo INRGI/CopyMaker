@@ -126,7 +126,46 @@ const LinkBuilderModal = ({ isOpen, onClose, onConfirm }) => {
             transition: Bounce,
           });
         }
-      } else {
+      } 
+      else if (typeRT === "RT TM(IT3)") {
+        const value = extractValue(excelData, productName, "RT TM");
+        const img = extractValue(excelData, productName, "IMG-IT").match(/[a-zA-Z]+(.+)/)[1];
+        const prefix = productName.match(/[a-zA-Z]+(.+)/)[1];
+        if (value) {
+          const linkUrl = `${values.urlStart}${value}${values.urlEnd}${img}_${prefix}`;
+          setResult(linkUrl);
+          dispatch(
+            editDomain({
+              id: domainId,
+              values: { ...values, linkType, typeRT, linkUrl },
+            })
+          );
+          toast.success("Your link created", {
+            position: "top-right",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            transition: Bounce,
+          });
+        } else {
+          toast.error("Product not found", {
+            position: "top-right",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            transition: Bounce,
+          });
+        }
+      } 
+      else {
         const value = extractValue(excelData, productName, columnName);
         if (value) {
           const linkUrl = `${values.urlStart}${value}${values.urlEnd}${productName}`;
@@ -270,6 +309,7 @@ const LinkBuilderModal = ({ isOpen, onClose, onConfirm }) => {
             onChange={handleRTChange}
           >
             <MenuItem value={"RT TM"}>RT TM</MenuItem>
+            <MenuItem value={"RT TM(IT3)"}>RT TM(IT3)</MenuItem>
             <MenuItem value={"RT GNF"}>RT GNF</MenuItem>
             <MenuItem value={"RT GF"}>RT GF</MenuItem>
             <MenuItem value={"RT GK"}>RT GK</MenuItem>

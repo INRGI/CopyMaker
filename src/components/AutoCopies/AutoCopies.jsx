@@ -328,6 +328,20 @@ const AutoCopies = () => {
           } else {
             toastError("Product not found");
           }
+          }
+          else if (typeRT === "RT TM(IT3)"){
+            const value = extractValue(excelData, values.submit, "RT TM");
+            const img = extractValue(excelData, values.submit, "IMG-IT").match(/[a-zA-Z]+(.+)/)[1];
+            const prefix = values.submit.match(/[a-zA-Z]+(.+)/)[1];
+          if (value) {
+            const linkUrl = `${domain.urlStart}${value}${domain.urlEnd}${img}_${prefix}`;
+            setResult(linkUrl);
+            dispatch(editDomain({ id: domainId, values: { linkUrl } }));
+            toastSuccess("Your link created");
+            return linkUrl;
+          } else {
+            toastError("Product not found");
+          }
           }else{
             const value = extractValue(excelData, values.submit, columnName);
           if (value) {
