@@ -61,8 +61,10 @@ const makeCopy = ({
     
 
     if (isReplace) {
-        result = result.replace(/<em/g, '<p');
-        result = result.replace(/<\/em>/g, '</p>');
+        result = result.replace(/<em/g, '<span');
+        result = result.replace(/<\/em>/g, '</span>');
+        result = result.replace(/<i/g, '<span');
+        result = result.replace(/<\/i>/g, '</span>');
         result = makeUnique(result);
     }  
 
