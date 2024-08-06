@@ -30,7 +30,6 @@ const makeCopy = ({
 }) => {
     let result = submit;
 
-
     if (isFontSize) {
         result = result.replace(/(style="[^"]*)font-size:[^;]*;/g, `$1font-size: ${fontSize}px;`);
     }
@@ -62,6 +61,8 @@ const makeCopy = ({
     
 
     if (isReplace) {
+        result = result.replace(/<em/g, '<p');
+        result = result.replace(/<\/em>/g, '</p>');
         result = makeUnique(result);
     }  
 
