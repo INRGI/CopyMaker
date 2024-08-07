@@ -204,6 +204,45 @@ const LinkBuilderModal = ({ isOpen, onClose, onConfirm }) => {
     }
 
     if (linkType === "Volume") {
+      if (typeRT === "Vol Blue") {
+        const value = extractValue(excelData, productName, columnName);
+        const img = extractValue(excelData, productName, "IMG-IT").match(/[a-zA-Z]+(.+)/)[1];
+        const prefix = productName.match(/[a-zA-Z]+(.+)/)[1];
+        if (value) {
+          const linkUrl = `${values.urlStart}${value}${values.urlEnd}${img}_${prefix}`;
+          setResult(linkUrl);
+          dispatch(
+            editDomain({
+              id: domainId,
+              values: { ...values, linkType, typeRT, linkUrl },
+            })
+          );
+          toast.success("Your link created", {
+            position: "top-right",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            transition: Bounce,
+          });
+          return;
+        } else {
+          toast.error("Product not found", {
+            position: "top-right",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            transition: Bounce,
+          });
+        }
+      } 
       const value = extractValue(excelData, productName, columnName);
       const img = extractValue(excelData, productName, "IMG-IT");
       const prefix = productName.match(/[a-zA-Z]+(.+)/)[1];
