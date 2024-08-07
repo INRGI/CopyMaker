@@ -30,9 +30,21 @@ const makeCopy = ({
 }) => {
     let result = submit;
 
+    // if (isFontSize) {
+    //     result = result.replace(/(style="[^"]*)font-size:[^;]*;/g, `$1font-size: ${fontSize}px;`);
+    // }
+
+    // Test not changing fs < 13px
     if (isFontSize) {
-        result = result.replace(/(style="[^"]*)font-size:[^;]*;/g, `$1font-size: ${fontSize}px;`);
+        result = result.replace(/(style="[^"]*?font-size\s*:\s*)(\d+)px([^;]*;)/g, (match, p1, p2, p3) => {
+            let fontSizeValue = parseInt(p2, 10);
+            if (fontSizeValue < 13) {
+                return match;
+            }
+            return `${p1}${fontSize}px${p3}`;
+        });
     }
+    
     
     if (isFontFamily) {
         result = result.replace(/(style="[^"]*)font-family:[^;]*;/g, `$1font-family: ${fontFamily};`);
@@ -50,13 +62,26 @@ const makeCopy = ({
     
         
 
+    // if (isWidth) {
+    //     result = result.replace(/(?<!<(img|a)[^>]*?)(max-width|width)\s*:\s*(?!100%\s*;)(\d+%?)(?!px)/g, (match, p1, p2) => {
+    //         return match.includes('100%') ? match : `${p2}: ${width}px`;
+    //     });
+
+    //     result = result.replace(/(\d{1,3})px0px/g, '$1px');
+    // }
+    // Test with 300px
     if (isWidth) {
-        result = result.replace(/(?<!<(img|a)[^>]*?)(max-width|width)\s*:\s*(?!100%\s*;)(\d+%?)(?!px)/g, (match, p1, p2) => {
+        result = result.replace(/(?<!<(img|a)[^>]*?)(max-width|width)\s*:\s*(?!100%\s*;)(\d+)(px|%)/g, (match, p1, p2, p3, p4) => {
+            let value = parseInt(p3, 10);
+            if (p4 === 'px' && value < 300) {
+                return match;
+            }
             return match.includes('100%') ? match : `${p2}: ${width}px`;
         });
-
+    
         result = result.replace(/(\d{1,3})px0px/g, '$1px');
     }
+    
 
     
 
@@ -67,98 +92,6 @@ const makeCopy = ({
         // result = result.replace(/<\/i>/g, '</span>');
         result = makeUnique(result);
     }  
-
-    // if (isPaddingLR) {
-    //     function replaceAllOccurrences(str, regex, replacement) {
-    //         return str.replace(regex, replacement);
-    //     }
-    
-    //     function replaceFirstOccurrence(str, regex, replacement) {
-    //         const match = str.match(regex);
-    //         if (match) {
-    //             return str.replace(match[0], replacement);
-    //         }
-    //         return str;
-    //     }
-    
-        // result = replaceAllOccurrences(result, /padding:\s*\d+px\s+\d+px\s+\d+px\s+\d+px;/g, 'padding: $1px 0 $3px 0;');
-        // result = replaceAllOccurrences(result, /padding:\s*(\d+)px\s+(\d+)px;/g, 'padding: $1px 0;');
-        // result = replaceAllOccurrences(result, /padding-left:\s*\d+px/g, 'padding-left: 0');
-        // result = replaceAllOccurrences(result, /padding-right:\s*\d+px/g, 'padding-right: 0');
-    
-        // result = replaceFirstOccurrence(result, /padding:\s*\d+px\s+0\s+\d+px\s+0;/g, `padding: 10px ${paddingLR}px;`);
-        // result = replaceFirstOccurrence(result, /padding:\s*(\d+)px\s+0;/g, `padding: 10px ${paddingLR}px;`);
-        // result = replaceFirstOccurrence(result, /padding-left:\s*0/g, `padding-left: ${paddingLR}px`);
-        // result = replaceFirstOccurrence(result, /padding-right:\s*0/g, `padding-right: ${paddingLR}px`);
-    
-    //     result = result.replace(/(<[^>]+>)/, `$1\n<style>padding: 10px ${paddingLR}px;</style>`);
-    // }
-
-    // if (isPaddingLR) {
-    //     function replaceAllOccurrences(str, regex, replacement) {
-    //         return str.replace(regex, replacement);
-    //     }
-    
-    //     result = replaceAllOccurrences(result, /padding:\s*\d+px\s+\d+px\s+\d+px\s+\d+px;/g, 'padding: $1px 0 $3px 0;');
-    //     result = replaceAllOccurrences(result, /padding:\s*(\d+)px\s+(\d+)px;/g, 'padding: $1px 0;');
-    //     result = replaceAllOccurrences(result, /padding-left:\s*\d+px/g, 'padding-left: 0');
-    //     result = replaceAllOccurrences(result, /padding-right:\s*\d+px/g, 'padding-right: 0');
-
-    
-    //     result = `
-    //         <table bgcolor="#fff" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="padding: 0px ${paddingLR}px;">
-    //             <tr>
-    //                 <td align="center" valign="top">
-    //                     ${result}
-    //                 </td>
-    //             </tr>
-    //         </table>
-    //     `;
-    // }
-
-    // if (isPaddingLR) {
-    //     function replaceAllOccurrences(str, regex, replacement) {
-    //         return str.replace(regex, replacement);
-    //     }
-    
-    //     const paddingRegex = /padding(-left|-right)?:\s*\d+px\s*;\s*/g;
-    //     const fullPaddingRegex = /padding:\s*(\d+px\s*){1,4};/g;
-        
-    //     result = replaceAllOccurrences(result, fullPaddingRegex, 'padding: 0;');
-    //     result = replaceAllOccurrences(result, paddingRegex, 'padding: 0;');
-    
-    //     result = `
-    //         <table bgcolor="#fff" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="padding: 10px ${paddingLR}px;">
-    //             <tr>
-    //                 <td>
-    //                         ${result}
-    //                 </td>
-    //             </tr>
-    //         </table>
-    //     `;
-    // }
-
-    
-
-    // if (isTrTB) {
-       
-    //     result = result.replace(/padding:\s*(\d+)px\s+(\d+)px\s+(\d+)px\s+(\d+)px;/g, (match, top, right, bottom, left) => {
-    //         const newTop = top === '0' ? '0' : `${trTB}`;
-    //         const newBottom = bottom === '0' ? '0' : `${trTB}`;
-    //         return `padding: ${newTop}px ${right}px ${newBottom}px ${left}px;`;
-    //     });
-    //     result = result.replace(/padding:\s*(\d+)px\s+(\d+)px;/g, (match, top, leftRight) => {
-    //         const newTop = top === '0' ? '0' : `${trTB}`;
-    //         return `padding: ${newTop}px ${leftRight}px;`;
-    //     });
-    //     result = result.replace(/padding-top:\s*\d{1,2}\s*px/g, (match) => {
-    //         return match.includes('0px') ? match : `padding-top: ${trTB}px`;
-    //     });
-    //     result = result.replace(/padding-bottom:\s*\d{1,2}\s*px/g, (match) => {
-    //         return match.includes('0px') ? match : `padding-bottom: ${trTB}px`;
-    //     });
-        
-    // }
     
     if (isTrTB) {
         result = result.replace(/padding:\s*(\d+)px\s+(\d+)px\s+(\d+)px\s+(\d+)px;/g, (match, top, right, bottom, left) => {
