@@ -24,4 +24,5 @@ export const Title = styled.h4`
     margin: 0;
     padding: 0;
     font-size: 20px;
+    text-align:center;
 `
