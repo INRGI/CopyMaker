@@ -154,23 +154,39 @@ const makeCopy = ({
     result = removeEmptySpacingRows(result);
 
     
-    
+    // Old version with problems. It brake the table container 
+    // if (isBGColor) {
+    //     result = result.replace(/<(table|tbody)([^>]*)\s+bgcolor\s*=\s*["']([^"']*)["']([^>]*)>/g, (match, tag, beforeAttrs, oldBGColor, afterAttrs) => {
+    //         return `<${tag}${beforeAttrs} bgcolor="${BGColor}"${afterAttrs}>`;
+    //     });
+        
+    //     result = result.replace(/background-color\s*:\s*([^;]+);(?![^<]*<\/a>)/g, `background-color: ${BGColor};`);
+
+    //     result = result.replace(/<(table|tbody)([^>]*)>/g, (match, tag, attrs) => {
+    //         if (attrs.includes('bgcolor')) {
+    //             return match;
+    //         } else {
+    //             return `<${tag}${attrs} bgcolor="${BGColor}">`;
+    //         }
+    //     });       
+    // }
+
     if (isBGColor) {
         result = result.replace(/<(table|tbody)([^>]*)\s+bgcolor\s*=\s*["']([^"']*)["']([^>]*)>/g, (match, tag, beforeAttrs, oldBGColor, afterAttrs) => {
             return `<${tag}${beforeAttrs} bgcolor="${BGColor}"${afterAttrs}>`;
         });
-        
+
         result = result.replace(/background-color\s*:\s*([^;]+);(?![^<]*<\/a>)/g, `background-color: ${BGColor};`);
 
         result = result.replace(/<(table|tbody)([^>]*)>/g, (match, tag, attrs) => {
-            if (attrs.includes('bgcolor')) {
+            if (/bgcolor\s*=\s*["']([^"']*)["']/.test(attrs)) {
                 return match;
             } else {
                 return `<${tag}${attrs} bgcolor="${BGColor}">`;
             }
         });
-                
     }
+    
 
     if (isDeleteLift) {
         result = result.replace(/lift.*?\.html/g, '');
