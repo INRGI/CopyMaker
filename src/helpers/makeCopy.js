@@ -50,15 +50,47 @@ const makeCopy = ({
         result = result.replace(/(style="[^"]*)font-family:[^;]*;/g, `$1font-family: ${fontFamily};`);
     }
 
+    // Previous version with replacing all link colors even bg
+    // if (isColorLink) {
+    //     result = result.replace(/<a(?![^>]*class=["']bots["'])\s+[^>]*style="([^"]*)"/g, (match, styleAttr) => {
+    //         if (styleAttr.includes('color:')) {
+    //             return match.replace(/color:[^;]+;/g, `color: ${colorLink};`);
+    //         } else {
+    //             return match.replace(/(style="[^"]*)"/, `$1;color: ${colorLink};"`);
+    //         }
+    //     });
+    // }
+    
     if (isColorLink) {
-        result = result.replace(/<a(?![^>]*class=["']bots["'])\s+[^>]*style="([^"]*)"/g, (match, styleAttr) => {
-            if (styleAttr.includes('color:')) {
-                return match.replace(/color:[^;]+;/g, `color: ${colorLink};`);
+        result = result.replace(/<a(?![^>]*class=["']bots["'])\s+([^>]*)style="([^"]*)"/g, (match, otherAttrs, styleAttr) => {
+            let newStyle = styleAttr;
+    
+            if (/background-color:[^;]+;/.test(newStyle)) {
+                newStyle = newStyle.replace(/background-color:[^;]+;/g, `background-color: ${colorLink};`);
+            } else if (/color:[^;]+;/.test(newStyle)) {
+                newStyle = newStyle.replace(/color:[^;]+;/g, `color: ${colorLink};`);
             } else {
-                return match.replace(/(style="[^"]*)"/, `$1;color: ${colorLink};"`);
+                newStyle += ` color: ${colorLink};`;
             }
+    
+            if (/border:[^;]+;/.test(newStyle)) {
+                newStyle = newStyle.replace(/border:[^;]+;/g, (borderMatch) => {
+                    return borderMatch.replace(/#[0-9A-Fa-f]{3,6}/g, colorLink);
+                });
+            }
+    
+            if (/background-color:[^;]+;/.test(newStyle)) {
+                newStyle = newStyle.replace(/background-color:[^;]+;/g, `background-color: ${colorLink}; color: #FFFFFF;`);
+            }
+    
+            return `<a ${otherAttrs}style="${newStyle}"`;
+        });
+
+        result = result.replace(/<a(?![^>]*class=["']bots["'])\s+([^>]*)>/g, (match, otherAttrs) => {
+            return `<a ${otherAttrs}style="color: ${colorLink}; background-color: ${colorLink}; color: #FFFFFF;">`;
         });
     }
+    
     
         
 
