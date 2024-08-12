@@ -123,24 +123,55 @@ const makeCopy = ({
         result = makeUnique(result);
     }  
     
+    // Previous version when <a paddings are changing
+    // if (isTrTB) {
+    //     result = result.replace(/padding:\s*(\d+)px\s+(\d+)px\s+(\d+)px\s+(\d+)px;/g, (match, top, right, bottom, left) => {
+    //         const newTop = top === '0' ? '0' : `${trTB}`;
+    //         const newBottom = bottom === '0' ? '0' : `${trTB}`;
+    //         return `padding: ${newTop}px 0 ${newBottom}px 0;`;
+    //     });
+
+    //     result = result.replace(/padding:\s*(\d+)px\s+(\d+)px;/g, (match, topBottom, leftRight) => {
+    //         const newTopBottom = topBottom === '0' ? '0' : `${trTB}`;
+    //         // return `padding: ${newTopBottom}px 0;`;
+    //         return `padding: 0px 0;`;
+    //     });
+
+    //     result = result.replace(/padding-left:\s*\d+px\s*;/gi, 'padding-left: 0;');
+    //     result = result.replace(/padding-right:\s*\d+px\s*;/gi, 'padding-right: 0;');
+
+    //     result = result.replace(/padding-left:\s*\d+px/gi, 'padding-left: 0');
+    // }
+
     if (isTrTB) {
-        result = result.replace(/padding:\s*(\d+)px\s+(\d+)px\s+(\d+)px\s+(\d+)px;/g, (match, top, right, bottom, left) => {
-            const newTop = top === '0' ? '0' : `${trTB}`;
-            const newBottom = bottom === '0' ? '0' : `${trTB}`;
-            return `padding: ${newTop}px 0 ${newBottom}px 0;`;
+        result = result.replace(/<[^>]+style="[^"]*"/g, (match) => {
+            if (/^<a\b/.test(match)) {
+                return match;
+            }
+
+            match = match.replace(/padding:\s*(\d+)px\s+(\d+)px\s+(\d+)px\s+(\d+)px;/g, (m, top, right, bottom, left) => {
+                const newTop = top === '0' ? '0' : `${trTB}`;
+                const newBottom = bottom === '0' ? '0' : `${trTB}`;
+                return `padding: ${newTop}px 0 ${newBottom}px 0;`;
+            });
+
+            match = match.replace(/padding:\s*(\d+)px\s+(\d+)px;/g, (m, topBottom, leftRight) => {
+                const newTopBottom = topBottom === '0' ? '0' : `${trTB}`;
+                return `padding: 0px 0;`;
+            });
+
+            match = match.replace(/padding-left:\s*\d+px\s*;/gi, 'padding-left: 0;');
+
+            match = match.replace(/padding-right:\s*\d+px\s*;/gi, 'padding-right: 0;');
+    
+            match = match.replace(/padding-left:\s*\d+px/gi, 'padding-left: 0');
+    
+            return match;
         });
-
-        result = result.replace(/padding:\s*(\d+)px\s+(\d+)px;/g, (match, topBottom, leftRight) => {
-            const newTopBottom = topBottom === '0' ? '0' : `${trTB}`;
-            // return `padding: ${newTopBottom}px 0;`;
-            return `padding: 0px 0;`;
-        });
-
-        result = result.replace(/padding-left:\s*\d+px\s*;/gi, 'padding-left: 0;');
-        result = result.replace(/padding-right:\s*\d+px\s*;/gi, 'padding-right: 0;');
-
-        result = result.replace(/padding-left:\s*\d+px/gi, 'padding-left: 0');
     }
+    
+    
+    
 
     if (isPaddingLR) {
         result = `
