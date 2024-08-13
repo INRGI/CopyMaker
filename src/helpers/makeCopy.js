@@ -50,6 +50,14 @@ const makeCopy = ({
         result = result.replace(/(style="[^"]*)font-family:[^;]*;/g, `$1font-family: ${fontFamily};`);
     }
 
+    if (isBGColor) {
+        result = result.replace(/(<(?:table|tbody)[^>]*)\s+bgcolor\s*=\s*["'](?:#?(?:[Ff]{3}|[Ff]{6}))["']/g, '$1');
+    
+        result = result.replace(/background-color\s*:\s*#?(?:[Ff]{3}|[Ff]{6});/g, '');
+    }
+    
+    
+
     // Previous version with replacing all link colors even bg
     // if (isColorLink) {
     //     result = result.replace(/<a(?![^>]*class=["']bots["'])\s+[^>]*style="([^"]*)"/g, (match, styleAttr) => {
@@ -175,7 +183,7 @@ const makeCopy = ({
 
     if (isPaddingLR) {
         result = `
-            <table bgcolor="#fff" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" >
+            <table ${isBGColor ? `bgcolor="${BGColor}"`: 'bgcolor="#fff"'} width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" >
                 <tr>
                     <td style="padding: ${trTB}px ${paddingLR}px;">
                         ${result}
@@ -234,21 +242,22 @@ const makeCopy = ({
     //     });       
     // }
 
-    if (isBGColor) {
-        result = result.replace(/<(table|tbody)([^>]*)\s+bgcolor\s*=\s*["']([^"']*)["']([^>]*)>/g, (match, tag, beforeAttrs, oldBGColor, afterAttrs) => {
-            return `<${tag}${beforeAttrs} bgcolor="${BGColor}"${afterAttrs}>`;
-        });
+    // Still have some problems
+    // if (isBGColor) {
+    //     result = result.replace(/<(table|tbody)([^>]*)\s+bgcolor\s*=\s*["']([^"']*)["']([^>]*)>/g, (match, tag, beforeAttrs, oldBGColor, afterAttrs) => {
+    //         return `<${tag}${beforeAttrs} bgcolor="${BGColor}"${afterAttrs}>`;
+    //     });
 
-        result = result.replace(/background-color\s*:\s*([^;]+);(?![^<]*<\/a>)/g, `background-color: ${BGColor};`);
+    //     result = result.replace(/background-color\s*:\s*([^;]+);(?![^<]*<\/a>)/g, `background-color: ${BGColor};`);
 
-        result = result.replace(/<(table|tbody)([^>]*)>/g, (match, tag, attrs) => {
-            if (/bgcolor\s*=\s*["']([^"']*)["']/.test(attrs)) {
-                return match;
-            } else {
-                return `<${tag}${attrs} bgcolor="${BGColor}">`;
-            }
-        });
-    }
+    //     result = result.replace(/<(table|tbody)([^>]*)>/g, (match, tag, attrs) => {
+    //         if (/bgcolor\s*=\s*["']([^"']*)["']/.test(attrs)) {
+    //             return match;
+    //         } else {
+    //             return `<${tag}${attrs} bgcolor="${BGColor}">`;
+    //         }
+    //     });
+    // }
     
 
     if (isDeleteLift) {
