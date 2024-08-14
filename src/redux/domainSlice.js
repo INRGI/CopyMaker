@@ -1,7 +1,7 @@
 import { createSlice, nanoid } from '@reduxjs/toolkit';
 
 const domainsInitialState = [
-  { id: 'id-1', name: 'NewDomain', fontSize: '18px', fontFamily: "Tahoma",isFontSize:false,isFontFamily:false, },
+  { id: 'id-1', name: 'NewDomain', fontSize: '18px', fontFamily: "Tahoma", isFontSize: false, isFontFamily: false, },
 ];
 
 const domainSlice = createSlice({
@@ -12,7 +12,7 @@ const domainSlice = createSlice({
       reducer(state, action) {
         state.push(action.payload);
       },
-      prepare({name, linkUrl, fontSize, fontFamily, colorLink, width, paddingLR, BGColor, botUrl ,isBotLink, isFontSize, isFontFamily, isColorLink, isWidth, isPaddingLR, isReplace, isDeleteLift, isLinkUrl, isTrTB, isBGColor,isAddHidden, isLineHeight, LineHeight, urlStart, urlEnd, linkType, typeRT }) {
+      prepare({ name, linkUrl, fontSize, fontFamily, colorLink, width, paddingLR, BGColor, botUrl, isBotLink, isFontSize, isFontFamily, isColorLink, isWidth, isPaddingLR, isReplace, isDeleteLift, isLinkUrl, isTrTB, isBGColor, isAddHidden, isLineHeight, LineHeight, urlStart, urlEnd, linkType, typeRT, unsubStart, unsubEnd, typeOfUnsub, }) {
         return {
           payload: {
             name,
@@ -42,6 +42,9 @@ const domainSlice = createSlice({
             urlEnd,
             linkType,
             typeRT,
+            unsubStart,
+            unsubEnd,
+            typeOfUnsub,
             id: nanoid()
           },
         };
@@ -53,22 +56,22 @@ const domainSlice = createSlice({
     },
     editDomain(state, action) {
       const index = state.findIndex(
-          (domain) => domain.id === action.payload.id
+        (domain) => domain.id === action.payload.id
       );
       if (index !== -1) {
-          return state.map((domain, idx) => {
-              if (idx === index) {
-                  return {
-                      ...domain,
-                      ...action.payload.values
-                  };
-              }
-              return domain;
-          });
+        return state.map((domain, idx) => {
+          if (idx === index) {
+            return {
+              ...domain,
+              ...action.payload.values
+            };
+          }
+          return domain;
+        });
       }
       return state;
-  },
-    
+    },
+
   },
 });
 
