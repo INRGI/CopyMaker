@@ -14,7 +14,7 @@ import {
   LinkContainer,
   LinkText,
   MuiInput,
-} from "./LInkBuilderModal.styled";
+} from "./UnsubBuilderModal.styled";
 
 const FeedbackSchema = Yup.object().shape({
   unsubStart: Yup.string()

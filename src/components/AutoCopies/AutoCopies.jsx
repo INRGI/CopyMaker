@@ -34,6 +34,7 @@ import {
   SubmitButtonDownload,
   SubmitContainer,
   TitleImages,
+  UnsubBuilderButton,
 } from "./AutoCopies.styled";
 import { GrDownload } from "react-icons/gr";
 import { BsCopy } from "react-icons/bs";
@@ -51,6 +52,7 @@ import SubjectsModal from "../SubjectsModal/SubjectsModal";
 import makeUnique from "../../helpers/makeUnique";
 import { toastError, toastSuccess } from "../../helpers/toastics";
 import PriorityDetails from "../PriorityDetails/PriorityDetails";
+import UnsubBuilderModal from "../UnsubBuilderModal/UnsubBuilderModal";
 
 const CLIENT_ID =
   "1042942150757-2q0dlbnb2ti5dhu68nf8bia7eusuj795.apps.googleusercontent.com";
@@ -96,6 +98,7 @@ const AutoCopies = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isHiddenModalOpen, setHiddenModalOpen] = useState(false);
   const [isLinkBuilderOpen, setLinkBuilderOpen] = useState(false);
+  const [isUnsubBuilderModal, setUnsubBuilderModal] = useState(false);
   const [isSubjectsModal, setSubjectsModal] = useState(false);
 
   const [isLoading, setIsLoading] = useState(false);
@@ -596,6 +599,10 @@ const AutoCopies = () => {
     setLinkBuilderOpen(false);
   };
 
+  const handleUnsubBuilderConfirm = (response) => {
+    setUnsubBuilderModal(false);
+  };
+
   const handleCopy = () => {
     toastSuccess("Copy copied");
   };
@@ -654,6 +661,7 @@ const AutoCopies = () => {
         >
           Link Builder
         </HiddenImageButton>
+        {/* <UnsubBuilderButton type="button" onClick={() => setUnsubBuilderModal(true)}>Unsub Builder</UnsubBuilderButton> */}
         <AddImageButton type="button" onClick={() => setSubjectsModal(true)}>
           Subjects
         </AddImageButton>
@@ -1035,6 +1043,11 @@ const AutoCopies = () => {
         isOpen={isLinkBuilderOpen}
         onClose={() => setLinkBuilderOpen(false)}
         onConfirm={handleLinkBuilderConfirm}
+      />
+      <UnsubBuilderModal
+        isOpen={isUnsubBuilderModal}
+        onClose={() => setUnsubBuilderModal(false)}
+        onConfirm={handleUnsubBuilderConfirm}
       />
       <SubjectsModal
         isOpen={isSubjectsModal}
