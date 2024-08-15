@@ -5,12 +5,12 @@ import { editDomain } from "../../redux/domainSlice";
 import { useParams } from "react-router-dom";
 import { Field, Form, Formik } from "formik";
 import * as Yup from "yup";
-import { nanoid } from "nanoid";
 import { Bounce, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import {
   Button,
   Container,
+  FormContainer,
   LinkContainer,
   LinkText,
   MuiInput,
@@ -46,19 +46,28 @@ const UnsubBuilderModal = ({ isOpen, onClose, onConfirm }) => {
     setTypeOfUnsub(domain ? domain.typeOfUnsub : "");
   }, [domainId, dispatch]);
 
-  const unsubStartId = nanoid();
-  const unsubEndId = nanoid();
-
   const initialValues = {
     unsubStart: domain ? domain.unsubStart : "",
     unsubEnd: domain ? domain.unsubEnd : "",
     typeOfUnsub: domain ? domain.typeOfUnsub : "",
   };
 
-  const handleSubmit = () => {};
-
-  const handleClose = () => {
-    onClose();
+  const handleSubmit = (values) => {
+    dispatch(editDomain({
+      id: domainId,
+      values: { ...values, typeOfUnsub },
+    }));
+    toast.success("Saved", {
+      position: "top-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      transition: Bounce,
+    });
   };
 
   const handleTypeChange = (event) => {
@@ -69,10 +78,21 @@ const UnsubBuilderModal = ({ isOpen, onClose, onConfirm }) => {
     <Container
       ariaHideApp={false}
       isOpen={isOpen}
-      onRequestClose={handleClose}
+      onRequestClose={onClose}
       contentLabel="Unsub Builder Modal"
     >
-      <FormControl fullWidth>
+      
+
+      {initialValues.typeOfUnsub !== "" && (
+        <Formik
+          initialValues={initialValues}
+          onSubmit={handleSubmit}
+          validationSchema={FeedbackSchema}
+          validateOnBlur={false}
+          validateOnChange={false}
+        >
+          <FormContainer>
+          <FormControl fullWidth>
         <InputLabel id="demo-simple-select-label">
           Choose type of unsub
         </InputLabel>
@@ -88,15 +108,6 @@ const UnsubBuilderModal = ({ isOpen, onClose, onConfirm }) => {
         </Select>
       </FormControl>
 
-      {typeOfUnsub !== "" && (
-        <Formik
-          initialValues={initialValues}
-          onSubmit={handleSubmit}
-          validationSchema={FeedbackSchema}
-          validateOnBlur={false}
-          validateOnChange={false}
-        >
-          <Form>
             <LinkContainer>
               <Field
                 fullWidth
@@ -106,12 +117,11 @@ const UnsubBuilderModal = ({ isOpen, onClose, onConfirm }) => {
                 variant="outlined"
                 type="text"
                 name="unsubStart"
-                id={unsubStartId}
                 placeholder="Unsub Start"
                 autoComplete="off"
                 required
               />
-              <LinkText>Unsub ID</LinkText>
+              <LinkText>ID</LinkText>
               <Field
                 fullWidth
                 as={MuiInput}
@@ -120,7 +130,6 @@ const UnsubBuilderModal = ({ isOpen, onClose, onConfirm }) => {
                 variant="outlined"
                 type="text"
                 name="unsubEnd"
-                id={unsubEndId}
                 placeholder="Unsub End"
                 autoComplete="off"
                 required
@@ -128,16 +137,16 @@ const UnsubBuilderModal = ({ isOpen, onClose, onConfirm }) => {
             </LinkContainer>
 
             <LinkContainer>
-
-              <Button type="submit" onClick={() => handleSubmit()}>
-              Save
+              <Button type="submit">
+                Save
               </Button>
             </LinkContainer>
-          </Form>
+          </FormContainer>
         </Formik>
       )}
     </Container>
   );
 };
+
 
 export default UnsubBuilderModal;

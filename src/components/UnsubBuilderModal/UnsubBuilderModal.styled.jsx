@@ -1,11 +1,12 @@
 import styled from "@emotion/styled";
 import { TextField } from "@mui/material";
+import { Form } from "formik";
 import Modal from 'react-modal';
 
 export const Container = styled(Modal)`
     width: 100%;
     max-width: 450px;
-    height: 320px;
+    height: 175px;
     background-color: white;
     border: 1px solid;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
@@ -17,8 +18,11 @@ export const Container = styled(Modal)`
     padding: 20px;
     display: flex;
     flex-direction: column;
-    gap: 20px;
     align-items: center;
+`;
+
+export const FormContainer = styled(Form)`
+    padding: 0;
 `;
 
 export const MuiInput = styled(TextField)`
@@ -28,11 +32,13 @@ export const MuiInput = styled(TextField)`
 export const LinkContainer = styled.div`
     display: flex;
     gap: 5px;
+    width: 450px;
     align-content: center;
     justify-content: center;
     align-items: center;
     margin-top: 15px;
-    :first-child{
+    margin-bottom: 0;
+    :first-of-type{
         margin-top: 0px;
     }
 `;
@@ -61,7 +67,7 @@ export const Button = styled.button`
     line-height: 1;
     list-style: none;
     overflow: hidden;
-    width: 95%;
+    width: 100%;
     position: relative;
     text-align: left;
     text-decoration: none;
@@ -72,7 +78,6 @@ export const Button = styled.button`
     white-space: nowrap;
     will-change: box-shadow,transform;
     font-size: 18px;
-    margin-left: 10px;
 
     &:focus {
     box-shadow: #8aa649 0 0 0 1.5px inset, rgba(45, 35, 66, 0.4) 0 2px 4px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #8aa649 0 -3px 0 inset;
