@@ -9,7 +9,7 @@ const UploadInfo = () => {
     return (
         <>
         <Container>
-            <Text>Last <CgMonday /> Update: 15.08(11:10)</Text>
+            <Text>Last <CgMonday /> Update: 16.08(11:41)</Text>
             <SupportText onClick={()=> setDonateOpen(true)}><BiDonateHeart /> Support Us Here</SupportText>
         </Container>
         <DonateModal
