@@ -661,7 +661,7 @@ const AutoCopies = () => {
         >
           Link Builder
         </HiddenImageButton>
-        {/* <UnsubBuilderButton type="button" onClick={() => setUnsubBuilderModal(true)}>Unsub Builder</UnsubBuilderButton> */}
+        <UnsubBuilderButton type="button" onClick={() => setUnsubBuilderModal(true)}>Unsub Builder</UnsubBuilderButton>
         <AddImageButton type="button" onClick={() => setSubjectsModal(true)}>
           Subjects
         </AddImageButton>

@@ -104,7 +104,7 @@ const UnsubBuilderModal = ({ isOpen, onClose, onConfirm }) => {
           onChange={handleTypeChange}
         >
           <MenuItem value={"UNSUB ID"}>UNSUB ID</MenuItem>
-          <MenuItem value={"Voluum unsub ID"}>Voluum unsub ID</MenuItem>
+          <MenuItem value={"Voluum unsub ID "}>Voluum unsub ID</MenuItem>
         </Select>
       </FormControl>
 
