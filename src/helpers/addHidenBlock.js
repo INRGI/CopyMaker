@@ -18,7 +18,3 @@ const addHiddenBlock = (text) => {
 };
 
 export default addHiddenBlock;
-
-{/* <table style="display:none;" role="presentation" cellpadding="0" cellspacing="0" align="center"><tr><td align="center" style="text-align: center">
-
-                </td></tr></table> */}

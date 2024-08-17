@@ -43,7 +43,6 @@ import Loader from "../Loader";
 import AddImageModal from "../AddImageModal";
 import Checkbox from "@mui/material/Checkbox";
 import makeCopy from "../../helpers/makeCopy";
-import { Bounce, toast } from "react-toastify";
 import InfoButton from "../InfoButton/InfoButton";
 import Preview from "../Preview/Preview";
 import AddHiddenModal from "../AddHiddenModal/AddHiddenModal";
@@ -130,7 +129,6 @@ const AutoCopies = () => {
   // }, []);
 
 
-  // // TEST WITH NEW AUTH START
   const [isSignedIn, setIsSignedIn] = useState(false);
 
   useEffect(() => {
@@ -169,7 +167,6 @@ const AutoCopies = () => {
     }
   }, []);
 
-  // // TEST WITH NEW AUTH END
 
   const initialValues = {
     fontSize: domain?.fontSize || "",
@@ -531,7 +528,6 @@ const AutoCopies = () => {
         setIsSubmitted(true);
         toastSuccess("Copy done");
 
-        // TEST
         const docFileQuery = `'${liftFolderId}' in parents and mimeType = 'application/vnd.google-apps.document'`;
         const fileResDock = await gapi.client.drive.files.list({
           q: docFileQuery,
@@ -560,7 +556,6 @@ const AutoCopies = () => {
           .filter((sentence) => sentence.length > 0);
         setTextArray(sentences);
         toastSuccess("SL done");
-        // TEST
       } catch (err) {
         setError(err.message);
         setIsLoading(false);
@@ -665,7 +660,6 @@ const AutoCopies = () => {
         <AddImageButton type="button" onClick={() => setSubjectsModal(true)}>
           Subjects
         </AddImageButton>
-        {/* <FastRedirect />   */}
       </FuncContainer>
 
       <Formik

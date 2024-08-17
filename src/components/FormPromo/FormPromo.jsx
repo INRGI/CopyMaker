@@ -185,10 +185,6 @@ const FormPromo = () => {
                 <AddImageButton type="button" onClick={()=> handleImageAdd(submitedResult)}>Add Image</AddImageButton>
 
                 <HiddenImageButton type="button" onClick={()=> handleHiddenModal(submitedResult)}>Custom Block</HiddenImageButton>
-
-
-
-
                 
                 <HiddenImageButton type="button" onClick={()=> setLinkBuilderOpen(true)} >Link Builder</HiddenImageButton>
             </FuncContainer>
