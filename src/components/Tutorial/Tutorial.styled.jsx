@@ -15,11 +15,16 @@ export const BodyContainer = styled.div`
     flex-direction: column;
     align-items: center;
     width: 100%;
-    max-width: 660px;
+    max-width: 750px;
     border-radius: 16px;
     box-shadow: 0 30px 30px -25px rgba(65, 51, 183, 0.25);
     background-color:#fff;
     padding-top:20px;
     padding-bottom:20px;
     overflow-y: auto;
+`;
+
+export const VideoTitle = styled.h2`
+    margin: 0;
+    padding: 0;
 `;
