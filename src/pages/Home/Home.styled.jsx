@@ -131,3 +131,21 @@ export const EmailFilterButton = styled(Link)`
     transform: translateY(2px);
     }
 `;
+
+export const ImportDomainButton = styled(MakeUniqueButton)`
+    background-color: #a7c957;
+    box-shadow: rgba(45, 35, 66, 0.4) 0 2px 4px,rgba(45, 35, 66, 0.3) 0 7px 13px -3px,#8aa649 0 -3px 0 inset;
+    &:focus {
+    box-shadow: #8aa649 0 0 0 1.5px inset, rgba(45, 35, 66, 0.4) 0 2px 4px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #8aa649 0 -3px 0 inset;
+    }
+
+    &:hover {
+    box-shadow: rgba(45, 35, 66, 0.4) 0 4px 8px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #8aa649 0 -3px 0 inset;
+    transform: translateY(-1px);
+    }
+
+    &:active {
+    box-shadow: #8aa649 0 3px 7px inset;
+    transform: translateY(1px);
+    }
+`;
