@@ -1,80 +1,68 @@
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { addDomain } from "../../redux/domainSlice";
+import { toastError, toastSuccess } from "../../helpers/toastics";
+import { Container, FileInputLabel, ImportButton, Title } from "./ImportDomainModal.styled";
 
-import { Formik, Form, Field } from 'formik';
+const ImportDomainModal = ({ isOpen, onClose }) => {
+  const dispatch = useDispatch();
+  const [file, setFile] = useState(null);
 
-import { Bounce, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import { BtnBack, ButtonContainer, Container, CopyButton, MuiInput, ResultContainer, ResultText, SubmitButtonDownload, Title, TitleContainer } from './ImportDomainModal.styled';
-import { useState } from 'react';
-import makeUnique from '../../helpers/makeUnique';
-import { nanoid } from 'nanoid';
+  const handleFileChange = (event) => {
+    setFile(event.target.files[0]);
+  };
 
-const ImportDomainModal = ({ isOpen, onClose }) =>{
-    const [submitedResult, setSubmitedResult] = useState("");
+  const importSingleDomain = () => {
+    if (!file) {
+      toastError("Please select a file to import!");
+      return;
+    }
 
-    const inputId = nanoid()
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      try {
+        const importedDomain = JSON.parse(e.target.result);
 
-    const initialValues = {
-        textToChange: "",       
+        if (importedDomain && importedDomain.name && importedDomain.id) {
+          dispatch(addDomain(importedDomain));
+          toastSuccess("Domain successfully imported!");
+          onClose();
+        } else {
+          toastError("Invalid file format or missing required data!");
+        }
+      } catch (error) {
+        toastError("Failed to read the file!");
+      }
     };
 
-    const handleSubmit = ({textToChange}) => {
-        setSubmitedResult(makeUnique(textToChange))
-        toast.success('Your text changed', {
-            position: "top-right",
-            autoClose: 2000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-            transition: Bounce,
-        });
-    };
+    reader.readAsText(file);
+  };
 
-    const handleClose = () => {
-        setSubmitedResult("");
-        onClose();
-    };
+  const handleClose = () => {
+    setFile(null);
+    onClose();
+  };
 
-    return (
-        <Container
-            ariaHideApp={false}
-            isOpen={isOpen}
-            onRequestClose={handleClose}
-            contentLabel="Edit Confirmation Modal"
-        >
-            <TitleContainer>
-                <Title>Anti Spam v1.0</Title>
-                
-                
-            </TitleContainer> 
-            <Formik
-                initialValues={initialValues}
-                onSubmit={handleSubmit}
-                validateOnBlur={false}
-                validateOnChange={false}
-            >
-                <Form>
-                    <Field fullWidth as={MuiInput} label="Your text" size="small" variant="outlined" type="text" name="textToChange" id={inputId} placeholder="Your text to transform paste here" required autoComplete="off" />
-                    <ButtonContainer>
-                        <BtnBack type="button" onClick={onClose}>Cancel</BtnBack>
-                        <SubmitButtonDownload type="submit">Submit</SubmitButtonDownload>   
-                    </ButtonContainer>
-                    
-
-                    {submitedResult && (
-                        <div>
-                            <ResultContainer>
-                                <ResultText>{submitedResult}</ResultText>
-                                <CopyButton onClick={() => {navigator.clipboard.writeText(submitedResult)}} type="button">Copy</CopyButton>
-                            </ResultContainer>
-                        </div>
-                    )}
-                </Form>
-            </Formik>
-        </Container>
-    )
+  return (
+    <Container
+      ariaHideApp={false}
+      isOpen={isOpen}
+      onRequestClose={handleClose}
+      contentLabel="Import Domain Modal"
+    >
+      <Title>Please select domain JSON file</Title>
+      <input
+        type="file"
+        accept="application/json"
+        onChange={handleFileChange}
+        style={{ display: "none" }}
+        id="import-input"
+      />
+      <FileInputLabel htmlFor="import-input">Choose file</FileInputLabel>
+      
+      {file && <ImportButton onClick={importSingleDomain}>Import domain</ImportButton>}
+    </Container>
+  );
 };
 
 export default ImportDomainModal;

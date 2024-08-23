@@ -30,7 +30,7 @@ const Home = () => {
                 <DomainForm />
                 <MakeUniqueButton onClick={() => setModalIsOpen(true)}>Anti Spam</MakeUniqueButton>
                 <EmailFilterButton to={`/emailFilter`} state={{ from: location }} >Email Filter</EmailFilterButton>
-                {/* <ImportDomainButton onClick={() => setImportIsOpen(true)}>Import Domain</ImportDomainButton> */}
+                <ImportDomainButton onClick={() => setImportIsOpen(true)}>Import Domain</ImportDomainButton>
             </LeftContainer>
             <DomainsContainer>      
                 {domains.length > 0 ? (

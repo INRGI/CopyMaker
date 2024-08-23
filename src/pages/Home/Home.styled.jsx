@@ -21,7 +21,7 @@ export const DomainsContainer = styled.div`
     flex-direction: column;
     gap: 20px;
     align-items: center;
-    height: 380px;
+    height: 440px;
     width: 100%;
     max-width: 700px;
     border-radius: 16px;
