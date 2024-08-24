@@ -8,11 +8,11 @@ import { Provider } from 'react-redux'
 import { store } from './redux/store';
 
 // Testing Service Worker
-// if ('serviceWorker' in navigator) {
-//   navigator.serviceWorker.addEventListener('controllerchange', function() {
-//     window.location.reload();
-//   });
-// }
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.addEventListener('controllerchange', function() {
+    window.location.reload();
+  });
+}
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
