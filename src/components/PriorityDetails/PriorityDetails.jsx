@@ -64,7 +64,7 @@ const PriorityDetails = ({ productName }) => {
         setUnsubDetails({
           unsubText: productDetails["UNSUB TEXT"] || "N/A",
           unsubId: productDetails["UNSUB ID"] || "N/A",
-          voluumUnsubId: productDetails["Voluum unsub ID "] || "N/A",
+          voluumUnsubId: productDetails["Voluum Green"] || "N/A",
           unsubUrl: productDetails["UNSUB URL"] || "N/A",
         });
       } else {
