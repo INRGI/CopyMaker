@@ -53,6 +53,7 @@ import { toastError, toastSuccess } from "../../helpers/toastics";
 import PriorityDetails from "../PriorityDetails/PriorityDetails";
 import UnsubBuilderModal from "../UnsubBuilderModal/UnsubBuilderModal";
 import { exportSingleDomain } from "../../helpers/exportSingleDomain";
+import MakeUniqueModal from "../MakeUniqueModa/MakeUniqueModal";
 
 const CLIENT_ID =
   "1042942150757-2q0dlbnb2ti5dhu68nf8bia7eusuj795.apps.googleusercontent.com";
@@ -100,6 +101,7 @@ const AutoCopies = () => {
   const [isLinkBuilderOpen, setLinkBuilderOpen] = useState(false);
   const [isUnsubBuilderModal, setUnsubBuilderModal] = useState(false);
   const [isSubjectsModal, setSubjectsModal] = useState(false);
+  const [isUniqueModal, setUniqueModal] = useState(false);
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -661,6 +663,7 @@ const AutoCopies = () => {
         <AddImageButton type="button" onClick={() => setSubjectsModal(true)}>
           Subjects
         </AddImageButton>
+        <HiddenImageButton onClick={() => setUniqueModal(true)}>Anti Spam</HiddenImageButton>
         <HiddenImageButton
           type="button"
           onClick={() => exportSingleDomain(domain)}
@@ -1055,6 +1058,10 @@ const AutoCopies = () => {
         onClose={() => setSubjectsModal(false)}
         subjects={textArray}
       />
+      <MakeUniqueModal
+                isOpen={isUniqueModal}
+                onClose={() => setUniqueModal(false)}
+            /> 
     </PageContainer>
   );
 };
