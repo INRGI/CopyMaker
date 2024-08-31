@@ -93,16 +93,12 @@ const makeCopy = ({
 
             if (/background-color:[^;]+;/.test(newStyle)) {
                 newStyle = newStyle.replace(/background-color:[^;]+;/g, `background-color: ${colorLink}; color: #FFFFFF;`);
-            }
-
-            else if (/color:[^;]+;/.test(newStyle)) {
+            } else if (/color:[^;]+;/.test(newStyle)) {
                 newStyle = newStyle.replace(/color:[^;]+;/g, `color: ${colorLink};`);
-            }
-
-            else {
+            } else {
                 newStyle += ` color: ${colorLink};`;
             }
-
+    
             if (/border:[^;]+;/.test(newStyle)) {
                 newStyle = newStyle.replace(/border:[^;]+;/g, (borderMatch) => {
                     return borderMatch.replace(/#[0-9A-Fa-f]{3,6}/g, colorLink);
@@ -111,8 +107,22 @@ const makeCopy = ({
     
             return `<a ${otherAttrs}style="${newStyle}"`;
         });
-
+    
+        result = result.replace(/<td\s+([^>]*)style="([^"]*)"/g, (match, otherAttrs, styleAttr) => {
+            let newStyle = styleAttr;
+    
+            if (/background-color:[^;]+;/.test(newStyle)) {
+                newStyle = newStyle.replace(/background-color:[^;]+;/g, `background-color: ${colorLink}; color: #FFFFFF;`);
+            }
+    
+            if (/color:[^;]+;/.test(newStyle)) {
+                newStyle = newStyle.replace(/color:[^;]+;/g, `color: ${colorLink};`);
+            }
+    
+            return `<td ${otherAttrs}style="${newStyle}"`;
+        });
     }
+    
     
 
     if (isWidth) {
