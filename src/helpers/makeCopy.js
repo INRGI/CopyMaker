@@ -56,15 +56,50 @@ const makeCopy = ({
         result = result.replace(/background-color\s*:\s*#?(?:[Ff]{3}|[Ff]{6});/g, '');
     }
 
+    // Previous version link painting
+    // if (isColorLink) {
+    //     result = result.replace(/<a(?![^>]*class=["']bots["'])\s+([^>]*)style="([^"]*)"/g, (match, otherAttrs, styleAttr) => {
+    //         let newStyle = styleAttr;
+
+    //         if (/background-color:[^;]+;/.test(newStyle)) {
+    //             newStyle = newStyle.replace(/background-color:[^;]+;/g, `background-color: ${colorLink};`);
+    //         } else if (/color:[^;]+;/.test(newStyle)) {
+    //             newStyle = newStyle.replace(/color:[^;]+;/g, `color: ${colorLink};`);
+    //         } else {
+    //             newStyle += ` color: ${colorLink};`;
+    //         }
+
+    //         if (/border:[^;]+;/.test(newStyle)) {
+    //             newStyle = newStyle.replace(/border:[^;]+;/g, (borderMatch) => {
+    //                 return borderMatch.replace(/#[0-9A-Fa-f]{3,6}/g, colorLink);
+    //             });
+    //         }
+
+    //         if (/background-color:[^;]+;/.test(newStyle)) {
+    //             newStyle = newStyle.replace(/background-color:[^;]+;/g, `background-color: ${colorLink}; color: #FFFFFF;`);
+    //         }
+
+    //         return `<a ${otherAttrs}style="${newStyle}"`;
+    //     });
+
+    //     result = result.replace(/<a(?![^>]*class=["']bots["'])\s+([^>]*)>/g, (match, otherAttrs) => {
+    //         return `<a ${otherAttrs}style="color: ${colorLink}; background-color: ${colorLink}; color: #FFFFFF;">`;
+    //     });
+    // }
+
     if (isColorLink) {
         result = result.replace(/<a(?![^>]*class=["']bots["'])\s+([^>]*)style="([^"]*)"/g, (match, otherAttrs, styleAttr) => {
             let newStyle = styleAttr;
 
             if (/background-color:[^;]+;/.test(newStyle)) {
-                newStyle = newStyle.replace(/background-color:[^;]+;/g, `background-color: ${colorLink};`);
-            } else if (/color:[^;]+;/.test(newStyle)) {
+                newStyle = newStyle.replace(/background-color:[^;]+;/g, `background-color: ${colorLink}; color: #FFFFFF;`);
+            }
+
+            else if (/color:[^;]+;/.test(newStyle)) {
                 newStyle = newStyle.replace(/color:[^;]+;/g, `color: ${colorLink};`);
-            } else {
+            }
+
+            else {
                 newStyle += ` color: ${colorLink};`;
             }
 
@@ -73,18 +108,12 @@ const makeCopy = ({
                     return borderMatch.replace(/#[0-9A-Fa-f]{3,6}/g, colorLink);
                 });
             }
-
-            if (/background-color:[^;]+;/.test(newStyle)) {
-                newStyle = newStyle.replace(/background-color:[^;]+;/g, `background-color: ${colorLink}; color: #FFFFFF;`);
-            }
-
+    
             return `<a ${otherAttrs}style="${newStyle}"`;
         });
 
-        result = result.replace(/<a(?![^>]*class=["']bots["'])\s+([^>]*)>/g, (match, otherAttrs) => {
-            return `<a ${otherAttrs}style="color: ${colorLink}; background-color: ${colorLink}; color: #FFFFFF;">`;
-        });
     }
+    
 
     if (isWidth) {
         result = result.replace(/(?<!<(img|a)[^>]*?)(max-width|width)\s*:\s*(?!100%\s*;)(\d+)(px|%)/g, (match, p1, p2, p3, p4) => {
