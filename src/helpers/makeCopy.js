@@ -89,39 +89,22 @@ const makeCopy = ({
     // }
     if (isColorLink) {
         result = result.replace(/<a(?![^>]*class=["']bots["'])\s+([^>]*)style="([^"]*)"/g, (match, otherAttrs, styleAttr) => {
-            let newStyle = styleAttr;
-
-            if (/background-color:[^;]+;/.test(newStyle)) {
+            let newStyle = styleAttr.trim();
+    
+            if (/background-color\s*:\s*[^;]+;/.test(newStyle)) {
                 return match;
             }
-    
-            // NOT CHANGING COLOR IF ITS ALREADY EXISTS
-            // if (/color:[^;]+;/.test(newStyle)) {
-            //     // Якщо є color, не змінюємо стиль
-            //     return match;
-            // }
+
+            if (/color\s*:\s*[^;]+;/.test(newStyle)) {
+                return match;
+            }
     
             newStyle += ` color: ${colorLink};`;
     
             return `<a ${otherAttrs}style="${newStyle}"`;
         });
-    
-        result = result.replace(/<td\s+([^>]*)style="([^"]*)"/g, (match, otherAttrs, styleAttr) => {
-            let newStyle = styleAttr;
-    
-            if (/background-color:[^;]+;/.test(newStyle)) {
-                return match;
-            }
-
-            if (/color:[^;]+;/.test(newStyle)) {
-                return match;
-            }
-
-            newStyle += ` color: ${colorLink};`;
-    
-            return `<td ${otherAttrs}style="${newStyle}"`;
-        });
     }
+    
     
     
 
