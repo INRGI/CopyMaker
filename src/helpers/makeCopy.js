@@ -87,45 +87,41 @@ const makeCopy = ({
     //         return `<a ${otherAttrs}style="color: ${colorLink}; background-color: ${colorLink}; color: #FFFFFF;">`;
     //     });
     // }
-
     if (isColorLink) {
-    result = result.replace(/<a(?![^>]*class=["']bots["'])\s+([^>]*)style="([^"]*)"/g, (match, otherAttrs, styleAttr) => {
-        let newStyle = styleAttr;
+        result = result.replace(/<a(?![^>]*class=["']bots["'])\s+([^>]*)style="([^"]*)"/g, (match, otherAttrs, styleAttr) => {
+            let newStyle = styleAttr;
 
-        if (/background-color:[^;]+;/.test(newStyle)) {
-            newStyle = newStyle.replace(/background-color:[^;]+;/g, `background-color: ${colorLink}; color: #FFFFFF;`);
-        } else if (/color:[^;]+;/.test(newStyle)) {
-            newStyle = newStyle.replace(/color:[^;]+;/g, `color: ${colorLink};`);
-        } else {
+            if (/background-color:[^;]+;/.test(newStyle)) {
+                return match;
+            }
+    
+            // NOT CHANGING COLOR IF ITS ALREADY EXISTS
+            // if (/color:[^;]+;/.test(newStyle)) {
+            //     // Якщо є color, не змінюємо стиль
+            //     return match;
+            // }
+    
             newStyle += ` color: ${colorLink};`;
-        }
+    
+            return `<a ${otherAttrs}style="${newStyle}"`;
+        });
+    
+        result = result.replace(/<td\s+([^>]*)style="([^"]*)"/g, (match, otherAttrs, styleAttr) => {
+            let newStyle = styleAttr;
+    
+            if (/background-color:[^;]+;/.test(newStyle)) {
+                return match;
+            }
 
-        return `<a ${otherAttrs}style="${newStyle}"`;
-    });
+            if (/color:[^;]+;/.test(newStyle)) {
+                return match;
+            }
 
-    result = result.replace(/<td\s+([^>]*)style="([^"]*)"/g, (match, otherAttrs, styleAttr) => {
-        let newStyle = styleAttr;
-
-        if (/background-color:[^;]+;/.test(newStyle)) {
-            newStyle = newStyle.replace(/background-color:[^;]+;/g, `background-color: ${colorLink}; color: #FFFFFF;`);
-        }
-
-        if (/color:[^;]+;/.test(newStyle)) {
-            newStyle = newStyle.replace(/color:[^;]+;/g, `color: ${colorLink};`);
-        }
-
-        return `<td ${otherAttrs}style="${newStyle}"`;
-    });
-
-    result = result.replace(/<td\s+([^>]*)style="([^"]*;?)color:\s*(#[0-9A-Fa-f]{3,6}|rgb\([^)]+\));?/g, (match, otherAttrs, colorAttr) => {
-        let newStyle = colorAttr;
-
-        newStyle = newStyle.replace(/color:\s*#[0-9A-Fa-f]{3,6};?/, `color: ${colorAttr};`);
-
-        return `<td ${otherAttrs}style="${newStyle}"`;
-    });
-}
-
+            newStyle += ` color: ${colorLink};`;
+    
+            return `<td ${otherAttrs}style="${newStyle}"`;
+        });
+    }
     
     
 
