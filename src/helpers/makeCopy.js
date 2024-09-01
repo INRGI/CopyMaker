@@ -51,10 +51,11 @@ const makeCopy = ({
     }
 
     if (isBGColor) {
-        result = result.replace(/(<(?:table|tbody)[^>]*)\s+bgcolor\s*=\s*["'](?:#?(?:[Ff]{3}|[Ff]{6}))["']/g, '$1');
-
-        result = result.replace(/background-color\s*:\s*#?(?:[Ff]{3}|[Ff]{6});/g, '');
+        result = result.replace(/(<(?:table|tbody|tr|td|th|div)[^>]*)\s+bgcolor\s*=\s*["']#?(?:[Ff]{3}|[Ff]{6})["']/gi, '$1');
+    
+        result = result.replace(/background-color\s*:\s*#?(?:[Ff]{3}|[Ff]{6});?/gi, '');
     }
+    
 
     // Previous version link painting
     // if (isColorLink) {
@@ -88,40 +89,43 @@ const makeCopy = ({
     // }
 
     if (isColorLink) {
-        result = result.replace(/<a(?![^>]*class=["']bots["'])\s+([^>]*)style="([^"]*)"/g, (match, otherAttrs, styleAttr) => {
-            let newStyle = styleAttr;
+    result = result.replace(/<a(?![^>]*class=["']bots["'])\s+([^>]*)style="([^"]*)"/g, (match, otherAttrs, styleAttr) => {
+        let newStyle = styleAttr;
 
-            if (/background-color:[^;]+;/.test(newStyle)) {
-                newStyle = newStyle.replace(/background-color:[^;]+;/g, `background-color: ${colorLink}; color: #FFFFFF;`);
-            } else if (/color:[^;]+;/.test(newStyle)) {
-                newStyle = newStyle.replace(/color:[^;]+;/g, `color: ${colorLink};`);
-            } else {
-                newStyle += ` color: ${colorLink};`;
-            }
-    
-            if (/border:[^;]+;/.test(newStyle)) {
-                newStyle = newStyle.replace(/border:[^;]+;/g, (borderMatch) => {
-                    return borderMatch.replace(/#[0-9A-Fa-f]{3,6}/g, colorLink);
-                });
-            }
-    
-            return `<a ${otherAttrs}style="${newStyle}"`;
-        });
-    
-        result = result.replace(/<td\s+([^>]*)style="([^"]*)"/g, (match, otherAttrs, styleAttr) => {
-            let newStyle = styleAttr;
-    
-            if (/background-color:[^;]+;/.test(newStyle)) {
-                newStyle = newStyle.replace(/background-color:[^;]+;/g, `background-color: ${colorLink}; color: #FFFFFF;`);
-            }
-    
-            if (/color:[^;]+;/.test(newStyle)) {
-                newStyle = newStyle.replace(/color:[^;]+;/g, `color: ${colorLink};`);
-            }
-    
-            return `<td ${otherAttrs}style="${newStyle}"`;
-        });
-    }
+        if (/background-color:[^;]+;/.test(newStyle)) {
+            newStyle = newStyle.replace(/background-color:[^;]+;/g, `background-color: ${colorLink}; color: #FFFFFF;`);
+        } else if (/color:[^;]+;/.test(newStyle)) {
+            newStyle = newStyle.replace(/color:[^;]+;/g, `color: ${colorLink};`);
+        } else {
+            newStyle += ` color: ${colorLink};`;
+        }
+
+        return `<a ${otherAttrs}style="${newStyle}"`;
+    });
+
+    result = result.replace(/<td\s+([^>]*)style="([^"]*)"/g, (match, otherAttrs, styleAttr) => {
+        let newStyle = styleAttr;
+
+        if (/background-color:[^;]+;/.test(newStyle)) {
+            newStyle = newStyle.replace(/background-color:[^;]+;/g, `background-color: ${colorLink}; color: #FFFFFF;`);
+        }
+
+        if (/color:[^;]+;/.test(newStyle)) {
+            newStyle = newStyle.replace(/color:[^;]+;/g, `color: ${colorLink};`);
+        }
+
+        return `<td ${otherAttrs}style="${newStyle}"`;
+    });
+
+    result = result.replace(/<td\s+([^>]*)style="([^"]*;?)color:\s*(#[0-9A-Fa-f]{3,6}|rgb\([^)]+\));?/g, (match, otherAttrs, colorAttr) => {
+        let newStyle = colorAttr;
+
+        newStyle = newStyle.replace(/color:\s*#[0-9A-Fa-f]{3,6};?/, `color: ${colorAttr};`);
+
+        return `<td ${otherAttrs}style="${newStyle}"`;
+    });
+}
+
     
     
 
