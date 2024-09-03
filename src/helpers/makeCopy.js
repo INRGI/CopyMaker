@@ -87,6 +87,7 @@ const makeCopy = ({
     //         return `<a ${otherAttrs}style="color: ${colorLink}; background-color: ${colorLink}; color: #FFFFFF;">`;
     //     });
     // }
+
     if (isColorLink) {
         result = result.replace(/<a(?![^>]*class=["']bots["'])\s+([^>]*)style="([^"]*)"/g, (match, otherAttrs, styleAttr) => {
             let newStyle = styleAttr.trim();
@@ -94,16 +95,17 @@ const makeCopy = ({
             if (/background-color\s*:\s*[^;]+;/.test(newStyle)) {
                 return match;
             }
-
-            if (/color\s*:\s*[^;]+;/.test(newStyle)) {
-                return match;
-            }
     
-            newStyle += ` color: ${colorLink};`;
+            if (/color\s*:\s*[^;]+;/.test(newStyle)) {
+                newStyle = newStyle.replace(/color\s*:\s*[^;]+;/g, `color: ${colorLink};`);
+            } else {
+                newStyle += ` color: ${colorLink};`;
+            }
     
             return `<a ${otherAttrs}style="${newStyle}"`;
         });
     }
+    
     
     
     
