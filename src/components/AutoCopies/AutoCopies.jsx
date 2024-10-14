@@ -361,11 +361,12 @@ const AutoCopies = () => {
 
         if (linkType === "Volume") {
           if (typeRT === "Vol Blue"){
+            const copyName = values.submit.match(/[a-zA-Z]+/)[0];
             const value = extractValue(excelData, values.submit, columnName);
             const img = extractValue(excelData, values.submit, "IMG-IT").match(/[a-zA-Z]+(.+)/)[1];
             const prefix = values.submit.match(/[a-zA-Z]+(.+)/)[1];
           if (value) {
-            const linkUrl = `${domain.urlStart}${value}${domain.urlEnd}${img}_${prefix}`;
+            const linkUrl = `${domain.urlStart}${value}${domain.urlEnd}${copyName}_${prefix}`;
             setResult(linkUrl);
             dispatch(editDomain({ id: domainId, values: { linkUrl } }));
             toastSuccess("Your link created");
