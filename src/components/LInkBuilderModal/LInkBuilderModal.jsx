@@ -208,8 +208,9 @@ const LinkBuilderModal = ({ isOpen, onClose, onConfirm }) => {
         const value = extractValue(excelData, productName, columnName);
         const img = extractValue(excelData, productName, "IMG-IT").match(/[a-zA-Z]+(.+)/)[1];
         const prefix = productName.match(/[a-zA-Z]+(.+)/)[1];
+        const copy = productName.match(/[a-zA-Z]+(.+)/)[0];
         if (value) {
-          const linkUrl = `${values.urlStart}${value}${values.urlEnd}${productName}_${prefix}`;
+          const linkUrl = `${values.urlStart}${value}${values.urlEnd}${copy}`;
           setResult(linkUrl);
           dispatch(
             editDomain({
