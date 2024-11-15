@@ -1,21 +1,13 @@
 import { useState } from "react";
-import { Container, SupportText, Text } from "./UploadInfo.styled";
-import { BiDonateHeart } from "react-icons/bi";
-import { CgMonday } from "react-icons/cg";
-import DonateModal from "../DonateModal/DonateModal";
+import { Container, StyledLink, Text } from "./UploadInfo.styled";
 
 const UploadInfo = () => {
     const [isDonateOpen, setDonateOpen] = useState(false);
     return (
         <>
         <Container>
-            <Text>Last <CgMonday /> Update: 04.11(10:20)</Text>
-            <SupportText onClick={()=> setDonateOpen(true)}><BiDonateHeart /> Support Us Here</SupportText>
+            <Text>It's no longer will be supported! Please move to <StyledLink href="https://copymaker.vercel.app/">new version</StyledLink></Text>
         </Container>
-        <DonateModal
-            isOpen={isDonateOpen}
-            onClose={() => setDonateOpen(false)}
-        />
         </>
     )
 }

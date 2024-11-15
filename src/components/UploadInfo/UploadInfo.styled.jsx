@@ -18,26 +18,21 @@ export const Text = styled.p`
     gap: 5px;
     align-items: center;
     font-size: 18px;
+    font-weight: bold;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    color: #cb0404;
 `;
 
-export const SupportText = styled.p`
+export const StyledLink = styled.a`
     padding: 0;
-    cursor: pointer;
     margin: 0;
     display: flex;
     gap: 5px;
     align-items: center;
     font-size: 18px;
+    font-weight: bold;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    transition: color .15s,transform .15s;
-    &:focus {
-        color: #cb0404;
-    }
-
-    &:hover {
-        color: #cb0404;
-    transform: translateY(-1px);
-    }
+    color: #cb0404;
 `;
+
 
